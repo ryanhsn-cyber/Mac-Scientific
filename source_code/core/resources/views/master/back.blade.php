@@ -29,6 +29,19 @@
 
     @yield('styles')
 
+    <style>
+        .note-editable, .note-editable * {
+            line-height: 2 !important;
+            margin-bottom: 10px !important;
+        }
+        .note-editable ul, .note-editable ol {
+            margin-left: 20px !important;
+        }
+        .note-editable p {
+            margin-bottom: 15px !important;
+        }
+    </style>
+
 </head>
 <body>
 	<div class="wrapper">
