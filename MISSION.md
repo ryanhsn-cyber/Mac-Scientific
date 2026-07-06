@@ -6,7 +6,7 @@ Maintain and develop the e-commerce_23 Laravel application (a bespoke Laravel ^7
 
 ## Current Status
 
-Local Docker environment successfully running. Catalog data has been cleared from the database, including all products, brands, reviews, campaigns, galleries, attributes, and attribute options. Associated image files were cleaned up from the filesystem. Resolved file permission errors (`chmod 777 assets/images`) when saving products, fixed Summernote text editor styling in `custom.css`, and implemented rich landing-page styling for product description details (`product.blade.php` and `master/front.blade.php`) supporting floating images, callout notification boxes, feature categories, grid layouts, and clean typography. Specifically updated the product view tab navigation UI to match a sleek white box with blue top-border design ("Description" and "Product Details"). Custom navigation categories, aligned topbar elements, custom banners, Nationwide Delivery section, custom pages, and footers remain intact.
+Local Docker environment successfully running. Catalog data has been cleared from the database. Resolved file permission errors when saving products, fixed Summernote text editor styling, and implemented rich landing-page styling for product description details supporting floating images, callout notification boxes, feature categories, grid layouts, and clean typography. Specifically updated the product view tab navigation UI to match a sleek white box with blue top-border design ("Description" and "Product Details"). Replaced legacy key-value pairs with a single Summernote WYSIWYG editor for specifications on create/edit product pages. Configured ItemRepository to save raw HTML specifications, and modified compare and product detail views to render specifications raw HTML directly. Set up an AJAX image upload endpoint for Summernote editors, allowing uploaded images inside specifications to be stored under `assets/images/`.
 
 ## Goal Pivots
 
@@ -35,4 +35,8 @@ N/A
 - [x] Update Return Policy page with effective date June 30, 2026 and full Return & Refund policy details.
 - [x] Replace FAQ link with Legal Notice page (Effective Date: June 30, 2026).
 - [x] Replace How It Works page with Medical Disclaimer page (Effective Date: June 30, 2026).
+- [x] Replace legacy key-value pair specifications with a single Summernote WYSIWYG editor.
+- [x] Persist raw HTML for specifications instead of JSON-encoded arrays in ItemRepository.
+- [x] Modify front compare and product detail views to render specifications raw HTML directly.
+- [x] Configure Summernote AJAX image uploading for drag-and-drop/selection of images.
 - [ ] Determine user requirements for further development or production deployment.
