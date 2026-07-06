@@ -423,8 +423,7 @@ body_theme4
             </section>
           </div>
       </div>
-      <!-- Copyright-->
-      <p class="footer-copyright"> {{$setting->copy_right}} | Website Designed By : <a href="https://www.elitedesign.com.bd" target="_blank"><span style="color: white;">&nbsp;Elite Design</span></a></p>
+      <p class="footer-copyright"> {{$setting->copy_right}} | Website Designed By : <a href="#" target="_blank"><span style="color: white;">&nbsp;Shohoj Solution</span></a></p>
     </div>
   </footer>
 

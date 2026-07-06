@@ -6,7 +6,7 @@ Maintain and develop the e-commerce_23 Laravel application (a bespoke Laravel ^7
 
 ## Current Status
 
-Local Docker environment successfully running. Navigation menu bar items updated to render requested category items (PRP, PRF, INJECTION, Labware, Dermalfiller, MICRONEEDLING, Care, Threadlifting, and Med courses). Reduced the categories box grid size (`col-lg-2`), adjusted menu link padding/font size, aligned topbar elements, hid mobile icons on desktop, updated hero slider banner to `banner 1.png`, updated shipping service section to "Nationwide Delivery", disabled unnecessary promotional sections & flash sales, renamed "New Products" to "Our Current Highlight", replaced product card grid with `banner 2.png` full banner view, removed Payment Options section, reset demo products from Featured/Best Seller sections, populated footer "Get In Touch" section with full contact, address, & social links (removed opening hours & TikTok icon), and updated About Us, Privacy Policy, Terms & Service, Return Policy, Legal Notice (replacing FAQ), and Medical Disclaimer (replacing How It Works) pages.
+Local Docker environment successfully running. Navigation menu bar items updated to render requested category items (PRP, PRF, INJECTION, Labware, Dermalfiller, MICRONEEDLING, Care, Threadlifting, and Med courses). Reduced the categories box grid size (`col-lg-2`), adjusted menu link padding/font size, aligned topbar elements, hid mobile icons on desktop, updated hero slider banner to `banner 1.png`, updated shipping service section to "Nationwide Delivery", disabled unnecessary promotional sections & flash sales, renamed "New Products" to "Our Current Highlight", replaced product card grid with `banner 2.png` full banner view, removed Payment Options section, reset demo products from Featured/Best Seller sections, populated footer "Get In Touch" section with full contact, address, & social links (removed opening hours & TikTok icon), updated copyright to "All rights reserved By Mac Scientific | Website Designed By : Shohoj Solution", and updated About Us, Privacy Policy, Terms & Service, Return Policy, Legal Notice (replacing FAQ), and Medical Disclaimer (replacing How It Works) pages.
 
 ## Goal Pivots
 
@@ -27,6 +27,7 @@ N/A
 - [x] Remove Payment Options section from homepage.
 - [x] Clear demo products from Featured Products and Best Seller sections, leaving them ready for manual product additions.
 - [x] Update footer "Get In Touch" contact information (Address, Phone, WhatsApp, Email) and social links (Facebook Page/Profile, Instagram, YouTube, WhatsApp), removing working hours and TikTok link.
+- [x] Update footer copyright to "All rights reserved By Mac Scientific | Website Designed By : Shohoj Solution".
 - [x] Update About Us page with Mac Scientific company profile, Mission, and Vision statements.
 - [x] Update Privacy Policy page with effective date June 30, 2026 and official policy text.
 - [x] Update Terms & Service page with effective date June 30, 2026 and 10 terms & conditions points.
