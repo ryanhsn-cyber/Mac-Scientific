@@ -41,6 +41,15 @@
 @endif
 <style>
     {{$setting->custom_css}}
+    .site-header .site-menu > ul > li > a {
+        padding: 12px 8px !important;
+        font-size: 13px !important;
+        white-space: nowrap !important;
+    }
+    .left-category-area .category-header h4 {
+        font-size: 14px !important;
+        padding: 12px 10px !important;
+    }
 </style>
 {{-- Google AdSense Start --}}
 @if ($setting->is_google_adsense == '1')
@@ -240,10 +249,10 @@ body_theme4
   <div class="navbar">
         <div class="container">
             <div class="row g-3 w-100">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     @include('includes.categories')
                 </div>
-                <div class="col-lg-9 d-flex justify-content-between">
+                <div class="col-lg-10 d-flex justify-content-between">
                     <div class="nav-inner">
                         <nav class="site-menu">
                             <ul>
