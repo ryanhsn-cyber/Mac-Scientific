@@ -153,7 +153,7 @@
                             <textarea name="specification_name" class="form-control text-editor"
                                 rows="6"
                                 placeholder="{{ __('Enter Product Details (Specification)') }}"
-                                >{{ $item->specification_name }}</textarea>
+                                >{{ $item->getHtmlSpecifications() }}</textarea>
                         </div>
                     </div>
                 </div>

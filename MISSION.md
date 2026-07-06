@@ -6,7 +6,7 @@ Maintain and develop the e-commerce_23 Laravel application (a bespoke Laravel ^7
 
 ## Current Status
 
-Local Docker environment successfully running. Catalog data has been cleared from the database. Resolved file permission errors when saving products, fixed Summernote text editor styling, and implemented rich landing-page styling for product description details supporting floating images, callout notification boxes, feature categories, grid layouts, and clean typography. Specifically updated the product view tab navigation UI to match a sleek white box with blue top-border design ("Description" and "Product Details"). Replaced legacy key-value pairs with a single Summernote WYSIWYG editor for specifications on create/edit product pages. Configured ItemRepository to save raw HTML specifications, and modified compare and product detail views to render specifications raw HTML directly. Set up an AJAX image upload endpoint for Summernote editors, allowing uploaded images inside specifications to be stored under `assets/images/`.
+Local Docker environment successfully running. Catalog data has been cleared from the database. Resolved file permission errors when saving products, fixed Summernote text editor styling, and implemented rich landing-page styling for product description details supporting floating images, callout notification boxes, feature categories, grid layouts, and clean typography. Specifically updated the product view tab navigation UI to match a sleek white box with blue top-border design ("Description" and "Product Details"). Replaced legacy key-value pairs with a single Summernote WYSIWYG editor for specifications on create/edit product pages across all product types (Standard, Digital, License, Affiliate). Configured ItemRepository to save raw HTML specifications, and modified compare and product detail views to render specifications raw HTML directly. Set up an AJAX image upload endpoint for Summernote editors, allowing uploaded images inside specifications to be stored under `assets/images/`. Cleaned up the `[null]` corrupted strings in the database, and fixed the 404 jQuery asset reference error in `back-login.blade.php`.
 
 ## Goal Pivots
 
@@ -39,4 +39,7 @@ N/A
 - [x] Persist raw HTML for specifications instead of JSON-encoded arrays in ItemRepository.
 - [x] Modify front compare and product detail views to render specifications raw HTML directly.
 - [x] Configure Summernote AJAX image uploading for drag-and-drop/selection of images.
+- [x] Implement Summernote specifications editor for all product types (Digital, License, Affiliate).
+- [x] Clean up database `[null]` specification string values.
+- [x] Resolve `jquery.3.2.1.min.js` 404 asset loading error.
 - [ ] Determine user requirements for further development or production deployment.

@@ -274,8 +274,6 @@ class ItemController extends Controller
             'curr' => Currency::where('is_default',1)->first(),
             'social_icons' => json_decode($item->social_icons,true),
             'social_links' => json_decode($item->social_links,true),
-            'specification_name' => json_decode($item->specification_name,true),
-            'specification_description' => json_decode($item->specification_description,true),
         ]);
     }
 
@@ -304,8 +302,6 @@ class ItemController extends Controller
             'curr' => Currency::where('is_default',1)->first(),
             'social_icons' => json_decode($item->social_icons,true),
             'social_links' => json_decode($item->social_links,true),
-            'specification_name' => json_decode($item->specification_name,true),
-            'specification_description' => json_decode($item->specification_description,true),
             'license_name' => json_decode($item->license_name,true),
             'license_key' => json_decode($item->license_key,true),
         ]);

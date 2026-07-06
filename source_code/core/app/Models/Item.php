@@ -126,4 +126,51 @@ class Item extends Model
      
     }
 
+    public function getHtmlSpecifications()
+    {
+        $spec_name = $this->specification_name;
+        $spec_desc = $this->specification_description;
+
+        if (!$spec_name || $spec_name === '[null]') {
+            return '';
+        }
+
+        // Check if it is a JSON array
+        if (is_string($spec_name) && strpos($spec_name, '[') === 0 && strpos($spec_name, ']') === strlen($spec_name) - 1) {
+            $names = json_decode($spec_name, true);
+            $descriptions = json_decode($spec_desc, true);
+            
+            if (is_array($names)) {
+                $filtered_names = array_filter($names, function($val) {
+                    return !is_null($val) && $val !== '';
+                });
+                if (empty($filtered_names)) {
+                    return '';
+                }
+
+                $html = '<table class="table table-bordered"><tbody>';
+                if (!is_array($descriptions)) {
+                    $descriptions = array_fill(0, count($names), '');
+                }
+                if (count($names) !== count($descriptions)) {
+                    if (count($descriptions) < count($names)) {
+                        $descriptions = array_pad($descriptions, count($names), '');
+                    } else {
+                        $descriptions = array_slice($descriptions, 0, count($names));
+                    }
+                }
+                foreach (array_combine($names, $descriptions) as $name => $description) {
+                    if ($name || $description) {
+                        $html .= '<tr><td><strong>' . e($name) . '</strong></td><td>' . e($description) . '</td></tr>';
+                    }
+                }
+                $html .= '</tbody></table>';
+                return $html;
+            }
+        }
+
+        return $spec_name;
+    }
+
 }
+
