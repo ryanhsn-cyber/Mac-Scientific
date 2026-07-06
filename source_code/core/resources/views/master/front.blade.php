@@ -192,7 +192,7 @@ body_theme4
 <div class="w-full max-w-container-max mx-auto px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center">
 <!-- Logo -->
 <a class="flex-shrink-0 mb-3 md:mb-0 site-logo" href="{{route('front.index')}}">
-<img src="{{asset('assets/images/'.$setting->logo)}}" alt="{{$setting->title}}" style="max-height: 55px;">
+<img src="{{asset('assets/images/'.$setting->logo)}}" alt="{{$setting->title}}" class="h-16 md:h-20 w-auto object-contain" style="max-height: 80px;">
 </a>
 <!-- Search Bar -->
 <div class="w-full md:w-1/2 max-w-xl mb-3 md:mb-0 px-2">
