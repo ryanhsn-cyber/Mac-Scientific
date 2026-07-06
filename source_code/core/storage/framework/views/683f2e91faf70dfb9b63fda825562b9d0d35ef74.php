@@ -1,9 +1,6 @@
 <?php $__currentLoopData = $datas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 <tr>
     <td>
-        <img src="<?php echo e($data->photo ? asset('assets/images/'.$data->photo) : asset('assets/images/placeholder.png')); ?>" alt="Image Not Found">
-    </td>
-    <td>
         <?php echo e($data->name); ?>
 
     </td>
