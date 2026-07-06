@@ -215,7 +215,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="genius-banner">
-                            <img class="img-fluid w-100 rounded" src="{{ asset('assets/images/banner_2.png') }}" alt="Our Current Highlight">
+                            <img class="img-fluid w-100 rounded" src="/assets/images/featured-banner.png" alt="Our Current Highlight">
                         </div>
                     </div>
                 </div>
