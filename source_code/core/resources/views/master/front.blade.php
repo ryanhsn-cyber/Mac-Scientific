@@ -58,6 +58,16 @@
         padding: 10px 20px !important;
         align-self: center !important;
     }
+    /* Product Details Tab Spacing */
+    .product-landing-details {
+        line-height: 2 !important;
+        font-size: 15px !important;
+    }
+    .product-landing-details p, 
+    .product-landing-details li, 
+    .product-landing-details div {
+        margin-bottom: 10px !important;
+    }
     .site-header .search-box-wrap .search-box-inner {
         width: 100%;
         align-self: center !important;
