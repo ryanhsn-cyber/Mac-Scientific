@@ -5,146 +5,680 @@
 @endsection
 
 @section('content')
-<main class="w-full bg-surface-container-lowest">
-    <!-- BEGIN: Hero Section -->
+
+    @php
+        function renderStarRating($rating, $maxRating = 5)
+        {
+            $fullStar = "<i class = 'far fa-star filled'></i>";
+            $halfStar = "<i class = 'far fa-star-half filled'></i>";
+            $emptyStar = "<i class = 'far fa-star'></i>";
+            $rating = $rating <= $maxRating ? $rating : $maxRating;
+
+            $fullStarCount = (int) $rating;
+            $halfStarCount = ceil($rating) - $fullStarCount;
+            $emptyStarCount = $maxRating - $fullStarCount - $halfStarCount;
+
+            $html = str_repeat($fullStar, $fullStarCount);
+            $html .= str_repeat($halfStar, $halfStarCount);
+            $html .= str_repeat($emptyStar, $emptyStarCount);
+            $html = $html;
+            return $html;
+        }
+    @endphp
+
+
     @if ($setting->is_slider == 1)
-    <section class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-6">
-        @if(count($sliders) > 0)
-        <div class="relative w-full h-[400px] overflow-hidden rounded-round-four shadow-sm">
-            <img alt="Slider" class="w-full h-full object-cover object-right" src="{{ asset('assets/images/' . $sliders[0]->photo) }}"/>
-            <div class="absolute inset-0 flex flex-col justify-center items-start px-12 md:px-24">
-                <h2 class="text-headline-sm text-[20px] font-light text-on-surface mb-2 tracking-widest">{{ $sliders[0]->subtitle ?? 'YOUR ONLINE SHOP FOR' }}</h2>
-                <h1 class="text-display-lg text-[48px] font-bold text-on-surface leading-tight">{{ $sliders[0]->title ?? 'PRP AND INNOVATIVE COSMETIC PRODUCTS' }}</h1>
-            </div>
-        </div>
-        @endif
-    </section>
-    @endif
-    <!-- END: Hero Section -->
-
-    <!-- BEGIN: Highlights Section -->
-    <section class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-6">
-        <div class="bg-gray-600 text-white text-center py-2 text-xl font-bold tracking-widest uppercase rounded-t-round-four">
-            Our Current Highlights
-        </div>
-        <div class="border border-t-0 border-outline-variant p-8 rounded-b-round-four flex flex-col md:flex-row items-center justify-between bg-surface-container-lowest">
-            <div class="w-full md:w-1/2 pr-8">
-                <div class="flex items-center mb-4">
-                    <span class="font-display-lg text-[32px] font-bold tracking-tight text-primary">prp</span><span class="font-display-lg text-[32px] font-normal text-on-surface">med</span>
-                </div>
-                <div class="flex items-end mb-4">
-                    <h2 class="text-[120px] font-bold text-primary leading-none">50%</h2>
-                    <div class="ml-4 mb-4 border-2 border-primary rounded-full w-24 h-24 flex flex-col items-center justify-center text-primary text-center">
-                        <span class="text-xs font-bold uppercase">Only for a</span>
-                        <span class="text-xs font-bold uppercase">short time</span>
-                        <div class="w-8 h-[1px] bg-primary my-1"></div>
-                        <span class="text-[10px] font-bold">MHD</span>
-                        <span class="text-[10px] font-bold">31.07.2026</span>
-                    </div>
-                </div>
-                <h3 class="text-3xl font-bold text-on-surface tracking-widest mb-2">DISCOUNT</h3>
-                <h4 class="text-xl font-light text-secondary tracking-wider mb-8">ON MICRONEEDLING SERUMS</h4>
-                <div class="flex space-x-8 mb-8 text-center text-xs text-secondary">
-                    <div class="flex flex-col items-center">
-                        <span class="material-symbols-outlined text-primary text-3xl mb-2">stars</span>
-                        <span>PROFESSIONAL<br/>RESULTS</span>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <span class="material-symbols-outlined text-primary text-3xl mb-2">science</span>
-                        <span>HIGH-QUALITY<br/>INGREDIENTS</span>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <span class="material-symbols-outlined text-primary text-3xl mb-2">check_circle</span>
-                        <span>SUITABLE FOR ALL<br/>SKIN TYPES</span>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <span class="material-symbols-outlined text-primary text-3xl mb-2">health_and_safety</span>
-                        <span>DESIGNED FOR<br/>PROFESSIONALS</span>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-6">
-                    <a href="{{route('front.catalog')}}" class="bg-primary hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-round-four transition-colors flex items-center shadow-md">
-                        SECURE NOW <span class="material-symbols-outlined ml-2">chevron_right</span>
-                    </a>
-                    <div class="flex items-center text-secondary text-sm font-bold">
-                        <span class="material-symbols-outlined text-primary text-3xl mr-2">event_available</span>
-                        <span>OFFER VALID WHILE<br/>STOCKS LAST</span>
-                    </div>
-                </div>
-            </div>
-            <div class="w-full md:w-1/2 mt-8 md:mt-0 flex justify-end">
-                <img alt="Microneedling Serums" class="max-w-full h-auto object-cover rounded-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAII-7TZEFvlywBBWTDABurr4SwS3umwyY6-NeAw2s0nFyYGNJeKIANT92rr7lF3xcXWGpO9l7p1gIXQyIe6s_Wqo-R2kCSqpva8jjOS3sN39Wx_nFpd1zGPee1xXunfmsRZWoPHtHuVKbAO_dLqZVCmnTQlh1XukQtSmSv7Lzb4RMSbFnw87G8H4bI4r0fasZWiVZs5McA8xGgWwuAeXVePWRBZ0dKoREAWRSJCo-z5D94CkOLNe18uw" style="max-height: 400px; width: 100%; object-position: center;"/>
-            </div>
-        </div>
-    </section>
-    <!-- END: Highlights Section -->
-
-    <!-- BEGIN: Bestsellers Section -->
-    @if ($setting->is_featured_category == 1)
-    <section class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-6 mb-12">
-        <div class="bg-gray-600 text-white text-center py-2 text-xl font-bold tracking-widest uppercase rounded-t-round-four">
-            Bestsellers
-        </div>
-        <div class="border border-t-0 border-outline-variant p-6 rounded-b-round-four bg-surface">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                @foreach ($feature_category_items as $item)
-                <!-- Product -->
-                <div class="bg-surface-container-lowest p-4 rounded-round-four shadow-sm border border-outline-variant flex flex-col h-full">
-                    <div class="flex-grow flex items-center justify-center mb-4 h-40">
-                        <a href="{{route('front.product', $item->slug)}}">
-                            <img alt="{{$item->name}}" class="max-h-full object-contain" src="{{asset('assets/images/'.$item->thumbnail)}}"/>
-                        </a>
-                    </div>
-                    <div class="text-xs text-secondary mb-1"><a href="{{route('front.catalog').'?category='.$item->category->slug}}">{{$item->category->name}}</a></div>
-                    <h3 class="font-bold text-sm mb-2 h-16 overflow-hidden"><a href="{{route('front.product', $item->slug)}}">{{$item->name}}</a></h3>
-                    <div class="text-[10px] text-secondary mb-2">{{$item->brand->name ?? ''}}<br/>{{$item->sku}}</div>
-                    <div class="flex justify-between items-end mb-4 mt-auto">
-                        <div class="font-bold text-lg">{{PriceHelper::grandCurrencyPrice($item)}}</div>
-                        @if($item->previous_price && $item->previous_price !=0)
-                        <div class="text-xs text-secondary line-through">{{PriceHelper::setPreviousPrice($item->previous_price)}}</div>
-                        @endif
-                    </div>
-                    <div class="flex space-x-2">
-                        <div class="flex border border-outline-variant rounded-round-four w-1/3">
-                            <input class="w-full text-center border-none p-1 text-sm rounded-l-round-four focus:ring-0" type="number" value="1"/>
+        <div class="slider-area-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- Main Slider-->
+                        <div class="hero-slider">
+                            <div class="hero-slider-main owl-carousel dots-inside" >
+                                @foreach ($sliders as $slider)
+                                    <div class="item
+                                    @if (DB::table('languages')->where('is_default',1)->first()->rtl == 1)
+                                    d-flex justify-content-end
+                                    @endif
+                                    "
+                                        style="background: url('{{ asset('assets/images/' . $slider->photo) }}')">
+                                        <div class="item-inner">
+                                            <div class="from-bottom">
+                                                @if ($slider->logo)
+                                                    <img class="d-inline-block brand-logo"
+                                                    src="{{ asset('assets/images/' . $slider->logo) }}"
+                                                    alt="logo">
+                                                @endif
+                                                <div class="title text-body"></div>
+                                                <div class="subtitle text-body"></div>
+                                            </div>
+                              
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                        <a href="javascript:;" data-target="{{ $item->id }}" class="add_to_single_cart w-2/3 border border-outline-variant rounded-round-four py-1 text-sm font-bold flex items-center justify-center hover:border-primary hover:text-primary transition-colors">
-                            <span class="material-symbols-outlined text-[16px] mr-1">shopping_bag</span> Add
+                    </div>
+
+                    @if (isset($hero_banner))
+                    <div class="col-lg-4 d-none d-lg-block">
+                        <a href="{{$hero_banner['url1']}}" class="sright-image">
+                            <img src="{{asset('assets/images/'.$hero_banner['img1'])}}" alt="">
+                            <div class="inner-content">
+
+                                @if (isset($hero_banner['subtitle1']))
+                                  <p></p>
+                                @endif
+
+                                @if (isset($hero_banner['title1']))
+                                <h4></h4>
+                                @endif
+                            </div>
+                        </a>
+                        <a href="{{$hero_banner['url2']}}" class="sright-image mb-0">
+                            <img src="{{asset('assets/images/'.$hero_banner['img2'])}}" alt="">
+                            <div class="inner-content">
+                                @if (isset($hero_banner['subtitle2']))
+                                 <p></p>
+                                @endif
+                                @if (isset($hero_banner['title2']))
+                                 <h4></h4>
+                                @endif
+                            </div>
+                        </a>
+                    </div>
+                    @endif
+
+                </div>
+            </div>
+        </div>
+    @endif
+
+
+    @if ($setting->is_service == 1)
+        <section class="service-section">
+            <div class="container">
+                <div class="row">
+                    @foreach ($services as $service)
+                        <div class="col-lg-3 col-sm-6 text-center mb-30">
+                            <div class="single-service single-service2">
+                                <img src="{{ asset('assets/images/'.$service->photo) }}" alt="Shipping">
+                                <div class="content">
+                                    <h6 class="mb-2">{{ $service->title }}</h6>
+                                    <p class="text-sm text-muted mb-0">{{ $service->details }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
+
+
+
+    @if ($setting->campaign_status == 1)
+        <div class="deal-of-day-section mt-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <h2 class="h3">{{ $setting->campaign_title }}</h2>
+                            <div class="right-area">
+                                    <div class="countdown countdown-alt" data-date-time="{{$setting->campaign_end_date}}"></div>
+                                    <a class="right_link" href="{{route('front.campaign')}}">{{ __('View All') }} <i class="icon-chevron-right"></i></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+
+                    <div class="col-lg-12">
+                    <div class="popular-category-slider owl-carousel">
+                        @foreach ($campaign_items as $compaign_item)
+
+                        <div class="slider-item">
+                            <div class="product-card">
+                                <div class="product-thumb">
+                                    @if (!$compaign_item->item->is_stock())
+                                        <div class="product-badge bg-secondary border-default text-body
+                                        ">{{__('out of stock')}}</div>
+                                    @endif
+
+                                    @if($compaign_item->item->previous_price && $compaign_item->item->previous_price !=0)
+                                        <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($compaign_item->item)}}</div>
+                                    @endif
+                                    <img class="lazy" data-src="{{asset('assets/images/'.$compaign_item->item->thumbnail)}}" alt="Product">
+                                    <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$compaign_item->item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
+                                        <a data-target="{{route('fornt.compare.product',$compaign_item->item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
+                                        @if ($compaign_item->item->is_stock())
+                                            <a class="product-button add_to_single_cart"  data-target="{{ $compaign_item->item->id }}" href="javascript:;"  title="{{__('To Cart')}}"><i class="icon-shopping-cart"></i>
+                                            </a>
+                                        @else
+                                            <a class="product-button" href="{{route('front.product',$compaign_item->item->slug)}}" title="{{__('Details')}}"><i class="icon-arrow-right"></i></a>
+                                        @endif
+                                    </div>
+                                </div>
+                                    <div class="product-card-body">
+
+                                        <div class="product-category"><a href="{{route('front.catalog').'?category='.$compaign_item->item->category->slug}}">{{$compaign_item->item->category->name}}</a></div>
+                                        <h3 class="product-title"><a href="{{route('front.product',$compaign_item->item->slug)}}">
+                                            {{ strlen(strip_tags($compaign_item->item->name)) > 35 ? substr(strip_tags($compaign_item->item->name), 0, 35) : strip_tags($compaign_item->item->name) }}
+                                        </a></h3>
+                                        <div class="rating-stars">
+                                            {!! renderStarRating($compaign_item->item->reviews->avg('rating')) !!}
+                                        </div>
+                                        <h4 class="product-price">
+                                        @if ($compaign_item->item->previous_price != 0)
+                                            <del>{{PriceHelper::setPreviousPrice($compaign_item->item->previous_price)}}</del>
+                                        @endif
+
+                                        {{PriceHelper::grandCurrencyPrice($compaign_item->item)}}
+                                        </h4>
+
+                                    </div>
+
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+
+                </div>
+
+                </div>
+            </div>
+        </div>
+    @endif
+
+
+    @if ($setting->is_three_c_b_first == 1)
+        <div class="bannner-section mt-60">
+            <div class="container ">
+                <div class="row gx-3">
+                    <div class="col-md-4">
+                        <a href="{{$banner_first['firsturl1']}}" class="genius-banner">
+                            <img src="{{ asset('assets/images/'.$banner_first['img1']) }}" alt="">
+                            <div class="inner-content">
+                                @if (isset($banner_first['subtitle1']))
+                                    <p>{{$banner_first['subtitle1']}}</p>
+                                @endif
+                                @if (isset($banner_first['title1']))
+                                    <h4>{{$banner_first['title1']}}</h4>
+                                @endif
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{{$banner_first['firsturl2']}}" class="genius-banner">
+                            <img src="{{ asset('assets/images/'.$banner_first['img2']) }}" alt="">
+                            <div class="inner-content">
+                                @if (isset($banner_first['subtitle2']))
+                                    <p>{{$banner_first['subtitle2']}}</p>
+                                @endif
+                                @if (isset($banner_first['title2']))
+                                    <h4>{{$banner_first['title2']}}</h4>
+                                @endif
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{{$banner_first['firsturl3']}}" class="genius-banner">
+                            <img src="{{ asset('assets/images/'.$banner_first['img3']) }}" alt="">
+                            <div class="inner-content">
+                                @if (isset($banner_first['subtitle3']))
+                                    <p>{{$banner_first['subtitle3']}} </p>
+                                @endif
+                                @if (isset($banner_first['title3']))
+                                    <h4>{{$banner_first['title3']}}</h4>
+                                @endif
+                            </div>
                         </a>
                     </div>
                 </div>
-                @endforeach
             </div>
         </div>
-    </section>
     @endif
-    <!-- END: Bestsellers Section -->
 
-    <!-- BEGIN: Payment and Trust Badges -->
-    <section class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-6 mb-12">
-        <div class="bg-gray-600 text-white text-center py-2 text-xl font-bold tracking-widest uppercase mb-8 rounded-round-four">
-            PAYMENT OPTIONS
-        </div>
-        <div class="flex justify-center mb-12">
-            <div class="flex space-x-2 bg-surface-container-lowest p-2 rounded-md shadow-sm">
-                <div class="w-12 h-8 bg-black rounded flex items-center justify-center"><div class="w-4 h-4 bg-red-500 rounded-full mix-blend-screen"></div><div class="w-4 h-4 bg-yellow-500 rounded-full -ml-2 mix-blend-screen"></div></div>
-                <div class="w-12 h-8 bg-[#e60050] rounded flex items-center justify-center text-white font-bold text-xs">iDEAL</div>
-                <div class="w-12 h-8 bg-black rounded flex items-center justify-center"><div class="w-4 h-4 bg-red-500 rounded-full mix-blend-screen"></div><div class="w-4 h-4 bg-yellow-500 rounded-full -ml-2 mix-blend-screen"></div></div>
-                <div class="w-12 h-8 bg-blue-700 rounded flex items-center justify-center text-white font-bold text-xs italic">VISA</div>
-                <div class="w-12 h-8 bg-white border border-gray-200 rounded flex items-center justify-center text-black font-bold text-[10px]">Pay</div>
-                <div class="w-12 h-8 bg-[#003087] rounded flex items-center justify-center text-white font-bold text-xs italic">PayPal</div>
-                <div class="w-12 h-8 bg-white border border-gray-200 rounded flex items-center justify-center text-blue-500 font-bold text-xs">K</div>
-                <div class="w-12 h-8 bg-[#00a5e5] rounded flex items-center justify-center text-white font-bold text-xs">giropay</div>
-                <div class="w-12 h-8 bg-[#e3000f] rounded flex items-center justify-center text-white font-bold text-xs">S</div>
+
+    @if ($setting->is_popular_category == 1)
+        <section class="newproduct-section popular-category-sec mt-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <h2 class="h3">{{ $popular_category_title }}</h2>
+                            <div class="links">
+                                @foreach ($popular_categories as $key => $popular_categorie)
+                                <a class="category_get {{$loop->first ? 'active' : ''}}" data-target="popular_category_view" data-href="{{route('front.popular.category',[$popular_categorie->slug,'popular_category','slider'])}}"  href="javascript:;" class="{{$loop->first ? 'active' : ''}}">{{$popular_categorie->name}}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="popular_category_view d-none">
+                    <img  src="{{asset('assets/images/ajax_loader.gif')}}" alt="">
+                </div>
+
+                <div class="row" id="popular_category_view">
+                    <div class="col-lg-12">
+                        <div class="popular-category-slider  owl-carousel">
+                            @foreach ($popular_category_items as $popular_category_item)
+                            <div class="slider-item">
+                                <div class="product-card">
+                                    <div class="product-thumb">
+
+                                        @if (!$popular_category_item->is_stock())
+                                            <div class="product-badge bg-secondary border-default text-body
+                                            ">{{__('out of stock')}}</div>
+                                        @endif
+                                        @if($popular_category_item->previous_price && $popular_category_item->previous_price !=0)
+                                        <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($popular_category_item)}}</div>
+                                        @endif
+                                            <img class="lazy" data-src="{{asset('assets/images/'.$popular_category_item->thumbnail)}}" alt="Product">
+                                            <div class="product-button-group">
+                                                <a class="product-button wishlist_store" href="{{route('user.wishlist.store',$popular_category_item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
+                                                <a data-target="{{route('fornt.compare.product',$popular_category_item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
+                                                @include('includes.item_footer',['sitem'=>$popular_category_item])
+                                            </div>
+                                        </div>
+                                    <div class="product-card-body">
+                                        <div class="product-category"><a href="{{route('front.catalog').'?category='.$popular_category_item->category->slug}}">{{$popular_category_item->category->name}}</a></div>
+                                        <h3 class="product-title"><a href="{{route('front.product',$popular_category_item->slug)}}">
+                                            {{ strlen(strip_tags($popular_category_item->name)) > 35 ? substr(strip_tags($popular_category_item->name), 0, 35) : strip_tags($popular_category_item->name) }}
+                                        </a></h3>
+                                        <div class="rating-stars">
+                                        <i class="far fa-star filled"></i><i class="far fa-star filled"></i><i class="far fa-star filled"></i><i class="far fa-star filled"></i><i class="far fa-star filled"></i>
+                                        </div>
+                                        <h4 class="product-price">
+                                            @if ($popular_category_item->previous_price != 0)
+                                            <del>{{PriceHelper::setPreviousPrice($popular_category_item->previous_price)}}</del>
+                                            @endif
+                                            {{PriceHelper::grandCurrencyPrice($popular_category_item)}}
+                                            </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    @endif
+
+    @if ($setting->is_three_c_b_second == 1)
+        <div class="bannner-section mt-60">
+            <div class="container ">
+                <div class="row gx-3">
+                    <div class="col-md-4">
+                        <a href="{{$banner_secend['url1']}}" class="genius-banner">
+                            <img class="lazy" data-src="{{ asset('assets/images/'.$banner_secend['img1']) }}" alt="">
+                            <div class="inner-content">
+                                @if (isset($banner_secend['subtitle1']))
+                                    <p>{{$banner_secend['subtitle1']}}</p>
+                                @endif
+
+                                @if (isset($banner_secend['title1']))
+                                    <h4>{{$banner_secend['title1']}}</h4>
+                                @endif
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{{$banner_secend['url2']}}" class="genius-banner">
+                            <img class="lazy" data-src="{{ asset('assets/images/'.$banner_secend['img2']) }}" alt="">
+                            <div class="inner-content">
+                                @if (isset($banner_secend['subtitle2']))
+                                    <p>{{$banner_secend['subtitle2']}}</p>
+                                @endif
+
+                                @if (isset($banner_secend['title2']))
+                                    <h4> {{$banner_secend['title2']}}</h4>
+                                @endif
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{{$banner_secend['url3']}}" class="genius-banner">
+                            <img class="lazy" data-src="{{ asset('assets/images/'.$banner_secend['img3']) }}" alt="">
+                            <div class="inner-content">
+                                @if (isset($banner_secend['subtitle3']))
+                                    <p>{{$banner_secend['subtitle3']}} </p>
+                                @endif
+
+                                @if (isset($banner_secend['title3']))
+                                    <h4>{{$banner_secend['title3']}}</h4>
+                                @endif
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="flex flex-wrap justify-between items-center border-t border-b border-outline-variant py-8">
-            <div class="text-blue-900 font-bold text-lg flex items-center"><span class="material-symbols-outlined text-4xl mr-2">verified_user</span> MITGLIED<br/><span class="text-sm font-normal">Händlerbund</span></div>
-            <div class="flex items-center text-yellow-600 font-bold"><span class="material-symbols-outlined text-4xl mr-2">shopping_cart_checkout</span> KAUFER SIEGEL<br/><span class="text-xs font-normal text-black">SICHER EINKAUFEN</span></div>
-            <div class="border-2 border-blue-600 p-2 text-blue-600 font-bold text-xl rounded flex flex-col items-center">FairCommerce<div class="bg-blue-600 text-white text-xs px-2 py-1 mt-1 w-full text-center">DAS ORIGINAL</div></div>
-            <div class="text-red-600 font-bold text-4xl italic flex items-center bg-yellow-400 p-2 rounded">DHL</div>
+    @endif
+
+    @if ($setting->is_highlighted == 1)
+        <section class="selected-product-section speacial-product-sec mt-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <div class="links">
+                                <a data-href="{{route('front.get.product','feature')}}" data-target="type_product_view" href="javascript:;" class="product_get active">{{__('Featured')}}</a>
+                                <a data-href="{{route('front.get.product','best')}}" data-target="type_product_view" class="product_get" href="javascript:;">{{__('Best Seller')}}</a>
+                                <a data-href="{{route('front.get.product','top')}}" data-target="type_product_view" class="product_get" href="javascript:;">{{__('Top Rated')}}</a>
+                                <a data-href="{{route('front.get.product','new')}}" data-target="type_product_view" class="product_get" href="javascript:;">{{__('New Product')}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="type_product_view d-none">
+                        <img  src="{{asset('assets/images/ajax_loader.gif')}}" alt="">
+                    </div>
+                    <div class="col-lg-12" id="type_product_view">
+
+                        <div class="features-slider  owl-carousel" >
+                            @foreach ($products->orderBy('id','DESC')->get()  as $item)
+                                @if ($item->is_type == 'feature')
+                                    <div class="slider-item">
+                                        <div class="product-card ">
+                                            <div class="product-thumb">
+                                                @if (!$item->is_stock())
+                                                    <div class="product-badge bg-secondary border-default text-body
+                                                    ">{{__('out of stock')}}</div>
+                                                @endif
+                                                @if($item->previous_price && $item->previous_price !=0)
+                                                <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($item)}}</div>
+                                                @endif
+                                                <img class="lazy" data-src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
+                                                <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
+                                                    <a data-target="{{route('fornt.compare.product',$item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
+                                                    @include('includes.item_footer',['sitem' => $item])
+                                                </div>
+                                            </div>
+                                            <div class="product-card-inner">
+                                            <div class="product-card-body">
+                                                <div class="product-category"><a href="{{route('front.catalog').'?category='.$item->category->slug}}">{{$item->category->name}}</a></div>
+                                                <h3 class="product-title"><a href="{{route('front.product',$item->slug)}}">
+                                                    {{ strlen(strip_tags($item->name)) > 35 ? substr(strip_tags($item->name), 0, 35) : strip_tags($item->name) }}
+                                                </a></h3>
+                                                <div class="rating-stars">
+                                                    {!! renderStarRating($item->reviews->avg('rating')) !!}
+                                                </div>
+                                                <h4 class="product-price">
+                                                @if ($item->previous_price != 0)
+                                                <del>{{PriceHelper::setPreviousPrice($item->previous_price)}}</del>
+                                                @endif
+                                                {{PriceHelper::grandCurrencyPrice($item)}}
+                                                </h4>
+                                            </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    @endif
+
+    @if ($extra_settings->is_t1_falsh == 1)
+    <div class="flash-sell-new-section mt-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <div class="section-title">
+                        <h2 class="h3">{{ __('Flash Deal') }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main-content">
+                        <div class="flash-deal-slider owl-carousel" >
+                            @foreach ($products->orderBy('id','DESC')->get()  as $item)
+                            @if ($item->is_type == 'flash_deal' && $item->date != null)
+                                <div class="slider-item">
+                                    <div class="product-card ">
+                                        <div class="product-thumb">
+                                            @if (!$item->is_stock())
+                                            <div class="product-badge bg-secondary border-default text-body
+                                            ">{{__('out of stock')}}</div>
+                                            @endif
+                                            @if($item->previous_price && $item->previous_price !=0)
+                                            <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($item)}}</div>
+                                            @endif
+                                            <img class="lazy" data-src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
+                                            <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
+                                                <a data-target="{{route('fornt.compare.product',$item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
+                                                @include('includes.item_footer',['sitem' => $item])
+                                            </div>
+                                        </div>
+                                        <div class="product-card-inner">
+                                            <div class="product-card-body">
+
+                                                <div class="product-category"><a href="{{route('front.catalog').'?category='.$item->category->slug}}">{{$item->category->name}}</a></div>
+                                                <h3 class="product-title"><a href="{{route('front.product',$item->slug)}}">
+                                                    {{ strlen(strip_tags($item->name)) > 50 ? substr(strip_tags($item->name), 0, 50) : strip_tags($item->name) }}
+                                                </a></h3>
+                                                <div class="rating-stars">
+                                                    {!! renderStarRating($item->reviews->avg('rating')) !!}
+                                                </div>
+                                                <h4 class="product-price">
+                                                @if ($item->previous_price != 0)
+                                                <del>{{PriceHelper::setPreviousPrice($item->previous_price)}}</del>
+                                                @endif
+
+                                                {{PriceHelper::grandCurrencyPrice($item)}}
+                                                </h4>
+                                                @if (date('d-m-y') != \Carbon\Carbon::parse($item->date)->format('d-m-y'))
+                                                <div class="countdown countdown-alt mb-3" data-date-time="{{ $item->date }}">
+                                                </div>
+                                                @endif
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
-    <!-- END: Payment and Trust Badges -->
-</main>
+    </div>
+    @endif
+
+    @if ($setting->is_two_column_category == 1)
+        <div class="flash-sell-area mt-50">
+            <div class="container">
+                <div class="row gx-3 justify-content-center">
+                    @foreach ($two_column_categoriess as $two_column_key => $two_column_category)
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="section-title">
+                            <h2 class="h3">{{ $two_column_category['name']->name }}</h2>
+                        </div>
+                        <div class="main-content">
+                            <div class="newproduct-slider owl-carousel">
+                                @foreach ($two_column_categoriess[$two_column_key]['items']->chunk(4) as $two_column_category_itemt)
+                                    <div class="slider-item">
+                                        @foreach ($two_column_category_itemt as $two_column_category_item)
+                                        <div class="product-card p-col">
+                                            <a class="product-thumb" href="{{route('front.product',$two_column_category_item->slug)}}">
+                                                @if(!$two_column_category_item->is_stock())
+                                                    <div class="product-badge bg-secondary border-default text-body
+                                                    ">{{__('out of stock')}}</div>
+                                                    @endif
+
+                                                <img class="lazy" data-src="{{asset('assets/images/'.$two_column_category_item->thumbnail)}}" alt="Product"></a>
+                                            <div class="product-card-body">
+                                                <h3 class="product-title"><a href="{{route('front.product',$two_column_category_item->slug)}}">
+                                                    {{ strlen(strip_tags($two_column_category_item->name)) > 40 ? substr(strip_tags($two_column_category_item->name), 0, 40) : strip_tags($two_column_category_item->name) }}
+                                                </a></h3>
+                                                <div class="rating-stars">
+                                                    {!! renderStarRating($two_column_category_item->reviews->avg('rating')) !!}
+                                                </div>
+                                                <h4 class="product-price">
+                                                @if ($two_column_category_item->previous_price != 0)
+                                                <del>{{PriceHelper::setPreviousPrice($two_column_category_item->previous_price)}}</del>
+                                                @endif
+                                                    {{PriceHelper::grandCurrencyPrice($two_column_category_item)}}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        @endforeach
+
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        </div>
+                    </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if ($setting->is_two_c_b == 1)
+        <div class="bannner-section mt-50">
+            <div class="container ">
+                <div class="row gx-3">
+                    <div class="col-md-6">
+                        <a href="{{$banner_third['url1']}}" class="genius-banner">
+                            <img class="lazy" data-src="{{ asset('assets/images/'.$banner_third['img1']) }}" alt="">
+                            <div class="inner-content">
+                                @if (isset($banner_third['subtitle1']))
+                                    <p>{{$banner_third['subtitle1']}}</p>
+                                @endif
+                                @if (isset($banner_third['title1']))
+                                    <h4>{{$banner_third['title1']}}</h4>
+                                @endif
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{{$banner_third['url2']}}" class="genius-banner">
+                            <img class="lazy" data-src="{{ asset('assets/images/'.$banner_third['img2']) }}" alt="">
+                            <div class="inner-content">
+                                @if (isset($banner_third['subtitle2']))
+                                    <p>{{$banner_third['subtitle2']}} </p>
+                                @endif
+                                @if (isset($banner_third['title2']))
+                                    <h4>{{$banner_third['title2']}}</h4>
+                                @endif
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if ($setting->is_featured_category == 1)
+        <section class="selected-product-section featured_cat_sec sps-two mt-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <h2 class="h3">{{ $feature_category_title }}</h2>
+                            <div class="links">
+                                @foreach ($feature_categories as $key => $feature_category)
+                                <a class="category_get {{$loop->first ? 'active' : ''}}" data-target="feature_category_view"  data-href="{{route('front.popular.category',[$feature_category->slug,'feature_category','normal'])}}" href="javascript:;" class="{{$loop->first ? 'active' : ''}}">{{$feature_category->name}}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature_category_view d-none">
+                    <img  src="{{asset('assets/images/ajax_loader.gif')}}" alt="">
+                </div>
+                <div class="row g-3" id="feature_category_view">
+                    @foreach ($feature_category_items as $feature_category_item)
+                    <div class="col-gd">
+                        <div class="product-card">
+                            <div class="product-thumb" >
+
+                                @if (!$feature_category_item->is_stock())
+                                    <div class="product-badge bg-secondary border-default text-body
+                                    ">{{__('out of stock')}}</div>
+                                @endif
+                                @if($feature_category_item->previous_price && $feature_category_item->previous_price !=0)
+                                <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($feature_category_item)}}</div>
+                                @endif
+                                    <img class="lazy" data-src="{{asset('assets/images/'.$feature_category_item->thumbnail)}}" alt="Product">
+                                    <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$feature_category_item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
+                                        <a data-target="{{route('fornt.compare.product',$feature_category_item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
+
+                                        @include('includes.item_footer',['sitem'=>$feature_category_item])
+
+                                    </div>
+                            </div>
+                            <div class="product-card-body">
+                                <div class="product-category"><a href="{{route('front.catalog').'?category='.$feature_category_item->category->slug}}">{{$feature_category_item->category->name}}</a></div>
+                                <h3 class="product-title"><a href="{{route('front.product',$feature_category_item->slug)}}">
+                                    {{ strlen(strip_tags($feature_category_item->name)) > 35 ? substr(strip_tags($feature_category_item->name), 0, 35) : strip_tags($feature_category_item->name) }}
+                                </a></h3>
+                                <div class="rating-stars">
+                                <i class="far fa-star filled"></i><i class="far fa-star filled"></i><i class="far fa-star filled"></i><i class="far fa-star filled"></i><i class="far fa-star filled"></i>
+                                </div>
+                                <h4 class="product-price">
+                                    @if ($feature_category_item->previous_price != 0)
+                                    <del>{{PriceHelper::setPreviousPrice($feature_category_item->previous_price)}}</del>
+                                    @endif
+                                    {{PriceHelper::grandCurrencyPrice($feature_category_item)}}
+                                    </h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </section>
+    @endif
+
+             @if ($setting->is_popular_brand == 1)
+        <section class="brand-section mt-30 mb-60">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="section-title">
+                            <h2 class="h3">{{ __('Popular Brands') }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="brand-slider owl-carousel">
+                            @foreach ($brands as $brand)
+                            <div class="slider-item">
+                                <a class="text-center" href="{{ route('front.catalog') . '?brand=' . $brand->slug }}">
+                                    <img class="d-block hi-50 lazy"
+                                    data-src="{{ asset('assets/images/' . $brand->photo) }}"
+                                        alt="{{ $brand->name }}" title="{{ $brand->name }}">
+                                </a>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+
+
 @endsection
+
