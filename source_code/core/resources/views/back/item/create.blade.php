@@ -104,18 +104,6 @@
                             rows="6"
                             placeholder="{{ __('Enter Description') }}"
                             >{{ old('details') }}</textarea>
-                            
-                        <div class="mt-2">
-                            <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('desc_image_upload').click()">
-                                <i class="fas fa-image"></i> {{ __('Browse Image to Description') }}
-                            </button>
-                            <input type="file" id="desc_image_upload" style="display:none;" accept="image/*" onchange="uploadCustomImage(this, '#details')">
-                            
-                            <button type="button" class="btn btn-info btn-sm ml-2" onclick="document.getElementById('desc_video_upload').click()">
-                                <i class="fas fa-video"></i> {{ __('Browse Video to Description') }}
-                            </button>
-                            <input type="file" id="desc_video_upload" style="display:none;" accept="video/*" onchange="uploadCustomVideo(this, '#details')">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -138,22 +126,10 @@
                     </div>
                     <div id="specifications-section">
                         <div class="form-group">
-                            <textarea name="specification_name" class="form-control text-editor" id="specification_editor"
+                            <textarea name="specification_name" class="form-control text-editor"
                                 rows="6"
                                 placeholder="{{ __('Enter Product Details (Specification)') }}"
                                 >{{ old('specification_name') }}</textarea>
-                                
-                            <div class="mt-2">
-                                <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('spec_image_upload').click()">
-                                    <i class="fas fa-image"></i> {{ __('Browse Image to Specifications') }}
-                                </button>
-                                <input type="file" id="spec_image_upload" style="display:none;" accept="image/*" onchange="uploadCustomImage(this, '#specification_editor')">
-                                
-                                <button type="button" class="btn btn-info btn-sm ml-2" onclick="document.getElementById('spec_video_upload').click()">
-                                    <i class="fas fa-video"></i> {{ __('Browse Video to Specifications') }}
-                                </button>
-                                <input type="file" id="spec_video_upload" style="display:none;" accept="video/*" onchange="uploadCustomVideo(this, '#specification_editor')">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -305,77 +281,5 @@
 </div>
 
 </div>
-@section('scripts')
-<script>
-function uploadCustomImage(input, target) {
-    if (input.files && input.files[0]) {
-        var data = new FormData();
-        data.append("image", input.files[0]);
-        data.append("_token", $('meta[name="csrf-token"]').attr('content'));
-        
-        var btn = $(input).prev('button');
-        var originalText = btn.html();
-        btn.html('<i class="fas fa-spinner fa-spin"></i> Uploading...');
-        
-        $.ajax({
-            data: data,
-            type: "POST",
-            url: admin_url + '/item/image/upload',
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                $(target).summernote('insertImage', response.url);
-                btn.html(originalText);
-                input.value = '';
-            },
-            error: function(data) {
-                console.log(data);
-                btn.html(originalText);
-            }
-        });
-    }
-}
 
-function uploadCustomVideo(input, target) {
-    if (input.files && input.files[0]) {
-        var data = new FormData();
-        data.append("image", input.files[0]);
-        data.append("_token", $('meta[name="csrf-token"]').attr('content'));
-        
-        var btn = $(input).prev('button');
-        var originalText = btn.html();
-        btn.html('<i class="fas fa-spinner fa-spin"></i> Uploading...');
-        
-        $.ajax({
-            data: data,
-            type: "POST",
-            url: admin_url + '/item/image/upload',
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                var node = document.createElement('video');
-                node.src = response.url;
-                node.controls = true;
-                node.style.width = '100%';
-                $(target).summernote('insertNode', node);
-                
-                // Add a blank space after the video to allow typing below it easily
-                var spaceNode = document.createElement('p');
-                spaceNode.innerHTML = '<br>';
-                $(target).summernote('insertNode', spaceNode);
-                
-                btn.html(originalText);
-                input.value = '';
-            },
-            error: function(data) {
-                console.log(data);
-                btn.html(originalText);
-            }
-        });
-    }
-}
-</script>
-@endsection
 @endsection
