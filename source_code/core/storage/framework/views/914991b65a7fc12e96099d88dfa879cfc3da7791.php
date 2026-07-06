@@ -526,41 +526,7 @@ body_theme4
 <!-- Page Content-->
 <?php echo $__env->yieldContent('content'); ?>
 
-<!--    announcement banner section start   -->
-<a class="announcement-banner" href="#announcement-modal"></a>
-<div id="announcement-modal" class="mfp-hide white-popup">
-    <?php if($setting->announcement_type == 'newletter'): ?>
-        <div class="announcement-with-content">
-            <div class="left-area">
-                <img src="<?php echo e(asset('assets/images/'.$setting->announcement)); ?>" alt="">
-            </div>
-            <div class="right-area">
-                <h3 class=""><?php echo e($setting->announcement_title); ?></h3>
-                <p><?php echo e($setting->announcement_details); ?></p>
-                <form class="subscriber-form" action="<?php echo e(route('front.subscriber.submit')); ?>" method="post">
-                    <?php echo csrf_field(); ?>
-                    <div class="input-group">
-                        <input class="form-control" type="email" name="email" placeholder="<?php echo e(__('Your e-mail')); ?>">
-                        <span class="input-group-addon"><i class="icon-mail"></i></span> </div>
-                    <div aria-hidden="true">
-                        <input type="hidden" name="b_c7103e2c981361a6639545bd5_1194bb7544" tabindex="-1">
-                    </div>
-
-                    <button class="btn btn-primary btn-block mt-2" type="submit">
-                        <span><?php echo e(__('Subscribe')); ?></span>
-                    </button>
-                </form>
-            </div>
-        </div>
-    <?php else: ?>
-        <a href="<?php echo e($setting->announcement_link); ?>">
-            <img src="<?php echo e(asset('assets/images/'.$setting->announcement)); ?>" alt="">
-        </a>
-    <?php endif; ?>
-
-
-</div>
-<!--    announcement banner section end   -->
+<!--    announcement banner section removed   -->
 
 <!-- Site Footer-->
 <footer class="site-footer">

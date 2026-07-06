@@ -26,7 +26,7 @@
 
 					<thead>
 						<tr>
-							<th>{{ __('Image') }}</th>
+								
                             <th>{{ __('Name') }}</th>
 							<th>{{ __('Status') }}</th>
 							<th>{{ __('Actions') }}</th>
