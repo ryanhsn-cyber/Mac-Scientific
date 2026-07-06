@@ -1,4 +1,8 @@
-@extends('master.front')
+import os
+
+file_path = "source_code/core/resources/views/front/themes/theme1.blade.php"
+
+content = """@extends('master.front')
 @section('meta')
     <meta name="keywords" content="{{ $setting->meta_keywords }}">
     <meta name="description" content="{{ $setting->meta_description }}">
@@ -148,3 +152,8 @@
     <!-- END: Payment and Trust Badges -->
 </main>
 @endsection
+"""
+
+with open(file_path, "w") as f:
+    f.write(content)
+print("Updated theme1.blade.php with Tailwind HTML.")
