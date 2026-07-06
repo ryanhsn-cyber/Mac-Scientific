@@ -59,14 +59,21 @@
         align-self: center !important;
     }
     /* Product Details Tab Spacing */
-    .product-landing-details {
-        line-height: 2 !important;
+    .product-landing-details,
+    .product-landing-details * {
+        line-height: 2.2 !important;
         font-size: 15px !important;
     }
     .product-landing-details p, 
     .product-landing-details li, 
-    .product-landing-details div {
-        margin-bottom: 10px !important;
+    .product-landing-details div,
+    .product-landing-details span {
+        margin-bottom: 12px !important;
+    }
+    .product-landing-details br {
+        display: block !important;
+        margin-bottom: 12px !important;
+        content: "" !important;
     }
     .site-header .search-box-wrap .search-box-inner {
         width: 100%;
