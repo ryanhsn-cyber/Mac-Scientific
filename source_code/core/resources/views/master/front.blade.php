@@ -62,20 +62,19 @@
 
 <!-- Tailwind CSS Integration -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Manrope', 'sans-serif'],
-                        'headline-md': ['Manrope', 'sans-serif'],
-                        'body-md': ['Manrope', 'sans-serif'],
-                        'label-md': ['Manrope', 'sans-serif'],
-                        'display-lg': ['Manrope', 'sans-serif'],
-                        'headline-sm': ['Manrope', 'sans-serif'],
-                        'body-sm': ['Manrope', 'sans-serif'],
+                        sans: ['Arial', 'Helvetica', 'sans-serif'],
+                        'headline-md': ['Arial', 'Helvetica', 'sans-serif'],
+                        'body-md': ['Arial', 'Helvetica', 'sans-serif'],
+                        'label-md': ['Arial', 'Helvetica', 'sans-serif'],
+                        'display-lg': ['Arial', 'Helvetica', 'sans-serif'],
+                        'headline-sm': ['Arial', 'Helvetica', 'sans-serif'],
+                        'body-sm': ['Arial', 'Helvetica', 'sans-serif'],
                     },
                     colors: {
                         primary: '#ccac00',
