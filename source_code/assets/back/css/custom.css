@@ -429,3 +429,26 @@ span.cookie-consent__message p {
 /* pre.CodeMirror-line {
   padding-left: 30px !important;
 } */
+
+/* Summernote Text Editor Styling Fixes */
+.note-editor.note-frame .note-editing-area .note-editable {
+  min-height: 220px !important;
+  line-height: 1.6 !important;
+  color: #333333 !important;
+  font-family: inherit !important;
+  background-color: #ffffff !important;
+  padding: 15px !important;
+}
+
+.note-editable p {
+  margin-top: 0 !important;
+  margin-bottom: 12px !important;
+  line-height: 1.6 !important;
+  height: auto !important;
+  position: static !important;
+  display: block !important;
+}
+
+.note-editable * {
+  line-height: inherit;
+}
