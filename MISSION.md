@@ -6,7 +6,7 @@ Maintain and develop the e-commerce_23 Laravel application (a bespoke Laravel ^7
 
 ## Current Status
 
-Local Docker environment successfully running. Navigation menu bar items updated to render requested category items (PRP, PRF, INJECTION, Labware, Dermalfiller, MICRONEEDLING, Care, Threadlifting, and Med courses). Reduced the categories box grid size (`col-lg-2`), adjusted menu link padding/font size, aligned topbar elements, hid mobile icons on desktop, updated hero slider banner to `banner 1.png`, updated shipping service section to "Nationwide Delivery", disabled unnecessary promotional sections & flash sales, renamed "New Products" to "Our Current Highlight", replaced product card grid with `banner 2.png` full banner view, and replaced Popular Brands with a Payment Options section (bKash, Nagad, Rocket, Mastercard, Visa, Amex).
+Local Docker environment successfully running. Navigation menu bar items updated to render requested category items (PRP, PRF, INJECTION, Labware, Dermalfiller, MICRONEEDLING, Care, Threadlifting, and Med courses). Reduced the categories box grid size (`col-lg-2`), adjusted menu link padding/font size, aligned topbar elements, hid mobile icons on desktop, updated hero slider banner to `banner 1.png`, updated shipping service section to "Nationwide Delivery", disabled unnecessary promotional sections & flash sales, renamed "New Products" to "Our Current Highlight", replaced product card grid with `banner 2.png` full banner view, and replaced Popular Brands with a static, non-carousel Payment Options grid (bKash, Nagad, Rocket, Mastercard, Visa, Amex).
 
 ## Goal Pivots
 
@@ -24,5 +24,5 @@ N/A
 - [x] Update service section to "Nationwide Delivery" and refresh subtitle.
 - [x] Remove 3-column promotional banner sections, 2-column discount banner section, Top Rated section, and Flash Sales section from homepage.
 - [x] Replace product grid under "Our Current Highlight" with full `banner 2.png` banner view.
-- [x] Replace Popular Brands section with Payment Options displaying bKash, Nagad, Rocket, Mastercard, Visa, and Amex logos.
+- [x] Replace Popular Brands section with static Payment Options grid displaying bKash, Nagad, Rocket, Mastercard, Visa, and Amex logos.
 - [ ] Determine user requirements for further development or production deployment.
