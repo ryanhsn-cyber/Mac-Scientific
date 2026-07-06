@@ -126,31 +126,66 @@ body_theme4
 <!-- Header-->
 <header class="w-full bg-surface" style="box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
 <!-- Utility Bar -->
-<div class="bg-surface-container-low text-body-sm py-1 border-b border-outline-variant">
+<div class="bg-surface-container-low text-xs py-1.5 border-b border-outline-variant">
 <div class="w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter flex justify-between items-center">
-<div class="flex space-x-4">
-<a class="text-secondary hover:text-primary transition-colors" href="{{route('front.index')}}">{{__('Home')}}</a>
-@if ($setting->is_contact == 1)
-<a class="text-secondary hover:text-primary transition-colors" href="{{route('front.contact')}}">{{__('Contact us')}}</a>
-@endif
-@if ($setting->is_blog == 1)
-<a class="text-secondary hover:text-primary transition-colors" href="{{route('front.blog')}}">{{__('Blog')}}</a>
-@endif
-</div>
-<div class="flex space-x-4 items-center">
-<div class="flex items-center space-x-1 cursor-pointer hover:text-primary transition-colors text-secondary t-h-dropdown">
-  <a class="main-link text-secondary hover:text-primary transition-colors flex items-center" href="#">{{ __('Currency') }} <span class="material-symbols-outlined text-[16px] ml-1">expand_more</span></a>
-  <div class="t-h-dropdown-menu bg-white border border-outline-variant shadow-sm mt-2 p-2 absolute z-50">
-      @foreach (DB::table('currencies')->get() as $currency)
-          <a class="block px-2 py-1 hover:bg-gray-100 text-sm {{Session::get('currency') == $currency->id ? 'text-primary font-bold' : ($currency->is_default == 1 && !Session::has('currency') ? 'text-primary font-bold' : 'text-secondary')}}" href="{{route('front.currency.setup',$currency->id)}}">{{$currency->name}}</a>
-      @endforeach
+  <!-- Left Links (Reduced text size) -->
+  <div class="flex space-x-4 text-[11px] font-medium tracking-wide uppercase">
+    <a class="text-secondary hover:text-primary transition-colors" href="{{route('front.index')}}">{{__('Home')}}</a>
+    @if ($setting->is_contact == 1)
+    <a class="text-secondary hover:text-primary transition-colors" href="{{route('front.contact')}}">{{__('Contact us')}}</a>
+    @endif
+    @if ($setting->is_blog == 1)
+    <a class="text-secondary hover:text-primary transition-colors" href="{{route('front.blog')}}">{{__('Blog')}}</a>
+    @endif
   </div>
-</div>
-<a class="flex items-center space-x-1 text-secondary hover:text-primary transition-colors" href="{{route('user.wishlist.index')}}">
-<span class="material-symbols-outlined text-[16px]">favorite</span>
-<span>{{ __('Wishlist') }} ({{Session::has('wishlist') ? count(Session::get('wishlist')) : '0'}})</span>
-</a>
-</div>
+
+  <!-- Right Actions (Language Switcher with Flag + Wishlist) -->
+  <div class="flex items-center space-x-6 text-[11px] font-medium justify-end">
+    <!-- Language Switcher -->
+    @php
+        $currLang = Session::has('language') ? DB::table('languages')->find(Session::get('language')) : DB::table('languages')->where('is_default',1)->first();
+        if(!$currLang) {
+            $currLang = DB::table('languages')->first();
+        }
+    @endphp
+    <div class="relative flex items-center space-x-1 cursor-pointer text-secondary hover:text-primary transition-colors t-h-dropdown">
+      <a class="main-link text-secondary hover:text-primary transition-colors flex items-center space-x-1 py-0.5" href="#">
+        @if(strtolower($currLang->language ?? '') == 'english' || strtolower($currLang->language ?? '') == 'en')
+            <span class="text-sm mr-1">🇬🇧</span>
+        @elseif(strtolower($currLang->language ?? '') == 'german' || strtolower($currLang->language ?? '') == 'de')
+            <span class="text-sm mr-1">🇩🇪</span>
+        @elseif(strtolower($currLang->language ?? '') == 'arabic' || strtolower($currLang->language ?? '') == 'ar')
+            <span class="text-sm mr-1">🇸🇦</span>
+        @else
+            <span class="text-sm mr-1">🌐</span>
+        @endif
+        <span>{{ $currLang->language ?? __('Language') }}</span>
+        <span class="material-symbols-outlined text-[14px] ml-0.5">expand_more</span>
+      </a>
+      <div class="t-h-dropdown-menu bg-white border border-outline-variant shadow-md rounded-round-four mt-1 p-1.5 absolute right-0 top-full z-50 w-32 min-w-max">
+          @foreach (DB::table('languages')->get() as $language)
+              <a class="flex items-center space-x-2 px-2 py-1 hover:bg-gray-100 rounded-sm text-[12px] transition-colors {{Session::get('language') == $language->id ? 'text-primary font-bold' : ($language->is_default == 1 && !Session::has('language') ? 'text-primary font-bold' : 'text-secondary')}}" href="{{route('front.language.setup',$language->id)}}">
+                  @if(strtolower($language->language) == 'english' || strtolower($language->language) == 'en')
+                      <span>🇬🇧</span>
+                  @elseif(strtolower($language->language) == 'german' || strtolower($language->language) == 'de')
+                      <span>🇩🇪</span>
+                  @elseif(strtolower($language->language) == 'arabic' || strtolower($language->language) == 'ar')
+                      <span>🇸🇦</span>
+                  @else
+                      <span>🌐</span>
+                  @endif
+                  <span>{{$language->language}}</span>
+              </a>
+          @endforeach
+      </div>
+    </div>
+
+    <!-- Wishlist -->
+    <a class="flex items-center space-x-1 text-secondary hover:text-primary transition-colors" href="{{route('user.wishlist.index')}}">
+      <span class="material-symbols-outlined text-[15px]">favorite</span>
+      <span>{{ __('Wishlist') }} ({{Session::has('wishlist') ? count(Session::get('wishlist')) : '0'}})</span>
+    </a>
+  </div>
 </div>
 </div>
 <!-- Main Header -->
