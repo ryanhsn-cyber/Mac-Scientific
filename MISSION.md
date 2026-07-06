@@ -6,7 +6,7 @@ Maintain and develop the e-commerce_23 Laravel application (a bespoke Laravel ^7
 
 ## Current Status
 
-Local Docker environment successfully running. Navigation menu bar items updated to render requested category items (PRP, PRF, INJECTION, Labware, Dermalfiller, MICRONEEDLING, Care, Threadlifting, and Med courses). Reduced the categories box grid size (`col-lg-2`), adjusted menu link padding/font size, aligned topbar elements, hid mobile icons on desktop, updated hero slider banner to `banner 1.png`, updated shipping service section to "Nationwide Delivery", disabled unnecessary promotional sections & flash sales, renamed "New Products" to "Our Current Highlight", replaced product card grid with `banner 2.png` full banner view, replaced Popular Brands with a static Payment Options grid (bKash, Nagad, Rocket, Mastercard, Visa, Amex), reset demo products from Featured/Best Seller sections, populated footer "Get In Touch" section with full contact, address, & social links, and updated About Us, Privacy Policy, Terms & Service, Return Policy, and Legal Notice pages (replacing FAQ).
+Local Docker environment successfully running. Navigation menu bar items updated to render requested category items (PRP, PRF, INJECTION, Labware, Dermalfiller, MICRONEEDLING, Care, Threadlifting, and Med courses). Reduced the categories box grid size (`col-lg-2`), adjusted menu link padding/font size, aligned topbar elements, hid mobile icons on desktop, updated hero slider banner to `banner 1.png`, updated shipping service section to "Nationwide Delivery", disabled unnecessary promotional sections & flash sales, renamed "New Products" to "Our Current Highlight", replaced product card grid with `banner 2.png` full banner view, replaced Popular Brands with a static Payment Options grid (bKash, Nagad, Rocket, Mastercard, Visa, Amex), reset demo products from Featured/Best Seller sections, populated footer "Get In Touch" section with full contact, address, & social links, and updated About Us, Privacy Policy, Terms & Service, Return Policy, Legal Notice (replacing FAQ), and Medical Disclaimer (replacing How It Works) pages.
 
 ## Goal Pivots
 
@@ -32,4 +32,5 @@ N/A
 - [x] Update Terms & Service page with effective date June 30, 2026 and 10 terms & conditions points.
 - [x] Update Return Policy page with effective date June 30, 2026 and full Return & Refund policy details.
 - [x] Replace FAQ link with Legal Notice page (Effective Date: June 30, 2026).
+- [x] Replace How It Works page with Medical Disclaimer page (Effective Date: June 30, 2026).
 - [ ] Determine user requirements for further development or production deployment.
