@@ -236,14 +236,14 @@ body_theme4
 </div>
 </div>
 <!-- Main Navigation -->
-<nav class="border-t border-b border-outline-variant py-3 bg-surface">
+<nav class="border-t border-b border-outline-variant bg-surface">
 <div class="w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-<ul class="flex flex-wrap items-center justify-center md:justify-start gap-3 lg:gap-5 text-label-md font-bold uppercase text-[13px]">
+<ul class="flex flex-wrap items-stretch justify-center md:justify-start gap-3 lg:gap-5 text-label-md font-bold uppercase text-[13px]">
 @foreach (DB::table('categories')->whereStatus(1)->get() as $category)
 @if(!$loop->first)
-<li class="h-3.5 w-[1px] bg-gray-300 opacity-60 self-center"></li>
+<li class="w-[1px] bg-outline-variant opacity-70 self-stretch" aria-hidden="true"></li>
 @endif
-<li><a class="text-secondary hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1" href="{{route('front.catalog').'?category='.$category->slug}}">{{$category->name}}</a></li>
+<li class="py-3 flex items-center"><a class="text-secondary hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-0.5" href="{{route('front.catalog').'?category='.$category->slug}}">{{$category->name}}</a></li>
 @endforeach
 </ul>
 </div>
