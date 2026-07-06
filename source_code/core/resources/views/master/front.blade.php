@@ -86,10 +86,10 @@
         display: flex !important;
         align-items: center !important;
     }
-    .site-header .toolbar .toolbar-item {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
+    @media (min-width: 992px) {
+        .site-header .toolbar .toolbar-item.visible-on-mobile {
+            display: none !important;
+        }
     }
 </style>
 {{-- Google AdSense Start --}}
