@@ -126,10 +126,10 @@ body_theme4
 <!-- Header-->
 <header class="w-full bg-surface" style="box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
 <!-- Utility Bar -->
-<div class="bg-surface-container-low text-xs py-1.5 border-b border-outline-variant">
-<div class="w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter flex justify-between items-center">
+<div class="bg-surface-container-low text-xs py-1 border-b border-outline-variant">
+<div class="w-full max-w-container-max mx-auto px-4 md:px-6 flex justify-between items-center">
   <!-- Left Links (Reduced text size) -->
-  <div class="flex space-x-4 text-[11px] font-medium tracking-wide uppercase">
+  <div class="flex space-x-3 text-[11px] font-medium tracking-wide uppercase">
     <a class="text-secondary hover:text-primary transition-colors" href="{{route('front.index')}}">{{__('Home')}}</a>
     @if ($setting->is_contact == 1)
     <a class="text-secondary hover:text-primary transition-colors" href="{{route('front.contact')}}">{{__('Contact us')}}</a>
@@ -140,7 +140,7 @@ body_theme4
   </div>
 
   <!-- Right Actions (Language Switcher with Flag + Wishlist) -->
-  <div class="flex items-center space-x-6 text-[11px] font-medium justify-end">
+  <div class="flex items-center space-x-3 text-[11px] font-medium justify-end">
     <!-- Language Switcher -->
     @php
         $currLang = Session::has('language') ? DB::table('languages')->find(Session::get('language')) : DB::table('languages')->where('is_default',1)->first();
@@ -151,20 +151,20 @@ body_theme4
     <div class="relative flex items-center space-x-1 cursor-pointer text-secondary hover:text-primary transition-colors t-h-dropdown">
       <a class="main-link text-secondary hover:text-primary transition-colors flex items-center space-x-1 py-0.5" href="#">
         @if(strtolower($currLang->language ?? '') == 'english' || strtolower($currLang->language ?? '') == 'en')
-            <span class="text-sm mr-1">🇬🇧</span>
+            <span class="text-xs mr-0.5">🇬🇧</span>
         @elseif(strtolower($currLang->language ?? '') == 'german' || strtolower($currLang->language ?? '') == 'de')
-            <span class="text-sm mr-1">🇩🇪</span>
+            <span class="text-xs mr-0.5">🇩🇪</span>
         @elseif(strtolower($currLang->language ?? '') == 'arabic' || strtolower($currLang->language ?? '') == 'ar')
-            <span class="text-sm mr-1">🇸🇦</span>
+            <span class="text-xs mr-0.5">🇸🇦</span>
         @else
-            <span class="text-sm mr-1">🌐</span>
+            <span class="text-xs mr-0.5">🌐</span>
         @endif
         <span>{{ $currLang->language ?? __('Language') }}</span>
         <span class="material-symbols-outlined text-[14px] ml-0.5">expand_more</span>
       </a>
-      <div class="t-h-dropdown-menu bg-white border border-outline-variant shadow-md rounded-round-four mt-1 p-1.5 absolute right-0 top-full z-50 w-32 min-w-max">
+      <div class="t-h-dropdown-menu bg-white border border-outline-variant shadow-md rounded-round-four mt-1 p-1.5 absolute right-0 top-full z-50 w-28 min-w-max">
           @foreach (DB::table('languages')->get() as $language)
-              <a class="flex items-center space-x-2 px-2 py-1 hover:bg-gray-100 rounded-sm text-[12px] transition-colors {{Session::get('language') == $language->id ? 'text-primary font-bold' : ($language->is_default == 1 && !Session::has('language') ? 'text-primary font-bold' : 'text-secondary')}}" href="{{route('front.language.setup',$language->id)}}">
+              <a class="flex items-center space-x-1.5 px-2 py-1 hover:bg-gray-100 rounded-sm text-[11px] transition-colors {{Session::get('language') == $language->id ? 'text-primary font-bold' : ($language->is_default == 1 && !Session::has('language') ? 'text-primary font-bold' : 'text-secondary')}}" href="{{route('front.language.setup',$language->id)}}">
                   @if(strtolower($language->language) == 'english' || strtolower($language->language) == 'en')
                       <span>🇬🇧</span>
                   @elseif(strtolower($language->language) == 'german' || strtolower($language->language) == 'de')
@@ -182,20 +182,20 @@ body_theme4
 
     <!-- Wishlist -->
     <a class="flex items-center space-x-1 text-secondary hover:text-primary transition-colors" href="{{route('user.wishlist.index')}}">
-      <span class="material-symbols-outlined text-[15px]">favorite</span>
+      <span class="material-symbols-outlined text-[14px]">favorite</span>
       <span>{{ __('Wishlist') }} ({{Session::has('wishlist') ? count(Session::get('wishlist')) : '0'}})</span>
     </a>
   </div>
 </div>
 </div>
 <!-- Main Header -->
-<div class="w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter py-6 flex flex-col md:flex-row justify-between items-center">
+<div class="w-full max-w-container-max mx-auto px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center">
 <!-- Logo -->
-<a class="flex-shrink-0 mb-4 md:mb-0 site-logo" href="{{route('front.index')}}">
-<img src="{{asset('assets/images/'.$setting->logo)}}" alt="{{$setting->title}}" style="max-height: 60px;">
+<a class="flex-shrink-0 mb-3 md:mb-0 site-logo" href="{{route('front.index')}}">
+<img src="{{asset('assets/images/'.$setting->logo)}}" alt="{{$setting->title}}" style="max-height: 55px;">
 </a>
 <!-- Search Bar -->
-<div class="w-full md:w-1/2 max-w-2xl mb-4 md:mb-0 px-4">
+<div class="w-full md:w-1/2 max-w-xl mb-3 md:mb-0 px-2">
 <form class="relative w-full" action="{{route('front.catalog')}}" method="get">
 <input name="search" class="w-full py-2 px-4 border border-outline rounded-round-four focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary bg-surface-container-lowest text-body-md" placeholder="{{__('Search our catalog')}}" type="text"/>
 <button type="submit" class="absolute right-3 top-2.5 text-secondary hover:text-primary transition-colors">
@@ -204,7 +204,7 @@ body_theme4
 </form>
 </div>
 <!-- Actions -->
-<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-4">
 <div class="flex items-center space-x-2">
 <div class="relative text-on-surface">
 <a href="{{route('front.cart')}}">
