@@ -33,23 +33,7 @@
 
 									@include('alerts.alerts')
 
-									<div class="form-group">
-										<label for="name">{{ __('Current Image') }} *</label>
-										<br>
-											<img class="admin-img"
-												src="{{ $category->photo ? asset('assets/images/'.$category->photo) : asset('assets/images/placeholder.png') }}"
-												alt="No Image Found">
-                                        <br>
-										<span class="mt-1">{{ __('Image Size Should Be 60 x 60.') }}</span>
-									</div>
 
-									<div class="form-group position-relative">
-										<label class="file">
-											<input type="file"  accept="image/*"  class="upload-photo" name="photo" id="file"
-												aria-label="File browser example">
-											<span class="file-custom text-left">{{ __('Upload Image...') }}</span>
-										</label>
-                                    </div>
 
 									<div class="form-group">
 										<label for="name">{{ __('Name') }} *</label>

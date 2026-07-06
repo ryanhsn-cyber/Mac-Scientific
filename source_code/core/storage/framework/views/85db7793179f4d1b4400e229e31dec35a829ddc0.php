@@ -254,27 +254,7 @@
         </div>
     </li>
 
-    <li class="nav-item">
-        <a data-toggle="collapse" href="#faqs">
-            <i class="fas fa-question-circle"></i>
-            <p><?php echo e(__('Manage Faqs')); ?></p>
-            <span class="caret"></span>
-        </a>
-        <div class="collapse" id="faqs">
-            <ul class="nav nav-collapse">
-                <li>
-                    <a class="sub-link" href="<?php echo e(route('back.fcategory.index')); ?>">
-                        <span class="sub-item"><?php echo e(__('Categories')); ?></span>
-                    </a>
-                </li>
-                <li>
-                    <a class="sub-link" href="<?php echo e(route('back.faq.index')); ?>">
-                        <span class="sub-item"><?php echo e(__('Faqs')); ?></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
+    
 
     <li class="nav-item">
         <a data-toggle="collapse" href="#post">
