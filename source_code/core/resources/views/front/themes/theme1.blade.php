@@ -379,7 +379,7 @@
                 <div class="row mb-30">
                     <div class="col-lg-12">
                         <a href="{{ route('front.catalog') }}" class="d-block">
-                            <img src="{{ asset('assets/images/featured-banner.png') }}"
+                            <img src="/assets/images/featured-banner.png"
                                  alt="Regenerative Medicine - All About The Procedure And Treatment Options"
                                  class="img-fluid w-100"
                                  style="border-radius: 8px; max-height: 320px; object-fit: cover;">
