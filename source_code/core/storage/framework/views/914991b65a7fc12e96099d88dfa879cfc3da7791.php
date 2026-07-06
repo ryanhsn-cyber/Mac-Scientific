@@ -64,6 +64,54 @@
 <?php endif; ?>
 
 
+<!-- Tailwind CSS Integration -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        'headline-md': ['Manrope', 'sans-serif'],
+                        'body-md': ['Manrope', 'sans-serif'],
+                        'label-md': ['Manrope', 'sans-serif'],
+                        'display-lg': ['Manrope', 'sans-serif'],
+                        'headline-sm': ['Manrope', 'sans-serif'],
+                        'body-sm': ['Manrope', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#ccac00',
+                        'primary-fixed': '#ccac00',
+                        surface: '#f9f9f9',
+                        'surface-dim': '#dadada',
+                        'surface-bright': '#f9f9f9',
+                        'surface-container-lowest': '#ffffff',
+                        'surface-container-low': '#f3f3f4',
+                        'inverse-surface': '#333333',
+                        'on-surface': '#111111',
+                        secondary: '#555555',
+                        'outline-variant': '#e0e0e0',
+                        outline: '#cccccc',
+                    },
+                    maxWidth: {
+                        'container-max': '1440px',
+                    },
+                    spacing: {
+                        'gutter': '2rem',
+                        'margin-mobile': '1rem',
+                        'section-padding': '4rem',
+                        'stack-lg': '2rem',
+                    },
+                    borderRadius: {
+                        'round-four': '0.25rem',
+                    }
+                }
+            }
+        }
+</script>
+
 </head>
 <!-- Body-->
 <body class="
@@ -80,232 +128,94 @@ body_theme4
 
 
 <!-- Header-->
-<style>
-    /* Custom Reference Design Styles Phase 1 & 2 */
-    .site-header { box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-    .menu-top-area { background-color: #F5F5F5; padding: 8px 0; border-bottom: 1px solid #EAEAEA; font-size: 13px; color: #555; }
-    .menu-top-area a { color: #555; text-decoration: none; margin-right: 15px; transition: color 0.3s; }
-    .menu-top-area a:hover { color: #D4AF37; }
-    
-    .topbar { padding: 25px 0; background-color: #FFFFFF; }
-    .topbar .search-box-wrap { flex-grow: 1; margin: 0 20px; }
-    .topbar .search-box { border: 2px solid #D4AF37; border-radius: 4px; overflow: hidden; display: flex; align-items: center; }
-    .topbar .search-box select { border: none; background: #f9f9f9; padding: 10px; color: #333; outline: none; border-right: 1px solid #EAEAEA; }
-    .topbar .search-box input { border: none; padding: 10px 15px; outline: none; flex-grow: 1; }
-    .topbar .search-box button { background-color: #D4AF37; color: #FFF; border: none; padding: 0 25px; cursor: pointer; transition: background 0.3s; }
-    .topbar .search-box button:hover { background-color: #b5952f; }
-    
-    .topbar .toolbar-item { margin-left: 25px; text-align: center; }
-    .topbar .toolbar-item .text-label { display: block; font-size: 12px; font-weight: 600; color: #2E2E2E; margin-top: 5px; text-transform: uppercase; }
-    .topbar .toolbar-item .icon-shopping-cart, .topbar .toolbar-item .icon-repeat, .topbar .toolbar-item .icon-heart { font-size: 22px; color: #2E2E2E; }
-    
-    .navbar { background-color: #2E2E2E; padding: 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-    .navbar .site-menu ul { display: flex; margin: 0; padding: 0; list-style: none; justify-content: center; }
-    .navbar .site-menu ul li { margin: 0; }
-    .navbar .site-menu ul li a { color: #FFFFFF; padding: 16px 25px; display: block; font-weight: 600; font-family: 'Inter', 'Montserrat', sans-serif; text-transform: uppercase; font-size: 14px; border-right: 1px solid #444; transition: all 0.3s; }
-    .navbar .site-menu ul li:first-child a { border-left: 1px solid #444; }
-    .navbar .site-menu ul li a:hover, .navbar .site-menu ul li.active a { background-color: #D4AF37; color: #FFFFFF; border-color: #D4AF37; }
-</style>
-<header class="site-header navbar-sticky">
-    <div class="menu-top-area">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-left d-none d-md-block">
-                    <a href="#"><i class="icon-phone"></i> Hotline: <?php echo e($setting->footer_phone); ?></a>
-                    <a href="mailto:<?php echo e($setting->footer_email); ?>"><i class="icon-mail"></i> <?php echo e($setting->footer_email); ?></a>
-                </div>
-                <div class="col-md-6 text-right">
-                    <div class="d-inline-block mr-3">
-                        <a href="<?php echo e(route('user.wishlist.index')); ?>"><i class="icon-heart"></i> <?php echo e(__('Wishlist')); ?></a>
-                    </div>
-                    <div class="t-h-dropdown d-inline-block mr-3">
-                        <a class="main-link" href="#"><?php echo e(__('Currency')); ?> <i class="icon-chevron-down"></i></a>
-                        <div class="t-h-dropdown-menu">
-                            <?php $__currentLoopData = DB::table('currencies')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $currency): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <a class="<?php echo e(Session::get('currency') == $currency->id ? 'active' : ($currency->is_default == 1 && !Session::has('currency') ? 'active' : '')); ?>" href="<?php echo e(route('front.currency.setup',$currency->id)); ?>"><?php echo e($currency->name); ?></a>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </div>
-                    </div>
-                    <div class="login-register d-inline-block">
-                        <?php if(!Auth::user()): ?>
-                        <a href="<?php echo e(route('user.login')); ?>"><i class="icon-user"></i> <?php echo e(__('Login/Register')); ?></a>
-                        <?php else: ?>
-                        <div class="t-h-dropdown">
-                            <div class="main-link">
-                                <i class="icon-user pr-1"></i> <?php echo e(Auth::user()->first_name); ?>
-
-                            </div>
-                            <div class="t-h-dropdown-menu">
-                                <a href="<?php echo e(route('user.dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a>
-                                <a href="<?php echo e(route('user.logout')); ?>"><?php echo e(__('Logout')); ?></a>
-                            </div>
-                        </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- Header-->
+<header class="w-full bg-surface" style="box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+<!-- Utility Bar -->
+<div class="bg-surface-container-low text-body-sm py-1 border-b border-outline-variant">
+<div class="w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter flex justify-between items-center">
+<div class="flex space-x-4">
+<a class="text-secondary hover:text-primary transition-colors" href="<?php echo e(route('front.index')); ?>"><?php echo e(__('Home')); ?></a>
+<?php if($setting->is_contact == 1): ?>
+<a class="text-secondary hover:text-primary transition-colors" href="<?php echo e(route('front.contact')); ?>"><?php echo e(__('Contact us')); ?></a>
+<?php endif; ?>
+<?php if($setting->is_blog == 1): ?>
+<a class="text-secondary hover:text-primary transition-colors" href="<?php echo e(route('front.blog')); ?>"><?php echo e(__('Blog')); ?></a>
+<?php endif; ?>
+</div>
+<div class="flex space-x-4 items-center">
+<div class="flex items-center space-x-1 cursor-pointer hover:text-primary transition-colors text-secondary t-h-dropdown">
+  <a class="main-link text-secondary hover:text-primary transition-colors flex items-center" href="#"><?php echo e(__('Currency')); ?> <span class="material-symbols-outlined text-[16px] ml-1">expand_more</span></a>
+  <div class="t-h-dropdown-menu bg-white border border-outline-variant shadow-sm mt-2 p-2 absolute z-50">
+      <?php $__currentLoopData = DB::table('currencies')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $currency): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <a class="block px-2 py-1 hover:bg-gray-100 text-sm <?php echo e(Session::get('currency') == $currency->id ? 'text-primary font-bold' : ($currency->is_default == 1 && !Session::has('currency') ? 'text-primary font-bold' : 'text-secondary')); ?>" href="<?php echo e(route('front.currency.setup',$currency->id)); ?>"><?php echo e($currency->name); ?></a>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+  </div>
+</div>
+<a class="flex items-center space-x-1 text-secondary hover:text-primary transition-colors" href="<?php echo e(route('user.wishlist.index')); ?>">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+<span><?php echo e(__('Wishlist')); ?> (<?php echo e(Session::has('wishlist') ? count(Session::get('wishlist')) : '0'); ?>)</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Main Header -->
+<div class="w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter py-6 flex flex-col md:flex-row justify-between items-center">
+<!-- Logo -->
+<a class="flex-shrink-0 mb-4 md:mb-0 site-logo" href="<?php echo e(route('front.index')); ?>">
+<img src="<?php echo e(asset('assets/images/'.$setting->logo)); ?>" alt="<?php echo e($setting->title); ?>" style="max-height: 60px;">
+</a>
+<!-- Search Bar -->
+<div class="w-full md:w-1/2 max-w-2xl mb-4 md:mb-0 px-4">
+<form class="relative w-full" action="<?php echo e(route('front.catalog')); ?>" method="get">
+<input name="search" class="w-full py-2 px-4 border border-outline rounded-round-four focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary bg-surface-container-lowest text-body-md" placeholder="<?php echo e(__('Search our catalog')); ?>" type="text"/>
+<button type="submit" class="absolute right-3 top-2.5 text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+</form>
+</div>
+<!-- Actions -->
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-2">
+<div class="relative text-on-surface">
+<a href="<?php echo e(route('front.cart')); ?>">
+<span class="material-symbols-outlined text-[28px]">shopping_bag</span>
+<span class="absolute -top-1 -right-2 bg-primary text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center"><?php echo e(Session::has('cart') ? count(Session::get('cart')) : '0'); ?></span>
+</a>
+</div>
+<div class="flex flex-col text-sm ml-1">
+<span class="font-bold text-on-surface"><a href="<?php echo e(route('front.cart')); ?>"><?php echo e(__('Cart')); ?></a></span>
+</div>
+</div>
+<div class="login-register">
+<?php if(!Auth::user()): ?>
+<a class="flex items-center space-x-1 text-secondary hover:text-primary transition-colors text-label-md" href="<?php echo e(route('user.login')); ?>">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span><?php echo e(__('Sign in')); ?></span>
+</a>
+<?php else: ?>
+<div class="t-h-dropdown flex items-center space-x-1 text-secondary hover:text-primary transition-colors text-label-md cursor-pointer relative">
+    <a class="main-link flex items-center" href="#"><span class="material-symbols-outlined text-[20px] mr-1">person</span> <?php echo e(Auth::user()->first_name); ?></a>
+    <div class="t-h-dropdown-menu bg-white border border-outline-variant shadow-sm mt-2 py-2 absolute z-50 right-0 w-32">
+        <a class="block px-4 py-1 text-sm text-secondary hover:bg-gray-100" href="<?php echo e(route('user.dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a>
+        <a class="block px-4 py-1 text-sm text-secondary hover:bg-gray-100" href="<?php echo e(route('user.logout')); ?>"><?php echo e(__('Logout')); ?></a>
     </div>
-  <!-- Topbar-->
-    <div class="topbar">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Logo-->
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="site-branding">
-                        <a class="site-logo" href="<?php echo e(route('front.index')); ?>"><img src="<?php echo e(asset('assets/images/'.$setting->logo)); ?>" alt="<?php echo e($setting->title); ?>" style="max-height: 60px;"></a>
-                    </div>
-                </div>
-                <!-- Search -->
-                <div class="col-lg-6 col-md-4 d-none d-lg-block">
-                    <div class="search-box-wrap w-100">
-                        <form class="input-group search-box" id="header_search_form" action="<?php echo e(route('front.catalog')); ?>" method="get">
-                            <select name="category" id="category_select">
-                                <option value=""><?php echo e(__('All Categories')); ?></option>
-                                <?php $__currentLoopData = DB::table('categories')->whereStatus(1)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($category->slug); ?>"><?php echo e($category->name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                            <input type="text" data-target="<?php echo e(route('front.search.suggest')); ?>" id="__product__search" name="search" placeholder="<?php echo e(__('Search for products...')); ?>">
-                            <button type="submit"><i class="icon-search"></i></button>
-                            <div class="serch-result d-none"></div>
-                        </form>
-                    </div>
-                </div>
-                <!-- Toolbar-->
-                <div class="col-lg-3 col-md-8 col-sm-6 text-right">
-                    <div class="toolbar d-flex justify-content-end align-items-center">
-                        <div class="toolbar-item visible-on-mobile mobile-menu-toggle"><a href="#">
-                            <div><i class="icon-menu" style="font-size: 22px;"></i><span class="text-label"><?php echo e(__('Menu')); ?></span></div>
-                            </a>
-                        </div>
-                        <div class="toolbar-item hidden-on-mobile">
-                            <a href="<?php echo e(route('fornt.compare.index')); ?>">
-                                <div>
-                                    <span class="compare-icon"><i class="icon-repeat"></i><span class="count-label compare_count"><?php echo e(Session::has('compare') ? count(Session::get('compare')) : '0'); ?></span></span>
-                                    <span class="text-label"><?php echo e(__('Compare')); ?></span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="toolbar-item">
-                            <a href="<?php echo e(route('front.cart')); ?>">
-                                <div>
-                                    <span class="cart-icon"><i class="icon-shopping-cart"></i><span class="count-label cart_count"><?php echo e(Session::has('cart') ? count(Session::get('cart')) : '0'); ?></span></span>
-                                    <span class="text-label"><?php echo e(__('Cart')); ?></span>
-                                </div>
-                            </a>
-                            <div class="toolbar-dropdown cart-dropdown widget-cart cart_view_header" id="header_cart_load" data-target="<?php echo e(route('front.header.cart')); ?>">
-                                <?php echo $__env->make('includes.header_cart', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Mobile Menu-->
-            <div class="mobile-menu">
-                <!-- Slideable (Mobile) Menu-->
-                <div class="mm-heading-area">
-                    <h4><?php echo e(__('Navigation')); ?></h4>
-                    <div class="toolbar-item visible-on-mobile mobile-menu-toggle mm-t-two">
-                        <a href="#">
-                            <div> <i class="icon-x"></i></div>
-                        </a>
-                    </div>
-                </div>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item" role="presentation99">
-                      <span class="active" id="mmenu-tab" data-bs-toggle="tab" data-bs-target="#mmenu"  role="tab" aria-controls="mmenu" aria-selected="true"><?php echo e(__('Menu')); ?></span>
-                    </li>
-                    <li class="nav-item" role="presentation99">
-                      <span class="" id="mcat-tab" data-bs-toggle="tab" data-bs-target="#mcat"  role="tab" aria-controls="mcat" aria-selected="false"><?php echo e(__('Category')); ?></span>
-                    </li>
-                </ul>
-                <div class="tab-content p-0" >
-                    <div class="tab-pane fade show active" id="mmenu" role="tabpanel" aria-labelledby="mmenu-tab">
-                        <nav class="slideable-menu">
-                            <ul>
-                                <li class="<?php echo e(request()->routeIs('front.index') ? 'active' : ''); ?>"><a href="<?php echo e(route('front.index')); ?>"><i class="icon-chevron-right"></i><?php echo e(__('Home')); ?></a></li>
-                                <?php if($setting->is_shop == 1): ?>
-                                <li class="<?php echo e(request()->routeIs('front.catalog*')  ? 'active' : ''); ?>"><a href="<?php echo e(route('front.catalog')); ?>"><i class="icon-chevron-right"></i><?php echo e(__('Shop')); ?></a></li>
-                                <?php endif; ?>
-                                <?php if($setting->is_campaign == 1): ?>
-                                <li class="<?php echo e(request()->routeIs('front.campaign')  ? 'active' : ''); ?>"><a href="<?php echo e(route('front.campaign')); ?>"><i class="icon-chevron-right"></i><?php echo e(__('Campaign')); ?></a></li>
-                                <?php endif; ?>
-                                <?php if($setting->is_brands == 1): ?>
-                                <li class="<?php echo e(request()->routeIs('front.brand')  ? 'active' : ''); ?>"><a href="<?php echo e(route('front.brand')); ?>"><i class="icon-chevron-right"></i><?php echo e(__('Brand')); ?></a></li>
-                                <?php endif; ?>
-                                <?php if($setting->is_blog == 1): ?>
-                                <li class="<?php echo e(request()->routeIs('front.blog*') ? 'active' : ''); ?>"><a href="<?php echo e(route('front.blog')); ?>"><i class="icon-chevron-right"></i><?php echo e(__('Blog')); ?></a></li>
-                                <?php endif; ?>
-                                <li class="t-h-dropdown">
-                                    <a class="" href="#"><i class="icon-chevron-right"></i><?php echo e(__('Pages')); ?> <i class="icon-chevron-down"></i></a>
-                                    <div class="t-h-dropdown-menu">
-                                        <?php if($setting->is_faq == 1): ?>
-                                        <a class="<?php echo e(request()->routeIs('front.faq*') ? 'active' : ''); ?>" href="<?php echo e(route('front.faq')); ?>"><i class="icon-chevron-right pr-2"></i><?php echo e(__('Faq')); ?></a>
-                                        <?php endif; ?>
-                                        <?php $__currentLoopData = DB::table('pages')->wherePos(0)->orwhere('pos',2)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <a class="<?php echo e(request()->url() == route('front.page',$page->slug) ? 'active' : ''); ?> " href="<?php echo e(route('front.page',$page->slug)); ?>"><i class="icon-chevron-right pr-2"></i><?php echo e($page->title); ?></a>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </div>
-                                </li>
-                                <?php if($setting->is_contact == 1): ?>
-                                <li class="<?php echo e(request()->routeIs('front.contact') ? 'active' : ''); ?>"><a href="<?php echo e(route('front.contact')); ?>"><i class="icon-chevron-right"></i><?php echo e(__('Contact')); ?></a></li>
-                                <?php endif; ?>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="tab-pane fade" id="mcat" role="tabpanel" aria-labelledby="mcat-tab">
-                        <nav class="slideable-menu">
-                            <?php echo $__env->make('includes.mobile-category', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-  <!-- Navbar-->
-  <div class="navbar d-none d-lg-block">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <nav class="site-menu">
-                        <ul>
-                            <li class="<?php echo e(request()->routeIs('front.index') ? 'active' : ''); ?>"><a href="<?php echo e(route('front.index')); ?>"><?php echo e(__('HOME')); ?></a></li>
-                            <?php if($setting->is_shop == 1): ?>
-                            <li class="<?php echo e(request()->routeIs('front.catalog*')  ? 'active' : ''); ?>"><a href="<?php echo e(route('front.catalog')); ?>"><?php echo e(__('SHOP')); ?></a></li>
-                            <?php endif; ?>
-                            <?php if($setting->is_campaign == 1): ?>
-                            <li class="<?php echo e(request()->routeIs('front.campaign')  ? 'active' : ''); ?>"><a href="<?php echo e(route('front.campaign')); ?>"><?php echo e(__('CAMPAIGN')); ?></a></li>
-                            <?php endif; ?>
-                            <?php if($setting->is_brands == 1): ?>
-                            <li class="<?php echo e(request()->routeIs('front.brand')  ? 'active' : ''); ?>"><a href="<?php echo e(route('front.brand')); ?>"><?php echo e(__('BRANDS')); ?></a></li>
-                            <?php endif; ?>
-                            <?php if($setting->is_blog == 1): ?>
-                            <li class="<?php echo e(request()->routeIs('front.blog*') ? 'active' : ''); ?>"><a href="<?php echo e(route('front.blog')); ?>"><?php echo e(__('MAGAZINE')); ?></a></li>
-                            <?php endif; ?>
-                            <li class="t-h-dropdown">
-                                <a class="main-link" href="#"><?php echo e(__('PAGES')); ?> <i class="icon-chevron-down"></i></a>
-                                <div class="t-h-dropdown-menu" style="background:#fff; color:#333; text-transform:none;">
-                                    <?php if($setting->is_faq == 1): ?>
-                                    <a class="<?php echo e(request()->routeIs('front.faq*') ? 'active' : ''); ?>" href="<?php echo e(route('front.faq')); ?>"><?php echo e(__('Faq')); ?></a>
-                                    <?php endif; ?>
-                                    <?php $__currentLoopData = DB::table('pages')->wherePos(0)->orwhere('pos',2)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <a class="<?php echo e(request()->url() == route('front.page',$page->slug) ? 'active' : ''); ?>" href="<?php echo e(route('front.page',$page->slug)); ?>"><?php echo e($page->title); ?></a>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </div>
-                            </li>
-                            <?php if($setting->is_contact == 1): ?>
-                            <li class="<?php echo e(request()->routeIs('front.contact') ? 'active' : ''); ?>"><a href="<?php echo e(route('front.contact')); ?>"><?php echo e(__('CONTACT US')); ?></a></li>
-                            <?php endif; ?>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
+<?php endif; ?>
+</div>
+</div>
+</div>
+<!-- Main Navigation -->
+<nav class="border-t border-b border-outline-variant py-3 bg-surface">
+<div class="w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+<ul class="flex flex-wrap justify-center md:justify-start space-x-6 lg:space-x-8 text-label-md font-bold uppercase text-[13px]">
+<?php $__currentLoopData = DB::table('categories')->whereStatus(1)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<li><a class="text-secondary hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1" href="<?php echo e(route('front.catalog').'?category='.$category->slug); ?>"><?php echo e($category->name); ?></a></li>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+</ul>
+</div>
+</nav>
 </header>
+
 <!-- Page Content-->
 <?php echo $__env->yieldContent('content'); ?>
 
