@@ -55,4 +55,4 @@ N/A
 - [x] Resolve `jquery.3.2.1.min.js` 404 asset loading error.
 - [x] Resolve 500 Internal Server Error on frontend product detail and compare pages.
 - [x] Remove the announcement/newsletter modal popup from the front-end layout.
-- [ ] Determine user requirements for further development or production deployment.
+- [x] Determine user requirements for further development or production deployment (Deployed to cPanel).
