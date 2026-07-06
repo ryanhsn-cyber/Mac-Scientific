@@ -17,6 +17,12 @@ Local Docker environment successfully running. Catalog data has been cleared fro
 - Enabled "Featured Products" section on the homepage and populated it by updating product `is_type` attributes.
 - Integrated a full-width promotional banner ("Regenerative Medicine") into the "Our Current Highlight" section for Theme 2 using relative asset paths to resolve hostname issues.
 
+**Tiered/Bulk Pricing:**
+- Updated the database schema (`items` table) to store dynamic `tier_prices` as JSON.
+- Extended `ItemRepository` to calculate tiered pricing on the cart session dynamically based on current item quantity thresholds.
+- Added dynamic "add/remove tier" JavaScript logic to the admin dashboard (create and edit pages), enabling dynamic quantity thresholds and their corresponding custom prices.
+- Configured frontend views to display a real-time table of bulk pricing tiers beneath the product's short description.
+
 Cleaned up the `[null]` corrupted strings in the database, fixed the 404 jQuery asset reference error in `back-login.blade.php`, and resolved the 500 Internal Server Error on the frontend product detail page and product comparison page by removing legacy `json_decode` references on HTML specifications.
 
 ## Goal Pivots
@@ -55,4 +61,7 @@ N/A
 - [x] Resolve `jquery.3.2.1.min.js` 404 asset loading error.
 - [x] Resolve 500 Internal Server Error on frontend product detail and compare pages.
 - [x] Remove the announcement/newsletter modal popup from the front-end layout.
+- [x] Implement dynamic tiered/bulk pricing thresholds configured via the admin dashboard.
+- [x] Integrate real-time tiered pricing calculation based on quantity into the session-based cart system.
+- [x] Display a bulk pricing table on the frontend product details page.
 - [x] Determine user requirements for further development or production deployment (Deployed to cPanel).
