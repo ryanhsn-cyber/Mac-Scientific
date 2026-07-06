@@ -232,7 +232,7 @@
 	<!-- Custom JS -->
 
     <?php echo $__env->yieldContent('scripts'); ?>
-	<script src="<?php echo e(asset('assets/back/js/custom.js')); ?>"></script>
+	<script src="<?php echo e(asset('assets/back/js/custom.js?v=' . time())); ?>"></script>
 
 </body>
 </html>

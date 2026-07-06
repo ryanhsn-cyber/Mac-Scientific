@@ -521,41 +521,7 @@ body_theme4
 <!-- Page Content-->
 @yield('content')
 
-<!--    announcement banner section start   -->
-<a class="announcement-banner" href="#announcement-modal"></a>
-<div id="announcement-modal" class="mfp-hide white-popup">
-    @if ($setting->announcement_type == 'newletter')
-        <div class="announcement-with-content">
-            <div class="left-area">
-                <img src="{{ asset('assets/images/'.$setting->announcement) }}" alt="">
-            </div>
-            <div class="right-area">
-                <h3 class="">{{  $setting->announcement_title }}</h3>
-                <p>{{ $setting->announcement_details }}</p>
-                <form class="subscriber-form" action="{{route('front.subscriber.submit')}}" method="post">
-                    @csrf
-                    <div class="input-group">
-                        <input class="form-control" type="email" name="email" placeholder="{{__('Your e-mail')}}">
-                        <span class="input-group-addon"><i class="icon-mail"></i></span> </div>
-                    <div aria-hidden="true">
-                        <input type="hidden" name="b_c7103e2c981361a6639545bd5_1194bb7544" tabindex="-1">
-                    </div>
-
-                    <button class="btn btn-primary btn-block mt-2" type="submit">
-                        <span>{{__('Subscribe')}}</span>
-                    </button>
-                </form>
-            </div>
-        </div>
-    @else
-        <a href="{{ $setting->announcement_link }}">
-            <img src="{{ asset('assets/images/'.$setting->announcement) }}" alt="">
-        </a>
-    @endif
-
-
-</div>
-<!--    announcement banner section end   -->
+<!--    announcement banner section removed   -->
 
 <!-- Site Footer-->
 <footer class="site-footer">
