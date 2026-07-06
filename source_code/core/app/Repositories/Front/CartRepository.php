@@ -34,7 +34,7 @@ class CartRepository
         $qty = isset($input['quantity']) ? $input['quantity'] : 1 ;
         $qty = is_numeric($qty) ? $qty : 1;
         $cart = Session::get('cart');
-        $item = Item::where('id',$input['item_id'])->select('id','name','photo','discount_price','previous_price','slug','item_type','license_name','license_key')->first();
+        $item = Item::where('id',$input['item_id'])->select('id','name','photo','discount_price','previous_price','slug','item_type','license_name','license_key','tier_prices')->first();
         $single = isset($request->type) ? ($request->type == '1' ? 1 : 0 ) : 0;
         if(Session::has('cart')){
             if($item->item_type == 'digital' || $item->item_type == 'license'){
@@ -121,6 +121,32 @@ class CartRepository
 
         $attribute['option_price'] = $input['option_price'];
         $cart = Session::get('cart');
+        
+        $final_qty = $qty;
+        if ($cart && isset($cart[$item->id.'-'.$cart_item_key])) {
+            if($qty_check == 1){
+                $final_qty =  $qty;
+            }else{
+                $final_qty = $cart[$item->id.'-'.$cart_item_key]['qty'] +  $qty;
+            }
+        }
+
+        $main_price = $item->discount_price;
+        if ($item->tier_prices) {
+            $tiers = json_decode($item->tier_prices, true);
+            if(is_array($tiers)) {
+                usort($tiers, function($a, $b) {
+                    return $b['min_qty'] <=> $a['min_qty']; // sort by min_qty descending
+                });
+                foreach($tiers as $tier) {
+                    if($final_qty >= (int)$tier['min_qty']) {
+                        $main_price = $tier['price'];
+                        break;
+                    }
+                }
+            }
+        }
+
         // if cart is empty then this the first product
         if (!$cart || !isset($cart[$item->id.'-'.$cart_item_key])) {
             $license_name = json_decode($item->license_name,true);
@@ -131,9 +157,9 @@ class CartRepository
                     'attribute_price' => $option_price,
                     "name" => $item->name,
                     "slug" => $item->slug,
-                    "qty" => $qty,
+                    "qty" => $final_qty,
                     "price" => PriceHelper::grandPrice($item),
-                    "main_price" => $item->discount_price,
+                    "main_price" => $main_price,
                     "photo" => $item->photo,
                     "type" => $item->item_type,
                     "item_type" => $item->item_type,
@@ -149,14 +175,8 @@ class CartRepository
         // if cart not empty then check if this product exist then increment quantity
         if (isset($cart[$item->id.'-'.$cart_item_key])) {
 
-            $cart = Session::get('cart');
-
-            if($qty_check == 1){
-                $cart[$item->id.'-'.$cart_item_key]['qty'] =  $qty;
-            }else{
-                $cart[$item->id.'-'.$cart_item_key]['qty'] +=  $qty;
-            }
-
+            $cart[$item->id.'-'.$cart_item_key]['qty'] =  $final_qty;
+            $cart[$item->id.'-'.$cart_item_key]['main_price'] = $main_price;
 
             Session::put('cart', $cart);
             

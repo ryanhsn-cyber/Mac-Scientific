@@ -488,6 +488,36 @@ $(document).on('click','.remove-menu',function(){
 
         });
 
+        // Appending Tier Pricing To Items
+        $('.add-tier-price').on('click',function(){
+            var text = $(this).data('text');
+            var text1 = $(this).data('text1');
+            $('#tier-price-section').append(`
+            <div class="d-flex mt-2">
+            <div class="flex-grow-1">
+            <div class="form-group">
+                <input type="number" min="1" class="form-control"
+                    name="tier_min_qty[]"
+                    placeholder="${text}" value="" required>
+                </div>
+        </div>
+        <div class="flex-grow-1">
+            <div class="form-group">
+                <input type="number" step="0.01" min="0" class="form-control"
+                    name="tier_price[]"
+                    placeholder="${text1}" value="" required>
+                </div>
+        </div>
+        <div class="flex-btn">
+                    <button type="button"
+                        class="btn btn-danger remove-tier-price">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+        </div>
+            `);
+        });
+
         $(document).on('click','.remove-social',function(){
             $(this).parent().parent().remove();
         });
@@ -495,6 +525,9 @@ $(document).on('click','.remove-menu',function(){
             $(this).parent().parent().remove();
         });
         $(document).on('click','.remove-license',function(){
+            $(this).parent().parent().remove();
+        });
+        $(document).on('click','.remove-tier-price',function(){
             $(this).parent().parent().remove();
         });
 

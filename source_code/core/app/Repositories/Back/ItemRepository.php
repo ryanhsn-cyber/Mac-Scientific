@@ -68,6 +68,21 @@ class ItemRepository
             $input['license_key'] = null;
         }
 
+        if($request->has('is_tier_price') && $request->has('tier_min_qty') && $request->has('tier_price')){
+            $tier_prices = [];
+            foreach($request->tier_min_qty as $key => $qty){
+                if($qty && isset($request->tier_price[$key])){
+                    $tier_prices[] = [
+                        'min_qty' => $qty,
+                        'price' => $request->tier_price[$key] / $curr->value
+                    ];
+                }
+            }
+            $input['tier_prices'] = json_encode($tier_prices);
+        }else{
+            $input['tier_prices'] = null;
+        }
+
         // digital product file upload
         if($request->item_type == 'digital'){
             if($request->hasFile('file')){
@@ -156,6 +171,21 @@ class ItemRepository
         }else{
             $input['license_name'] = null;
             $input['license_key'] = null;
+        }
+
+        if($request->has('is_tier_price') && $request->has('tier_min_qty') && $request->has('tier_price')){
+            $tier_prices = [];
+            foreach($request->tier_min_qty as $key => $qty){
+                if($qty && isset($request->tier_price[$key])){
+                    $tier_prices[] = [
+                        'min_qty' => $qty,
+                        'price' => $request->tier_price[$key] / $curr->value
+                    ];
+                }
+            }
+            $input['tier_prices'] = json_encode($tier_prices);
+        }else{
+            $input['tier_prices'] = null;
         }
 
 

@@ -132,6 +132,38 @@
 
                     <p class="text-muted">{{$item->sort_details}} <a href="#details" class="scroll-to">{{__('Read more')}}</a></p>
 
+                    @if($item->tier_prices)
+                    <div class="tier-pricing-table mt-3 mb-3">
+                        <h6 class="text-medium mb-2">{{ __('Bulk/Tiered Pricing') }}</h6>
+                        <table class="table table-sm table-bordered text-center">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>{{ __('Quantity') }}</th>
+                                    <th>{{ __('Price per item') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $tiers = json_decode($item->tier_prices, true);
+                                    if(is_array($tiers)) {
+                                        usort($tiers, function($a, $b) {
+                                            return $a['min_qty'] <=> $b['min_qty']; // ascending
+                                        });
+                                    }
+                                @endphp
+                                @if(is_array($tiers))
+                                    @foreach($tiers as $tier)
+                                    <tr>
+                                        <td>{{ $tier['min_qty'] }}+</td>
+                                        <td>{{ PriceHelper::setCurrencyPrice($tier['price']) }}</td>
+                                    </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                    @endif
+
                     <div class="row margin-top-1x">
                         @foreach($attributes as $attribute)
                         @if($attribute->options->count() != 0)

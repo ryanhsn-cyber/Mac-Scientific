@@ -137,6 +137,38 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
+                        <label class="switch-primary">
+                            <input type="checkbox" class="switch switch-bootstrap status radio-check" name="is_tier_price" value="1" >
+                            <span class="switch-body"></span>
+                            <span class="switch-text">{{ __('Tiered/Bulk Pricing') }}</span>
+                        </label>
+                    </div>
+                    <div id="tier-price-section" class="d-none">
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <div class="form-group">
+                                    <input type="number" min="1" class="form-control"
+                                        name="tier_min_qty[]"
+                                        placeholder="{{ __('Minimum Quantity') }}" value="">
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="form-group">
+                                    <input type="number" min="0" step="0.01" class="form-control"
+                                        name="tier_price[]"
+                                        placeholder="{{ __('Price') }}" value="">
+                                </div>
+                            </div>
+                            <div class="flex-btn">
+                                <button type="button" class="btn btn-success add-tier-price" data-text="{{ __('Minimum Quantity') }}" data-text1="{{ __('Price') }}"> <i class="fa fa-plus"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
                         <label for="meta_keywords">{{ __('Meta Keywords') }}
                             </label>
                         <input type="text" name="meta_keywords" class="tags"

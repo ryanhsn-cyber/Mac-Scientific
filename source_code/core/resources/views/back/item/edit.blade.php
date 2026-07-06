@@ -156,6 +156,59 @@
                                 >{{ $item->getHtmlSpecifications() }}</textarea>
                         </div>
                     </div>
+                    
+                    <div class="form-group">
+                        <label class="switch-primary">
+                            <input type="checkbox" class="switch switch-bootstrap status radio-check" name="is_tier_price" value="1" {{ $item->tier_prices ? 'checked' : '' }}>
+                            <span class="switch-body"></span>
+                            <span class="switch-text">{{ __('Tiered/Bulk Pricing') }}</span>
+                        </label>
+                    </div>
+
+                    <div id="tier-price-section" class="{{ $item->tier_prices ? '' : 'd-none' }}">
+                        @if($item->tier_prices)
+                            @foreach(json_decode($item->tier_prices, true) as $tier)
+                            <div class="d-flex mt-2">
+                                <div class="flex-grow-1">
+                                    <div class="form-group">
+                                        <input type="number" min="1" class="form-control"
+                                            name="tier_min_qty[]"
+                                            placeholder="{{ __('Minimum Quantity') }}" value="{{ $tier['min_qty'] }}" required>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="form-group">
+                                        <input type="number" min="0" step="0.01" class="form-control"
+                                            name="tier_price[]"
+                                            placeholder="{{ __('Price') }}" value="{{ round($tier['price'] * $curr->value, 2) }}" required>
+                                    </div>
+                                </div>
+                                <div class="flex-btn">
+                                    <button type="button" class="btn btn-danger remove-tier-price"> <i class="fa fa-minus"></i> </button>
+                                </div>
+                            </div>
+                            @endforeach
+                        @endif
+                        <div class="d-flex mt-2">
+                            <div class="flex-grow-1">
+                                <div class="form-group">
+                                    <input type="number" min="1" class="form-control"
+                                        name="tier_min_qty[]"
+                                        placeholder="{{ __('Minimum Quantity') }}" value="">
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="form-group">
+                                    <input type="number" min="0" step="0.01" class="form-control"
+                                        name="tier_price[]"
+                                        placeholder="{{ __('Price') }}" value="">
+                                </div>
+                            </div>
+                            <div class="flex-btn">
+                                <button type="button" class="btn btn-success add-tier-price" data-text="{{ __('Minimum Quantity') }}" data-text1="{{ __('Price') }}"> <i class="fa fa-plus"></i> </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card">
