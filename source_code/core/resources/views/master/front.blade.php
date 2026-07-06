@@ -145,19 +145,17 @@ body_theme4
   <div class="flex items-center gap-2 text-[11px] font-medium justify-end">
     <!-- Language Switcher -->
     @php
-        $currLang = Session::has('language') ? DB::table('languages')->find(Session::get('language')) : DB::table('languages')->where('is_default',1)->first();
+        $currLang = Session::has('language') ? DB::table('languages')->find(Session::get('language')) : DB::table('languages')->where('type', 'Website')->where('is_default',1)->first();
         if(!$currLang) {
-            $currLang = DB::table('languages')->first();
+            $currLang = DB::table('languages')->where('type', 'Website')->first();
         }
     @endphp
-    <div class="relative flex items-center cursor-pointer text-secondary hover:text-primary transition-colors t-h-dropdown">
+    <div class="relative flex items-center cursor-pointer text-secondary hover:text-primary transition-colors t-h-dropdown !mr-0">
       <a class="main-link text-secondary hover:text-primary transition-colors flex items-center space-x-1 py-0.5" href="#">
-        @if(strtolower($currLang->language ?? '') == 'english' || strtolower($currLang->language ?? '') == 'en')
+        @if(in_array(strtolower($currLang->language ?? ''), ['english', 'en']))
             <span class="text-xs mr-0.5">🇬🇧</span>
-        @elseif(strtolower($currLang->language ?? '') == 'german' || strtolower($currLang->language ?? '') == 'de')
-            <span class="text-xs mr-0.5">🇩🇪</span>
-        @elseif(strtolower($currLang->language ?? '') == 'arabic' || strtolower($currLang->language ?? '') == 'ar')
-            <span class="text-xs mr-0.5">🇸🇦</span>
+        @elseif(in_array(strtolower($currLang->language ?? ''), ['bangla', 'bengali', 'bn']))
+            <span class="text-xs mr-0.5">🇧🇩</span>
         @else
             <span class="text-xs mr-0.5">🌐</span>
         @endif
@@ -165,14 +163,12 @@ body_theme4
         <span class="material-symbols-outlined text-[14px] ml-0.5">expand_more</span>
       </a>
       <div class="t-h-dropdown-menu bg-white border border-outline-variant shadow-md rounded-round-four mt-1 p-1.5 absolute right-0 top-full z-50 w-28 min-w-max">
-          @foreach (DB::table('languages')->get() as $language)
+          @foreach (DB::table('languages')->where('type', 'Website')->get() as $language)
               <a class="flex items-center space-x-1.5 px-2 py-1 hover:bg-gray-100 rounded-sm text-[11px] transition-colors {{Session::get('language') == $language->id ? 'text-primary font-bold' : ($language->is_default == 1 && !Session::has('language') ? 'text-primary font-bold' : 'text-secondary')}}" href="{{route('front.language.setup',$language->id)}}">
-                  @if(strtolower($language->language) == 'english' || strtolower($language->language) == 'en')
+                  @if(in_array(strtolower($language->language), ['english', 'en']))
                       <span>🇬🇧</span>
-                  @elseif(strtolower($language->language) == 'german' || strtolower($language->language) == 'de')
-                      <span>🇩🇪</span>
-                  @elseif(strtolower($language->language) == 'arabic' || strtolower($language->language) == 'ar')
-                      <span>🇸🇦</span>
+                  @elseif(in_array(strtolower($language->language), ['bangla', 'bengali', 'bn']))
+                      <span>🇧🇩</span>
                   @else
                       <span>🌐</span>
                   @endif
