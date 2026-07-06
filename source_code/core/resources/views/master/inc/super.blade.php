@@ -254,27 +254,7 @@
         </div>
     </li>
 
-    <li class="nav-item">
-        <a data-toggle="collapse" href="#faqs">
-            <i class="fas fa-question-circle"></i>
-            <p>{{ __('Manage Faqs') }}</p>
-            <span class="caret"></span>
-        </a>
-        <div class="collapse" id="faqs">
-            <ul class="nav nav-collapse">
-                <li>
-                    <a class="sub-link" href="{{ route('back.fcategory.index') }}">
-                        <span class="sub-item">{{ __('Categories') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="sub-link" href="{{ route('back.faq.index') }}">
-                        <span class="sub-item">{{ __('Faqs') }}</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
+    {{-- Manage Faqs removed --}}
 
     <li class="nav-item">
         <a data-toggle="collapse" href="#post">
