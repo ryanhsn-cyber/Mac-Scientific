@@ -206,6 +206,30 @@ $(document).on('click','.remove-menu',function(){
 
     $(function() {
 
+         // ── Toast helper ─────────────────────────────────────────────
+         function showToast(message, type) {
+             // type: 'info' | 'success' | 'error'
+             var colors = { info: '#2563eb', success: '#16a34a', error: '#dc2626' };
+             var icons  = { info: '⏳', success: '✅', error: '❌' };
+             var toast = $('<div id="video-upload-toast"></div>').css({
+                 position: 'fixed', top: '20px', right: '20px', zIndex: 99999,
+                 background: colors[type] || '#333', color: '#fff',
+                 padding: '14px 22px', borderRadius: '8px',
+                 fontSize: '14px', fontWeight: '600',
+                 boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                 display: 'flex', alignItems: 'center', gap: '10px',
+                 transition: 'opacity 0.3s ease',
+                 maxWidth: '340px', wordBreak: 'break-word'
+             }).html(icons[type] + ' ' + message);
+
+             $('#video-upload-toast').remove(); // remove any existing
+             $('body').append(toast);
+
+             if (type !== 'info') {
+                 setTimeout(function() { toast.fadeOut(400, function(){ toast.remove(); }); }, 3500);
+             }
+         }
+
          // editor
          if($('.text-editor').length > 0) {
 
@@ -217,16 +241,21 @@ $(document).on('click','.remove-menu',function(){
                      click: function () {
                          var input = document.createElement('input');
                          input.type = 'file';
-                         input.accept = 'video/*';
+                         input.accept = 'video/mp4,video/webm,video/ogg,video/*';
                          input.style.display = 'none';
                          document.body.appendChild(input);
 
                          input.onchange = function() {
                              if (input.files && input.files[0]) {
+                                 var file = input.files[0];
+
+                                 // Show loading toast
+                                 showToast('Uploading video, please wait…', 'info');
+
                                  var data = new FormData();
-                                 data.append("image", input.files[0]);
+                                 data.append("image", file);
                                  data.append("_token", $('meta[name="csrf-token"]').attr('content'));
-                                 
+
                                  $.ajax({
                                      data: data,
                                      type: "POST",
@@ -234,41 +263,29 @@ $(document).on('click','.remove-menu',function(){
                                      cache: false,
                                      contentType: false,
                                      processData: false,
-                                     beforeSend: function() {
-                                         var loader = document.createElement('div');
-                                         loader.id = 'temp-video-loader';
-                                         loader.innerHTML = '<strong style="color: blue;">[Uploading video... Please wait]</strong>';
-                                         context.invoke('editor.insertNode', loader);
-                                     },
                                      success: function(response) {
-                                         var videoNode = document.createElement('video');
-                                         videoNode.src = response.url;
-                                         videoNode.controls = true;
-                                         videoNode.style.width = '100%';
-                                         videoNode.style.marginTop = '10px';
-                                         
-                                         var editorBody = context.layoutInfo.editable;
-                                         var loader = editorBody.find('#temp-video-loader');
-                                         if (loader.length > 0) {
-                                             // We have to use Summernote's API to ensure the state updates
-                                             loader.remove(); 
-                                         }
-                                         
-                                         // Now insert the node
-                                         context.invoke('editor.insertNode', videoNode);
-                                         
-                                         // add a new line after
-                                         var p = document.createElement('p');
-                                         p.innerHTML = '<br>';
-                                         context.invoke('editor.insertNode', p);
-                                         
+                                         showToast('Video uploaded successfully!', 'success');
+
+                                         // Build the video HTML string
+                                         var videoHtml = '<video controls style="width:100%;margin-top:10px;" src="' + response.url + '"></video><p><br></p>';
+
+                                         // Insert via Summernote pasteHTML to bypass sanitizer stripping <video>
+                                         var editable = context.layoutInfo.editable;
+                                         editable.focus();
+
+                                         // Use execCommand to paste raw HTML — avoids Summernote sanitization
+                                         document.execCommand('insertHTML', false, videoHtml);
+
+                                         // Sync Summernote's internal state
+                                         context.invoke('triggerEvent', 'change');
+
                                          document.body.removeChild(input);
                                      },
-                                     error: function(data) {
-                                         console.log(data);
-                                         alert("Error uploading video! Ensure it is under 100MB and in a supported format.");
-                                         var editorBody = context.layoutInfo.editable;
-                                         editorBody.find('#temp-video-loader').remove();
+                                     error: function(xhr) {
+                                         var msg = 'Upload failed.';
+                                         if (xhr.status === 413) msg = 'File too large (max 100MB).';
+                                         else if (xhr.status === 419) msg = 'Session expired, refresh and try again.';
+                                         showToast(msg, 'error');
                                          document.body.removeChild(input);
                                      }
                                  });
@@ -284,6 +301,7 @@ $(document).on('click','.remove-menu',function(){
 
              $('.text-editor').summernote({
                 height: 300,
+                disableDragAndDrop: true,
                 buttons: {
                     customVideo: VideoUploadButton
                 },
@@ -295,7 +313,7 @@ $(document).on('click','.remove-menu',function(){
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['table', ['table']],
                     ['insert', ['link', 'picture', 'customVideo']],
-                    ['view', ['fullscreen']],
+                    ['view', ['fullscreen', 'codeview']],
                   ],
                 callbacks: {
                     onImageUpload: function(files) {
@@ -321,7 +339,7 @@ $(document).on('click','.remove-menu',function(){
                 }
              });
 
-        }
+         }
 
         // Datatable
         if($('#admin-table').length > 0) {
