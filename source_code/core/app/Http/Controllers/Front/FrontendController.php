@@ -364,11 +364,7 @@ class FrontendController extends Controller
 
 	public function faq()
 	{
-        if(Setting::first()->is_faq == 0){
-            return back();
-        }
-        $fcategories =  Fcategory::whereStatus(1)->withCount('faqs')->latest('id')->get();
-		return view('front.faq.index',['fcategories' => $fcategories]);
+		return redirect(route('front.page', 'legal-notice'));
 	}
 
 	public function show($slug)
