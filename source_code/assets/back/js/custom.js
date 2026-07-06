@@ -250,10 +250,12 @@ $(document).on('click','.remove-menu',function(){
                                          var editorBody = context.layoutInfo.editable;
                                          var loader = editorBody.find('#temp-video-loader');
                                          if (loader.length > 0) {
-                                             loader.replaceWith(videoNode);
-                                         } else {
-                                             context.invoke('editor.insertNode', videoNode);
+                                             // We have to use Summernote's API to ensure the state updates
+                                             loader.remove(); 
                                          }
+                                         
+                                         // Now insert the node
+                                         context.invoke('editor.insertNode', videoNode);
                                          
                                          // add a new line after
                                          var p = document.createElement('p');
@@ -264,9 +266,9 @@ $(document).on('click','.remove-menu',function(){
                                      },
                                      error: function(data) {
                                          console.log(data);
-                                         alert("Error uploading video! Check console for details.");
+                                         alert("Error uploading video! Ensure it is under 100MB and in a supported format.");
                                          var editorBody = context.layoutInfo.editable;
-                                         editorBody.find('#temp-video-loader').replaceWith('<div style="color:red;">[Error uploading video]</div>');
+                                         editorBody.find('#temp-video-loader').remove();
                                          document.body.removeChild(input);
                                      }
                                  });

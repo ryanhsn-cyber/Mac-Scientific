@@ -20,3 +20,6 @@ RUN sed -ri -e 's!/var/www/!/var/www/html/source_code!g' /etc/apache2/apache2.co
 
 # Set working directory
 WORKDIR /var/www/html/source_code/core
+
+# Increase PHP upload limits for video uploads
+RUN echo "upload_max_filesize = 100M\npost_max_size = 100M" > /usr/local/etc/php/conf.d/uploads.ini
