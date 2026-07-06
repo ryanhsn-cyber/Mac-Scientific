@@ -230,7 +230,7 @@ $(document).on('click','.remove-menu',function(){
                                  $.ajax({
                                      data: data,
                                      type: "POST",
-                                     url: admin_url + '/item/image/upload',
+                                     url: admin_url + '/item/video/upload',
                                      cache: false,
                                      contentType: false,
                                      processData: false,

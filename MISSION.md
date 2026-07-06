@@ -8,7 +8,14 @@ Maintain and develop the e-commerce_23 Laravel application (a bespoke Laravel ^7
 
 Local Docker environment successfully running. Catalog data has been cleared from the database, and we just wiped the subcategories and child categories for a fresh start. Resolved file permission errors when saving products, fixed Summernote text editor styling, and implemented rich landing-page styling for product description details supporting floating images, callout notification boxes, feature categories, grid layouts, and clean typography. Specifically updated the product view tab navigation UI to match a sleek white box with blue top-border design ("Description" and "Product Details"). Replaced legacy key-value pairs with a single Summernote WYSIWYG editor for specifications on create/edit product pages across all product types (Standard, Digital, License, Affiliate). Configured ItemRepository to save raw HTML specifications, and updated frontend product detail and compare views to use the `getHtmlSpecifications()` helper, ensuring both raw HTML and legacy JSON specifications render correctly.
 
-**Media Integration:** Removed legacy external "Browse Image" buttons in favor of native toolbar integration. Modified Summernote initialization in `custom.js` to override the default video button, allowing users to upload native video files directly from their machine into the editor. Videos are uploaded asynchronously via AJAX, injected securely via raw HTML to prevent editor DOM stripping, and feature a robust loading state. To support this, the PHP environment's `upload_max_filesize` and `post_max_size` limits were increased from 2MB to 500MB via a custom `uploads.ini`.
+**Media Integration:** Removed legacy external "Browse Image" buttons in favor of native toolbar integration. Modified Summernote initialization in `custom.js` to override the default video button, allowing users to upload native video files directly from their machine into the editor. Videos are uploaded asynchronously via AJAX and injected using Summernote's internal `insertNode` API to properly update the editor state. The PHP environment's `upload_max_filesize` and `post_max_size` limits were increased to 100MB via a custom `uploads.ini` generated in the Dockerfile.
+
+**Storefront & Admin UI Cleanup:**
+
+- Removed redundant "Manage FAQ" sidebar items from admin interfaces.
+- Simplified "Category Management" by removing image upload fields/previews from forms and tables.
+- Enabled "Featured Products" section on the homepage and populated it by updating product `is_type` attributes.
+- Integrated a full-width promotional banner ("Regenerative Medicine") into the "Our Current Highlight" section for Theme 2 using relative asset paths to resolve hostname issues.
 
 Cleaned up the `[null]` corrupted strings in the database, fixed the 404 jQuery asset reference error in `back-login.blade.php`, and resolved the 500 Internal Server Error on the frontend product detail page and product comparison page by removing legacy `json_decode` references on HTML specifications.
 

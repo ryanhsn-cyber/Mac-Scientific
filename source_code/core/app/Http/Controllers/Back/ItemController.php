@@ -308,16 +308,53 @@ class ItemController extends Controller
     }
 
 
+    /**
+     * Handle Summernote image upload from WYSIWYG editor.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function uploadImage(Request $request)
     {
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $name = \App\Helpers\ImageHelper::handleUploadedImage($file, 'assets/images');
+            // Use relative URL to avoid Docker hostname resolution issues
             return response()->json([
-                'url' => asset('assets/images/' . $name)
+                'url' => '/assets/images/' . $name
             ]);
         }
         return response()->json(['error' => 'No image uploaded.'], 400);
+    }
+
+    /**
+     * Handle Summernote video upload from WYSIWYG editor.
+     *
+     * Stores video files in assets/videos/ and returns a relative URL
+     * so the video can be embedded in the description editor.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function uploadVideo(Request $request)
+    {
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $videoDir = base_path('../assets/videos');
+
+            if (!file_exists($videoDir)) {
+                mkdir($videoDir, 0755, true);
+            }
+
+            $name = \Illuminate\Support\Str::random(8) . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move($videoDir, $name);
+
+            // Return relative URL to avoid Docker hostname resolution issues
+            return response()->json([
+                'url' => '/assets/videos/' . $name
+            ]);
+        }
+        return response()->json(['error' => 'No video uploaded.'], 400);
     }
 
     public function stockOut()
