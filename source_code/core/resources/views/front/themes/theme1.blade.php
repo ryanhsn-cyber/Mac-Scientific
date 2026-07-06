@@ -366,6 +366,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title">
+                            <h2 class="h3">{{ __('Featured Products') }}</h2>
                             <div class="links">
                                 <a data-href="{{route('front.get.product','feature')}}" data-target="type_product_view" href="javascript:;" class="product_get active">{{__('Featured')}}</a>
                                 <a data-href="{{route('front.get.product','best')}}" data-target="type_product_view" class="product_get" href="javascript:;">{{__('Best Seller')}}</a>
