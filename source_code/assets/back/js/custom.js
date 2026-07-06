@@ -269,12 +269,10 @@ $(document).on('click','.remove-menu',function(){
                                          // Build the video HTML string
                                          var videoHtml = '<video controls style="width:100%;margin-top:10px;" src="' + response.url + '"></video><p><br></p>';
 
-                                         // Insert via Summernote pasteHTML to bypass sanitizer stripping <video>
-                                         var editable = context.layoutInfo.editable;
-                                         editable.focus();
-
-                                         // Use execCommand to paste raw HTML — avoids Summernote sanitization
-                                         document.execCommand('insertHTML', false, videoHtml);
+                                         // Append directly to the code view to avoid the HTML sanitizer stripping the <video> tag
+                                         var $editor = context.layoutInfo.note;
+                                         var currentCode = $editor.summernote('code');
+                                         $editor.summernote('code', currentCode + videoHtml);
 
                                          // Sync Summernote's internal state
                                          context.invoke('triggerEvent', 'change');
