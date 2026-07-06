@@ -128,21 +128,21 @@ body_theme4
 <!-- Utility Bar -->
 <div class="bg-surface-container-low text-xs py-1.5 border-b border-outline-variant">
 <div class="w-full max-w-container-max mx-auto px-4 md:px-6 flex justify-between items-center">
-  <!-- Left Links (Reduced text size with dividers) -->
-  <div class="flex items-center space-x-2.5 text-[11px] font-medium tracking-wide uppercase">
+  <!-- Left Links (Reduced text size with tight dividers) -->
+  <div class="flex items-center gap-2 text-[11px] font-medium tracking-wide uppercase">
     <a class="text-secondary hover:text-primary transition-colors" href="{{route('front.index')}}">{{__('Home')}}</a>
     @if ($setting->is_contact == 1)
-    <span class="h-3 w-[1px] bg-gray-300 self-center opacity-70"></span>
+    <span class="h-3 w-[1px] bg-gray-300 opacity-60"></span>
     <a class="text-secondary hover:text-primary transition-colors" href="{{route('front.contact')}}">{{__('Contact us')}}</a>
     @endif
     @if ($setting->is_blog == 1)
-    <span class="h-3 w-[1px] bg-gray-300 self-center opacity-70"></span>
+    <span class="h-3 w-[1px] bg-gray-300 opacity-60"></span>
     <a class="text-secondary hover:text-primary transition-colors" href="{{route('front.blog')}}">{{__('Blog')}}</a>
     @endif
   </div>
 
-  <!-- Right Actions (Language Switcher with Flag + Wishlist with divider) -->
-  <div class="flex items-center space-x-2.5 text-[11px] font-medium justify-end">
+  <!-- Right Actions (Language Switcher + Divider + Wishlist) -->
+  <div class="flex items-center gap-2 text-[11px] font-medium justify-end">
     <!-- Language Switcher -->
     @php
         $currLang = Session::has('language') ? DB::table('languages')->find(Session::get('language')) : DB::table('languages')->where('is_default',1)->first();
@@ -150,7 +150,7 @@ body_theme4
             $currLang = DB::table('languages')->first();
         }
     @endphp
-    <div class="relative flex items-center space-x-1 cursor-pointer text-secondary hover:text-primary transition-colors t-h-dropdown">
+    <div class="relative flex items-center cursor-pointer text-secondary hover:text-primary transition-colors t-h-dropdown">
       <a class="main-link text-secondary hover:text-primary transition-colors flex items-center space-x-1 py-0.5" href="#">
         @if(strtolower($currLang->language ?? '') == 'english' || strtolower($currLang->language ?? '') == 'en')
             <span class="text-xs mr-0.5">🇬🇧</span>
@@ -182,7 +182,7 @@ body_theme4
       </div>
     </div>
 
-    <span class="h-3 w-[1px] bg-gray-300 self-center opacity-70"></span>
+    <span class="h-3 w-[1px] bg-gray-300 opacity-60"></span>
 
     <!-- Wishlist -->
     <a class="flex items-center space-x-1 text-secondary hover:text-primary transition-colors" href="{{route('user.wishlist.index')}}">
