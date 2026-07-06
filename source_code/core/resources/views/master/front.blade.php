@@ -363,8 +363,9 @@ body_theme4
           <section class="widget widget-light-skin">
             <h3 class="widget-title"><span style="color: white;">Get In Touch&nbsp;</span></h3>
             <p class="mb-1"><strong>{{__('Address')}}: </strong> {{$setting->footer_address}}</p>
-            <p class="mb-1"><strong>{{__('Phone')}}: </strong> {{$setting->footer_phone}}</p>
-            <p class="mb-3"><strong>{{__('Email')}}: </strong> {{$setting->footer_email}}</p>
+            <p class="mb-1"><strong>{{__('Phone')}}: </strong> <a href="tel:{{$setting->footer_phone}}" class="text-white">{{$setting->footer_phone}}</a></p>
+            <p class="mb-1"><strong>{{__('WhatsApp')}}: </strong> <a href="https://wa.me/8801312699221" target="_blank" class="text-white">+8801312699221</a></p>
+            <p class="mb-3"><strong>{{__('Email')}}: </strong> <a href="mailto:{{$setting->footer_email}}" class="text-white">{{$setting->footer_email}}</a></p>
             <ul class="list-unstyled text-sm">
               <li><span class=""><strong>{{__('Monday-Friday')}}: </strong></span>{{$setting->friday_start}} - {{$setting->friday_end}}</li>
               <li><span class=""><strong>{{__('Saturday')}}: </strong></span>{{$setting->satureday_start}} - {{$setting->satureday_end}}</li>
@@ -372,11 +373,10 @@ body_theme4
             @php
             $links = json_decode($setting->social_link,true)['links'];
             $icons = json_decode($setting->social_link,true)['icons'];
-
-          @endphp
+            @endphp
             <div class="footer-social-links">
                 @foreach ($links as $link_key => $link)
-                <a href="{{$link}}"><span><i class="{{$icons[$link_key]}}"></i></span></a>
+                <a href="{{$link}}" target="_blank"><span><i class="{{$icons[$link_key]}}"></i></span></a>
                 @endforeach
             </div>
           </section>
