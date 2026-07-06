@@ -232,15 +232,8 @@ $(document).on('click','.remove-menu',function(){
                                      contentType: false,
                                      processData: false,
                                      success: function(response) {
-                                         var node = document.createElement('video');
-                                         node.src = response.url;
-                                         node.controls = true;
-                                         node.style.width = '100%';
-                                         context.invoke('editor.insertNode', node);
-                                         
-                                         var p = document.createElement('p');
-                                         p.innerHTML = '<br>';
-                                         context.invoke('editor.insertNode', p);
+                                         var html = '<video src="' + response.url + '" controls style="width: 100%;"></video><br><p><br></p>';
+                                         context.invoke('editor.pasteHTML', html);
                                      },
                                      error: function(data) {
                                          console.log(data);
