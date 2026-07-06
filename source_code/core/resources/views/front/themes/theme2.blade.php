@@ -274,7 +274,7 @@
         </div>
     @endif
 
-    @if ($extra_settings->is_t2_featured_product == 1)
+    @if ($extra_settings->is_t2_featured_product == 1 && $products->where('is_type', 'feature')->count() > 0)
         <section class="selected-product-section mt-50 theme2">
             <div class="container">
                 <div class="row">
@@ -337,7 +337,7 @@
         </section>
     @endif
 
-    @if ($extra_settings->is_t2_bestseller_product == 1)
+    @if ($extra_settings->is_t2_bestseller_product == 1 && $products->where('is_type', 'best')->count() > 0)
         <section class="selected-product-section mt-50  theme2">
             <div class="container">
                 <div class="row">
