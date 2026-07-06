@@ -6,7 +6,7 @@ Maintain and develop the e-commerce_23 Laravel application (a bespoke Laravel ^7
 
 ## Current Status
 
-Local Docker environment successfully running. Navigation menu bar items updated to render requested category items (PRP, PRF, INJECTION, Labware, Dermalfiller, MICRONEEDLING, Care, Threadlifting, and Med courses). Reduced the categories box grid size (`col-lg-2`), adjusted menu link padding/font size, aligned topbar elements, hid mobile icons on desktop, updated hero slider banner to `banner 1.png`, updated shipping service section to "Nationwide Delivery", disabled both 3-column banner sections & flash sales section, renamed "New Products" to "Our Current Highlight", and replaced product card grid with `banner 2.png` full banner view.
+Local Docker environment successfully running. Navigation menu bar items updated to render requested category items (PRP, PRF, INJECTION, Labware, Dermalfiller, MICRONEEDLING, Care, Threadlifting, and Med courses). Reduced the categories box grid size (`col-lg-2`), adjusted menu link padding/font size, aligned topbar elements, hid mobile icons on desktop, updated hero slider banner to `banner 1.png`, updated shipping service section to "Nationwide Delivery", disabled both 3-column banner sections, 2-column discount banner section, Top Rated section, and Flash Sales section, renamed "New Products" to "Our Current Highlight", and replaced product card grid with `banner 2.png` full banner view.
 
 ## Goal Pivots
 
@@ -22,6 +22,6 @@ N/A
 - [x] Hide mobile search icon and menu toggle button from desktop header toolbar.
 - [x] Update homepage hero slider banner to `banner 1.png`.
 - [x] Update service section to "Nationwide Delivery" and refresh subtitle.
-- [x] Remove both 3-column promotional banner sections and Flash Sales section from homepage.
+- [x] Remove 3-column promotional banner sections, 2-column discount banner section, Top Rated section, and Flash Sales section from homepage.
 - [x] Replace product grid under "Our Current Highlight" with full `banner 2.png` banner view.
 - [ ] Determine user requirements for further development or production deployment.
