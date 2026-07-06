@@ -553,22 +553,43 @@
                 <div class="row">
                     <div class="col-lg-12 ">
                         <div class="section-title section-title2  section-title3">
-                            <h2 class="h3">{{ __('Popular Brands') }}</h2>
+                            <h2 class="h3">{{ __('Payment Options') }}</h2>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="brand-slider owl-carousel">
-                            @foreach ($brands as $brand)
                             <div class="slider-item">
-                                <a class="text-center" href="{{ route('front.catalog') . '?brand=' . $brand->slug }}">
-                                    <img class="d-block hi-50 lazy"
-                                     data-src="{{ asset('assets/images/' . $brand->photo) }}"
-                                        alt="{{ $brand->name }}" title="{{ $brand->name }}">
-                                </a>
+                                <div class="text-center p-2">
+                                    <img class="d-block mx-auto hi-50" src="{{ asset('assets/images/payments/bkash.svg') }}" alt="bKash" title="bKash">
+                                </div>
                             </div>
-                            @endforeach
+                            <div class="slider-item">
+                                <div class="text-center p-2">
+                                    <img class="d-block mx-auto hi-50" src="{{ asset('assets/images/payments/nagad.svg') }}" alt="Nagad" title="Nagad">
+                                </div>
+                            </div>
+                            <div class="slider-item">
+                                <div class="text-center p-2">
+                                    <img class="d-block mx-auto hi-50" src="{{ asset('assets/images/payments/rocket.svg') }}" alt="Rocket" title="Rocket">
+                                </div>
+                            </div>
+                            <div class="slider-item">
+                                <div class="text-center p-2">
+                                    <img class="d-block mx-auto hi-50" src="{{ asset('assets/images/payments/mastercard.svg') }}" alt="Mastercard" title="Mastercard">
+                                </div>
+                            </div>
+                            <div class="slider-item">
+                                <div class="text-center p-2">
+                                    <img class="d-block mx-auto hi-50" src="{{ asset('assets/images/payments/visa.svg') }}" alt="Visa" title="Visa">
+                                </div>
+                            </div>
+                            <div class="slider-item">
+                                <div class="text-center p-2">
+                                    <img class="d-block mx-auto hi-50" src="{{ asset('assets/images/payments/amex.svg') }}" alt="Amex" title="Amex">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

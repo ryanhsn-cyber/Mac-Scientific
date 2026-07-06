@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 60" width="160" height="60">
+  <rect width="160" height="60" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+  <path d="M22 14 L42 22 L34 38 L22 34 Z" fill="#E2136E"/>
+  <path d="M42 22 L54 12 L44 32 L34 38 Z" fill="#C20D5C"/>
+  <path d="M34 38 L54 44 L44 32 Z" fill="#E2136E"/>
+  <text x="64" y="38" font-family="Arial, sans-serif" font-weight="bold" font-size="22" fill="#E2136E">bKash</text>
+</svg>

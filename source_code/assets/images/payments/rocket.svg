@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 60" width="160" height="60">
+  <rect width="160" height="60" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+  <path d="M32 15 L40 28 L35 45 L32 40 L29 45 L24 28 Z" fill="#8C3494"/>
+  <circle cx="32" cy="24" r="3" fill="#ffffff"/>
+  <text x="52" y="38" font-family="Arial, sans-serif" font-weight="bold" font-size="20" fill="#8C3494">Rocket</text>
+</svg>
