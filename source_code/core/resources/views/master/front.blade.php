@@ -50,6 +50,47 @@
         font-size: 14px !important;
         padding: 12px 10px !important;
     }
+    /* Header Topbar Perfect Alignment */
+    .topbar .d-flex.justify-content-between {
+        align-items: center !important;
+    }
+    .site-header .search-box-wrap {
+        padding: 10px 20px !important;
+        align-self: center !important;
+    }
+    .site-header .search-box-wrap .search-box-inner {
+        width: 100%;
+        align-self: center !important;
+    }
+    .topbar .search-box-inner .search-box {
+        display: flex !important;
+        align-items: center !important;
+    }
+    .topbar .search-box-inner .search-box select {
+        height: 44px !important;
+        border: 1px solid #e0e0e0 !important;
+        border-right: 0 !important;
+        border-radius: 4px 0 0 4px !important;
+        background-color: #fff !important;
+    }
+    .topbar .search-box-inner .search-box form.input-group {
+        display: flex !important;
+        align-items: center !important;
+    }
+    .topbar .search-box-inner .search-box form.input-group .form-control {
+        height: 44px !important;
+        border: 1px solid #e0e0e0 !important;
+        border-radius: 0 4px 4px 0 !important;
+    }
+    .site-header .toolbar {
+        display: flex !important;
+        align-items: center !important;
+    }
+    .site-header .toolbar .toolbar-item {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
 </style>
 {{-- Google AdSense Start --}}
 @if ($setting->is_google_adsense == '1')
@@ -136,7 +177,7 @@ body_theme4
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <!-- Logo-->
                         <div class="site-branding"><a class="site-logo align-self-center" href="{{route('front.index')}}"><img src="{{asset('assets/images/'.$setting->logo)}}" alt="{{$setting->title}}"></a></div>
                         <!-- Search / Categories-->
@@ -164,7 +205,7 @@ body_theme4
                             <span class="d-block d-lg-none close-m-serch"><i class="icon-x"></i></span>
                         </div>
                         <!-- Toolbar-->
-                        <div class="toolbar d-flex">
+                        <div class="toolbar d-flex align-items-center">
 
                         <div class="toolbar-item close-m-serch visible-on-mobile"><a href="#">
                             <div>
@@ -188,7 +229,7 @@ body_theme4
                         </div>
                         @else
                         <div class="toolbar-item hidden-on-mobile"><a href="{{route('user.wishlist.index')}}">
-                          <div><span class="compare-icon"><i class="icon-heart"></i></span><span class="text-label">{{__('Wishlist')}}</span></div>
+                          <div><span class="compare-icon"><i class="icon-heart"></i><span class="count-label wishlist_count">0</span></span><span class="text-label">{{__('Wishlist')}}</span></div>
                           </a>
                       </div>
                         @endif
