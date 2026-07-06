@@ -23,3 +23,8 @@ WORKDIR /var/www/html/source_code/core
 
 # Increase PHP upload limits for video uploads
 RUN echo "upload_max_filesize = 100M\npost_max_size = 100M" > /usr/local/etc/php/conf.d/uploads.ini
+
+# Ensure assets/videos directory exists with correct write permissions for Apache
+RUN mkdir -p /var/www/html/source_code/assets/videos \
+    && chown -R www-data:www-data /var/www/html/source_code/assets \
+    && chmod -R 775 /var/www/html/source_code/assets
