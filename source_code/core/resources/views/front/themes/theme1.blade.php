@@ -28,9 +28,9 @@
 
 
     @if ($setting->is_slider == 1)
-        <div class="slider-area-wrapper">
+        <div class="slider-area-wrapper" style="margin-top: 30px;">
             <div class="container">
-                <div class="row">
+                <div class="row g-3">
                     <div class="col-lg-8">
                         <!-- Main Slider-->
                         <div class="hero-slider">
@@ -605,7 +605,7 @@
                 </div>
                 <div class="row g-3" id="feature_category_view">
                     @foreach ($feature_category_items as $feature_category_item)
-                    <div class="col-gd">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-6">
                         <div class="product-card">
                             <div class="product-thumb" >
 
