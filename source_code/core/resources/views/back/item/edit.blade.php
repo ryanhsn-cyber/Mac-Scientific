@@ -127,6 +127,13 @@
                             rows="6"
                             placeholder="{{ __('Enter Description') }}"
                             >{{$item->details}}</textarea>
+                            
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('desc_image_upload').click()">
+                                <i class="fas fa-image"></i> {{ __('Browse Image to Description') }}
+                            </button>
+                            <input type="file" id="desc_image_upload" style="display:none;" accept="image/*" onchange="uploadCustomImage(this, '#details')">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -150,10 +157,17 @@
 
                     <div id="specifications-section" class="{{ $item->is_specification == 0 ? 'd-none' : '' }}">
                         <div class="form-group">
-                            <textarea name="specification_name" class="form-control text-editor"
+                            <textarea name="specification_name" class="form-control text-editor" id="specification_editor"
                                 rows="6"
                                 placeholder="{{ __('Enter Product Details (Specification)') }}"
                                 >{{ $item->getHtmlSpecifications() }}</textarea>
+                            
+                            <div class="mt-2">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('spec_image_upload').click()">
+                                    <i class="fas fa-image"></i> {{ __('Browse Image to Specifications') }}
+                                </button>
+                                <input type="file" id="spec_image_upload" style="display:none;" accept="image/*" onchange="uploadCustomImage(this, '#specification_editor')">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -335,5 +349,39 @@
   </div>
 
 {{-- DELETE MODAL ENDS --}}
+
+@section('scripts')
+<script>
+function uploadCustomImage(input, target) {
+    if (input.files && input.files[0]) {
+        var data = new FormData();
+        data.append("image", input.files[0]);
+        data.append("_token", $('meta[name="csrf-token"]').attr('content'));
+        
+        var btn = $(input).prev('button');
+        var originalText = btn.html();
+        btn.html('<i class="fas fa-spinner fa-spin"></i> Uploading...');
+        
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: admin_url + '/item/image/upload',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                $(target).summernote('insertImage', response.url);
+                btn.html(originalText);
+                input.value = '';
+            },
+            error: function(data) {
+                console.log(data);
+                btn.html(originalText);
+            }
+        });
+    }
+}
+</script>
+@endsection
 
 @endsection
