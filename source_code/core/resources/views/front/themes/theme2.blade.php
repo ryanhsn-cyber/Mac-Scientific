@@ -547,40 +547,6 @@
     @endif
 
 
-    @if ($extra_settings->is_t2_brand_section == 1)
-        <section class="brand-section  mt-30 mb-60">
-            <div class="container ">
-                <div class="row">
-                    <div class="col-lg-12 ">
-                        <div class="section-title section-title2  section-title3">
-                            <h2 class="h3">{{ __('Payment Options') }}</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center justify-content-center g-4 py-3">
-                    <div class="col-4 col-sm-4 col-md-2 text-center">
-                        <img class="img-fluid mx-auto hi-50" src="{{ asset('assets/images/payments/bkash.svg') }}" alt="bKash" title="bKash">
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-2 text-center">
-                        <img class="img-fluid mx-auto hi-50" src="{{ asset('assets/images/payments/nagad.svg') }}" alt="Nagad" title="Nagad">
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-2 text-center">
-                        <img class="img-fluid mx-auto hi-50" src="{{ asset('assets/images/payments/rocket.svg') }}" alt="Rocket" title="Rocket">
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-2 text-center">
-                        <img class="img-fluid mx-auto hi-50" src="{{ asset('assets/images/payments/mastercard.svg') }}" alt="Mastercard" title="Mastercard">
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-2 text-center">
-                        <img class="img-fluid mx-auto hi-50" src="{{ asset('assets/images/payments/visa.svg') }}" alt="Visa" title="Visa">
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-2 text-center">
-                        <img class="img-fluid mx-auto hi-50" src="{{ asset('assets/images/payments/amex.svg') }}" alt="Amex" title="Amex">
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif
-
 @endsection
 
 
