@@ -258,7 +258,7 @@
                 </li>
             </ul>
             <div class="tab-content card">
-                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab"">
+                <div class="tab-pane fade show active p-3 p-sm-4 p-md-5 product-landing-details" id="description" role="tabpanel" aria-labelledby="description-tab">
                 {!! $item->details !!}
                 </div>
                 <div class="tab-pane fade show" id="specification" role="tabpanel" aria-labelledby="specification-tab">

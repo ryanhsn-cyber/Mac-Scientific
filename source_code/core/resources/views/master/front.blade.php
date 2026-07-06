@@ -91,6 +91,185 @@
             display: none !important;
         }
     }
+
+    /* Product Details Landing Page Formatting */
+    #details .nav-tabs {
+        border-bottom: 2px solid #e9ecef !important;
+        margin-bottom: 0 !important;
+    }
+    #details .nav-tabs .nav-link {
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        color: #4b5563 !important;
+        padding: 12px 24px !important;
+        border: none !important;
+        border-bottom: 3px solid transparent !important;
+        transition: all 0.25s ease !important;
+        background: transparent !important;
+    }
+    #details .nav-tabs .nav-link:hover {
+        color: #0d6efd !important;
+    }
+    #details .nav-tabs .nav-link.active {
+        color: #0d6efd !important;
+        background: transparent !important;
+        border-bottom: 3px solid #0d6efd !important;
+    }
+
+    #description.product-landing-details {
+        color: #2d3748;
+        font-size: 15px;
+        line-height: 1.75;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    #description.product-landing-details h1, 
+    #description.product-landing-details h2, 
+    #description.product-landing-details h3, 
+    #description.product-landing-details h4, 
+    #description.product-landing-details h5, 
+    #description.product-landing-details h6 {
+        color: #1a202c;
+        font-weight: 700;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        line-height: 1.35;
+        clear: both;
+    }
+    #description.product-landing-details h1 { font-size: 1.85rem; }
+    #description.product-landing-details h2 { font-size: 1.6rem; border-bottom: 2px solid #edf2f7; padding-bottom: 8px; }
+    #description.product-landing-details h3 { font-size: 1.35rem; }
+    #description.product-landing-details h4 { font-size: 1.18rem; }
+    #description.product-landing-details h5 { font-size: 1.05rem; }
+    #description.product-landing-details h6 { font-size: 0.95rem; }
+
+    #description.product-landing-details h2.text-center, 
+    #description.product-landing-details h3.text-center {
+        border-bottom: none;
+    }
+
+    #description.product-landing-details p {
+        margin-bottom: 1.25rem;
+        line-height: 1.75;
+        color: #334155;
+    }
+
+    #description.product-landing-details ul, 
+    #description.product-landing-details ol {
+        margin-top: 0.5rem;
+        margin-bottom: 1.5rem;
+        padding-left: 1.75rem;
+    }
+    #description.product-landing-details ul li, 
+    #description.product-landing-details ol li {
+        margin-bottom: 0.5rem;
+        line-height: 1.65;
+        color: #334155;
+    }
+    #description.product-landing-details ul li::marker {
+        color: #0d6efd;
+    }
+
+    #description.product-landing-details img {
+        max-width: 100% !important;
+        height: auto !important;
+        border-radius: 8px;
+        margin: 12px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease;
+    }
+
+    #description.product-landing-details .alignleft,
+    #description.product-landing-details img.alignleft,
+    #description.product-landing-details img[style*="float: left"],
+    #description.product-landing-details img[style*="float:left"] {
+        float: left;
+        margin: 6px 24px 20px 0 !important;
+        max-width: 48% !important;
+    }
+
+    #description.product-landing-details .alignright,
+    #description.product-landing-details img.alignright,
+    #description.product-landing-details img[style*="float: right"],
+    #description.product-landing-details img[style*="float:right"] {
+        float: right;
+        margin: 6px 0 20px 24px !important;
+        max-width: 48% !important;
+    }
+
+    #description.product-landing-details .aligncenter,
+    #description.product-landing-details img.aligncenter,
+    #description.product-landing-details img[style*="float: center"] {
+        display: block;
+        margin: 20px auto !important;
+        clear: both;
+    }
+
+    @media (max-width: 767.98px) {
+        #description.product-landing-details .alignleft,
+        #description.product-landing-details img.alignleft,
+        #description.product-landing-details img[style*="float: left"],
+        #description.product-landing-details img[style*="float:left"],
+        #description.product-landing-details .alignright,
+        #description.product-landing-details img.alignright,
+        #description.product-landing-details img[style*="float: right"],
+        #description.product-landing-details img[style*="float:right"] {
+            float: none !important;
+            display: block !important;
+            margin: 15px auto !important;
+            max-width: 100% !important;
+        }
+    }
+
+    #description.product-landing-details::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    #description.product-landing-details .callout-box,
+    #description.product-landing-details .alert-info,
+    #description.product-landing-details .notice-box,
+    #description.product-landing-details .highlight-box {
+        background-color: #f0f7ff;
+        border-left: 4px solid #0d6efd;
+        padding: 18px 24px;
+        border-radius: 8px;
+        margin: 24px 0;
+        color: #0f172a;
+        box-shadow: 0 2px 8px rgba(13, 110, 253, 0.06);
+    }
+
+    #description.product-landing-details .feature-title-red {
+        color: #dc2626;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.5px;
+    }
+
+    #description.product-landing-details table {
+        width: 100% !important;
+        margin: 20px 0;
+        border-collapse: collapse;
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    #description.product-landing-details th, 
+    #description.product-landing-details td {
+        padding: 12px 16px;
+        border: 1px solid #e2e8f0;
+        text-align: left;
+    }
+    #description.product-landing-details th {
+        background-color: #f8fafc;
+        font-weight: 600;
+        color: #1e293b;
+    }
 </style>
 {{-- Google AdSense Start --}}
 @if ($setting->is_google_adsense == '1')
