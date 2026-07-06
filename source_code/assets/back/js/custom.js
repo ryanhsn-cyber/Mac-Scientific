@@ -218,6 +218,9 @@ $(document).on('click','.remove-menu',function(){
                          var input = document.createElement('input');
                          input.type = 'file';
                          input.accept = 'video/*';
+                         input.style.display = 'none';
+                         document.body.appendChild(input);
+
                          input.onchange = function() {
                              if (input.files && input.files[0]) {
                                  var data = new FormData();
@@ -231,14 +234,44 @@ $(document).on('click','.remove-menu',function(){
                                      cache: false,
                                      contentType: false,
                                      processData: false,
+                                     beforeSend: function() {
+                                         var loader = document.createElement('div');
+                                         loader.id = 'temp-video-loader';
+                                         loader.innerHTML = '<strong style="color: blue;">[Uploading video... Please wait]</strong>';
+                                         context.invoke('editor.insertNode', loader);
+                                     },
                                      success: function(response) {
-                                         var html = '<video src="' + response.url + '" controls style="width: 100%;"></video><br><p><br></p>';
-                                         context.invoke('editor.pasteHTML', html);
+                                         var videoNode = document.createElement('video');
+                                         videoNode.src = response.url;
+                                         videoNode.controls = true;
+                                         videoNode.style.width = '100%';
+                                         videoNode.style.marginTop = '10px';
+                                         
+                                         var editorBody = context.layoutInfo.editable;
+                                         var loader = editorBody.find('#temp-video-loader');
+                                         if (loader.length > 0) {
+                                             loader.replaceWith(videoNode);
+                                         } else {
+                                             context.invoke('editor.insertNode', videoNode);
+                                         }
+                                         
+                                         // add a new line after
+                                         var p = document.createElement('p');
+                                         p.innerHTML = '<br>';
+                                         context.invoke('editor.insertNode', p);
+                                         
+                                         document.body.removeChild(input);
                                      },
                                      error: function(data) {
                                          console.log(data);
+                                         alert("Error uploading video! Check console for details.");
+                                         var editorBody = context.layoutInfo.editable;
+                                         editorBody.find('#temp-video-loader').replaceWith('<div style="color:red;">[Error uploading video]</div>');
+                                         document.body.removeChild(input);
                                      }
                                  });
+                             } else {
+                                 document.body.removeChild(input);
                              }
                          };
                          input.click();
