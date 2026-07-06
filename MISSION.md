@@ -6,7 +6,7 @@ Maintain and develop the e-commerce_23 Laravel application (a bespoke Laravel ^7
 
 ## Current Status
 
-Local Docker environment successfully running. Navigation menu bar items updated to render requested category items (PRP, PRF, INJECTION, Labware, Dermalfiller, MICRONEEDLING, Care, Threadlifting, and Med courses). Reduced the categories box grid size (`col-lg-2`), adjusted menu link padding/font size, aligned topbar elements, hid mobile icons on desktop, updated hero slider banner to `banner 1.png`, updated shipping service section to "Nationwide Delivery", and disabled the 3-column banner section and flash sales section.
+Local Docker environment successfully running. Navigation menu bar items updated to render requested category items (PRP, PRF, INJECTION, Labware, Dermalfiller, MICRONEEDLING, Care, Threadlifting, and Med courses). Reduced the categories box grid size (`col-lg-2`), adjusted menu link padding/font size, aligned topbar elements, hid mobile icons on desktop, updated hero slider banner to `banner 1.png`, updated shipping service section to "Nationwide Delivery", disabled the 3-column banner section & flash sales section, renamed "New Products" to "Our Current Highlight", and updated product images to `banner 2.png`.
 
 ## Goal Pivots
 
@@ -23,4 +23,5 @@ N/A
 - [x] Update homepage hero slider banner to `banner 1.png`.
 - [x] Update service section to "Nationwide Delivery" and refresh subtitle.
 - [x] Remove 3-column promotional banner boxes and Flash Sales section from homepage.
+- [x] Rename "New Products" section to "Our Current Highlight" and update product images to `banner 2.png`.
 - [ ] Determine user requirements for further development or production deployment.
