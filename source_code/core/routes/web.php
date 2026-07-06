@@ -4,6 +4,16 @@
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/run-migrations', function () {
+    try {
+        Artisan::call('migrate', ['--force' => true]);
+        return "Migrations ran successfully! Output: " . Artisan::output();
+    } catch (\Exception $e) {
+        return "Migration failed: " . $e->getMessage();
+    }
+});
 
 Route::group(['middleware' => 'adminlocalize'], function () {
 
