@@ -209,8 +209,56 @@ $(document).on('click','.remove-menu',function(){
          // editor
          if($('.text-editor').length > 0) {
 
+             var VideoUploadButton = function (context) {
+                 var ui = $.summernote.ui;
+                 var button = ui.button({
+                     contents: '<i class="note-icon-video"/>',
+                     tooltip: 'Upload Video',
+                     click: function () {
+                         var input = document.createElement('input');
+                         input.type = 'file';
+                         input.accept = 'video/*';
+                         input.onchange = function() {
+                             if (input.files && input.files[0]) {
+                                 var data = new FormData();
+                                 data.append("image", input.files[0]);
+                                 data.append("_token", $('meta[name="csrf-token"]').attr('content'));
+                                 
+                                 $.ajax({
+                                     data: data,
+                                     type: "POST",
+                                     url: admin_url + '/item/image/upload',
+                                     cache: false,
+                                     contentType: false,
+                                     processData: false,
+                                     success: function(response) {
+                                         var node = document.createElement('video');
+                                         node.src = response.url;
+                                         node.controls = true;
+                                         node.style.width = '100%';
+                                         context.invoke('editor.insertNode', node);
+                                         
+                                         var p = document.createElement('p');
+                                         p.innerHTML = '<br>';
+                                         context.invoke('editor.insertNode', p);
+                                     },
+                                     error: function(data) {
+                                         console.log(data);
+                                     }
+                                 });
+                             }
+                         };
+                         input.click();
+                     }
+                 });
+                 return button.render();
+             }
+
              $('.text-editor').summernote({
                 height: 300,
+                buttons: {
+                    customVideo: VideoUploadButton
+                },
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'underline', 'clear']],
@@ -218,7 +266,7 @@ $(document).on('click','.remove-menu',function(){
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
+                    ['insert', ['link', 'picture', 'customVideo']],
                     ['view', ['fullscreen']],
                   ],
                 callbacks: {
