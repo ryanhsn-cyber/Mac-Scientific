@@ -94,26 +94,33 @@
 
     /* Product Details Landing Page Formatting */
     #details .nav-tabs {
-        border-bottom: 2px solid #e9ecef !important;
+        border-bottom: 1px solid #e5e7eb !important;
         margin-bottom: 0 !important;
+        gap: 5px;
+    }
+    #details .nav-tabs .nav-item {
+        margin-bottom: -1px;
     }
     #details .nav-tabs .nav-link {
-        font-size: 16px !important;
+        font-size: 15px !important;
         font-weight: 600 !important;
-        color: #4b5563 !important;
-        padding: 12px 24px !important;
-        border: none !important;
-        border-bottom: 3px solid transparent !important;
+        color: #8c8c8c !important;
+        padding: 15px 30px !important;
+        border: 1px solid transparent !important;
+        border-top: 3px solid transparent !important;
         transition: all 0.25s ease !important;
         background: transparent !important;
+        border-radius: 0 !important;
     }
     #details .nav-tabs .nav-link:hover {
-        color: #0d6efd !important;
+        color: #1a1a1a !important;
     }
     #details .nav-tabs .nav-link.active {
-        color: #0d6efd !important;
-        background: transparent !important;
-        border-bottom: 3px solid #0d6efd !important;
+        color: #000000 !important;
+        background: #ffffff !important;
+        border: 1px solid #e5e7eb !important;
+        border-top: 3px solid #0d6efd !important;
+        border-bottom-color: #ffffff !important;
     }
 
     #description.product-landing-details {
