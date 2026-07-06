@@ -52,8 +52,8 @@ class ItemRepository
         }
 
         if($request->has('is_specification')){
-            $input['specification_name'] = json_encode($input['specification_name']);
-            $input['specification_description'] = json_encode($input['specification_description']);
+            $input['specification_name'] = $request->specification_name;
+            $input['specification_description'] = null;
         }else{
             $input['is_specification']    = 0;
             $input['specification_name'] = null;
@@ -142,8 +142,8 @@ class ItemRepository
         }
 
         if($request->has('is_specification')){
-            $input['specification_name'] = json_encode($input['specification_name']);
-            $input['specification_description'] = json_encode($input['specification_description']);
+            $input['specification_name'] = $request->specification_name;
+            $input['specification_description'] = null;
         }else{
             $input['is_specification']    = 0;
             $input['specification_name'] = null;

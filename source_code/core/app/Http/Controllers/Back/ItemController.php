@@ -155,8 +155,6 @@ class ItemController extends Controller
             'curr' => Currency::where('is_default',1)->first(),
             'social_icons' => json_decode($item->social_icons,true),
             'social_links' => json_decode($item->social_links,true),
-            'specification_name' => json_decode($item->specification_name,true),
-            'specification_description' => json_decode($item->specification_description,true),
         ]);
     }
 
@@ -313,6 +311,18 @@ class ItemController extends Controller
         ]);
     }
 
+
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = \App\Helpers\ImageHelper::handleUploadedImage($file, 'assets/images');
+            return response()->json([
+                'url' => asset('assets/images/' . $name)
+            ]);
+        }
+        return response()->json(['error' => 'No image uploaded.'], 400);
+    }
 
     public function stockOut()
     {

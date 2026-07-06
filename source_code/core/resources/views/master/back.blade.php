@@ -5,6 +5,7 @@
 	<title>{{ $setting->title }}</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="icon"  type="image/x-icon" href="{{ asset('assets/images/'.$setting->favicon) }}"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<!-- Fonts and icons -->
 	<script src="{{ asset('assets/back/js/plugin/webfont/webfont.min.js') }}"></script>
@@ -161,6 +162,7 @@
 
 <script>
     var mainbs = {!! $mainbs !!};
+    var admin_url = '{{ url('/admin') }}';
 </script>
 	<!--   Core JS Files   -->
 	<script src="{{ asset('assets/back/js/core/jquery.3.6.0.min.js') }}"></script>

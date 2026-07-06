@@ -209,7 +209,8 @@ $(document).on('click','.remove-menu',function(){
          // editor
          if($('.text-editor').length > 0) {
 
-            $('.text-editor').summernote({
+             $('.text-editor').summernote({
+                height: 300,
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'underline', 'clear']],
@@ -219,8 +220,30 @@ $(document).on('click','.remove-menu',function(){
                     ['table', ['table']],
                     ['insert', ['link', 'picture', 'video']],
                     ['view', ['fullscreen']],
-                  ]
-            });
+                  ],
+                callbacks: {
+                    onImageUpload: function(files) {
+                        var editor = $(this);
+                        var data = new FormData();
+                        data.append("image", files[0]);
+                        data.append("_token", $('meta[name="csrf-token"]').attr('content'));
+                        $.ajax({
+                            data: data,
+                            type: "POST",
+                            url: admin_url + '/item/image/upload',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function(response) {
+                                editor.summernote('insertImage', response.url);
+                            },
+                            error: function(data) {
+                                console.log(data);
+                            }
+                        });
+                    }
+                }
+             });
 
         }
 

@@ -65,29 +65,14 @@
                           @php
                              // dd($sname,$sdesc)
                           @endphp
-                          @foreach ($sname as $key => $name)
                           <tr>
-                              <th>{{$name}}</th>
+                              <th>{{__('Specifications')}}</th>
+                              @foreach ($items as $item)
                               <td>
-                                @if($items[0]->specification_name)
-                                 @if(in_array($name,json_decode($items[0]->specification_name,true)))
-                                 @if (isset($sdesc[0][$key]))
-                                 {{$sdesc[0][$key]}}
-                                 @endif
-                                 @endif
-                                 @endif
+                                  {!! $item->specification_name !!}
                               </td>
-                              <td>
-                                @if($items[1]->specification_name)
-                                  @if(in_array($name,json_decode($items[1]->specification_name,true)))
-                                  @if (isset($sdesc[1][$key]))
-                                  {{$sdesc[1][$key]}}
-                                  @endif
-                                 @endif
-                                 @endif
-                              </td>
+                              @endforeach
                            </tr>
-                          @endforeach
                           @else
                           <tr>
                               <td>
@@ -104,21 +89,12 @@
                              @endforeach
                           </tr>
 
-
-                          @foreach ($sname as $key => $name)
-                          @if($items[0]->specification_name)
                           <tr>
-                              <th>{{$name}}</th>
+                              <th>{{__('Specifications')}}</th>
                               <td>
-                                 @if(in_array($name,json_decode($items[0]->specification_name,true)))
-                                  @if (isset($sdesc[0][$key]))
-                                  {{$sdesc[0][$key]}}
-                                  @endif
-                                 @endif
+                                  {!! $items[0]->specification_name !!}
                               </td>
                            </tr>
-                           @endif
-                          @endforeach
                          @endif
 
                           <tr>

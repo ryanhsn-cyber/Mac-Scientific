@@ -125,27 +125,12 @@
                         </label>
                     </div>
                     <div id="specifications-section">
-                        <div class="d-flex">
-
-                            <div class="flex-grow-1">
-                                <div class="form-group">
-                                    <input type="text" class="form-control"
-                                        name="specification_name[]"
-                                        placeholder="{{ __('Specification Name') }}" value="">
-                                    </div>
-                            </div>
-                            <div class="flex-grow-1">
-                                <div class="form-group">
-                                    <input type="text" class="form-control"
-                                        name="specification_description[]"
-                                        placeholder="{{ __('Specification description') }}" value="">
-                                    </div>
-                            </div>
-                            <div class="flex-btn">
-                                <button type="button" class="btn btn-success add-specification" data-text="{{ __('Specification Name') }}" data-text1="{{ __('Specification Description') }}"> <i class="fa fa-plus"></i> </button>
-                            </div>
+                        <div class="form-group">
+                            <textarea name="specification_name" class="form-control text-editor"
+                                rows="6"
+                                placeholder="{{ __('Enter Product Details (Specification)') }}"
+                                >{{ old('specification_name') }}</textarea>
                         </div>
-
                     </div>
                 </div>
             </div>

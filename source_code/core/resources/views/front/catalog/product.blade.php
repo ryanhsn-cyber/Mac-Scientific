@@ -261,31 +261,12 @@
                 <div class="tab-pane fade show active p-3 p-sm-4 p-md-5 product-landing-details" id="description" role="tabpanel" aria-labelledby="description-tab">
                 {!! $item->details !!}
                 </div>
-                <div class="tab-pane fade show" id="specification" role="tabpanel" aria-labelledby="specification-tab">
-                <div class="comparison-table">
-                    <table class="table table-bordered">
-                        <thead class="bg-secondary">
-                        </thead>
-                        <tbody>
-                        <tr class="bg-secondary">
-                            <th class="text-uppercase">{{__('Specifications')}}</th>
-                            <td><span class="text-medium">{{__('Descriptions')}}</span></td>
-                        </tr>
-                        @if($sec_name)
-                        @foreach(array_combine($sec_name,$sec_details) as  $sname => $sdetail)
-                        <tr>
-                            <th>{{$sname}}</th>
-                            <td>{{$sdetail}}</td>
-                        </tr>
-                        @endforeach
-                        @else
-                        <tr class="text-center">
-                            <td colspan="2">{{__('No Specifications')}}</td>
-                            </tr>
-                        @endif
-                        </tbody>
-                    </table>
-                    </div>
+                <div class="tab-pane fade show p-3 p-sm-4 p-md-5 product-landing-details" id="specification" role="tabpanel" aria-labelledby="specification-tab">
+                    @if($item->specification_name)
+                        {!! $item->specification_name !!}
+                    @else
+                        <div class="text-center">{{__('No Product Details Available')}}</div>
+                    @endif
                 </div>
             </div>
             </div>
