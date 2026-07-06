@@ -126,21 +126,23 @@ body_theme4
 <!-- Header-->
 <header class="w-full bg-surface" style="box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
 <!-- Utility Bar -->
-<div class="bg-surface-container-low text-xs py-1 border-b border-outline-variant">
+<div class="bg-surface-container-low text-xs py-1.5 border-b border-outline-variant">
 <div class="w-full max-w-container-max mx-auto px-4 md:px-6 flex justify-between items-center">
-  <!-- Left Links (Reduced text size) -->
-  <div class="flex space-x-3 text-[11px] font-medium tracking-wide uppercase">
+  <!-- Left Links (Reduced text size with dividers) -->
+  <div class="flex items-center space-x-2.5 text-[11px] font-medium tracking-wide uppercase">
     <a class="text-secondary hover:text-primary transition-colors" href="{{route('front.index')}}">{{__('Home')}}</a>
     @if ($setting->is_contact == 1)
+    <span class="h-3 w-[1px] bg-gray-300 self-center opacity-70"></span>
     <a class="text-secondary hover:text-primary transition-colors" href="{{route('front.contact')}}">{{__('Contact us')}}</a>
     @endif
     @if ($setting->is_blog == 1)
+    <span class="h-3 w-[1px] bg-gray-300 self-center opacity-70"></span>
     <a class="text-secondary hover:text-primary transition-colors" href="{{route('front.blog')}}">{{__('Blog')}}</a>
     @endif
   </div>
 
-  <!-- Right Actions (Language Switcher with Flag + Wishlist) -->
-  <div class="flex items-center space-x-3 text-[11px] font-medium justify-end">
+  <!-- Right Actions (Language Switcher with Flag + Wishlist with divider) -->
+  <div class="flex items-center space-x-2.5 text-[11px] font-medium justify-end">
     <!-- Language Switcher -->
     @php
         $currLang = Session::has('language') ? DB::table('languages')->find(Session::get('language')) : DB::table('languages')->where('is_default',1)->first();
@@ -180,6 +182,8 @@ body_theme4
       </div>
     </div>
 
+    <span class="h-3 w-[1px] bg-gray-300 self-center opacity-70"></span>
+
     <!-- Wishlist -->
     <a class="flex items-center space-x-1 text-secondary hover:text-primary transition-colors" href="{{route('user.wishlist.index')}}">
       <span class="material-symbols-outlined text-[14px]">favorite</span>
@@ -204,7 +208,7 @@ body_theme4
 </form>
 </div>
 <!-- Actions -->
-<div class="flex items-center space-x-4">
+<div class="flex items-center space-x-3">
 <div class="flex items-center space-x-2">
 <div class="relative text-on-surface">
 <a href="{{route('front.cart')}}">
@@ -216,6 +220,7 @@ body_theme4
 <span class="font-bold text-on-surface"><a href="{{route('front.cart')}}">{{ __('Cart') }}</a></span>
 </div>
 </div>
+<span class="h-4 w-[1px] bg-gray-300 self-center opacity-70"></span>
 <div class="login-register">
 @if(!Auth::user())
 <a class="flex items-center space-x-1 text-secondary hover:text-primary transition-colors text-label-md" href="{{route('user.login')}}">
