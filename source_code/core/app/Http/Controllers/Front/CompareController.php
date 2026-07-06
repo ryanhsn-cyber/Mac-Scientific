@@ -59,13 +59,6 @@ class CompareController extends Controller
             foreach($ids as $key => $id){
                 $item = Item::findOrFail($id);
                 $items[] = $item;
-                if(!empty($item->specification_name)){
-                    $sname =  array_unique(array_merge($sname,json_decode($item->specification_name,true)));
-                    $sdesc[] =  json_decode($item->specification_description,true);
-                }else{
-                    $sname = [];
-                    $sdesc = [];
-                }
             }
         }else{
             $items = [];

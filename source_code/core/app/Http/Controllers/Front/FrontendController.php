@@ -301,8 +301,6 @@ class FrontendController extends Controller
             'reviews'       => $item->reviews()->where('status',1)->paginate(3),
             'galleries'     => $item->galleries,
             'video'         => $item->video ? end($video) : '',
-            'sec_name'      => isset($item->specification_name) ? json_decode($item->specification_name,true) : [],
-            'sec_details'   => isset($item->specification_description) ? json_decode($item->specification_description,true) : [],
             'attributes'    => $item->attributes,
             'related_items' => $item->category->items()->whereStatus(1)->where('id','!=',$item->id)->take(8)->get()
         ]);
