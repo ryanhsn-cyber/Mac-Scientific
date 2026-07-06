@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/dermatol/public_html/
-    - /bin/cp -R source_code/* $DEPLOYPATH
+    - /bin/cp -a source_code/. $DEPLOYPATH
