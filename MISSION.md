@@ -6,7 +6,7 @@ Maintain and develop the e-commerce_23 Laravel application (a bespoke Laravel ^7
 
 ## Current Status
 
-Local Docker environment successfully running. Navigation menu bar items updated to render requested category items (PRP, PRF, INJECTION, Labware, Dermalfiller, MICRONEEDLING, Care, Threadlifting, and Med courses). Reduced the categories box grid size (`col-lg-2`), adjusted menu link padding/font size, aligned topbar elements, hid mobile icons on desktop, updated hero slider banner to `banner 1.png`, updated shipping service section to "Nationwide Delivery", disabled unnecessary promotional sections & flash sales, renamed "New Products" to "Our Current Highlight", replaced product card grid with `banner 2.png` full banner view, replaced Popular Brands with a static Payment Options grid (bKash, Nagad, Rocket, Mastercard, Visa, Amex), reset demo products from Featured/Best Seller sections, and populated footer "Get In Touch" section with full contact, address, & social links.
+Local Docker environment successfully running. Navigation menu bar items updated to render requested category items (PRP, PRF, INJECTION, Labware, Dermalfiller, MICRONEEDLING, Care, Threadlifting, and Med courses). Reduced the categories box grid size (`col-lg-2`), adjusted menu link padding/font size, aligned topbar elements, hid mobile icons on desktop, updated hero slider banner to `banner 1.png`, updated shipping service section to "Nationwide Delivery", disabled unnecessary promotional sections & flash sales, renamed "New Products" to "Our Current Highlight", replaced product card grid with `banner 2.png` full banner view, replaced Popular Brands with a static Payment Options grid (bKash, Nagad, Rocket, Mastercard, Visa, Amex), reset demo products from Featured/Best Seller sections, populated footer "Get In Touch" section with full contact, address, & social links, and updated About Us page content, Mission, and Vision.
 
 ## Goal Pivots
 
@@ -27,4 +27,5 @@ N/A
 - [x] Replace Popular Brands section with static Payment Options grid displaying bKash, Nagad, Rocket, Mastercard, Visa, and Amex logos.
 - [x] Clear demo products from Featured Products and Best Seller sections, leaving them ready for manual product additions.
 - [x] Update footer "Get In Touch" contact information (Address, Phone, WhatsApp, Email) and social links (Facebook Page/Profile, Instagram, YouTube, TikTok, WhatsApp).
+- [x] Update About Us page with Mac Scientific company profile, Mission, and Vision statements.
 - [ ] Determine user requirements for further development or production deployment.
