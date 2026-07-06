@@ -175,7 +175,7 @@
 
 <script>
     var mainbs = {!! $mainbs !!};
-    var admin_url = '{{ url('/admin') }}';
+    var admin_url = '/admin';
 </script>
 	<!--   Core JS Files   -->
 	<script src="{{ asset('assets/back/js/core/jquery.3.6.0.min.js') }}"></script>
