@@ -262,8 +262,8 @@
                 {!! $item->details !!}
                 </div>
                 <div class="tab-pane fade show p-3 p-sm-4 p-md-5 product-landing-details" id="specification" role="tabpanel" aria-labelledby="specification-tab">
-                    @if($item->specification_name)
-                        {!! $item->specification_name !!}
+                    @if($item->getHtmlSpecifications())
+                        {!! $item->getHtmlSpecifications() !!}
                     @else
                         <div class="text-center">{{__('No Product Details Available')}}</div>
                     @endif

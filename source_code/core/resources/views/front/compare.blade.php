@@ -69,7 +69,7 @@
                               <th>{{__('Specifications')}}</th>
                               @foreach ($items as $item)
                               <td>
-                                  {!! $item->specification_name !!}
+                                  {!! $item->getHtmlSpecifications() !!}
                               </td>
                               @endforeach
                            </tr>
@@ -92,7 +92,7 @@
                           <tr>
                               <th>{{__('Specifications')}}</th>
                               <td>
-                                  {!! $items[0]->specification_name !!}
+                                  {!! $items[0]->getHtmlSpecifications() !!}
                               </td>
                            </tr>
                          @endif
