@@ -95,6 +95,33 @@
                 </div>
             </div>
         </div>
+
+        @if($item->tier_prices)
+        <div class="tier-pricing-container mt-4 mb-2 py-3" style="border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb;">
+            <div class="d-flex flex-wrap align-items-center" style="gap: 15px 40px;">
+                @php
+                    $tiers = json_decode($item->tier_prices, true);
+                    if(is_array($tiers)) {
+                        usort($tiers, function($a, $b) {
+                            return $a['min_qty'] <=> $b['min_qty']; // ascending
+                        });
+                    }
+                @endphp
+                @if(is_array($tiers))
+                    @foreach($tiers as $index => $tier)
+                        @php
+                            $next_qty = isset($tiers[$index + 1]) ? ($tiers[$index + 1]['min_qty'] - 1) : null;
+                            $qty_range = $next_qty ? number_format($tier['min_qty']) . '-' . number_format($next_qty) : '&ge;' . number_format($tier['min_qty']);
+                        @endphp
+                        <div class="tier-block text-left" style="min-width: 100px;">
+                            <div class="tier-price font-weight-bold" style="font-size: 26px; color: #1a1a1a; line-height: 1.2; margin-bottom: 4px;">{{ PriceHelper::setCurrencyPrice($tier['price']) }}</div>
+                            <div class="tier-qty" style="font-size: 14px; color: #757575;">{!! $qty_range !!} pieces</div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+        @endif
         
       </div>
 
@@ -169,33 +196,6 @@
                     </span>
 
                     <p class="text-muted">{{$item->sort_details}} <a href="#details" class="scroll-to">{{__('Read more')}}</a></p>
-
-                    @if($item->tier_prices)
-                    <div class="tier-pricing-container mt-4 mb-4 py-3" style="border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb;">
-                        <div class="d-flex flex-wrap align-items-center" style="gap: 15px 40px;">
-                            @php
-                                $tiers = json_decode($item->tier_prices, true);
-                                if(is_array($tiers)) {
-                                    usort($tiers, function($a, $b) {
-                                        return $a['min_qty'] <=> $b['min_qty']; // ascending
-                                    });
-                                }
-                            @endphp
-                            @if(is_array($tiers))
-                                @foreach($tiers as $index => $tier)
-                                    @php
-                                        $next_qty = isset($tiers[$index + 1]) ? ($tiers[$index + 1]['min_qty'] - 1) : null;
-                                        $qty_range = $next_qty ? number_format($tier['min_qty']) . '-' . number_format($next_qty) : '&ge;' . number_format($tier['min_qty']);
-                                    @endphp
-                                    <div class="tier-block text-left" style="min-width: 100px;">
-                                        <div class="tier-price font-weight-bold" style="font-size: 26px; color: #1a1a1a; line-height: 1.2; margin-bottom: 4px;">{{ PriceHelper::setCurrencyPrice($tier['price']) }}</div>
-                                        <div class="tier-qty" style="font-size: 14px; color: #757575;">{!! $qty_range !!} pieces</div>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-                    @endif
 
                     <div class="row margin-top-1x">
                         @foreach($attributes as $attribute)
