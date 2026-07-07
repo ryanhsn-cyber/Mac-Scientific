@@ -4,7 +4,6 @@
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 
 Route::get('/run-migrations', function () {
     try {
