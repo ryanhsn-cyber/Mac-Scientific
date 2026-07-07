@@ -18,6 +18,7 @@ Local Docker environment successfully running. Catalog data has been cleared fro
 - Integrated a full-width promotional banner ("Regenerative Medicine") into the "Our Current Highlight" section for Theme 2 using relative asset paths to resolve hostname issues.
 
 **Tiered/Bulk Pricing:**
+
 - Updated the database schema (`items` table) to store dynamic `tier_prices` as JSON.
 - Extended `ItemRepository` to calculate tiered pricing on the cart session dynamically based on current item quantity thresholds.
 - Added dynamic "add/remove tier" JavaScript logic to the admin dashboard (create and edit pages), enabling dynamic quantity thresholds and their corresponding custom prices.

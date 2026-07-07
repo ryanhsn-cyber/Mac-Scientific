@@ -76,20 +76,20 @@
         
         <!-- Store Stats Box (Alibaba Style) -->
         <div class="store-stats-box mt-4 p-3" style="background-color: #f8f9fa; border-radius: 8px;">
-            <div class="d-flex justify-content-between text-left">
-                <div class="stat-item" style="flex: 1; padding-right: 5px;">
+            <div class="row text-left">
+                <div class="col-6 col-sm-3 mb-3 mb-sm-0">
                     <div class="stat-value font-weight-bold text-dark" style="font-size: 15px;">{{ number_format($item->reviews->avg('rating') ?: 0, 1) }}/5 <span class="text-muted font-weight-normal" style="font-size: 13px; text-decoration: underline;">({{ $item->reviews->count() }})</span></div>
                     <div class="stat-label text-muted" style="font-size: 12px; line-height: 1.3; margin-top: 2px;">Product rating</div>
                 </div>
-                <div class="stat-item" style="flex: 1; padding-right: 5px;">
+                <div class="col-6 col-sm-3 mb-3 mb-sm-0">
                     <div class="stat-value font-weight-bold text-dark" style="font-size: 15px;">{!! $setting->store_response_time !!}</div>
                     <div class="stat-label text-muted" style="font-size: 12px; line-height: 1.3; margin-top: 2px;">Response Time</div>
                 </div>
-                <div class="stat-item" style="flex: 1; padding-right: 5px;">
+                <div class="col-6 col-sm-3">
                     <div class="stat-value font-weight-bold text-dark" style="font-size: 15px;">{!! $setting->store_on_time_delivery !!}</div>
                     <div class="stat-label text-muted" style="font-size: 12px; line-height: 1.3; margin-top: 2px;">On-time delivery<br>rate</div>
                 </div>
-                <div class="stat-item" style="flex: 1;">
+                <div class="col-6 col-sm-3">
                     <div class="stat-value font-weight-bold text-dark" style="font-size: 15px;">{!! $setting->store_reorder_rate !!}</div>
                     <div class="stat-label text-muted" style="font-size: 12px; line-height: 1.3; margin-top: 2px;">Reorder rate</div>
                 </div>
