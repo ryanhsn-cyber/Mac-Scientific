@@ -248,7 +248,7 @@ class OrderController extends Controller
 
         $result = json_decode($response, true);
 
-        if (isset($result['status']) && $result['status'] == 200 && isset($result['consignment'])) {
+        if (is_array($result) && isset($result['status']) && $result['status'] == 200 && isset($result['consignment'])) {
             $order->update([
                 'steadfast_consignment_id' => $result['consignment']['consignment_id'],
                 'steadfast_tracking_code' => $result['consignment']['tracking_code'],
@@ -258,11 +258,16 @@ class OrderController extends Controller
         }
 
         $errorMessage = __('Failed to send order to Steadfast Courier.');
-        if (isset($result['message'])) {
-            $errorMessage = $result['message'];
-        } elseif (isset($result['errors'])) {
-            $errorMessage = json_encode($result['errors']);
+        if (is_array($result)) {
+            if (isset($result['message'])) {
+                $errorMessage = $result['message'];
+            } elseif (isset($result['errors'])) {
+                $errorMessage = json_encode($result['errors']);
+            }
+        } elseif (!empty(trim($response))) {
+            $errorMessage = __('API Error: ') . strip_tags(trim($response));
         }
+        
         return redirect()->back()->withErrors($errorMessage);
     }
 
@@ -293,8 +298,7 @@ class OrderController extends Controller
         }
 
         $result = json_decode($response, true);
-
-        if (isset($result['status']) && $result['status'] == 200 && isset($result['delivery_status'])) {
+        if (is_array($result) && isset($result['status']) && $result['status'] == 200 && isset($result['delivery_status'])) {
             $order->update([
                 'steadfast_status' => $result['delivery_status']
             ]);
@@ -302,10 +306,14 @@ class OrderController extends Controller
         }
 
         $errorMessage = __('Failed to fetch Steadfast status.');
-        if (isset($result['message'])) {
-            $errorMessage = $result['message'];
-        } elseif (isset($result['errors'])) {
-            $errorMessage = json_encode($result['errors']);
+        if (is_array($result)) {
+            if (isset($result['message'])) {
+                $errorMessage = $result['message'];
+            } elseif (isset($result['errors'])) {
+                $errorMessage = json_encode($result['errors']);
+            }
+        } elseif (!empty(trim($response))) {
+            $errorMessage = __('API Error: ') . strip_tags(trim($response));
         }
         return redirect()->back()->withErrors($errorMessage);
     }
