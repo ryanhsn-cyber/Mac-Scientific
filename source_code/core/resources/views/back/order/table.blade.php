@@ -42,6 +42,22 @@
           </div>
     </td>
     <td>
+        @if($setting->steadfast_api_key && $setting->steadfast_secret_key)
+            @if(!$data->steadfast_consignment_id)
+            <form action="{{ route('back.order.steadfast', $data->id) }}" method="POST" class="d-inline">
+                @csrf
+                <button type="submit" class="btn btn-success btn-sm">{{ __('Send') }}</button>
+            </form>
+            @else
+            <span class="badge badge-info mb-1">{{ __('ID:') }} {{ $data->steadfast_consignment_id }}</span><br>
+            <span class="badge badge-secondary mb-1">{{ $data->steadfast_status ?? 'Pending' }}</span><br>
+            <a href="{{ route('back.order.steadfast.status', $data->id) }}" class="btn btn-warning btn-sm" title="{{ __('Update Status') }}"><i class="fas fa-sync"></i></a>
+            @endif
+        @else
+            <span class="badge badge-danger">{{ __('Not Configured') }}</span>
+        @endif
+    </td>
+    <td>
         <div class="action-list">
             <a class="btn btn-secondary btn-sm"
                 href="{{ route('back.order.invoice',$data->id) }}">
