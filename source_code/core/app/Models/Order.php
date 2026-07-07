@@ -25,7 +25,10 @@ class Order extends Model
         'currency_value',
         'tax',
         'state_price',
-        'state'
+        'state',
+        'steadfast_consignment_id',
+        'steadfast_tracking_code',
+        'steadfast_status',
     ];
 
     public function user()

@@ -15,6 +15,37 @@
         </div>
     </div>
 
+    <!-- Steadfast API Settings -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h6 class="m-0 font-weight-bold text-primary">{{ __('Steadfast Courier API Settings') }}</h6>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('back.setting.update') }}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="steadfast_api_key">{{ __('Steadfast API Key') }}</label>
+                            <input type="text" class="form-control" id="steadfast_api_key" name="steadfast_api_key" placeholder="{{ __('Enter API Key') }}" value="{{ $setting->steadfast_api_key }}">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="steadfast_secret_key">{{ __('Steadfast Secret Key') }}</label>
+                            <input type="text" class="form-control" id="steadfast_secret_key" name="steadfast_secret_key" placeholder="{{ __('Enter Secret Key') }}" value="{{ $setting->steadfast_secret_key }}">
+                        </div>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <div class="form-group w-100">
+                            <button type="submit" class="btn btn-primary w-100">{{ __('Save') }}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
 	<!-- DataTales -->
 	<div class="card shadow mb-4">

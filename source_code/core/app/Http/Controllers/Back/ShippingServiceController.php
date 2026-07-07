@@ -30,7 +30,8 @@ class ShippingServiceController extends Controller
     public function index()
     {
         return view('back.shipping.index',[
-            'datas' => ShippingService::get()
+            'datas' => ShippingService::get(),
+            'setting' => \App\Models\Setting::first()
         ]);
     }
 

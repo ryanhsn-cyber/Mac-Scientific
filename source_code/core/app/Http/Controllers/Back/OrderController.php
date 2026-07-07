@@ -195,6 +195,110 @@ class OrderController extends Controller
     }
 
 
+    public function steadfast($id)
+    {
+        $order = Order::findOrFail($id);
+        $setting = \App\Models\Setting::first();
+
+        if (!$setting->steadfast_api_key || !$setting->steadfast_secret_key) {
+            return redirect()->back()->withErrors(__('Steadfast API credentials are missing.'));
+        }
+
+        $ship = json_decode($order->shipping_info, true);
+        $bill = json_decode($order->billing_info, true);
+
+        // Fallback to billing if shipping is not fully present
+        $name = isset($ship['ship_first_name']) ? $ship['ship_first_name'] . ' ' . $ship['ship_last_name'] : $bill['bill_first_name'] . ' ' . $bill['bill_last_name'];
+        $phone = isset($ship['ship_phone']) ? $ship['ship_phone'] : $bill['bill_phone'];
+        $address = isset($ship['ship_address1']) ? $ship['ship_address1'] : $bill['bill_address1'];
+        if (isset($ship['ship_city'])) {
+            $address .= ', ' . $ship['ship_city'];
+        }
+
+        // \App\Helpers\PriceHelper::OrderTotal is not always available statically, let's calculate directly or use it if available
+        $cod_amount = $order->payment_method == 'Cash On Delivery' ? \App\Helpers\PriceHelper::OrderTotal($order) : 0;
+
+        $data = [
+            'invoice' => $order->transaction_number,
+            'recipient_name' => $name,
+            'recipient_phone' => $phone,
+            'recipient_address' => $address,
+            'cod_amount' => $cod_amount,
+            'note' => 'Order via Store'
+        ];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://portal.steadfast.com.bd/api/v1/create_order");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Api-Key: {$setting->steadfast_api_key}",
+            "Secret-Key: {$setting->steadfast_secret_key}",
+            "Content-Type: application/json"
+        ]);
+
+        $response = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+
+        if ($err) {
+            return redirect()->back()->withErrors(__('cURL Error: ') . $err);
+        }
+
+        $result = json_decode($response, true);
+
+        if (isset($result['status']) && $result['status'] == 200 && isset($result['consignment'])) {
+            $order->update([
+                'steadfast_consignment_id' => $result['consignment']['consignment_id'],
+                'steadfast_tracking_code' => $result['consignment']['tracking_code'],
+                'steadfast_status' => $result['consignment']['status']
+            ]);
+            return redirect()->back()->withSuccess(__('Order successfully sent to Steadfast Courier. Consignment ID: ' . $result['consignment']['consignment_id']));
+        }
+
+        $errorMessage = isset($result['errors']) ? json_encode($result['errors']) : __('Failed to send order to Steadfast Courier.');
+        return redirect()->back()->withErrors($errorMessage);
+    }
+
+    public function steadfastUpdateStatus($id)
+    {
+        $order = Order::findOrFail($id);
+        $setting = \App\Models\Setting::first();
+
+        if (!$order->steadfast_consignment_id) {
+            return redirect()->back()->withErrors(__('Order is not sent to Steadfast Courier yet.'));
+        }
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://portal.steadfast.com.bd/api/v1/status_by_cid/" . $order->steadfast_consignment_id);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Api-Key: {$setting->steadfast_api_key}",
+            "Secret-Key: {$setting->steadfast_secret_key}",
+            "Content-Type: application/json"
+        ]);
+
+        $response = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+
+        if ($err) {
+            return redirect()->back()->withErrors(__('cURL Error: ') . $err);
+        }
+
+        $result = json_decode($response, true);
+
+        if (isset($result['status']) && $result['status'] == 200 && isset($result['delivery_status'])) {
+            $order->update([
+                'steadfast_status' => $result['delivery_status']
+            ]);
+            return redirect()->back()->withSuccess(__('Steadfast Status Updated: ' . $result['delivery_status']));
+        }
+
+        return redirect()->back()->withErrors(__('Failed to fetch Steadfast status.'));
+    }
+
     public function delete($id)
     {
         $order = Order::findOrFail($id);

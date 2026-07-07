@@ -5,7 +5,7 @@
 <!-- Start of Main Content -->
 <div class="container-fluid">
 
-	<!-- Page Heading -->
+    <!-- Page Heading -->
     <div class="card mb-4">
         <div class="card-body">
             <div class="d-sm-flex align-items-center justify-content-between">
@@ -17,6 +17,29 @@
                 </div>
         </div>
     </div>
+    
+    @if($setting->steadfast_api_key && $setting->steadfast_secret_key)
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="d-sm-flex align-items-center justify-content-between">
+                <h5 class="mb-0"><b>{{ __('Steadfast Courier Integration') }}</b></h5>
+                <div>
+                    @if(!$order->steadfast_consignment_id)
+                    <form action="{{ route('back.order.steadfast', $order->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-success btn-sm">{{ __('Send to Steadfast Courier') }}</button>
+                    </form>
+                    @else
+                    <span class="badge badge-info">{{ __('Consignment ID:') }} {{ $order->steadfast_consignment_id }}</span>
+                    <span class="badge badge-primary">{{ __('Tracking Code:') }} {{ $order->steadfast_tracking_code }}</span>
+                    <span class="badge badge-secondary">{{ __('Status:') }} {{ $order->steadfast_status ?? 'Pending' }}</span>
+                    <a href="{{ route('back.order.steadfast.status', $order->id) }}" class="btn btn-warning btn-sm ml-2">{{ __('Update Status') }}</a>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 @php
     if($order->state){
         $state = json_decode($order->state,true);

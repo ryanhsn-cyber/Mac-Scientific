@@ -125,6 +125,8 @@ class Setting extends Model
         'store_response_time',
         'store_on_time_delivery',
         'store_reorder_rate',
+        'steadfast_api_key',
+        'steadfast_secret_key',
     ];
 
     public $timestamps = false;
