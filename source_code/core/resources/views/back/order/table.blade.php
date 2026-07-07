@@ -42,7 +42,7 @@
           </div>
     </td>
     <td>
-        @if($setting->steadfast_api_key && $setting->steadfast_secret_key)
+        @if(($setting->steadfast_api_key ?? false) && ($setting->steadfast_secret_key ?? false))
             @if(!$data->steadfast_consignment_id)
             <form action="{{ route('back.order.steadfast', $data->id) }}" method="POST" class="d-inline">
                 @csrf

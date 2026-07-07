@@ -27,13 +27,13 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="steadfast_api_key">{{ __('Steadfast API Key') }}</label>
-                            <input type="text" class="form-control" id="steadfast_api_key" name="steadfast_api_key" placeholder="{{ __('Enter API Key') }}" value="{{ $setting->steadfast_api_key }}">
+                            <input type="text" class="form-control" id="steadfast_api_key" name="steadfast_api_key" placeholder="{{ __('Enter API Key') }}" value="{{ $setting->steadfast_api_key ?? '' }}">
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="steadfast_secret_key">{{ __('Steadfast Secret Key') }}</label>
-                            <input type="text" class="form-control" id="steadfast_secret_key" name="steadfast_secret_key" placeholder="{{ __('Enter Secret Key') }}" value="{{ $setting->steadfast_secret_key }}">
+                            <input type="text" class="form-control" id="steadfast_secret_key" name="steadfast_secret_key" placeholder="{{ __('Enter Secret Key') }}" value="{{ $setting->steadfast_secret_key ?? '' }}">
                         </div>
                     </div>
                     <div class="col-md-2 d-flex align-items-end">

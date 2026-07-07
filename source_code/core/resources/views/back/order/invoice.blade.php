@@ -18,7 +18,7 @@
         </div>
     </div>
     
-    @if($setting->steadfast_api_key && $setting->steadfast_secret_key)
+    @if(($setting->steadfast_api_key ?? false) && ($setting->steadfast_secret_key ?? false))
     <div class="card mb-4">
         <div class="card-body">
             <div class="d-sm-flex align-items-center justify-content-between">
