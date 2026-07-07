@@ -321,6 +321,11 @@
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="specification-tab" data-bs-toggle="tab" data-bs-target="#specification" type="button" role="tab" aria-controls="specification" aria-selected="false">{{__('Product Details')}}</a>
                 </li>
+                @if ($item->how_to_use)
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="how-to-use-tab" data-bs-toggle="tab" data-bs-target="#how-to-use" type="button" role="tab" aria-controls="how-to-use" aria-selected="false">{{__('How to Use')}}</a>
+                </li>
+                @endif
             </ul>
             <div class="tab-content card">
                 <div class="tab-pane fade show active p-3 p-sm-4 p-md-5 product-landing-details" id="description" role="tabpanel" aria-labelledby="description-tab">
@@ -333,6 +338,11 @@
                         <div class="text-center">{{__('No Product Details Available')}}</div>
                     @endif
                 </div>
+                @if ($item->how_to_use)
+                <div class="tab-pane fade show p-3 p-sm-4 p-md-5 product-landing-details" id="how-to-use" role="tabpanel" aria-labelledby="how-to-use-tab">
+                    {!! $item->how_to_use !!}
+                </div>
+                @endif
             </div>
             </div>
         </div>

@@ -160,6 +160,15 @@
                             placeholder="{{ __('Enter Description') }}"
                             >{{ old('details') }}</textarea>
                     </div>
+
+                    <div class="form-group">
+                        <label for="how_to_use">{{ __('How to Use') }}</label>
+                        <textarea name="how_to_use" id="how_to_use"
+                            class="form-control text-editor"
+                            rows="6"
+                            placeholder="{{ __('Enter How to Use Instructions') }}"
+                            >{{ old('how_to_use') }}</textarea>
+                    </div>
                 </div>
             </div>
             <div class="card">
