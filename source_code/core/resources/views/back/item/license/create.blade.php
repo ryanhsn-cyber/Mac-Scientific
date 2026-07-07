@@ -182,19 +182,12 @@
                             value="">
                     </div>
                     <div class="form-group">
-                        <label class="switch-primary">
-                            <input type="checkbox" class="switch switch-bootstrap status radio-check" name="is_specification" value="1" checked>
-                            <span class="switch-body"></span>
-                            <span class="switch-text">{{ __('Specifications') }}</span>
-                        </label>
-                    </div>
-                    <div id="specifications-section">
-                        <div class="form-group">
-                            <textarea name="specification_name" class="form-control text-editor"
-                                rows="6"
-                                placeholder="{{ __('Enter Product Details (Specification)') }}"
-                                >{{ old('specification_name') }}</textarea>
-                        </div>
+                        <label for="specification_name">{{ __('Specifications') }}</label>
+                        <input type="hidden" name="is_specification" value="1">
+                        <textarea name="specification_name" id="specification_name" class="form-control text-editor"
+                            rows="6"
+                            placeholder="{{ __('Enter Product Details (Specification)') }}"
+                            >{{ old('specification_name') }}</textarea>
                     </div>
                 </div>
             </div>

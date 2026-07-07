@@ -181,20 +181,12 @@
                             value="{{$item->tags}}">
                     </div>
                     <div class="form-group">
-                        <label class="switch-primary">
-                            <input type="checkbox" class="switch switch-bootstrap status radio-check" name="is_specification" value="1" {{$item->is_specification ==1 ? 'checked' : ''}}>
-                            <span class="switch-body"></span>
-                            <span class="switch-text">{{ __('Specifications') }}</span>
-                        </label>
-                    </div>
-
-                    <div id="specifications-section" class="{{ $item->is_specification == 0 ? 'd-none' : '' }}">
-                        <div class="form-group">
-                            <textarea name="specification_name" class="form-control text-editor"
-                                rows="6"
-                                placeholder="{{ __('Enter Product Details (Specification)') }}"
-                                >{{ $item->getHtmlSpecifications() }}</textarea>
-                        </div>
+                        <label for="specification_name">{{ __('Specifications') }}</label>
+                        <input type="hidden" name="is_specification" value="1">
+                        <textarea name="specification_name" id="specification_name" class="form-control text-editor"
+                            rows="6"
+                            placeholder="{{ __('Enter Product Details (Specification)') }}"
+                            >{{ $item->getHtmlSpecifications() }}</textarea>
                     </div>
                 </div>
             </div>
