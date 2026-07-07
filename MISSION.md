@@ -24,6 +24,13 @@ Local Docker environment successfully running. Catalog data has been cleared fro
 - Added dynamic "add/remove tier" JavaScript logic to the admin dashboard (create and edit pages), enabling dynamic quantity thresholds and their corresponding custom prices.
 - Configured frontend views to display a real-time table of bulk pricing tiers beneath the product's short description.
 
+**Courier Integration:**
+
+- Integrated Steadfast Courier API into the platform to allow admins to directly dispatch orders and track deliveries.
+- Created `steadfast_api_key` and `steadfast_secret_key` in `settings` for store-wide credential configuration.
+- Extended the `orders` table to store `steadfast_consignment_id`, `steadfast_tracking_code`, and `steadfast_status`.
+- Designed interactive Steadfast integration blocks directly on the Admin Order Invoice page and the main Admin Orders list, with "Send to Courier" and "Update Status" features.
+
 Cleaned up the `[null]` corrupted strings in the database, fixed the 404 jQuery asset reference error in `back-login.blade.php`, and resolved the 500 Internal Server Error on the frontend product detail page and product comparison page by removing legacy `json_decode` references on HTML specifications.
 
 ## Goal Pivots
@@ -65,4 +72,5 @@ N/A
 - [x] Implement dynamic tiered/bulk pricing thresholds configured via the admin dashboard.
 - [x] Integrate real-time tiered pricing calculation based on quantity into the session-based cart system.
 - [x] Display a bulk pricing table on the frontend product details page.
+- [x] Integrate Steadfast Courier API for parcel dispatching and tracking.
 - [x] Determine user requirements for further development or production deployment (Deployed to cPanel).
