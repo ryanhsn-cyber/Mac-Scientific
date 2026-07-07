@@ -26,8 +26,10 @@ Local Docker environment successfully running. Catalog data has been cleared fro
 
 **Courier Integration:**
 
-- Integrated Steadfast Courier API into the platform to allow admins to directly dispatch orders and track deliveries.
-- Created `steadfast_api_key` and `steadfast_secret_key` in `settings` for store-wide credential configuration.
+- **Completed (2026-07-07): Steadfast Courier Integration & API Migration**
+  - Integrated "Send to Courier" button in the admin `orders.index` table for bulk-like efficiency.
+  - Replaced dead `portal.steadfast.com.bd` endpoint with active `portal.packzy.com` in backend API logic.
+  - Added non-JSON response handling to display actual API account errors (like "Account is not active!") instead of failing silently to generic errors.
 - Extended the `orders` table to store `steadfast_consignment_id`, `steadfast_tracking_code`, and `steadfast_status`.
 - Designed interactive Steadfast integration blocks directly on the Admin Order Invoice page and the main Admin Orders list, with "Send to Courier" and "Update Status" features.
 
