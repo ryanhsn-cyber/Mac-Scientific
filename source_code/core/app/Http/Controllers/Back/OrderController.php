@@ -257,7 +257,12 @@ class OrderController extends Controller
             return redirect()->back()->withSuccess(__('Order successfully sent to Steadfast Courier. Consignment ID: ' . $result['consignment']['consignment_id']));
         }
 
-        $errorMessage = isset($result['errors']) ? json_encode($result['errors']) : __('Failed to send order to Steadfast Courier.');
+        $errorMessage = __('Failed to send order to Steadfast Courier.');
+        if (isset($result['message'])) {
+            $errorMessage = $result['message'];
+        } elseif (isset($result['errors'])) {
+            $errorMessage = json_encode($result['errors']);
+        }
         return redirect()->back()->withErrors($errorMessage);
     }
 
@@ -296,7 +301,13 @@ class OrderController extends Controller
             return redirect()->back()->withSuccess(__('Steadfast Status Updated: ' . $result['delivery_status']));
         }
 
-        return redirect()->back()->withErrors(__('Failed to fetch Steadfast status.'));
+        $errorMessage = __('Failed to fetch Steadfast status.');
+        if (isset($result['message'])) {
+            $errorMessage = $result['message'];
+        } elseif (isset($result['errors'])) {
+            $errorMessage = json_encode($result['errors']);
+        }
+        return redirect()->back()->withErrors($errorMessage);
     }
 
     public function delete($id)
