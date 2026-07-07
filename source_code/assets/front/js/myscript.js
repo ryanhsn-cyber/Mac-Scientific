@@ -999,10 +999,27 @@ $(function ($) {
                 quantity = qty;
             }
 
-            let setCurrency = $("#set_currency").val();
-            let currency_direction = $("#currency_direction").val();
-
             let demoPrice = parseFloat($("#demo_price").val());
+            let tierPricesStr = $("#tier_prices").val();
+            if (tierPricesStr) {
+                try {
+                    let tiers = JSON.parse(tierPricesStr);
+                    if (Array.isArray(tiers) && tiers.length > 0) {
+                        tiers.sort((a, b) => parseInt(b.min_qty) - parseInt(a.min_qty));
+                        for (let i = 0; i < tiers.length; i++) {
+                            if (quantity >= parseInt(tiers[i].min_qty)) {
+                                demoPrice = parseFloat(tiers[i].price);
+                                break;
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.error("Error parsing tier prices", e);
+                }
+            }
+            
+            let currency_direction = $("#currency_direction").val();
+            let setCurrency = $("#set_currency").val();
             let subPrice = parseFloat(demoPrice + totalOptionPrice);
             let mainPrice = subPrice * quantity;
             mainPrice = number_format(mainPrice,2,decimal_separator,thousand_separator);

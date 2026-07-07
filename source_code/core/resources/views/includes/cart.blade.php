@@ -25,8 +25,7 @@
 
                 @foreach ($cart as $key => $item)
                 @php
-
-                    $cartTotal +=  ($item['main_price'] + $total + $item['attribute_price']) * $item['qty'];
+                    $cartTotal +=  ($item['main_price'] + $item['attribute_price']) * $item['qty'];
                 @endphp
                 <tr>
                     <td>

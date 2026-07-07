@@ -81,6 +81,30 @@
 
                                                     <div class="col-lg-8">
                                                         <div class="form-group">
+                                                            <label for="store_response_time">{{ __('Store Response Time') }}</label>
+                                                            <input type="text" name="store_response_time" class="form-control" id="store_response_time"
+                                                                placeholder="{{ __('e.g., &le;4h') }}" value="{{ $setting->store_response_time }}" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-8">
+                                                        <div class="form-group">
+                                                            <label for="store_on_time_delivery">{{ __('Store On-time Delivery Rate') }}</label>
+                                                            <input type="text" name="store_on_time_delivery" class="form-control" id="store_on_time_delivery"
+                                                                placeholder="{{ __('e.g., &ge;90%') }}" value="{{ $setting->store_on_time_delivery }}" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-8">
+                                                        <div class="form-group">
+                                                            <label for="store_reorder_rate">{{ __('Store Reorder Rate') }}</label>
+                                                            <input type="text" name="store_reorder_rate" class="form-control" id="store_reorder_rate"
+                                                                placeholder="{{ __('e.g., 30%') }}" value="{{ $setting->store_reorder_rate }}" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-8">
+                                                        <div class="form-group">
                                                             <label for="primary_color">{{ __('Primary Colour Code') }} *</label>
                                                             <input type="text" data-jscolor="" name="primary_color" class="form-control" id="primary_color"
                                                                 placeholder="{{ __('Enter Website Primary Colour Code') }}" value="{{ $setting->primary_color }}" >

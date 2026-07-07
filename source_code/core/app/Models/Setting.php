@@ -122,6 +122,9 @@ class Setting extends Model
         'decimal_separator',
         'thousand_separator',
         'is_decimal',
+        'store_response_time',
+        'store_on_time_delivery',
+        'store_reorder_rate',
     ];
 
     public $timestamps = false;

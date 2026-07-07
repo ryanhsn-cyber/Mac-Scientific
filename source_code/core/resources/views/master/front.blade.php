@@ -643,7 +643,7 @@ body_theme4
 <script type="text/javascript" src="{{asset('assets/front/js/scripts.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/front/js/lazy.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/front/js/lazy.plugin.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/front/js/myscript.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/front/js/myscript.js?v=') . time()}}"></script>
 @yield('script')
 
 @if($setting->is_facebook_messenger	== '1')

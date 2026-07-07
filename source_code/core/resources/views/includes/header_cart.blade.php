@@ -6,7 +6,7 @@
 @if (Session::has('cart'))
 @foreach (Session::get('cart') as $key => $cart)
 @php
-    $grandSubtotal = ($cart['main_price'] + $grandSubtotal + $cart['attribute_price']) * $cart['qty'];
+    $grandSubtotal += ($cart['main_price'] + $cart['attribute_price']) * $cart['qty'];
 @endphp
 <div class="entry">
   <div class="entry-thumb"><a href="{{route('front.product',$cart['slug'])}}"><img src="{{asset('assets/images/'.$cart['photo'])}}" alt="Product"></a></div>

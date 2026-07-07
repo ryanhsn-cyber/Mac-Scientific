@@ -283,7 +283,7 @@ class PriceHelper
         $total = 0;
 
         foreach ($cartt as $key => $cart) {
-            $total =($cart['main_price'] + $total + $cart['attribute_price']) * $cart['qty'];
+            $total += ($cart['main_price'] + $cart['attribute_price']) * $cart['qty'];
         }
 
         if(Session::has('currency')){
