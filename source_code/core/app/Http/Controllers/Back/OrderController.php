@@ -228,7 +228,7 @@ class OrderController extends Controller
         ];
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://portal.steadfast.com.bd/api/v1/create_order");
+        curl_setopt($ch, CURLOPT_URL, "https://portal.packzy.com/api/v1/create_order");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
@@ -271,7 +271,7 @@ class OrderController extends Controller
         }
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://portal.steadfast.com.bd/api/v1/status_by_cid/" . $order->steadfast_consignment_id);
+        curl_setopt($ch, CURLOPT_URL, "https://portal.packzy.com/api/v1/status_by_cid/" . $order->steadfast_consignment_id);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             "Api-Key: {$setting->steadfast_api_key}",
