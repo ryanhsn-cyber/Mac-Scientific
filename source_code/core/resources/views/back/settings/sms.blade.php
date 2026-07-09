@@ -73,24 +73,9 @@
                                                     <div class="radio-show {{ $setting->is_twilio == 0 ? 'd-none' : '' }}">
 
                                                         <div class="form-group ">
-                                                            <label for="twilio_sid">{{ __('Twilio Sid') }}</label>
-                                                            <input type="text" class="form-control " id="twilio_sid" name="twilio_sid" placeholder="{{ __('Enter Twilio Sid') }}" value="{{ $setting->twilio_sid }}" >
-                                                        </div>
-
-                                                        <div class="form-group ">
-                                                            <label for="twilio_token">{{ __('Twilio Token') }}</label>
-                                                            <input type="text" class="form-control " id="twilio_token" name="twilio_token" placeholder="{{ __('Enter Twilio Token') }}" value="{{ $setting->twilio_token }}" >
-                                                        </div>
-
-                                                        <div class="form-group ">
-                                                            <label for="twilio_form_number">{{ __('Twilio Form Number') }}</label>
-                                                            <input type="text" class="form-control " id="twilio_form_number" name="twilio_form_number" placeholder="{{ __('Enter Twilio Form Number') }}" value="{{ $setting->twilio_form_number }}" >
-                                                        </div>
-
-                                                        <div class="form-group ">
-                                                            <label for="twilio_country_code">{{ __('Country Number Code') }}</label>
-                                                            <input type="text" class="form-control" id="twilio_country_code" name="twilio_country_code" placeholder="{{ __('Country Number Code') }}" value="{{ $setting->twilio_country_code }}">
-                                                           <strong>{{__('Note')}}</strong> : <small class="text-primary">{{__('Must use country code before (+) sign')}}</small>
+                                                            <label for="sms_url">{{ __('Universal SMS API URL') }}</label>
+                                                            <input type="text" class="form-control" id="sms_url" name="sms_url" placeholder="{{ __('e.g., http://api.sms.com/send?to={number}&msg={message}') }}" value="{{ $setting->sms_url }}">
+                                                            <small class="form-text text-muted">{{ __('Use {number} for the recipient phone number and {message} for the SMS content.') }}</small>
                                                         </div>
 
                                                     </div>

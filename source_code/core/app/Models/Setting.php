@@ -77,6 +77,7 @@ class Setting extends Model
         'twilio_form_number',
         'twilio_country_code',
         'is_twilio',
+        'sms_url',
         'twilio_section',
         'is_announcement',
         'announcement',

@@ -46,10 +46,7 @@ class SMSSettingController extends Controller
     {
        
         $request->validate([
-            "twilio_sid" => "required:max:200",
-            "twilio_token" => "required|max:100",
-            "twilio_form_number" => "required|max:100",
-            "twilio_country_code" => "required|max:100",
+            "sms_url" => "required|url",
         ]);
         $input = $request->all();
         if(isset($request['is_twilio'])){
