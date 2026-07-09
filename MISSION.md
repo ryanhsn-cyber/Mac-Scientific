@@ -33,7 +33,7 @@ Local Docker environment successfully running. Catalog data has been cleared fro
 - Extended the `orders` table to store `steadfast_consignment_id`, `steadfast_tracking_code`, and `steadfast_status`.
 - Designed interactive Steadfast integration blocks directly on the Admin Order Invoice page and the main Admin Orders list, with "Send to Courier" and "Update Status" features.
 
-Cleaned up the `[null]` corrupted strings in the database, fixed the 404 jQuery asset reference error in `back-login.blade.php`, and resolved the 500 Internal Server Error on the frontend product detail page and product comparison page by removing legacy `json_decode` references on HTML specifications.
+Cleaned up the `[null]` corrupted strings in the database, fixed the 404 jQuery asset reference error in `back-login.blade.php`, and resolved the 500 Internal Server Error on the frontend product detail page and product comparison page by removing legacy `json_decode` references on HTML specifications. Fixed "Undefined property: stdClass::$is_facebook_capi" error on the admin system settings page by introducing null coalescing operators (`??`) to gracefully handle missing database columns prior to running migrations.
 
 ## Goal Pivots
 
