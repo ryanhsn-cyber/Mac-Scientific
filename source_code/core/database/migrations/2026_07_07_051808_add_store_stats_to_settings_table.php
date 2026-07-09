@@ -14,9 +14,15 @@ class AddStoreStatsToSettingsTable extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('store_response_time')->nullable()->default('&le;4h');
-            $table->string('store_on_time_delivery')->nullable()->default('&ge;90%');
-            $table->string('store_reorder_rate')->nullable()->default('30%');
+            if (!Schema::hasColumn('settings', 'store_response_time')) {
+                $table->string('store_response_time')->nullable()->default('&le;4h');
+            }
+            if (!Schema::hasColumn('settings', 'store_on_time_delivery')) {
+                $table->string('store_on_time_delivery')->nullable()->default('&ge;90%');
+            }
+            if (!Schema::hasColumn('settings', 'store_reorder_rate')) {
+                $table->string('store_reorder_rate')->nullable()->default('30%');
+            }
         });
     }
 

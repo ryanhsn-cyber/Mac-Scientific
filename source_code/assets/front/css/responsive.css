@@ -131,10 +131,10 @@
         margin-right: 10px;
     }
     .hero-slider .item {
-        height: 430px;
+        height: 350px;
     }
     .body_theme2 .hero-slider .item {
-        height: 430px;
+        height: 350px;
     }
 }
 
@@ -227,7 +227,7 @@
         margin: 0 auto;
     }
     .hero-slider .item {
-        height: 340px;
+        height: 250px;
     }
     .announcement-with-content .left-area {
         display: none;

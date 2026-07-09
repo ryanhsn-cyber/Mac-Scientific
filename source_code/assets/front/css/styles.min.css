@@ -4916,7 +4916,9 @@ a.alert {
 .owl-carousel .owl-stage {
     position: relative;
     -ms-touch-action: pan-Y;
-    -moz-backface-visibility: hidden
+    touch-action: pan-Y;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .owl-carousel .owl-stage::after {
@@ -6161,6 +6163,7 @@ video {
 
 .product-quantity input[type=number] {
     -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 
@@ -6226,7 +6229,7 @@ video {
     font-size: 13px
 }
 
-..widget-light-skin .widget-title {
+.widget-light-skin .widget-title {
     border-color: rgba(255, 255, 255, .13);
     color: #fff
 }
@@ -7387,7 +7390,7 @@ video {
 
     .breadcrumbs>li {
         margin-left: 3px;
-        margin-margin-right: 3px
+        margin-right: 3px
     }
 
     .t-h-dropdown .t-h-dropdown-menu {
@@ -8655,13 +8658,12 @@ screen and (-ms-high-contrast:none) {
     position: absolute;
     left: 0;
     top: 100%;
-    margin-top: ;
+    margin-top: 0;
     width: 100%;
     border-radius: 5px;
     background: #fff;
     opacity: 0;
     visibility: hidden;
-    box-shadow: ;
 }
 
 .left-category-area .category-list.active {
@@ -9147,7 +9149,6 @@ screen and (-ms-high-contrast:none) {
     color: #241e1e
 }
 
-.brand-slider .slider-item {}
 
 .brand-slider .slider-item a {
     background: #f0e6d9;
@@ -9224,12 +9225,6 @@ screen and (-ms-high-contrast:none) {
     margin-bottom: 0 !important
 }
 
-.bestseller-section .section-title,
-.features-section .section-title,
-.flash-deal .section-title,
-.newproduct-section .section-title,
-.relatedproduct-section .section-title,
-.toprated-section .section-title {}
 
 .widget-categories .widget-title {
     color: #fff
@@ -9565,7 +9560,6 @@ screen and (-ms-high-contrast:none) {
     font-size: 18px
 }
 
-.flash-sell-area .product-card .product-button-group .product-button {}
 
 .flash-sell-area .flash-deal-slider .slider-item {
     padding: 10px 6px 10px
@@ -10353,7 +10347,7 @@ screen and (-ms-high-contrast:none) {
 }
 
 .body_theme2 .hero-slider .item {
-    height: 570px;
+    height: 450px;
 }
 
 .three_column_product .newproduct-slider .owl-nav div {
