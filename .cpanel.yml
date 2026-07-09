@@ -3,5 +3,3 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/dermatol/public_html
     - /bin/cp -af source_code/. $DEPLOYPATH/
-    - cd $DEPLOYPATH/core && php artisan optimize:clear
-    - cd $DEPLOYPATH/core && php artisan migrate --force
