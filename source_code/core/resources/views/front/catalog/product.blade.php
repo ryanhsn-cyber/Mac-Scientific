@@ -159,44 +159,114 @@
                     <input type="hidden" value="{{PriceHelper::setCurrencySign()}}" id="set_currency">
                     <input type="hidden" value="{{PriceHelper::setCurrencyValue()}}" id="set_currency_val">
                     <input type="hidden" value="{{$setting->currency_direction}}" id="currency_direction">
-                    <h4 class="mb-2 p-title-main">{{$item->name}}</h4>
-                    <div class="mb-3 d-flex align-items-center">
-                        <div class="rating-stars d-inline-block gmr-3">
+                    <h4 class="mb-2 p-title-main" style="font-weight: 700; color: #1a1a1a;">{{$item->name}}</h4>
+                    <p class="text-muted" style="font-size: 15px; margin-bottom: 15px;">{{$item->sort_details}}</p>
+
+                    <div class="mb-3 d-flex align-items-center flex-wrap" style="gap: 10px;">
+                        <div class="rating-stars d-inline-block" style="color: #ffb800; font-size: 14px;">
                         {!!renderStarRating($item->reviews->avg('rating'))!!}
                         </div>
                         @php
                             $b_reviews = $item->reviews->count();
                             $b_orders = \App\Models\Order::where('cart', 'like', '%'.$item->name.'%')->count();
-                            // Add a baseline of realistic demo orders if desired, but we will use actual DB count.
                         @endphp
-                        <span class="text-muted mr-3" style="font-size: 14px;">
-                            (<a href="#details" class="text-muted">{{ $b_reviews }} {{ __('Reviews') }}</a>
-                            <span class="mx-1">|</span>
-                            {{ $b_orders }} {{ __('Orders') }})
-                        </span>
+                        <span class="text-primary font-weight-bold" style="font-size: 13px;">(<a href="#details">{{ $b_reviews }} {{ __('Reviews') }}</a>)</span>
+                        <span class="text-muted" style="font-size: 12px;">|</span>
+                        <span class="text-dark font-weight-bold" style="font-size: 13px;">{{ $b_orders }} {{ __('Orders') }}</span>
+                        <span class="text-muted" style="font-size: 12px;">|</span>
                         @if ($item->is_stock())
-                            <span class="text-success  d-inline-block">{{__('In Stock')}}</span>
+                            <span class="text-success font-weight-bold" style="font-size: 13px;">{{__('In Stock')}}</span>
                         @else
-                            <span class="text-danger  d-inline-block">{{__('Out of stock')}}</span>
+                            <span class="text-danger font-weight-bold" style="font-size: 13px;">{{__('Out of stock')}}</span>
                         @endif
                     </div>
 
-
                     @if($item->is_type == 'flash_deal')
                     @if (date('d-m-y') != \Carbon\Carbon::parse($item->date)->format('d-m-y'))
-                    <div class="countdown countdown-alt mb-3" data-date-time="{{ $item->date }}">
+                    <div class="countdown countdown-alt mb-3" data-date-time="{{ $item->date }}"></div>
+                    @endif
+                    @endif
+
+                    <div class="price-area d-flex align-items-center mb-4 flex-wrap" style="gap: 15px;">
+                        @if ($item->previous_price != 0)
+                            <del class="text-muted" style="font-size: 20px; font-weight: 500;">{{PriceHelper::setPreviousPrice($item->previous_price)}}</del>
+                        @endif
+                        <span id="main_price" class="main-price text-primary font-weight-bold" style="font-size: 28px;">{{PriceHelper::grandCurrencyPrice($item)}}</span>
+                        @if ($item->previous_price != 0)
+                            @php
+                                $save_amount = $item->previous_price - $item->discount_price;
+                                $save_percent = round(($save_amount / $item->previous_price) * 100);
+                            @endphp
+                            <span class="badge" style="background-color: #e5f7ed; color: #00a651; padding: 6px 12px; font-size: 13px; font-weight: 600; border-radius: 4px;">Save {{PriceHelper::setCurrencyPrice($save_amount)}} ({{$save_percent}}%)</span>
+                        @endif
                     </div>
-                    @endif
-                    @endif
 
-                    <span class="h3 d-block price-area">
-                    @if ($item->previous_price != 0)
-                        <small class="d-inline-block"><del>{{PriceHelper::setPreviousPrice($item->previous_price)}}</del></small>
-                    @endif
-                    <span id="main_price" class="main-price">{{PriceHelper::grandCurrencyPrice($item)}}</span>
-                    </span>
+                    <!-- Trust Badges -->
+                    <div class="row mb-4" style="gap: 10px 0;">
+                        <div class="col-4 px-1">
+                            <div class="text-center p-2 d-flex flex-column align-items-center justify-content-center" style="border: 1px solid #e0e0e0; border-radius: 6px; background-color: #fff; height: 100%;">
+                                <i class="fas fa-shield-alt text-success mb-1" style="font-size: 18px;"></i>
+                                <div style="font-size: 11px; line-height: 1.2; font-weight: 500;">Professional<br>Clinic Grade</div>
+                            </div>
+                        </div>
+                        <div class="col-4 px-1">
+                            <div class="text-center p-2 d-flex flex-column align-items-center justify-content-center" style="border: 1px solid #e0e0e0; border-radius: 6px; background-color: #fff; height: 100%;">
+                                <i class="fas fa-check-circle text-success mb-1" style="font-size: 18px;"></i>
+                                <div style="font-size: 11px; line-height: 1.2; font-weight: 500;">Genuine<br>Product</div>
+                            </div>
+                        </div>
+                        <div class="col-4 px-1">
+                            <div class="text-center p-2 d-flex flex-column align-items-center justify-content-center" style="border: 1px solid #e0e0e0; border-radius: 6px; background-color: #fff; height: 100%;">
+                                <i class="fas fa-truck text-success mb-1" style="font-size: 18px;"></i>
+                                <div style="font-size: 11px; line-height: 1.2; font-weight: 500;">Nationwide<br>Delivery</div>
+                            </div>
+                        </div>
+                        <div class="col-4 px-1 mt-2">
+                            <div class="text-center p-2 d-flex flex-column align-items-center justify-content-center" style="border: 1px solid #e0e0e0; border-radius: 6px; background-color: #fff; height: 100%;">
+                                <i class="fas fa-lock text-success mb-1" style="font-size: 18px;"></i>
+                                <div style="font-size: 11px; line-height: 1.2; font-weight: 500;">Secure<br>Payment</div>
+                            </div>
+                        </div>
+                        <div class="col-4 px-1 mt-2">
+                            <div class="text-center p-2 d-flex flex-column align-items-center justify-content-center" style="border: 1px solid #e0e0e0; border-radius: 6px; background-color: #fff; height: 100%;">
+                                <i class="fas fa-box text-success mb-1" style="font-size: 18px;"></i>
+                                <div style="font-size: 11px; line-height: 1.2; font-weight: 500;">Ready Stock in<br>Bangladesh</div>
+                            </div>
+                        </div>
+                        <div class="col-4 px-1 mt-2">
+                            <div class="text-center p-2 d-flex flex-column align-items-center justify-content-center" style="border: 1px solid #e0e0e0; border-radius: 6px; background-color: #fff; height: 100%;">
+                                <i class="fas fa-hand-holding-usd text-success mb-1" style="font-size: 18px;"></i>
+                                <div style="font-size: 11px; line-height: 1.2; font-weight: 500;">Cash on<br>Delivery</div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <p class="text-muted">{{$item->sort_details}} <a href="#details" class="scroll-to">{{__('Read more')}}</a></p>
+                    <!-- Key Features -->
+                    <div class="key-features mb-4 pt-3" style="border-top: 1px solid #eee;">
+                        <h6 class="font-weight-bold mb-3" style="color: #1a1a1a; font-size: 16px;">Key Features</h6>
+                        <div class="row">
+                            @if($item->tags)
+                                @foreach(explode(',', $item->tags) as $tag)
+                                <div class="col-6 mb-2 d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success mr-2"></i> <span style="font-size: 13px; font-weight: 500;">{{ trim($tag) }}</span>
+                                </div>
+                                @endforeach
+                            @else
+                                <div class="col-6 mb-2 d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success mr-2"></i> <span style="font-size: 13px; font-weight: 500;">Premium Quality</span>
+                                </div>
+                                <div class="col-6 mb-2 d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success mr-2"></i> <span style="font-size: 13px; font-weight: 500;">Fast Performance</span>
+                                </div>
+                                <div class="col-6 mb-2 d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success mr-2"></i> <span style="font-size: 13px; font-weight: 500;">Reliable Design</span>
+                                </div>
+                                <div class="col-6 mb-2 d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success mr-2"></i> <span style="font-size: 13px; font-weight: 500;">Easy to Use</span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
 
                     <div class="row margin-top-1x">
                         @foreach($attributes as $attribute)
@@ -249,30 +319,96 @@
                     </div>
                     @endif
 
-                    <div class="row align-items-end pb-4">
-                        <div class="col-sm-12">
+                    <!-- Action Buttons -->
+                    <div class="action-buttons mb-4 pt-3" style="border-top: 1px solid #eee;">
+                        <div class="d-flex align-items-center mb-3">
                             @if ($item->item_type == 'normal')
-                            <div class="qtySelector product-quantity">
-                              <span class="decreaseQty subclick"><i class="fas fa-minus "></i></span>
-                              <input type="text" class="qtyValue cart-amount" value="1">
-                              <span class="increaseQty addclick"><i class="fas fa-plus"></i></span>
-                                <input type="hidden" value="3333" id="current_stock">
+                            <div class="d-flex align-items-center mr-3">
+                                <span class="font-weight-bold mr-3" style="font-size: 15px;">Quantity</span>
+                                <div class="qtySelector product-quantity d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 4px; overflow: hidden; height: 44px; width: 120px;">
+                                    <span class="decreaseQty subclick" style="width: 40px; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #f8f9fa; color: #003399;"><i class="fas fa-minus"></i></span>
+                                    <input type="text" class="qtyValue cart-amount text-center font-weight-bold m-0" value="1" style="width: 40px; height: 100%; border: none; border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0; padding: 0;">
+                                    <span class="increaseQty addclick" style="width: 40px; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #f8f9fa; color: #003399;"><i class="fas fa-plus"></i></span>
+                                    <input type="hidden" value="3333" id="current_stock">
+                                </div>
                             </div>
                             @endif
-                            <div class="p-action-button">
-                              @if ($item->item_type != 'affiliate')
+
+                            @if ($item->item_type != 'affiliate')
                                 @if ($item->is_stock())
-                                <button class="btn btn-primary m-0 a-t-c-mr" id="add_to_cart"><i class="icon-bag"></i><span>{{ __('Add to Cart') }}</span></button>
-                                <button class="btn btn-primary m-0" id="but_to_cart"><i class="icon-bag"></i><span>{{ __('Order Now') }}</span></button>
+                                <button class="btn m-0 flex-grow-1" id="add_to_cart" style="background-color: #003399; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;"><i class="fas fa-shopping-cart mr-2"></i>Add to Cart</button>
                                 @else
-                                    <button class="btn btn-primary m-0"><i class="icon-bag"></i><span>{{__('Out of stock')}}</span></button>
+                                <button class="btn btn-secondary m-0 flex-grow-1" style="height: 44px; font-weight: 600; border-radius: 6px;" disabled><i class="fas fa-shopping-cart mr-2"></i>Out of stock</button>
                                 @endif
-                              @else
-                              <a href="{{$item->affiliate_link}}" target="_blank" class="btn btn-primary m-0"><span><i class="icon-bag"></i>{{ __('Buy Now') }}</span></a>
-                              @endif
+                            @else
+                                <a href="{{$item->affiliate_link}}" target="_blank" class="btn m-0 flex-grow-1" style="background-color: #003399; color: #fff; height: 44px; font-weight: 600; border-radius: 6px;"><i class="fas fa-shopping-cart mr-2"></i>Buy Now</a>
+                            @endif
+                        </div>
+                        
+                        @if ($item->item_type != 'affiliate' && $item->is_stock())
+                        @php
+                            $phone = $setting->footer_phone ?? '01XXXXXXXXX';
+                            $whatsappNum = preg_replace('/[^0-9]/', '', $phone);
+                            if(substr($whatsappNum, 0, 2) === '01') {
+                                $whatsappNum = '88' . $whatsappNum; // Assuming BD number
+                            }
+                        @endphp
+                        <div class="mb-3">
+                            <a href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('I want to order: ' . $item->name . ' - ' . route('front.product', $item->slug)) }}" target="_blank" class="btn w-100 m-0 d-flex align-items-center justify-content-center" style="background-color: #25d366; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
+                                <i class="fab fa-whatsapp mr-2" style="font-size: 18px;"></i> Order via WhatsApp
+                            </a>
+                        </div>
+                        <div>
+                            <button class="btn w-100 m-0 d-flex align-items-center justify-content-center" id="but_to_cart" style="background: linear-gradient(90deg, #ff8a00, #e52e71); color: #fff; height: 44px; font-weight: 600; border-radius: 6px; border: none; box-shadow: none;">
+                                <i class="fas fa-bolt mr-2"></i> Buy Now
+                            </button>
+                        </div>
+                        @endif
+                    </div>
 
+                    <!-- Delivery & Warranty Info -->
+                    <div class="row mb-4">
+                        <div class="col-6 pr-2">
+                            <div class="p-3 d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fafafa; height: 100%;">
+                                <i class="fas fa-truck text-primary mr-3" style="font-size: 24px;"></i>
+                                <div>
+                                    <div class="font-weight-bold text-dark mb-1" style="font-size: 12px;">Delivery Information</div>
+                                    <div style="font-size: 10px; color: #555; line-height: 1.4;">
+                                        Dhaka: 1 Day Delivery<br>
+                                        Outside Dhaka: 2-3 Days<br>
+                                        Cash on Delivery Available
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="col-6 pl-2">
+                            <div class="p-3 d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fafafa; height: 100%;">
+                                <i class="fas fa-shield-alt text-primary mr-3" style="font-size: 24px;"></i>
+                                <div>
+                                    <div class="font-weight-bold text-dark mb-1" style="font-size: 12px;">Warranty</div>
+                                    <div style="font-size: 10px; color: #555; line-height: 1.4;">
+                                        6 Months Warranty<br>
+                                        Service Support<br>
+                                        Genuine Spare Parts
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <!-- Payment Methods -->
+                    <div class="payment-methods p-3 mb-4" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fff;">
+                        <div class="font-weight-bold text-dark mb-3" style="font-size: 13px;">Payment Methods</div>
+                        <div class="d-flex align-items-center justify-content-between flex-wrap">
+                            <div style="width: 15%; text-align: center;"><img src="https://securepay.sslcommerz.com/public/image/bkash.png" alt="bKash" style="max-height: 20px; object-fit: contain;"></div>
+                            <div style="width: 15%; text-align: center;"><img src="https://securepay.sslcommerz.com/public/image/nagad.png" alt="Nagad" style="max-height: 20px; object-fit: contain;"></div>
+                            <div style="width: 15%; text-align: center;"><img src="https://securepay.sslcommerz.com/public/image/rocket.png" alt="Rocket" style="max-height: 20px; object-fit: contain;"></div>
+                            <div style="width: 15%; text-align: center;"><img src="https://securepay.sslcommerz.com/public/image/visa.png" alt="Visa" style="max-height: 20px; object-fit: contain;"></div>
+                            <div style="width: 15%; text-align: center;"><img src="https://securepay.sslcommerz.com/public/image/mastercard.png" alt="Mastercard" style="max-height: 20px; object-fit: contain;"></div>
+                            <div style="width: 15%; text-align: center; line-height: 1;">
+                                <div class="font-weight-bold text-success" style="font-size: 12px;">COD</div>
+                                <div style="font-size: 8px; color: #666; margin-top: 2px;">Cash on Delivery</div>
+                            </div>
                         </div>
                     </div>
 
