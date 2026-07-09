@@ -16,13 +16,14 @@ if (!function_exists('exec')) {
 $output = [];
 $output[] = "Starting Deployment...";
 
-// 1. Pull latest code from GitHub into the cPanel repository
-exec('cd /home/dermatol/Mac-Scientific && git pull origin main 2>&1', $output);
+// 1. Pull latest code from GitHub into the cPanel repository, enforcing a hard reset to prevent merge conflicts
+exec('cd /home/dermatol/Mac-Scientific && git fetch origin && git reset --hard origin/main 2>&1', $output);
 
 // 2. Copy the updated files into the live public_html folder
 exec('/bin/cp -af /home/dermatol/Mac-Scientific/source_code/. /home/dermatol/public_html/ 2>&1', $output);
 
-// 3. Automatically run database migrations (just in case new tables/columns were added)
+// 3. Clear application caches and run migrations
+exec('cd /home/dermatol/public_html/core && php artisan optimize:clear 2>&1', $output);
 exec('cd /home/dermatol/public_html/core && php artisan migrate --force 2>&1', $output);
 
 // Print the result logs
