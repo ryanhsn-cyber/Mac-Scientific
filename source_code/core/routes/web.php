@@ -14,6 +14,25 @@ Route::get('/run-migrations', function () {
     }
 });
 
+Route::get('/clear-settings-now', function () {
+    try {
+        \Illuminate\Support\Facades\DB::table('payment_settings')->whereNotIn('unique_keyword', ['cod', 'sslcommerz', 'bank'])->update(['status' => 0]);
+        \Illuminate\Support\Facades\DB::table('payment_settings')->where('unique_keyword', 'sslcommerz')->update(['status' => 0, 'information' => '{"store_id":"","store_password":"","check_sandbox":0}']);
+        \Illuminate\Support\Facades\DB::table('payment_settings')->where('unique_keyword', 'bank')->update(['status' => 0, 'text' => '']);
+        
+        \Illuminate\Support\Facades\DB::table('settings')->update([
+            'facebook_check' => 0, 'facebook_client_id' => '', 'facebook_client_secret' => '', 'facebook_redirect' => '',
+            'google_check' => 0, 'google_client_id' => '', 'google_client_secret' => '', 'google_redirect' => '',
+            'smtp_check' => 0, 'email_host' => '', 'email_port' => '', 'email_encryption' => '', 'email_user' => '', 'email_pass' => '', 'email_from' => '', 'email_from_name' => '', 'contact_email' => ''
+        ]);
+        
+        Artisan::call('optimize:clear');
+        return "Settings forcefully cleared successfully!";
+    } catch (\Exception $e) {
+        return "Failed: " . $e->getMessage();
+    }
+});
+
 Route::group(['middleware' => 'adminlocalize'], function () {
 
     Route::prefix('admin')->group(function () {
