@@ -14,14 +14,24 @@ class AddSteadfastColumnsToSettingsAndOrders extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('steadfast_api_key')->nullable();
-            $table->string('steadfast_secret_key')->nullable();
+            if (!Schema::hasColumn('settings', 'steadfast_api_key')) {
+                $table->string('steadfast_api_key')->nullable();
+            }
+            if (!Schema::hasColumn('settings', 'steadfast_secret_key')) {
+                $table->string('steadfast_secret_key')->nullable();
+            }
         });
 
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('steadfast_consignment_id')->nullable();
-            $table->string('steadfast_tracking_code')->nullable();
-            $table->string('steadfast_status')->nullable();
+            if (!Schema::hasColumn('orders', 'steadfast_consignment_id')) {
+                $table->string('steadfast_consignment_id')->nullable();
+            }
+            if (!Schema::hasColumn('orders', 'steadfast_tracking_code')) {
+                $table->string('steadfast_tracking_code')->nullable();
+            }
+            if (!Schema::hasColumn('orders', 'steadfast_status')) {
+                $table->string('steadfast_status')->nullable();
+            }
         });
     }
 
