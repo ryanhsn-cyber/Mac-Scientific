@@ -113,6 +113,132 @@
             </div>
         </div>
 
+        <!-- FAQ & Reviews Feature Section -->
+        <div class="row mt-4 mb-2">
+            <!-- FAQ Section -->
+            <div class="col-12 mb-4">
+                <div class="p-3" style="border: 1px solid #e0e0e0; border-radius: 8px; background: #fff;">
+                    <h6 class="font-weight-bold mb-3" style="color: #003399; font-size: 15px;">Frequently Asked Questions</h6>
+                    <div class="accordion" id="faqAccordion">
+                        <!-- FAQ Item 1 -->
+                        <div class="card border-0 mb-1">
+                            <div class="card-header p-0 bg-transparent border-0" id="headingOne">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 13px; font-weight: 500;">
+                                    Is this suitable for PRP or Exosome therapy?
+                                    <i class="fas fa-plus" style="color: #003399;"></i>
+                                </button>
+                            </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                                    Yes, it is highly suitable for both PRP and Exosome therapies, helping active ingredients penetrate deeply.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Item 2 -->
+                        <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
+                            <div class="card-header p-0 bg-transparent border-0" id="headingTwo">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 13px; font-weight: 500;">
+                                    How many speed levels are available?
+                                    <i class="fas fa-plus" style="color: #003399;"></i>
+                                </button>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                                    It comes with 5 adjustable speed levels for customized treatments.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Item 3 -->
+                        <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
+                            <div class="card-header p-0 bg-transparent border-0" id="headingThree">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size: 13px; font-weight: 500;">
+                                    Is it rechargeable?
+                                    <i class="fas fa-plus" style="color: #003399;"></i>
+                                </button>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                                    Yes, it features a built-in rechargeable battery for cordless operation.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Item 4 -->
+                        <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
+                            <div class="card-header p-0 bg-transparent border-0" id="headingFour">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="font-size: 13px; font-weight: 500;">
+                                    How do I clean and sterilize the pen?
+                                    <i class="fas fa-plus" style="color: #003399;"></i>
+                                </button>
+                            </div>
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqAccordion">
+                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                                    Wipe the pen body with alcohol. The cartridges are single-use and should be discarded safely.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Item 5 -->
+                        <div class="card border-0" style="border-top: 1px solid #f1f1f1 !important;">
+                            <div class="card-header p-0 bg-transparent border-0" id="headingFive">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="font-size: 13px; font-weight: 500;">
+                                    What is the warranty?
+                                    <i class="fas fa-plus" style="color: #003399;"></i>
+                                </button>
+                            </div>
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqAccordion">
+                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                                    We provide a 1-year warranty covering manufacturing defects.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Reviews Section -->
+            <div class="col-12 mb-3">
+                <div class="p-4 d-flex flex-column" style="border: 1px solid #e0e0e0; border-radius: 8px; background: #fff;">
+                    <h6 class="font-weight-bold mb-4" style="color: #003399; font-size: 16px;">Customer Reviews</h6>
+                    
+                    <div class="d-flex mb-4 align-items-center">
+                        <div class="mr-4 text-center pr-4" style="border-right: 1px solid #f1f1f1;">
+                            <h2 class="font-weight-bold text-dark mb-1" style="font-size: 48px; line-height: 1;">{{ number_format($item->reviews->avg('rating') ?: 0, 1) }}</h2>
+                            <div class="rating-stars" style="color: #ffb800; font-size: 16px; margin-bottom: 5px;">
+                                {!!renderStarRating($item->reviews->avg('rating'))!!}
+                            </div>
+                            <div class="text-dark font-weight-bold" style="font-size: 13px;">{{ $item->reviews->count() }} Reviews</div>
+                        </div>
+                        <div class="flex-grow-1">
+                            @for($i = 5; $i >= 1; $i--)
+                                @php
+                                    $count = $item->reviews->where('status',1)->where('rating',$i)->count();
+                                    $total = $item->reviews->where('status',1)->count() ?: 1;
+                                    $percent = round(($count / $total) * 100);
+                                @endphp
+                                <div class="d-flex align-items-center mb-2" style="font-size: 12px;">
+                                    <span class="text-dark font-weight-bold" style="width: 20px;">{{ $i }} <i class="fas fa-star" style="color: #ffb800; font-size: 10px;"></i></span>
+                                    <div class="progress mx-3 flex-grow-1" style="height: 8px; border-radius: 4px; background-color: #f1f1f1;">
+                                        <div class="progress-bar" role="progressbar" style="width: {{ $percent }}%; border-radius: 4px; background-color: #ffb800;" aria-valuenow="{{ $percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span style="width: 35px; text-align: right; color: #555; font-weight: 600;">{{ $percent }}%</span>
+                                    <span style="width: 30px; text-align: right; color: #999;">({{ $count }})</span>
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
+                    
+                    @if (Auth::check())
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#leaveReview" class="btn btn-outline-primary btn-block py-2 mt-auto" style="border-radius: 6px; font-size: 14px; font-weight: 600; border-color: #003399; color: #003399; background: transparent;">
+                            <i class="far fa-edit mr-1"></i> {{ $item->reviews->count() > 0 ? 'Write a review' : 'Be the first to review this product' }}
+                        </a>
+                    @else
+                        <a href="{{ route('user.login') }}" class="btn btn-outline-primary btn-block py-2 mt-auto" style="border-radius: 6px; font-size: 14px; font-weight: 600; border-color: #003399; color: #003399; background: transparent;">
+                            <i class="fas fa-sign-in-alt mr-1"></i> Login to write a review
+                        </a>
+                    @endif
+                </div>
+            </div>
+        </div>
+
         
       </div>
 
@@ -245,10 +371,10 @@
                     <div class="key-features mb-4 pt-3" style="border-top: 1px solid #eee;">
                         <h6 class="font-weight-bold mb-3" style="color: #1a1a1a; font-size: 16px;">Key Features</h6>
                         <div class="row">
-                            @if($item->tags)
-                                @foreach(explode(',', $item->tags) as $tag)
+                            @if($item->features)
+                                @foreach(explode(',', $item->features) as $feature)
                                 <div class="col-6 mb-2 d-flex align-items-center">
-                                    <i class="fas fa-check-circle text-success mr-2"></i> <span style="font-size: 13px; font-weight: 500;">{{ trim($tag) }}</span>
+                                    <i class="fas fa-check-circle text-success mr-2"></i> <span style="font-size: 13px; font-weight: 500;">{{ trim($feature) }}</span>
                                 </div>
                                 @endforeach
                             @else
@@ -284,6 +410,7 @@
                             @endif
                         @endforeach
                     </div>
+                    <!-- Tier Pricing -->
                     @if($item->tier_prices)
                     <div class="tier-pricing-table mt-4 mb-3 table-responsive">
                         @php
@@ -321,49 +448,41 @@
 
                     <!-- Action Buttons -->
                     <div class="action-buttons mb-4 pt-3" style="border-top: 1px solid #eee;">
-                        <div class="d-flex align-items-center mb-3">
+                        
+                        <div class="d-flex mb-3" style="gap: 15px;">
                             @if ($item->item_type == 'normal')
-                            <div class="d-flex align-items-center mr-3">
-                                <span class="font-weight-bold mr-3" style="font-size: 15px;">Quantity</span>
-                                <div class="qtySelector product-quantity d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 4px; overflow: hidden; height: 44px; width: 120px;">
-                                    <span class="decreaseQty subclick" style="width: 40px; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #f8f9fa; color: #003399;"><i class="fas fa-minus"></i></span>
+                            <div class="d-flex align-items-start pt-1">
+                                <span class="font-weight-bold mr-3" style="font-size: 15px; color: #333; line-height: 44px;">Quantity</span>
+                                <div class="qtySelector product-quantity d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 4px; overflow: hidden; height: 44px; width: 110px;">
+                                    <span class="decreaseQty subclick" style="width: 35px; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #f8f9fa; color: #333;"><i class="fas fa-minus" style="font-size: 12px;"></i></span>
                                     <input type="text" class="qtyValue cart-amount text-center font-weight-bold m-0" value="1" style="width: 40px; height: 100%; border: none; border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0; padding: 0;">
-                                    <span class="increaseQty addclick" style="width: 40px; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #f8f9fa; color: #003399;"><i class="fas fa-plus"></i></span>
+                                    <span class="increaseQty addclick" style="width: 35px; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #f8f9fa; color: #333;"><i class="fas fa-plus" style="font-size: 12px;"></i></span>
                                     <input type="hidden" value="3333" id="current_stock">
                                 </div>
                             </div>
                             @endif
 
-                            @if ($item->item_type != 'affiliate')
-                                @if ($item->is_stock())
-                                <button class="btn m-0 flex-grow-1" id="add_to_cart" style="background-color: #003399; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;"><i class="fas fa-shopping-cart mr-2"></i>Add to Cart</button>
+                            <div class="d-flex flex-column flex-grow-1" style="gap: 10px;">
+                                @if ($item->item_type != 'affiliate')
+                                    @if ($item->is_stock())
+                                    <button class="btn m-0 w-100 d-flex align-items-center justify-content-center" id="add_to_cart" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
+                                        <i class="fas fa-shopping-cart mr-2"></i><span>Add to Cart</span>
+                                    </button>
+                                    <button class="btn m-0 w-100 d-flex align-items-center justify-content-center" id="but_to_cart" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
+                                        <i class="fas fa-bolt mr-2"></i><span>Buy Now</span>
+                                    </button>
+                                    @else
+                                    <button class="btn btn-secondary m-0 w-100 d-flex align-items-center justify-content-center" style="height: 44px; font-weight: 600; border-radius: 6px;" disabled>
+                                        <i class="fas fa-shopping-cart mr-2"></i><span>Out of stock</span>
+                                    </button>
+                                    @endif
                                 @else
-                                <button class="btn btn-secondary m-0 flex-grow-1" style="height: 44px; font-weight: 600; border-radius: 6px;" disabled><i class="fas fa-shopping-cart mr-2"></i>Out of stock</button>
+                                    <a href="{{$item->affiliate_link}}" target="_blank" class="btn m-0 w-100 d-flex align-items-center justify-content-center" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px;">
+                                        <i class="fas fa-shopping-cart mr-2"></i><span>Buy Now</span>
+                                    </a>
                                 @endif
-                            @else
-                                <a href="{{$item->affiliate_link}}" target="_blank" class="btn m-0 flex-grow-1" style="background-color: #003399; color: #fff; height: 44px; font-weight: 600; border-radius: 6px;"><i class="fas fa-shopping-cart mr-2"></i>Buy Now</a>
-                            @endif
+                            </div>
                         </div>
-                        
-                        @if ($item->item_type != 'affiliate' && $item->is_stock())
-                        @php
-                            $phone = $setting->footer_phone ?? '01XXXXXXXXX';
-                            $whatsappNum = preg_replace('/[^0-9]/', '', $phone);
-                            if(substr($whatsappNum, 0, 2) === '01') {
-                                $whatsappNum = '88' . $whatsappNum; // Assuming BD number
-                            }
-                        @endphp
-                        <div class="mb-3">
-                            <a href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('I want to order: ' . $item->name . ' - ' . route('front.product', $item->slug)) }}" target="_blank" class="btn w-100 m-0 d-flex align-items-center justify-content-center" style="background-color: #25d366; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
-                                <i class="fab fa-whatsapp mr-2" style="font-size: 18px;"></i> Order via WhatsApp
-                            </a>
-                        </div>
-                        <div>
-                            <button class="btn w-100 m-0 d-flex align-items-center justify-content-center" id="but_to_cart" style="background: linear-gradient(90deg, #ff8a00, #e52e71); color: #fff; height: 44px; font-weight: 600; border-radius: 6px; border: none; box-shadow: none;">
-                                <i class="fas fa-bolt mr-2"></i> Buy Now
-                            </button>
-                        </div>
-                        @endif
                     </div>
 
                     <!-- Delivery & Warranty Info -->
@@ -399,16 +518,8 @@
                     <!-- Payment Methods -->
                     <div class="payment-methods p-3 mb-4" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fff;">
                         <div class="font-weight-bold text-dark mb-3" style="font-size: 13px;">Payment Methods</div>
-                        <div class="d-flex align-items-center justify-content-between flex-wrap">
-                            <div style="width: 15%; text-align: center;"><img src="https://securepay.sslcommerz.com/public/image/bkash.png" alt="bKash" style="max-height: 20px; object-fit: contain;"></div>
-                            <div style="width: 15%; text-align: center;"><img src="https://securepay.sslcommerz.com/public/image/nagad.png" alt="Nagad" style="max-height: 20px; object-fit: contain;"></div>
-                            <div style="width: 15%; text-align: center;"><img src="https://securepay.sslcommerz.com/public/image/rocket.png" alt="Rocket" style="max-height: 20px; object-fit: contain;"></div>
-                            <div style="width: 15%; text-align: center;"><img src="https://securepay.sslcommerz.com/public/image/visa.png" alt="Visa" style="max-height: 20px; object-fit: contain;"></div>
-                            <div style="width: 15%; text-align: center;"><img src="https://securepay.sslcommerz.com/public/image/mastercard.png" alt="Mastercard" style="max-height: 20px; object-fit: contain;"></div>
-                            <div style="width: 15%; text-align: center; line-height: 1;">
-                                <div class="font-weight-bold text-success" style="font-size: 12px;">COD</div>
-                                <div style="font-size: 8px; color: #666; margin-top: 2px;">Cash on Delivery</div>
-                            </div>
+                        <div class="d-flex align-items-center justify-content-center flex-wrap">
+                            <img class="d-block" src="{{ $setting->footer_gateway_img ? asset('assets/images/'.$setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}" style="max-height: 35px; object-fit: contain;">
                         </div>
                     </div>
 
@@ -448,16 +559,7 @@
                         </div>
 
                         <div class="mt-4 p-d-f-area">
-                            <div class="left">
-                                <a class="btn btn-primary btn-sm wishlist_store wishlist_text" href="{{route('user.wishlist.store',$item->id)}}"><span><i class="icon-heart"></i></span>
-                                @if (Auth::check() && App\Models\Wishlist::where('user_id',Auth::user()->id)->where('item_id',$item->id)->exists())
-                                <span>{{__('Added To Wishlist')}}</span>
-                                @else
-                                <span class="wishlist1">{{__('Wishlist')}}</span>
-                                <span class="wishlist2 d-none">{{__('Added To Wishlist')}}</span>
-                                @endif
-                                </a>
-                                <button class="btn btn-primary btn-sm  product_compare" data-target="{{route('fornt.compare.product',$item->id)}}" ><span><i class="icon-repeat"></i>{{__('Compare')}}</span></button>
+                            <div class="left" style="display: none;">
                             </div>
 
                             <div class="d-flex align-items-center">
@@ -532,7 +634,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-lg-12">
               @forelse ($reviews as $review)
               <div class="single-review">
                   <div class="comment">
@@ -571,46 +673,6 @@
             </div>
 
           </div>
-          <div class="col-md-4 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="text-center">
-                  <div class="d-inline align-baseline display-3 mr-1">{{ round($item->reviews->avg('rating'),2)}}</div>
-                  <div class="d-inline align-baseline text-sm text-warning mr-1">
-                    <div class="rating-stars">{!!renderStarRating($item->reviews->avg('rating'))!!}</div>
-                  </div>
-                </div>
-                <div class="pt-3">
-                  <label class="text-medium text-sm">5 {{__('stars')}} <span class="text-muted">- {{$item->reviews->where('status',1)->where('rating',5)->count()}}</span></label>
-                  <div class="progress margin-bottom-1x">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{$item->reviews->where('status',1)->where('rating',5)->sum('rating') * 20}}%; height: 2px;" aria-valuenow="100" aria-valuemin="{{$item->reviews->where('rating',5)->sum('rating') * 20}}" aria-valuemax="100"></div>
-                  </div>
-                  <label class="text-medium text-sm">4 {{__('stars')}} <span class="text-muted">- {{$item->reviews->where('status',1)->where('rating',4)->count()}}</span></label>
-                  <div class="progress margin-bottom-1x">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{$item->reviews->where('status',1)->where('rating',4)->sum('rating') * 20}}%; height: 2px;" aria-valuenow="{{$item->reviews->where('rating',4)->sum('rating') * 20}}" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <label class="text-medium text-sm">3 {{__('stars')}} <span class="text-muted">- {{$item->reviews->where('status',1)->where('rating',3)->count()}}</span></label>
-                  <div class="progress margin-bottom-1x">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{$item->reviews->where('rating',3)->sum('rating') * 20}}%; height: 2px;" aria-valuenow="{{$item->reviews->where('rating',3)->sum('rating') * 20}}" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <label class="text-medium text-sm">2 {{__('stars')}} <span class="text-muted">- {{$item->reviews->where('status',1)->where('rating',2)->count()}}</span></label>
-                  <div class="progress margin-bottom-1x">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{$item->reviews->where('status',1)->where('rating',2)->sum('rating') * 20}}%; height: 2px;" aria-valuenow="{{$item->reviews->where('rating',2)->sum('rating') * 20}}" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <label class="text-medium text-sm">1 {{__('star')}} <span class="text-muted">- {{$item->reviews->where('status',1)->where('rating',1)->count()}}</span></label>
-                  <div class="progress mb-2">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{$item->reviews->where('status',1)->where('rating',1)->sum('rating') * 20}}; height: 2px;" aria-valuenow="0" aria-valuemin="{{$item->reviews->where('rating',1)->sum('rating') * 20}}" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                @if (Auth::user())
-                    <div class="pb-2"><a class="btn btn-primary btn-block" href="#" data-bs-toggle="modal" data-bs-target="#leaveReview"><span>{{__('Leave a Review')}}</span></a></div>
-                    @else
-                    <div class="pb-2"><a class="btn btn-primary btn-block" href="{{route('user.login')}}" ><span>{{__('Login')}}</span></a></div>
-                @endif
-              </div>
-            </div>
-          </div>
-
 
     </div>
   </div>

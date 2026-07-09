@@ -124,6 +124,14 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group mb-2">
+                        <label for="features">{{ __('Key Features') }}
+                            </label>
+                        <input type="text" name="features" class="tags"
+                            id="features"
+                            placeholder="{{ __('Key Features') }}"
+                            value="">
+                    </div>
+                    <div class="form-group mb-2">
                         <label for="tags">{{ __('Product Tags') }}
                             </label>
                         <input type="text" name="tags" class="tags"

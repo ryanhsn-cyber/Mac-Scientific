@@ -119,6 +119,14 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group mb-2">
+                        <label for="features">{{ __('Key Features') }}
+                            </label>
+                        <input type="text" name="features" class="tags"
+                            id="features"
+                            placeholder="{{ __('Key Features') }}"
+                            value="">
+                    </div>
+                    <div class="form-group mb-2">
                         <label for="tags">{{ __('Product Tags') }}
                             </label>
                         <input type="text" name="tags" class="tags"
@@ -284,8 +292,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="tax_id">{{ __('Select Tax') }} *</label>
-                        <select name="tax_id" id="tax_id" class="form-control" required>
+                        <label for="tax_id">{{ __('Select Tax') }}</label>
+                        <select name="tax_id" id="tax_id" class="form-control">
                             <option value="">{{__('Select One')}}</option>
                             @foreach(DB::table('taxes')->whereStatus(1)->get() as $tax)
                             <option value="{{ $tax->id }}">{{ $tax->name }}</option>

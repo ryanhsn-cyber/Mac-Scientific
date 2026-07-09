@@ -61,7 +61,7 @@ class ItemRequest extends FormRequest
             'discount_price'  => 'required|max:50',
             'previous_price'  => 'max:50',
             'stock'           => 'numeric|max:9999999999',
-            'tax_id'          => 'required',
+            'tax_id'          => 'nullable',
             'photo'           => $required, 'mimes:jpeg,jpg,png,svg'
         ];
     }
@@ -76,7 +76,6 @@ class ItemRequest extends FormRequest
 
         return [
             'name.required'            =>  __('Name field is required.'),
-            'tax_id.required'          =>  __('Tax field is required.'),
             'category_id.required'     =>  __('Category field is required.'),
             'brand_id.required'        =>  __('Brand field is required.'),
             'slug.required'            =>  __('Slug field is required.'),
