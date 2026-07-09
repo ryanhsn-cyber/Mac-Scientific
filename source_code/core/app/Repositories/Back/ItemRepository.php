@@ -51,6 +51,10 @@ class ItemRepository
             $input['tags'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->tags);
         }
 
+        if($request->has('features')){
+            $input['features'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->features);
+        }
+
         if($request->has('is_specification')){
             $input['specification_name'] = $request->specification_name;
             $input['specification_description'] = null;
@@ -154,6 +158,10 @@ class ItemRepository
 
         if($request->has('tags')){
             $input['tags'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->tags);
+        }
+
+        if($request->has('features')){
+            $input['features'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->features);
         }
 
         if($request->has('is_specification')){
