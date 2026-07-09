@@ -277,6 +277,7 @@ Route::group(['middleware' => 'adminlocalize'], function () {
             Route::post('home-page/popular/category/update', 'Back\HomePageController@popular_category_update')->name('back.popular.category.update');
             Route::post('home-page/tree/cloumn/category/update', 'Back\HomePageController@tree_column_category_update')->name('back.tree.column.category.update');
             Route::post('home-page/feature/category/category/update', 'Back\HomePageController@feature_category_update')->name('back.feature.category.update');
+            Route::post('home-page/highlight/banner/update', 'Back\HomePageController@highlight_banner_update')->name('back.highlight.banner.update');
             Route::post('home-page4/banner/update', 'Back\HomePageController@homepage4update')->name('back.home_page4.banner.update');
             Route::post('home-page4/category/update', 'Back\HomePageController@homepage4categoryupdate')->name('back.home4.category.update');
 

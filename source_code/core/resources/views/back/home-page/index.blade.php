@@ -33,6 +33,7 @@
                         <a class="nav-link" id="v-pills-t6-tab" data-toggle="pill" href="#v-pills-t6" role="tab" aria-controls="v-pills-t6" aria-selected="false">{{ __('2 column banner') }}</a>
                         <a class="nav-link" id="v-pills-t7-tab" data-toggle="pill" href="#v-pills-t7" role="tab" aria-controls="v-pills-t7" aria-selected="false">{{ __('Home Page 4 Banner 5 Column') }}</a>
                         <a class="nav-link" id="v-pills-t8-tab" data-toggle="pill" href="#v-pills-t8" role="tab" aria-controls="v-pills-t8" aria-selected="false">{{ __('Home Page 4 Popular Categories') }}</a>
+                        <a class="nav-link" id="v-pills-t10-tab" data-toggle="pill" href="#v-pills-t10" role="tab" aria-controls="v-pills-t10" aria-selected="false">{{ __('Highlight Banner') }}</a>
                     </div>
                 </div>
                 <div class="col-7 col-md-9">
@@ -992,8 +993,33 @@
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-secondary ">{{ __('Submit') }}</button>
                         </div>
-                    </form>
-                            </div>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane fade" id="v-pills-t10" role="tabpanel" aria-labelledby="v-pills-t10-tab">
+                            <form class="admin-form" action="{{route('back.highlight.banner.update')}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="name">{{ __('Highlight Banner') }} *</label>
+                                    <br>
+                                        <img class="admin-img"
+                                            src="{{ asset('assets/images/featured-banner.png') }}"
+                                            alt="No Image Found">
+                                    <br>
+                                    <span class="mt-1">{{ __('Image Size Should Be 1200 x 300.') }}</span>
+                                </div>
+                                <div class="form-group position-relative">
+                                    <label class="file">
+                                        <input type="file" accept="image/*" class="upload-photo" name="highlight_banner" id="file"
+                                            aria-label="File browser example">
+                                        <span class="file-custom text-left">{{ __('Upload Image...') }}</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-secondary ">{{ __('Submit') }}</button>
+                                </div>
+                            </form>
+                        </div>
 
                         </div>
                     </div>
