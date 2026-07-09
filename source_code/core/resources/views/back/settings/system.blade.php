@@ -695,48 +695,48 @@
 
                                                         <div class="form-group">
                                                             <label class="switch-primary">
-                                                            <input type="checkbox" class="switch switch-bootstrap status" name="is_facebook_capi" value="1" {{ $setting->is_facebook_capi == 1 ? 'checked' : '' }}>
+                                                            <input type="checkbox" class="switch switch-bootstrap status" name="is_facebook_capi" value="1" {{ ($setting->is_facebook_capi ?? 0) == 1 ? 'checked' : '' }}>
                                                             <span class="switch-body"></span>
                                                             <span class="switch-text">{{ __('Enable Facebook Conversions API (CAPI)') }}</span>
                                                             </label>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>{{ __('Meta Pixel ID') }} *</label>
-                                                            <input type="text" name="facebook_pixel_id" class="form-control" placeholder="{{ __('Meta Pixel ID') }}" value="{{ $setting->facebook_pixel_id }}">
+                                                            <input type="text" name="facebook_pixel_id" class="form-control" placeholder="{{ __('Meta Pixel ID') }}" value="{{ $setting->facebook_pixel_id ?? '' }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>{{ __('CAPI Access Token') }} *</label>
-                                                            <textarea name="facebook_capi_token" class="form-control" placeholder="{{ __('CAPI Access Token') }}">{{ $setting->facebook_capi_token }}</textarea>
+                                                            <textarea name="facebook_capi_token" class="form-control" placeholder="{{ __('CAPI Access Token') }}">{{ $setting->facebook_capi_token ?? '' }}</textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>{{ __('Test Event Code (Optional)') }}</label>
-                                                            <input type="text" name="facebook_capi_test_code" class="form-control" placeholder="{{ __('TESTXXXXX') }}" value="{{ $setting->facebook_capi_test_code }}">
+                                                            <input type="text" name="facebook_capi_test_code" class="form-control" placeholder="{{ __('TESTXXXXX') }}" value="{{ $setting->facebook_capi_test_code ?? '' }}">
                                                         </div>
                                                         <hr>
                                                         <div class="form-group">
                                                             <label class="switch-primary">
-                                                            <input type="checkbox" class="switch switch-bootstrap status" name="is_facebook_capi_view_content" value="1" {{ $setting->is_facebook_capi_view_content == 1 ? 'checked' : '' }}>
+                                                            <input type="checkbox" class="switch switch-bootstrap status" name="is_facebook_capi_view_content" value="1" {{ ($setting->is_facebook_capi_view_content ?? 0) == 1 ? 'checked' : '' }}>
                                                             <span class="switch-body"></span>
                                                             <span class="switch-text">{{ __('Track ViewContent Event') }}</span>
                                                             </label>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="switch-primary">
-                                                            <input type="checkbox" class="switch switch-bootstrap status" name="is_facebook_capi_add_to_cart" value="1" {{ $setting->is_facebook_capi_add_to_cart == 1 ? 'checked' : '' }}>
+                                                            <input type="checkbox" class="switch switch-bootstrap status" name="is_facebook_capi_add_to_cart" value="1" {{ ($setting->is_facebook_capi_add_to_cart ?? 0) == 1 ? 'checked' : '' }}>
                                                             <span class="switch-body"></span>
                                                             <span class="switch-text">{{ __('Track AddToCart Event') }}</span>
                                                             </label>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="switch-primary">
-                                                            <input type="checkbox" class="switch switch-bootstrap status" name="is_facebook_capi_purchase" value="1" {{ $setting->is_facebook_capi_purchase == 1 ? 'checked' : '' }}>
+                                                            <input type="checkbox" class="switch switch-bootstrap status" name="is_facebook_capi_purchase" value="1" {{ ($setting->is_facebook_capi_purchase ?? 0) == 1 ? 'checked' : '' }}>
                                                             <span class="switch-body"></span>
                                                             <span class="switch-text">{{ __('Track Purchase Event') }}</span>
                                                             </label>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="switch-primary">
-                                                            <input type="checkbox" class="switch switch-bootstrap status" name="is_facebook_capi_initiate_checkout" value="1" {{ $setting->is_facebook_capi_initiate_checkout == 1 ? 'checked' : '' }}>
+                                                            <input type="checkbox" class="switch switch-bootstrap status" name="is_facebook_capi_initiate_checkout" value="1" {{ ($setting->is_facebook_capi_initiate_checkout ?? 0) == 1 ? 'checked' : '' }}>
                                                             <span class="switch-body"></span>
                                                             <span class="switch-text">{{ __('Track InitiateCheckout Event') }}</span>
                                                             </label>
