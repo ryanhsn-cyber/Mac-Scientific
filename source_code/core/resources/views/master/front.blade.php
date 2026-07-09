@@ -54,6 +54,17 @@
     .topbar .d-flex.justify-content-between {
         align-items: center !important;
     }
+    /* Header Logo Sizing Fix */
+    .site-header .site-branding .site-logo {
+        width: auto !important;
+        max-width: 250px !important;
+    }
+    .site-header .site-branding .site-logo img {
+        width: auto !important;
+        max-height: 80px !important;
+        object-fit: contain !important;
+    }
+
     .site-header .search-box-wrap {
         padding: 10px 20px !important;
         align-self: center !important;
