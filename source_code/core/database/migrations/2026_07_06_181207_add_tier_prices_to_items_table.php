@@ -14,7 +14,9 @@ class AddTierPricesToItemsTable extends Migration
     public function up()
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->text('tier_prices')->nullable();
+            if (!Schema::hasColumn('items', 'tier_prices')) {
+                $table->text('tier_prices')->nullable();
+            }
         });
     }
 

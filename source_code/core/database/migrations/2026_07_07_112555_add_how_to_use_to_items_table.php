@@ -14,7 +14,9 @@ class AddHowToUseToItemsTable extends Migration
     public function up()
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->text('how_to_use')->nullable();
+            if (!Schema::hasColumn('items', 'how_to_use')) {
+                $table->text('how_to_use')->nullable();
+            }
         });
     }
 

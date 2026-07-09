@@ -14,7 +14,9 @@ class AddSmsUrlToSettingsTable extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->text('sms_url')->nullable();
+            if (!Schema::hasColumn('settings', 'sms_url')) {
+                $table->text('sms_url')->nullable();
+            }
         });
     }
 
