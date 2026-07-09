@@ -74,7 +74,7 @@
 
                                                         <div class="form-group ">
                                                             <label for="sms_url">{{ __('Universal SMS API URL') }}</label>
-                                                            <input type="text" class="form-control" id="sms_url" name="sms_url" placeholder="{{ __('e.g., http://api.sms.com/send?to={number}&msg={message}') }}" value="{{ $setting->sms_url }}">
+                                                            <input type="text" class="form-control" id="sms_url" name="sms_url" placeholder="{{ __('e.g., http://api.sms.com/send?to={number}&msg={message}') }}" value="{{ $setting->sms_url ?? '' }}">
                                                             <small class="form-text text-muted">{{ __('Use {number} for the recipient phone number and {message} for the SMS content.') }}</small>
                                                         </div>
 
