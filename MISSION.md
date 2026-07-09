@@ -15,7 +15,8 @@ Local Docker environment successfully running. Catalog data has been cleared fro
 - Removed redundant "Manage FAQ" sidebar items from admin interfaces.
 - Simplified "Category Management" by removing image upload fields/previews from forms and tables.
 - Enabled "Featured Products" section on the homepage and populated it by updating product `is_type` attributes.
-- Integrated a full-width promotional banner ("Regenerative Medicine") into the "Our Current Highlight" section for Theme 2 using relative asset paths to resolve hostname issues.
+- Integrated a full-width promotional banner ("Regenerative Medicine") into the "Our Current Highlight" section for Theme 2.
+- Created a new "Highlight Banner" configuration tab in the Admin Panel to dynamically upload and replace the "Our Current Highlight" image without needing manual file uploads.
 
 **Tiered/Bulk Pricing:**
 
