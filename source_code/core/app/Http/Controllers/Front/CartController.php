@@ -43,6 +43,20 @@ class CartController extends Controller
     {
         
         $msg = $this->repository->store($request);
+
+        if($request->item_id){
+            $item = Item::find($request->item_id);
+            if($item){
+                \App\Helpers\FacebookCapiHelper::sendEvent('AddToCart', [
+                    'content_name' => $item->name,
+                    'content_ids' => [(string)$item->id],
+                    'content_type' => 'product',
+                    'value' => (float)$item->discount_price,
+                    'currency' => 'BDT'
+                ]);
+            }
+        }
+
         if($request->ajax()){
             return response()->json(['message' => $msg , 'qty' => count(Session::get('cart'))]);
         }
@@ -53,6 +67,20 @@ class CartController extends Controller
 	public function store(Request $request)
 	{
         $msg = $this->repository->store($request);
+
+        if($request->item_id){
+            $item = Item::find($request->item_id);
+            if($item){
+                \App\Helpers\FacebookCapiHelper::sendEvent('AddToCart', [
+                    'content_name' => $item->name,
+                    'content_ids' => [(string)$item->id],
+                    'content_type' => 'product',
+                    'value' => (float)$item->discount_price,
+                    'currency' => 'BDT'
+                ]);
+            }
+        }
+
         if(isset($request->addtocart)){
            Session::flash('success_message',__('Cart Added Successfully'));
            return back();

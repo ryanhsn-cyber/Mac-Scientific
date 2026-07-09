@@ -47,7 +47,7 @@ class SettingRepository
             $input['twilio_section'] = json_encode($input['twilio_section'],true);
         }
    
-        $setting_fields = ['is_attribute_search','is_range_search','is_shop','is_blog','is_campaign','is_brands','is_faq','is_contact','is_loader','recaptcha', 'is_google_analytics', 'is_google_adsense', 'is_facebook_pixel', 'is_facebook_messenger','is_privacy_trams','is_guest_checkout'];
+        $setting_fields = ['is_attribute_search','is_range_search','is_shop','is_blog','is_campaign','is_brands','is_faq','is_contact','is_loader','recaptcha', 'is_google_analytics', 'is_google_adsense', 'is_facebook_pixel', 'is_facebook_messenger','is_privacy_trams','is_guest_checkout', 'is_facebook_capi', 'is_facebook_capi_view_content', 'is_facebook_capi_add_to_cart', 'is_facebook_capi_purchase', 'is_facebook_capi_initiate_checkout'];
 
         foreach($setting_fields as $setting_field){
             if($request->has($setting_field)){

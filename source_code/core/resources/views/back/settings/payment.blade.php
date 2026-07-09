@@ -26,16 +26,7 @@
                             <div class="nav flex-column m-3 nav-pills nav-secondary" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
                                     <a class="nav-link active" data-toggle="pill" href="#cod">{{ __('Cash On Delivery') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#stripe">{{ __('Stripe') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#paypal">{{ __('Paypal') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#molly">{{ __('Mollie') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#paytm">{{ __('Paytm') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#razorpay">{{ __('Razorpay') }}</a>
                                     <a class="nav-link" data-toggle="pill" href="#sslcommerz">{{ __('SSL commerz') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#mercadopago">{{ __('Mercadopago') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#authorize">{{ __('Authorize.Net') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#paystack">{{ __('Paystack') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#flutterwave">{{ __('Flutterwave') }}</a>
                                     <a class="nav-link" data-toggle="pill" href="#bank">{{ __('Bank Transfer') }}</a>
 
                             </div>

@@ -452,3 +452,11 @@ span.cookie-consent__message p {
 .note-editable * {
   line-height: inherit;
 }
+
+.note-editable img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 10px auto !important;
+  clear: both !important;
+}

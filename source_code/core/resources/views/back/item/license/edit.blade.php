@@ -38,7 +38,7 @@
                         <input type="text" name="name" class="form-control item-name"
                             id="name"
                             placeholder="{{ __('Enter Name') }}"
-                            value="{{ $item->name }}" >
+                            value="{{ $item- required>name }}" >
                     </div>
 
                     <div class="form-group">
@@ -46,7 +46,7 @@
                         <input type="text" name="slug" class="form-control"
                             id="slug"
                             placeholder="{{ __('Enter Slug') }}"
-                            value="{{ $item->slug }}" >
+                            value="{{ $item- required>slug }}" >
                     </div>
 
                 </div>
@@ -211,7 +211,7 @@
                         <textarea name="details" id="details"
                             class="form-control text-editor"
                             rows="6"
-                            placeholder="{{ __('Enter Description') }}"
+                            placeholder="{{ __('Enter Description') }}" required
                             >{{$item->details}}</textarea>
                     </div>
 
@@ -313,7 +313,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="category_id">{{ __('Select Category') }} *</label>
-                        <select name="category_id" id="category_id" data-href="{{route('back.get.subcategory')}}" class="form-control" >
+                        <select name="category_id" id="category_id" data-href="{{route('back.get.subcategory')}}" class="form-control" required >
                             @foreach(DB::table('categories')->whereStatus(1)->get() as $cat)
                             <option value="{{ $cat->id }}" {{ $cat->id == $item->category_id ? 'selected' : '' }}>{{ $cat->name }}</option>
                             @endforeach
@@ -353,7 +353,7 @@
 
                     <div class="form-group">
                         <label for="tax_id">{{ __('Select Tax') }} *</label>
-                        <select name="tax_id" id="tax_id" class="form-control">
+                        <select name="tax_id" id="tax_id" class="form-control" required>
                             <option value="">{{__('Select One')}}</option>
                             @foreach(DB::table('taxes')->whereStatus(1)->get() as $tax)
                             <option value="{{ $tax->id }}" {{$item->tax_id == $tax->id ? 'selected' : ''}} >{{ $tax->name }}</option>
@@ -365,7 +365,7 @@
                         <label for="sku">{{ __('SKU') }} *</label>
                         <input type="text" name="sku" class="form-control"
                             id="sku" placeholder="{{ __('Enter SKU') }}"
-                            value="{{$item->sku}}" >
+                            value="{{$item- required>sku}}" >
                     </div>
                     <div class="form-group">
                         <label for="video">{{ __('Vido Link') }} </label>

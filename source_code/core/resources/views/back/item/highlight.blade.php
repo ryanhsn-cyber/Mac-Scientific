@@ -42,7 +42,7 @@
 
 									<div class="form-group">
 										<label for="is_type">{{ __('Select Type') }} *</label>
-										<select name="is_type" id="is_type" class="form-control" >
+										<select name="is_type" id="is_type" class="form-control" required >
 											<option value="undefine" {{$item->is_type == 'undefine' ? 'selected' : ''}}>{{ __('Undefine Product') }}</option>
 											<option value="new" {{$item->is_type == 'new' ? 'selected' : ''}} >{{ __('New Arrival') }}</option>
 											<option value="feature" {{$item->is_type == 'feature' ? 'selected' : ''}} >{{ __('Feature Product') }}</option>
@@ -57,7 +57,7 @@
 										<input type="text" name="date" class="form-control datepicker" id="datepicker"
 											id="slug"
 											placeholder="{{ __('Enter Date') }}"
-											value="{{ $item->date }}" >
+											value="{{ $item- required>date }}" >
 									</div>
 
 

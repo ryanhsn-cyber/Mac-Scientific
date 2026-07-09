@@ -9,6 +9,23 @@
 <meta name="description" content="{{$item->meta_description}}">
 @endsection
 
+@section('styleplugins')
+<style>
+    .product-landing-details img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block;
+        margin: 15px auto;
+        clear: both;
+    }
+    .product-landing-details {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="page-title">
     <div class="container">
@@ -96,32 +113,6 @@
             </div>
         </div>
 
-        @if($item->tier_prices)
-        <div class="tier-pricing-container mt-4 mb-2 py-3" style="border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb;">
-            <div class="d-flex flex-wrap align-items-center" style="gap: 15px 40px;">
-                @php
-                    $tiers = json_decode($item->tier_prices, true);
-                    if(is_array($tiers)) {
-                        usort($tiers, function($a, $b) {
-                            return $a['min_qty'] <=> $b['min_qty']; // ascending
-                        });
-                    }
-                @endphp
-                @if(is_array($tiers))
-                    @foreach($tiers as $index => $tier)
-                        @php
-                            $next_qty = isset($tiers[$index + 1]) ? ($tiers[$index + 1]['min_qty'] - 1) : null;
-                            $qty_range = $next_qty ? number_format($tier['min_qty']) . '-' . number_format($next_qty) : '&ge;' . number_format($tier['min_qty']);
-                        @endphp
-                        <div class="tier-block text-left" style="min-width: 100px;">
-                            <div class="tier-price font-weight-bold" style="font-size: 26px; color: #1a1a1a; line-height: 1.2; margin-bottom: 4px;">{{ PriceHelper::setCurrencyPrice($tier['price']) }}</div>
-                            <div class="tier-qty" style="font-size: 14px; color: #757575;">{!! $qty_range !!} pieces</div>
-                        </div>
-                    @endforeach
-                @endif
-            </div>
-        </div>
-        @endif
         
       </div>
 
@@ -169,10 +160,20 @@
                     <input type="hidden" value="{{PriceHelper::setCurrencyValue()}}" id="set_currency_val">
                     <input type="hidden" value="{{$setting->currency_direction}}" id="currency_direction">
                     <h4 class="mb-2 p-title-main">{{$item->name}}</h4>
-                    <div class="mb-3">
+                    <div class="mb-3 d-flex align-items-center">
                         <div class="rating-stars d-inline-block gmr-3">
                         {!!renderStarRating($item->reviews->avg('rating'))!!}
                         </div>
+                        @php
+                            $b_reviews = $item->reviews->count();
+                            $b_orders = \App\Models\Order::where('cart', 'like', '%'.$item->name.'%')->count();
+                            // Add a baseline of realistic demo orders if desired, but we will use actual DB count.
+                        @endphp
+                        <span class="text-muted mr-3" style="font-size: 14px;">
+                            (<a href="#details" class="text-muted">{{ $b_reviews }} {{ __('Reviews') }}</a>
+                            <span class="mx-1">|</span>
+                            {{ $b_orders }} {{ __('Orders') }})
+                        </span>
                         @if ($item->is_stock())
                             <span class="text-success  d-inline-block">{{__('In Stock')}}</span>
                         @else
@@ -213,6 +214,41 @@
                             @endif
                         @endforeach
                     </div>
+                    @if($item->tier_prices)
+                    <div class="tier-pricing-table mt-4 mb-3 table-responsive">
+                        @php
+                            $tiers = json_decode($item->tier_prices, true);
+                            if(is_array($tiers)) {
+                                usort($tiers, function($a, $b) {
+                                    return $a['min_qty'] <=> $b['min_qty']; // ascending
+                                });
+                            }
+                        @endphp
+                        @if(is_array($tiers) && count($tiers) > 0)
+                            <table class="table table-bordered table-sm mb-0">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th scope="col" style="font-weight: 600; font-size: 14px; color: #333;">Quantity (Pieces)</th>
+                                        <th scope="col" style="font-weight: 600; font-size: 14px; color: #333;">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($tiers as $index => $tier)
+                                        @php
+                                            $next_qty = isset($tiers[$index + 1]) ? ($tiers[$index + 1]['min_qty'] - 1) : null;
+                                            $qty_range = $next_qty ? number_format($tier['min_qty']) . ' - ' . number_format($next_qty) : '&ge; ' . number_format($tier['min_qty']);
+                                        @endphp
+                                        <tr>
+                                            <td style="font-size: 14px; color: #555; vertical-align: middle;">{!! $qty_range !!}</td>
+                                            <td class="font-weight-bold" style="font-size: 16px; color: #1a1a1a; vertical-align: middle;">{{ PriceHelper::setCurrencyPrice($tier['price']) }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @endif
+                    </div>
+                    @endif
+
                     <div class="row align-items-end pb-4">
                         <div class="col-sm-12">
                             @if ($item->item_type == 'normal')
@@ -226,8 +262,8 @@
                             <div class="p-action-button">
                               @if ($item->item_type != 'affiliate')
                                 @if ($item->is_stock())
-                                <button class="btn btn-primary m-0 a-t-c-mr" id="add_to_cart"><i class="icon-bag"></i><span>{{ __('কার্টে যোগ করুন') }}</span></button>
-                                <button class="btn btn-primary m-0" id="but_to_cart"><i class="icon-bag"></i><span>{{ __('এখুনি অর্ডার করুন') }}</span></button>
+                                <button class="btn btn-primary m-0 a-t-c-mr" id="add_to_cart"><i class="icon-bag"></i><span>{{ __('Add to Cart') }}</span></button>
+                                <button class="btn btn-primary m-0" id="but_to_cart"><i class="icon-bag"></i><span>{{ __('Order Now') }}</span></button>
                                 @else
                                     <button class="btn btn-primary m-0"><i class="icon-bag"></i><span>{{__('Out of stock')}}</span></button>
                                 @endif
@@ -489,7 +525,9 @@
                             <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($related)}}</div>
                             @endif
                             <div class="product-thumb">
-                                <img class="lazy" data-src="{{asset('assets/images/'.$related->thumbnail)}}" alt="Product">
+                                <a href="{{route('front.product',$related->slug)}}">
+<img class="lazy" data-src="{{asset('assets/images/'.$related->thumbnail)}}" alt="Product">
+</a>
                                 <div class="product-button-group">
                                     <a class="product-button wishlist_store" href="{{route('user.wishlist.store',$related->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                     <a class="product-button product_compare" href="javascript:;" data-target="{{route('fornt.compare.product',$related->id)}}" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>

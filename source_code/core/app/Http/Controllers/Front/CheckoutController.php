@@ -110,6 +110,19 @@ class CheckoutController extends Controller
         $data['shipping'] = $shipping;
         $data['tax'] = $total_tax;
         $data['payments'] = PaymentSetting::whereStatus(1)->get();
+
+        // Send Facebook CAPI InitiateCheckout Event
+        $content_ids = [];
+        foreach($cart as $key => $item){
+            $content_ids[] = (string)$key;
+        }
+        \App\Helpers\FacebookCapiHelper::sendEvent('InitiateCheckout', [
+            'content_ids' => $content_ids,
+            'content_type' => 'product',
+            'value' => (float)$total_amount,
+            'currency' => PriceHelper::setCurrencyName()
+        ]);
+
         return view('front.checkout.billing',$data);
 
     }
@@ -444,10 +457,30 @@ class CheckoutController extends Controller
             $order = Order::find($order_id);
             $cart = json_decode($order->cart, true);
             $setting = Setting::first();
+
+            // Send Facebook CAPI Purchase Event
+            $content_ids = [];
+            foreach($cart as $key => $item){
+                $content_ids[] = (string)$key;
+            }
+            
+            $userData = [];
+            if ($order->billing_email) $userData['em'] = hash('sha256', strtolower(trim($order->billing_email)));
+            if ($order->billing_phone) $userData['ph'] = hash('sha256', strtolower(trim($order->billing_phone)));
+            if ($order->billing_first_name) $userData['fn'] = hash('sha256', strtolower(trim($order->billing_first_name)));
+            if ($order->billing_last_name) $userData['ln'] = hash('sha256', strtolower(trim($order->billing_last_name)));
+            
+            \App\Helpers\FacebookCapiHelper::sendEvent('Purchase', [
+                'content_ids' => $content_ids,
+                'content_type' => 'product',
+                'value' => (float)PriceHelper::setConvertPrice($order->pay_amount),
+                'currency' => PriceHelper::setCurrencyName()
+            ], $userData);
+
             if($setting->is_twilio == 1){
                 // message
                 $sms = new SmsHelper();
-                $user_number = $order->user->phone;
+                $user_number = $order->user ? $order->user->phone : '';
                 if($user_number){
                     $sms->SendSms($user_number,"'purchase'");
                 }

@@ -570,7 +570,11 @@
                               @foreach($recentOrders as $data)
                               <tr>
                                   <td>
+                                      @if($data->user_id)
                                       <a href="{{route('back.user.show',$data->user_id)}}">{{ $data->user->displayName()}}</a>
+                                      @else
+                                      Guest
+                                      @endif
                                   </td>
                                   <td>
                                       <a href="{{route('back.order.invoice',$data->id)}}">{{ $data->transaction_number}}</a>

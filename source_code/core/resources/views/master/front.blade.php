@@ -748,5 +748,46 @@ body_theme4
     </script>
     @endif
 
+    <style>
+        .whatsapp-fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 35px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            z-index: 9999;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+        }
+        .whatsapp-fab:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+        .whatsapp-fab i {
+            margin-top: 0px;
+            margin-left: 1px;
+        }
+        @media (max-width: 767.98px) {
+            .whatsapp-fab {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 30px;
+            }
+        }
+    </style>
+    <a href="https://wa.me/8801410699221" class="whatsapp-fab" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
 </body>
 </html>

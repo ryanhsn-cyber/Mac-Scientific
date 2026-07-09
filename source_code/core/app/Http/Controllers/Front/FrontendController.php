@@ -296,6 +296,16 @@ class FrontendController extends Controller
 
         $item = Item::with('category')->whereStatus(1)->whereSlug($slug)->firstOrFail();
         $video = explode('=',$item->video);
+
+        // Send Facebook CAPI ViewContent Event
+        \App\Helpers\FacebookCapiHelper::sendEvent('ViewContent', [
+            'content_name' => $item->name,
+            'content_ids' => [(string)$item->id],
+            'content_type' => 'product',
+            'value' => (float)$item->discount_price,
+            'currency' => 'BDT' // Defaulting to BDT, can be customized
+        ]);
+
         return view('front.catalog.product',[
             'item'          => $item,
             'reviews'       => $item->reviews()->where('status',1)->paginate(3),

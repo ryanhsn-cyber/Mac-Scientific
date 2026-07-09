@@ -33,7 +33,7 @@
 
 									<div class="form-group">
                                         <label for="attribute_id">{{ __('Attribute') }} *</label>
-                                        <select name="attribute_id" class="form-control" id="attribute_id" >
+                                        <select name="attribute_id" class="form-control" id="attribute_id" required >
                                             <option value="">{{ __('Select Attribute') }}</option>
                                             @foreach($attributes as $attribute)
                                             <option value="{{ $attribute->id }}" {{ $attribute->id == old('attribute_id') ? 'selected' : '' }}>{{ $attribute->name }}</option>
@@ -44,13 +44,13 @@
 									<div class="form-group">
 										<label for="attr_name">{{ __('Name') }} *</label>
 										<input type="text" name="name" class="form-control" id="attr_name"
-											placeholder="{{ __('Enter Name') }}" value="{{ old('name') }}" >
+											placeholder="{{ __('Enter Name') }}" value="{{ old('name') }}" required >
 									</div>
 
 									<div class="form-group">
 										<label for="stock">{{ __('Stock') }} *</label>
 										<input type="text" name="stock" class="form-control" id="stock"
-											placeholder="{{ __('Enter Stock') }}" value="{{ old('stock') }}" >
+											placeholder="{{ __('Enter Stock') }}" value="{{ old('stock') }}" required >
                                             <label for="unlimited">
                                                 <input type="checkbox" class="my-2" id="unlimited">
                                             {{__('Unlimited Stock')}}

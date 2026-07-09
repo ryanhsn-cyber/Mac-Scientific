@@ -36,7 +36,7 @@
 									<div class="form-group">
 										<label for="attr_name">{{ __('Name') }} *</label>
 										<input type="text" name="name" class="form-control" id="attr_name"
-											placeholder="{{ __('Enter Name') }}" value="{{ $attribute->name }}" >
+											placeholder="{{ __('Enter Name') }}" value="{{ $attribute- required>name }}" >
 									</div>
                                     <input type="hidden" id="attr_keyword" name="keyword" value="{{ $attribute->keyword }}">
                                     <input type="hidden" name="item_id" value="{{ $item->id }}">

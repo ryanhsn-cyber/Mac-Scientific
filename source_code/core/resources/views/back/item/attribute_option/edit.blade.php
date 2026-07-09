@@ -35,7 +35,7 @@
 
 									<div class="form-group">
                                         <label for="attribute_id">{{ __('Attribute') }} *</label>
-                                        <select name="attribute_id" class="form-control" id="attribute_id" >
+                                        <select name="attribute_id" class="form-control" id="attribute_id" required >
                                             <option value="">{{ __('Select Attribute') }}</option>
                                             @foreach($attributes as $attribute)
                                             <option value="{{ $attribute->id }}" {{ $attribute->id == $option->attribute_id ? 'selected' : '' }}>{{ $attribute->name }}</option>
@@ -46,13 +46,13 @@
 									<div class="form-group">
 										<label for="attr_name">{{ __('Name') }} *</label>
 										<input type="text" name="name" class="form-control" id="attr_name"
-											placeholder="{{ __('Enter Name') }}" value="{{ $option->name }}" >
+											placeholder="{{ __('Enter Name') }}" value="{{ $option- required>name }}" >
 									</div>
 
                                     <div class="form-group">
 										<label for="stock">{{ __('Stock') }} *</label>
 										<input type="text" name="stock" class="form-control" id="stock"
-											placeholder="{{ __('Enter Stock') }}" value="{{ $option->stock }}" >
+											placeholder="{{ __('Enter Stock') }}" value="{{ $option- required>stock }}" >
                                             <label for="unlimited">
                                                 <input type="checkbox" {{$option->stock == 'unlimited' ? 'checked' : ''}} class="my-2" id="unlimited">
                                             {{__('Unlimited Stock')}}

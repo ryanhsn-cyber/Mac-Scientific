@@ -127,6 +127,14 @@ class Setting extends Model
         'store_reorder_rate',
         'steadfast_api_key',
         'steadfast_secret_key',
+        'facebook_pixel_id',
+        'facebook_capi_token',
+        'facebook_capi_test_code',
+        'is_facebook_capi',
+        'is_facebook_capi_view_content',
+        'is_facebook_capi_add_to_cart',
+        'is_facebook_capi_purchase',
+        'is_facebook_capi_initiate_checkout',
     ];
 
     public $timestamps = false;

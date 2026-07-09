@@ -35,19 +35,19 @@
                         <label for="name">{{ __('Name') }} *</label>
                         <input type="text" name="name" class="form-control item-name"
                             id="name" placeholder="{{ __('Enter Name') }}"
-                            value="{{ old('name') }}" >
+                            value="{{ old('name') }}" required >
                     </div>
                     <div class="form-group">
                         <label for="affiliate__link">{{ __('Affiliate Link') }} *</label>
                         <input type="text" name="affiliate_link" class="form-control"
                             id="affiliate__link" placeholder="{{ __('Enter Affiliate Link') }}"
-                            value="{{ old('name') }}" >
+                            value="{{ old('name') }}" required >
                     </div>
                     <div class="form-group">
                         <label for="slug">{{ __('Slug') }} *</label>
                         <input type="text" name="slug" class="form-control"
                             id="slug" placeholder="{{ __('Enter Slug') }}"
-                            value="{{ old('slug') }}" >
+                            value="{{ old('slug') }}" required >
                     </div>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                         <textarea name="details" id="details"
                             class="form-control text-editor"
                             rows="6"
-                            placeholder="{{ __('Enter Description') }}"
+                            placeholder="{{ __('Enter Description') }}" required
                             >{{ old('details') }}</textarea>
                     </div>
 
@@ -211,7 +211,7 @@
 
                     <div class="form-group">
                         <label for="category_id">{{ __('Select Category') }} *</label>
-                        <select name="category_id" id="category_id" data-href="{{route('back.get.subcategory')}}" class="form-control" >
+                        <select name="category_id" id="category_id" data-href="{{route('back.get.subcategory')}}" class="form-control" required >
                             <option value="" selected>{{__('Select One')}}</option>
                             @foreach(DB::table('categories')->whereStatus(1)->get() as $cat)
                             <option value="{{ $cat->id }}">{{ $cat->name }}</option>
