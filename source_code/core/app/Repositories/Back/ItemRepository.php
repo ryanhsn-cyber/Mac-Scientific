@@ -35,7 +35,16 @@ class ItemRepository
         $input['previous_price'] = $request->previous_price / $curr->value;
 
         if($request->has('meta_keywords')){
-            $input['meta_keywords'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->meta_keywords);
+            $decodedMeta = json_decode($request->meta_keywords, true);
+            if(is_array($decodedMeta)) {
+                $metaArray = [];
+                foreach($decodedMeta as $m) {
+                    if(isset($m['value'])) $metaArray[] = $m['value'];
+                }
+                $input['meta_keywords'] = implode(',', $metaArray);
+            } else {
+                $input['meta_keywords'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->meta_keywords);
+            }
         }
 
         if($request->has('is_social')){
@@ -48,11 +57,29 @@ class ItemRepository
         }
 
         if($request->has('tags')){
-            $input['tags'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->tags);
+            $decodedTags = json_decode($request->tags, true);
+            if(is_array($decodedTags)) {
+                $tagsArray = [];
+                foreach($decodedTags as $t) {
+                    if(isset($t['value'])) $tagsArray[] = $t['value'];
+                }
+                $input['tags'] = implode(',', $tagsArray);
+            } else {
+                $input['tags'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->tags);
+            }
         }
 
         if($request->has('features')){
-            $input['features'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->features);
+            $decodedFeatures = json_decode($request->features, true);
+            if(is_array($decodedFeatures)) {
+                $featuresArray = [];
+                foreach($decodedFeatures as $f) {
+                    if(isset($f['value'])) $featuresArray[] = $f['value'];
+                }
+                $input['features'] = implode(',', $featuresArray);
+            } else {
+                $input['features'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->features);
+            }
         }
 
         if($request->has('is_specification')){
@@ -139,7 +166,16 @@ class ItemRepository
 
 
         if($request->has('meta_keywords')){
-            $input['meta_keywords'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->meta_keywords);
+            $decodedMeta = json_decode($request->meta_keywords, true);
+            if(is_array($decodedMeta)) {
+                $metaArray = [];
+                foreach($decodedMeta as $m) {
+                    if(isset($m['value'])) $metaArray[] = $m['value'];
+                }
+                $input['meta_keywords'] = implode(',', $metaArray);
+            } else {
+                $input['meta_keywords'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->meta_keywords);
+            }
         }
 
         $curr = Currency::where('is_default',1)->first();
@@ -157,11 +193,29 @@ class ItemRepository
         }
 
         if($request->has('tags')){
-            $input['tags'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->tags);
+            $decodedTags = json_decode($request->tags, true);
+            if(is_array($decodedTags)) {
+                $tagsArray = [];
+                foreach($decodedTags as $t) {
+                    if(isset($t['value'])) $tagsArray[] = $t['value'];
+                }
+                $input['tags'] = implode(',', $tagsArray);
+            } else {
+                $input['tags'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->tags);
+            }
         }
 
         if($request->has('features')){
-            $input['features'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->features);
+            $decodedFeatures = json_decode($request->features, true);
+            if(is_array($decodedFeatures)) {
+                $featuresArray = [];
+                foreach($decodedFeatures as $f) {
+                    if(isset($f['value'])) $featuresArray[] = $f['value'];
+                }
+                $input['features'] = implode(',', $featuresArray);
+            } else {
+                $input['features'] = str_replace(["value", "{", "}", "[","]",":","\""], '', $request->features);
+            }
         }
 
         if($request->has('is_specification')){

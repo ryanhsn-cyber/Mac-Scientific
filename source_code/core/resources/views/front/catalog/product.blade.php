@@ -372,7 +372,18 @@
                         <h6 class="font-weight-bold mb-3" style="color: #1a1a1a; font-size: 16px;">Key Features</h6>
                         <div class="row">
                             @if($item->features)
-                                @foreach(explode(',', $item->features) as $feature)
+                                @php
+                                    $featuresArray = [];
+                                    $decodedFeatures = json_decode($item->features, true);
+                                    if(is_array($decodedFeatures)) {
+                                        foreach($decodedFeatures as $f) {
+                                            if(isset($f['value'])) $featuresArray[] = $f['value'];
+                                        }
+                                    } else {
+                                        $featuresArray = explode(',', $item->features);
+                                    }
+                                @endphp
+                                @foreach($featuresArray as $feature)
                                 <div class="col-6 mb-2 d-flex align-items-center">
                                     <i class="fas fa-check-circle text-success mr-2"></i> <span style="font-size: 13px; font-weight: 500;">{{ trim($feature) }}</span>
                                 </div>
@@ -544,11 +555,22 @@
                                 </div>
                                 <div class="pt-1 mb-1"><span class="text-medium">{{__('Tags')}}:</span>
                                     @if($item->tags)
-                                    @foreach (explode(',',$item->tags) as $tag)
+                                    @php
+                                        $tagsArray = [];
+                                        $decodedTags = json_decode($item->tags, true);
+                                        if(is_array($decodedTags)) {
+                                            foreach($decodedTags as $t) {
+                                                if(isset($t['value'])) $tagsArray[] = $t['value'];
+                                            }
+                                        } else {
+                                            $tagsArray = explode(',', $item->tags);
+                                        }
+                                    @endphp
+                                    @foreach ($tagsArray as $tag)
                                     @if ($loop->last)
-                                    <a href="{{route('front.catalog').'?tag='.$tag}}">{{$tag}}</a>
+                                    <a href="{{route('front.catalog').'?tag='.$tag}}">{{trim($tag)}}</a>
                                     @else
-                                    <a href="{{route('front.catalog').'?tag='.$tag}}">{{$tag}}</a>,
+                                    <a href="{{route('front.catalog').'?tag='.$tag}}">{{trim($tag)}}</a>,
                                     @endif
                                     @endforeach
                                     @endif
