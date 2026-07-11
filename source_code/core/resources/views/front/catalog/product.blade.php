@@ -415,11 +415,11 @@
                     <!-- Payment Methods -->
                     <div class="payment-methods p-3 mb-4" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fff;">
                         <div class="font-weight-bold text-dark mb-3" style="font-size: 13px;">Payment Methods</div>
-                        <div class="d-flex align-items-center justify-content-center flex-wrap" style="gap: 15px;">
+                        <div class="d-flex align-items-center justify-content-center flex-wrap" style="gap: 8px;">
                             <img class="d-block" src="{{ $setting->footer_gateway_img ? asset('assets/images/'.$setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}" style="max-height: 35px; object-fit: contain;">
-                            <div class="d-flex align-items-center" style="border: 1px solid #28a745; padding: 5px 12px; border-radius: 6px; background-color: #f0fff4; color: #28a745; height: 35px;">
-                                <i class="fas fa-hand-holding-usd" style="font-size: 18px; margin-right: 8px;"></i>
-                                <span style="font-size: 12px; font-weight: 600; text-transform: uppercase;">Cash on Delivery</span>
+                            <div class="d-flex align-items-center justify-content-center" style="border: 1px solid #ddd; border-radius: 4px; background-color: #fff; height: 35px; padding: 0 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                                <i class="fas fa-hand-holding-usd text-success" style="font-size: 16px; margin-right: 6px;"></i>
+                                <span style="font-size: 11px; font-weight: 700; color: #555;">COD</span>
                             </div>
                         </div>
                     </div>
