@@ -38,6 +38,7 @@ Cleaned up the `[null]` corrupted strings in the database, fixed the 404 jQuery 
 
 **Product Detail Page Refinements:**
 - Moved the FAQ and Rating summary (Customer Reviews snapshot) from the top-left product gallery section down into the main Reviews section, displaying them side-by-side.
+- Added an "Order via WhatsApp" button on the product details page directly beneath the "Add to Cart" and "Buy Now" buttons.
 - Re-aligned the "Add to Cart" and "Buy Now" buttons vertically for a cleaner interface.
 - Removed the mandatory tax validation from the admin product creation/edit forms.
 - Replaced the duplicate "Product Tags" Key Features rendering with a dedicated `features` column in the database and a new "Key Features" editor field in the Admin Panel.
@@ -86,4 +87,5 @@ N/A
 - [x] Display a bulk pricing table on the frontend product details page.
 - [x] Integrate Steadfast Courier API for parcel dispatching and tracking.
 - [x] Moved the FAQ and Rating system into the main review section on the product details page.
+- [x] Added "Order via WhatsApp" functionality directly on the product view page.
 - [x] Determine user requirements for further development or production deployment (Deployed to cPanel).
