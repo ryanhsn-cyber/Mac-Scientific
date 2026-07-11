@@ -348,6 +348,12 @@
                             @endif
 
                             <div class="d-flex flex-column flex-grow-1" style="gap: 10px;">
+                                @php
+                                    $wa_phone = preg_replace('/[^0-9]/', '', $setting->footer_phone);
+                                    if(substr($wa_phone, 0, 2) === '01') {
+                                        $wa_phone = '88' . $wa_phone;
+                                    }
+                                @endphp
                                 @if ($item->item_type != 'affiliate')
                                     @if ($item->is_stock())
                                     <button class="btn m-0 w-100 d-flex align-items-center justify-content-center" id="add_to_cart" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
@@ -356,10 +362,16 @@
                                     <button class="btn m-0 w-100 d-flex align-items-center justify-content-center" id="but_to_cart" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
                                         <i class="fas fa-bolt mr-2"></i><span>Buy Now</span>
                                     </button>
+                                    <a href="https://wa.me/{{ $wa_phone }}?text={{ urlencode('Hello, I want to order this product: ' . $item->name . ' - ' . route('front.product', $item->slug)) }}" target="_blank" class="btn m-0 w-100 d-flex align-items-center justify-content-center" style="background-color: #25D366; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
+                                        <i class="fab fa-whatsapp mr-2" style="font-size: 18px;"></i><span style="font-size: 15px;">Order via WhatsApp</span>
+                                    </a>
                                     @else
                                     <button class="btn btn-secondary m-0 w-100 d-flex align-items-center justify-content-center" style="height: 44px; font-weight: 600; border-radius: 6px;" disabled>
                                         <i class="fas fa-shopping-cart mr-2"></i><span>Out of stock</span>
                                     </button>
+                                    <a href="https://wa.me/{{ $wa_phone }}?text={{ urlencode('Hello, is this product available? ' . $item->name . ' - ' . route('front.product', $item->slug)) }}" target="_blank" class="btn m-0 w-100 d-flex align-items-center justify-content-center" style="background-color: #25D366; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
+                                        <i class="fab fa-whatsapp mr-2" style="font-size: 18px;"></i><span style="font-size: 15px;">Inquire via WhatsApp</span>
+                                    </a>
                                     @endif
                                 @else
                                     <a href="{{$item->affiliate_link}}" target="_blank" class="btn m-0 w-100 d-flex align-items-center justify-content-center" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px;">
