@@ -349,10 +349,7 @@
 
                             <div class="d-flex flex-column flex-grow-1" style="gap: 10px;">
                                 @php
-                                    $wa_phone = preg_replace('/[^0-9]/', '', $setting->footer_phone);
-                                    if(substr($wa_phone, 0, 2) === '01') {
-                                        $wa_phone = '88' . $wa_phone;
-                                    }
+                                    $wa_phone = '8801410699221';
                                 @endphp
                                 @if ($item->item_type != 'affiliate')
                                     @if ($item->is_stock())
