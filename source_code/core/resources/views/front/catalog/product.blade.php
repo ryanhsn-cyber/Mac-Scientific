@@ -517,71 +517,70 @@
                     <h6 class="font-weight-bold mb-3" style="color: #003399; font-size: 15px;">Frequently Asked Questions</h6>
                     <div class="accordion" id="faqAccordion">
                         <!-- FAQ Item 1 -->
-                        <div class="card border-0 mb-1">
-                            <div class="card-header p-0 bg-transparent border-0" id="headingOne">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 13px; font-weight: 500;">
+                        <div class="accordion-item border-0 mb-1" style="border: 1px solid #f1f1f1 !important; border-radius: 6px; overflow: hidden;">
+                            <h2 class="accordion-header" id="headingOne" style="margin: 0;">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 14px; font-weight: 600; padding: 12px 15px; color: #003399; background-color: #f8f9fa; box-shadow: none;">
                                     Is this suitable for PRP or Exosome therapy?
-                                    <i class="fas fa-plus" style="color: #003399;"></i>
                                 </button>
-                            </div>
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body p-3 text-muted" style="font-size: 13.5px; background-color: #fff;">
                                     Yes, it is highly suitable for both PRP and Exosome therapies, helping active ingredients penetrate deeply.
                                 </div>
                             </div>
                         </div>
+
                         <!-- FAQ Item 2 -->
-                        <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
-                            <div class="card-header p-0 bg-transparent border-0" id="headingTwo">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 13px; font-weight: 500;">
+                        <div class="accordion-item border-0 mb-1" style="border: 1px solid #f1f1f1 !important; border-radius: 6px; overflow: hidden;">
+                            <h2 class="accordion-header" id="headingTwo" style="margin: 0;">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 14px; font-weight: 600; padding: 12px 15px; color: #003399; background-color: #f8f9fa; box-shadow: none;">
                                     How many speed levels are available?
-                                    <i class="fas fa-plus" style="color: #003399;"></i>
                                 </button>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body p-3 text-muted" style="font-size: 13.5px; background-color: #fff;">
                                     It comes with 5 adjustable speed levels for customized treatments.
                                 </div>
                             </div>
                         </div>
+
                         <!-- FAQ Item 3 -->
-                        <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
-                            <div class="card-header p-0 bg-transparent border-0" id="headingThree">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size: 13px; font-weight: 500;">
+                        <div class="accordion-item border-0 mb-1" style="border: 1px solid #f1f1f1 !important; border-radius: 6px; overflow: hidden;">
+                            <h2 class="accordion-header" id="headingThree" style="margin: 0;">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size: 14px; font-weight: 600; padding: 12px 15px; color: #003399; background-color: #f8f9fa; box-shadow: none;">
                                     Is it rechargeable?
-                                    <i class="fas fa-plus" style="color: #003399;"></i>
                                 </button>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body p-3 text-muted" style="font-size: 13.5px; background-color: #fff;">
                                     Yes, it features a built-in rechargeable battery for cordless operation.
                                 </div>
                             </div>
                         </div>
+
                         <!-- FAQ Item 4 -->
-                        <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
-                            <div class="card-header p-0 bg-transparent border-0" id="headingFour">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="font-size: 13px; font-weight: 500;">
+                        <div class="accordion-item border-0 mb-1" style="border: 1px solid #f1f1f1 !important; border-radius: 6px; overflow: hidden;">
+                            <h2 class="accordion-header" id="headingFour" style="margin: 0;">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="font-size: 14px; font-weight: 600; padding: 12px 15px; color: #003399; background-color: #f8f9fa; box-shadow: none;">
                                     How do I clean and sterilize the pen?
-                                    <i class="fas fa-plus" style="color: #003399;"></i>
                                 </button>
-                            </div>
-                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
-                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body p-3 text-muted" style="font-size: 13.5px; background-color: #fff;">
                                     Wipe the pen body with alcohol. The cartridges are single-use and should be discarded safely.
                                 </div>
                             </div>
                         </div>
+
                         <!-- FAQ Item 5 -->
-                        <div class="card border-0" style="border-top: 1px solid #f1f1f1 !important;">
-                            <div class="card-header p-0 bg-transparent border-0" id="headingFive">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="font-size: 13px; font-weight: 500;">
+                        <div class="accordion-item border-0" style="border: 1px solid #f1f1f1 !important; border-radius: 6px; overflow: hidden;">
+                            <h2 class="accordion-header" id="headingFive" style="margin: 0;">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="font-size: 14px; font-weight: 600; padding: 12px 15px; color: #003399; background-color: #f8f9fa; box-shadow: none;">
                                     What is the warranty?
-                                    <i class="fas fa-plus" style="color: #003399;"></i>
                                 </button>
-                            </div>
-                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
-                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body p-3 text-muted" style="font-size: 13.5px; background-color: #fff;">
                                     We provide a 1-year warranty covering manufacturing defects.
                                 </div>
                             </div>
