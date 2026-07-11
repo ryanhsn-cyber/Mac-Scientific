@@ -37,6 +37,7 @@ Local Docker environment successfully running. Catalog data has been cleared fro
 Cleaned up the `[null]` corrupted strings in the database, fixed the 404 jQuery asset reference error in `back-login.blade.php`, and resolved the 500 Internal Server Error on the frontend product detail page and product comparison page by removing legacy `json_decode` references on HTML specifications. Fixed "Undefined property: stdClass::$is_facebook_capi" error on the admin system settings page by introducing null coalescing operators (`??`) to gracefully handle missing database columns prior to running migrations.
 
 **Product Detail Page Refinements:**
+
 - Moved the FAQ and Rating summary (Customer Reviews snapshot) from the top-left product gallery section down into the main Reviews section, displaying them side-by-side.
 - Added an "Order via WhatsApp" button on the product details page directly beneath the "Add to Cart" and "Buy Now" buttons.
 - Re-aligned the "Add to Cart" and "Buy Now" buttons vertically for a cleaner interface.
