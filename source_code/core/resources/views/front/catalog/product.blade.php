@@ -113,132 +113,6 @@
             </div>
         </div>
 
-        <!-- FAQ & Reviews Feature Section -->
-        <div class="row mt-4 mb-2">
-            <!-- FAQ Section -->
-            <div class="col-12 mb-4">
-                <div class="p-3" style="border: 1px solid #e0e0e0; border-radius: 8px; background: #fff;">
-                    <h6 class="font-weight-bold mb-3" style="color: #003399; font-size: 15px;">Frequently Asked Questions</h6>
-                    <div class="accordion" id="faqAccordion">
-                        <!-- FAQ Item 1 -->
-                        <div class="card border-0 mb-1">
-                            <div class="card-header p-0 bg-transparent border-0" id="headingOne">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 13px; font-weight: 500;">
-                                    Is this suitable for PRP or Exosome therapy?
-                                    <i class="fas fa-plus" style="color: #003399;"></i>
-                                </button>
-                            </div>
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#faqAccordion">
-                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
-                                    Yes, it is highly suitable for both PRP and Exosome therapies, helping active ingredients penetrate deeply.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ Item 2 -->
-                        <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
-                            <div class="card-header p-0 bg-transparent border-0" id="headingTwo">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 13px; font-weight: 500;">
-                                    How many speed levels are available?
-                                    <i class="fas fa-plus" style="color: #003399;"></i>
-                                </button>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
-                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
-                                    It comes with 5 adjustable speed levels for customized treatments.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ Item 3 -->
-                        <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
-                            <div class="card-header p-0 bg-transparent border-0" id="headingThree">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size: 13px; font-weight: 500;">
-                                    Is it rechargeable?
-                                    <i class="fas fa-plus" style="color: #003399;"></i>
-                                </button>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
-                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
-                                    Yes, it features a built-in rechargeable battery for cordless operation.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ Item 4 -->
-                        <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
-                            <div class="card-header p-0 bg-transparent border-0" id="headingFour">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="font-size: 13px; font-weight: 500;">
-                                    How do I clean and sterilize the pen?
-                                    <i class="fas fa-plus" style="color: #003399;"></i>
-                                </button>
-                            </div>
-                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqAccordion">
-                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
-                                    Wipe the pen body with alcohol. The cartridges are single-use and should be discarded safely.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ Item 5 -->
-                        <div class="card border-0" style="border-top: 1px solid #f1f1f1 !important;">
-                            <div class="card-header p-0 bg-transparent border-0" id="headingFive">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="font-size: 13px; font-weight: 500;">
-                                    What is the warranty?
-                                    <i class="fas fa-plus" style="color: #003399;"></i>
-                                </button>
-                            </div>
-                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqAccordion">
-                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
-                                    We provide a 1-year warranty covering manufacturing defects.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Customer Reviews Section -->
-            <div class="col-12 mb-3">
-                <div class="p-4 d-flex flex-column" style="border: 1px solid #e0e0e0; border-radius: 8px; background: #fff;">
-                    <h6 class="font-weight-bold mb-4" style="color: #003399; font-size: 16px;">Customer Reviews</h6>
-                    
-                    <div class="d-flex mb-4 align-items-center">
-                        <div class="mr-4 text-center pr-4" style="border-right: 1px solid #f1f1f1;">
-                            <h2 class="font-weight-bold text-dark mb-1" style="font-size: 48px; line-height: 1;">{{ number_format($item->reviews->avg('rating') ?: 0, 1) }}</h2>
-                            <div class="rating-stars" style="color: #ffb800; font-size: 16px; margin-bottom: 5px;">
-                                {!!renderStarRating($item->reviews->avg('rating'))!!}
-                            </div>
-                            <div class="text-dark font-weight-bold" style="font-size: 13px;">{{ $item->reviews->count() }} Reviews</div>
-                        </div>
-                        <div class="flex-grow-1">
-                            @for($i = 5; $i >= 1; $i--)
-                                @php
-                                    $count = $item->reviews->where('status',1)->where('rating',$i)->count();
-                                    $total = $item->reviews->where('status',1)->count() ?: 1;
-                                    $percent = round(($count / $total) * 100);
-                                @endphp
-                                <div class="d-flex align-items-center mb-2" style="font-size: 12px;">
-                                    <span class="text-dark font-weight-bold" style="width: 20px;">{{ $i }} <i class="fas fa-star" style="color: #ffb800; font-size: 10px;"></i></span>
-                                    <div class="progress mx-3 flex-grow-1" style="height: 8px; border-radius: 4px; background-color: #f1f1f1;">
-                                        <div class="progress-bar" role="progressbar" style="width: {{ $percent }}%; border-radius: 4px; background-color: #ffb800;" aria-valuenow="{{ $percent }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span style="width: 35px; text-align: right; color: #555; font-weight: 600;">{{ $percent }}%</span>
-                                    <span style="width: 30px; text-align: right; color: #999;">({{ $count }})</span>
-                                </div>
-                            @endfor
-                        </div>
-                    </div>
-                    
-                    @if (Auth::check())
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#leaveReview" class="btn btn-outline-primary btn-block py-2 mt-auto" style="border-radius: 6px; font-size: 14px; font-weight: 600; border-color: #003399; color: #003399; background: transparent;">
-                            <i class="far fa-edit mr-1"></i> {{ $item->reviews->count() > 0 ? 'Write a review' : 'Be the first to review this product' }}
-                        </a>
-                    @else
-                        <a href="{{ route('user.login') }}" class="btn btn-outline-primary btn-block py-2 mt-auto" style="border-radius: 6px; font-size: 14px; font-weight: 600; border-color: #003399; color: #003399; background: transparent;">
-                            <i class="fas fa-sign-in-alt mr-1"></i> Login to write a review
-                        </a>
-                    @endif
-                </div>
-            </div>
-        </div>
-
         
       </div>
 
@@ -648,6 +522,131 @@
 
   <!-- Reviews-->
   <div class="container  review-area">
+        <!-- FAQ & Reviews Feature Section -->
+        <div class="row mt-4 mb-4">
+            <!-- Customer Reviews Section -->
+            <div class="col-md-6 mb-3">
+                <div class="p-4 d-flex flex-column h-100" style="border: 1px solid #e0e0e0; border-radius: 8px; background: #fff;">
+                    <h6 class="font-weight-bold mb-4" style="color: #003399; font-size: 16px;">Customer Reviews</h6>
+                    
+                    <div class="d-flex mb-4 align-items-center">
+                        <div class="mr-4 text-center pr-4" style="border-right: 1px solid #f1f1f1;">
+                            <h2 class="font-weight-bold text-dark mb-1" style="font-size: 48px; line-height: 1;">{{ number_format($item->reviews->avg('rating') ?: 0, 1) }}</h2>
+                            <div class="rating-stars" style="color: #ffb800; font-size: 16px; margin-bottom: 5px;">
+                                {!!renderStarRating($item->reviews->avg('rating'))!!}
+                            </div>
+                            <div class="text-dark font-weight-bold" style="font-size: 13px;">{{ $item->reviews->count() }} Reviews</div>
+                        </div>
+                        <div class="flex-grow-1">
+                            @for($i = 5; $i >= 1; $i--)
+                                @php
+                                    $count = $item->reviews->where('status',1)->where('rating',$i)->count();
+                                    $total = $item->reviews->where('status',1)->count() ?: 1;
+                                    $percent = round(($count / $total) * 100);
+                                @endphp
+                                <div class="d-flex align-items-center mb-2" style="font-size: 12px;">
+                                    <span class="text-dark font-weight-bold" style="width: 20px;">{{ $i }} <i class="fas fa-star" style="color: #ffb800; font-size: 10px;"></i></span>
+                                    <div class="progress mx-3 flex-grow-1" style="height: 8px; border-radius: 4px; background-color: #f1f1f1;">
+                                        <div class="progress-bar" role="progressbar" style="width: {{ $percent }}%; border-radius: 4px; background-color: #ffb800;" aria-valuenow="{{ $percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span style="width: 35px; text-align: right; color: #555; font-weight: 600;">{{ $percent }}%</span>
+                                    <span style="width: 30px; text-align: right; color: #999;">({{ $count }})</span>
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
+                    
+                    @if (Auth::check())
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#leaveReview" class="btn btn-outline-primary btn-block py-2 mt-auto" style="border-radius: 6px; font-size: 14px; font-weight: 600; border-color: #003399; color: #003399; background: transparent;">
+                            <i class="far fa-edit mr-1"></i> {{ $item->reviews->count() > 0 ? 'Write a review' : 'Be the first to review this product' }}
+                        </a>
+                    @else
+                        <a href="{{ route('user.login') }}" class="btn btn-outline-primary btn-block py-2 mt-auto" style="border-radius: 6px; font-size: 14px; font-weight: 600; border-color: #003399; color: #003399; background: transparent;">
+                            <i class="fas fa-sign-in-alt mr-1"></i> Login to write a review
+                        </a>
+                    @endif
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="col-md-6 mb-3">
+                <div class="p-3 h-100" style="border: 1px solid #e0e0e0; border-radius: 8px; background: #fff;">
+                    <h6 class="font-weight-bold mb-3" style="color: #003399; font-size: 15px;">Frequently Asked Questions</h6>
+                    <div class="accordion" id="faqAccordion">
+                        <!-- FAQ Item 1 -->
+                        <div class="card border-0 mb-1">
+                            <div class="card-header p-0 bg-transparent border-0" id="headingOne">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 13px; font-weight: 500;">
+                                    Is this suitable for PRP or Exosome therapy?
+                                    <i class="fas fa-plus" style="color: #003399;"></i>
+                                </button>
+                            </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                                    Yes, it is highly suitable for both PRP and Exosome therapies, helping active ingredients penetrate deeply.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Item 2 -->
+                        <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
+                            <div class="card-header p-0 bg-transparent border-0" id="headingTwo">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 13px; font-weight: 500;">
+                                    How many speed levels are available?
+                                    <i class="fas fa-plus" style="color: #003399;"></i>
+                                </button>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                                    It comes with 5 adjustable speed levels for customized treatments.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Item 3 -->
+                        <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
+                            <div class="card-header p-0 bg-transparent border-0" id="headingThree">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size: 13px; font-weight: 500;">
+                                    Is it rechargeable?
+                                    <i class="fas fa-plus" style="color: #003399;"></i>
+                                </button>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                                    Yes, it features a built-in rechargeable battery for cordless operation.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Item 4 -->
+                        <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
+                            <div class="card-header p-0 bg-transparent border-0" id="headingFour">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="font-size: 13px; font-weight: 500;">
+                                    How do I clean and sterilize the pen?
+                                    <i class="fas fa-plus" style="color: #003399;"></i>
+                                </button>
+                            </div>
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqAccordion">
+                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                                    Wipe the pen body with alcohol. The cartridges are single-use and should be discarded safely.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Item 5 -->
+                        <div class="card border-0" style="border-top: 1px solid #f1f1f1 !important;">
+                            <div class="card-header p-0 bg-transparent border-0" id="headingFive">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="font-size: 13px; font-weight: 500;">
+                                    What is the warranty?
+                                    <i class="fas fa-plus" style="color: #003399;"></i>
+                                </button>
+                            </div>
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqAccordion">
+                                <div class="card-body p-2 text-muted" style="font-size: 13px;">
+                                    We provide a 1-year warranty covering manufacturing defects.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="section-title">
