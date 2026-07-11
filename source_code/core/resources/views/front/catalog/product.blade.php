@@ -14,14 +14,20 @@
     .product-landing-details img {
         max-width: 100% !important;
         height: auto !important;
-        display: block;
-        margin: 15px auto;
-        clear: both;
+        display: block !important;
+        margin: 15px auto !important;
+        clear: both !important;
+        float: none !important;
     }
     .product-landing-details {
         overflow-wrap: break-word;
         word-wrap: break-word;
         word-break: break-word;
+    }
+    .product-landing-details::after {
+        content: "";
+        display: table;
+        clear: both;
     }
 </style>
 @endsection
