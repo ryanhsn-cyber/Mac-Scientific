@@ -37,6 +37,7 @@ Local Docker environment successfully running. Catalog data has been cleared fro
 Cleaned up the `[null]` corrupted strings in the database, fixed the 404 jQuery asset reference error in `back-login.blade.php`, and resolved the 500 Internal Server Error on the frontend product detail page and product comparison page by removing legacy `json_decode` references on HTML specifications. Fixed "Undefined property: stdClass::$is_facebook_capi" error on the admin system settings page by introducing null coalescing operators (`??`) to gracefully handle missing database columns prior to running migrations.
 
 **Product Detail Page Refinements:**
+- Moved the FAQ and Rating summary (Customer Reviews snapshot) from the top-left product gallery section down into the main Reviews section, displaying them side-by-side.
 - Re-aligned the "Add to Cart" and "Buy Now" buttons vertically for a cleaner interface.
 - Removed the mandatory tax validation from the admin product creation/edit forms.
 - Replaced the duplicate "Product Tags" Key Features rendering with a dedicated `features` column in the database and a new "Key Features" editor field in the Admin Panel.
@@ -84,4 +85,5 @@ N/A
 - [x] Integrate real-time tiered pricing calculation based on quantity into the session-based cart system.
 - [x] Display a bulk pricing table on the frontend product details page.
 - [x] Integrate Steadfast Courier API for parcel dispatching and tracking.
+- [x] Moved the FAQ and Rating system into the main review section on the product details page.
 - [x] Determine user requirements for further development or production deployment (Deployed to cPanel).
