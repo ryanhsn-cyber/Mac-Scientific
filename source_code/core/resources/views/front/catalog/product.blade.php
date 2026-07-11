@@ -420,77 +420,7 @@
                         </div>
                     </div>
 
-                    <div class="div">
-                        <div class="t-c-b-area">
-                            @if ($item->brand_id)
-                            <div class="pt-1 mb-1"><span class="text-medium">{{__('Brand')}}:</span>
-                                    <a href="{{route('front.catalog').'?brand='.$item->brand->slug}}">{{$item->brand->name}}</a>
-                                </div>
-                            @endif
 
-                                <div class="pt-1 mb-1"><span class="text-medium">{{__('Categories')}}:</span>
-                                    <a href="{{route('front.catalog').'?category='.$item->category->slug}}">{{$item->category->name}}</a>
-                                        @if ($item->subcategory->name)
-                                        /
-                                        @endif
-                                    <a href="{{route('front.catalog').'?subcategory='.$item->subcategory->slug}}">{{$item->subcategory->name}}</a>
-                                        @if ($item->childcategory->name)
-                                        /
-                                        @endif
-                                    <a href="{{route('front.catalog').'?childcategory='.$item->childcategory->slug}}">{{$item->childcategory->name}}</a>
-                                </div>
-                                <div class="pt-1 mb-1"><span class="text-medium">{{__('Tags')}}:</span>
-                                    @if($item->tags)
-                                    @php
-                                        $tagsArray = [];
-                                        $decodedTags = json_decode($item->tags, true);
-                                        if(is_array($decodedTags)) {
-                                            foreach($decodedTags as $t) {
-                                                if(isset($t['value'])) $tagsArray[] = $t['value'];
-                                            }
-                                        } else {
-                                            $tagsArray = explode(',', $item->tags);
-                                        }
-                                    @endphp
-                                    @foreach ($tagsArray as $tag)
-                                    @if ($loop->last)
-                                    <a href="{{route('front.catalog').'?tag='.$tag}}">{{trim($tag)}}</a>
-                                    @else
-                                    <a href="{{route('front.catalog').'?tag='.$tag}}">{{trim($tag)}}</a>,
-                                    @endif
-                                    @endforeach
-                                    @endif
-                                </div>
-                                @if ($item->item_type == 'normal')
-                                <div class="pt-1 mb-4"><span class="text-medium">{{__('SKU')}}:</span> #{{$item->sku}}</div>
-                                @endif
-                        </div>
-
-                        <div class="mt-4 p-d-f-area">
-                            <div class="left" style="display: none;">
-                            </div>
-
-                            <div class="d-flex align-items-center">
-                                <span class="text-muted mr-1">{{__('Share')}}: </span>
-                                <div class="d-inline-block a2a_kit">
-                                    <a class="facebook  a2a_button_facebook" href="">
-                                        <span><i class="fab fa-facebook-f"></i></span>
-                                    </a>
-                                    <a class="twitter  a2a_button_twitter" href="">
-                                        <span><i class="fab fa-twitter"></i></span>
-                                    </a>
-                                    <a class="linkedin  a2a_button_linkedin" href="">
-                                        <span><i class="fab fa-linkedin-in"></i></span>
-                                    </a>
-                                    <a class="pinterest   a2a_button_pinterest" href="">
-                                        <span><i class="fab fa-pinterest"></i></span>
-                                    </a>
-                                </div>
-                                <script async src="https://static.addtoany.com/menu/page.js"></script>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
