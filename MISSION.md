@@ -47,6 +47,7 @@ Cleaned up the `[null]` corrupted strings in the database, fixed the 404 jQuery 
 - Added a high-level customer review summary section and a responsive FAQ accordion below the product image gallery, now fully refactored to use standard Bootstrap 5 components for correct expand/collapse functionality and visibility.
 - Fixed a layout issue where WYSIWYG (Summernote) inline images inside the product description tab were floating out of the container and overlapping the edge and other elements; enforced `display: block` and `float: none` with a `.product-landing-details` clearfix.
 - Fixed a bug where Tagify JSON arrays (e.g. `[{"value":"Safe"}]`) would appear visually broken on the frontend by updating `ItemRepository` to robustly `json_decode` the string before storing and updating the frontend `product.blade.php` to decode legacy JSON strings.
+- Fixed horizontal overflow on mobile viewports for the product action buttons ("Quantity", "Add to Cart", "Order via WhatsApp", "Buy Now") by implementing flexible wrapping (`flex-wrap`).
 
 ## Goal Pivots
 
