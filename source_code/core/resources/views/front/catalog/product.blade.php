@@ -519,7 +519,7 @@
                         <!-- FAQ Item 1 -->
                         <div class="card border-0 mb-1">
                             <div class="card-header p-0 bg-transparent border-0" id="headingOne">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 13px; font-weight: 500;">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 13px; font-weight: 500;">
                                     Is this suitable for PRP or Exosome therapy?
                                     <i class="fas fa-plus" style="color: #003399;"></i>
                                 </button>
@@ -533,7 +533,7 @@
                         <!-- FAQ Item 2 -->
                         <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
                             <div class="card-header p-0 bg-transparent border-0" id="headingTwo">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 13px; font-weight: 500;">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 13px; font-weight: 500;">
                                     How many speed levels are available?
                                     <i class="fas fa-plus" style="color: #003399;"></i>
                                 </button>
@@ -547,7 +547,7 @@
                         <!-- FAQ Item 3 -->
                         <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
                             <div class="card-header p-0 bg-transparent border-0" id="headingThree">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size: 13px; font-weight: 500;">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size: 13px; font-weight: 500;">
                                     Is it rechargeable?
                                     <i class="fas fa-plus" style="color: #003399;"></i>
                                 </button>
@@ -561,7 +561,7 @@
                         <!-- FAQ Item 4 -->
                         <div class="card border-0 mb-1" style="border-top: 1px solid #f1f1f1 !important;">
                             <div class="card-header p-0 bg-transparent border-0" id="headingFour">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="font-size: 13px; font-weight: 500;">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="font-size: 13px; font-weight: 500;">
                                     How do I clean and sterilize the pen?
                                     <i class="fas fa-plus" style="color: #003399;"></i>
                                 </button>
@@ -575,7 +575,7 @@
                         <!-- FAQ Item 5 -->
                         <div class="card border-0" style="border-top: 1px solid #f1f1f1 !important;">
                             <div class="card-header p-0 bg-transparent border-0" id="headingFive">
-                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="font-size: 13px; font-weight: 500;">
+                                <button class="btn btn-link btn-block text-left text-dark text-decoration-none p-2 d-flex justify-content-between align-items-center collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="font-size: 13px; font-weight: 500;">
                                     What is the warranty?
                                     <i class="fas fa-plus" style="color: #003399;"></i>
                                 </button>
