@@ -91,6 +91,7 @@ class SettingController extends Controller
      */
     public function update(SettingRequest $request)
     {
+        \Log::info("Settings Update Called. Files:", array_keys($request->allFiles()));
         $this->repository->update($request);
         return redirect()->back()->withSuccess(__('Data Updated Successfully.'));
     }

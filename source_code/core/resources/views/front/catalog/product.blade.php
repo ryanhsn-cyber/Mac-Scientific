@@ -355,7 +355,7 @@
                     <!-- Action Buttons -->
                     <div class="action-buttons mb-4 pt-3" style="border-top: 1px solid #eee;">
                         
-                        <div class="d-flex mb-3" style="gap: 15px;">
+                        <div class="d-flex mb-3 flex-wrap" style="gap: 15px;">
                             @if ($item->item_type == 'normal')
                             <div class="d-flex align-items-start pt-1">
                                 <span class="font-weight-bold mr-3" style="font-size: 15px; color: #333; line-height: 44px;">Quantity</span>
