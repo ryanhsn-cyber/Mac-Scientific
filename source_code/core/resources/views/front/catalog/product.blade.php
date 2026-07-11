@@ -359,11 +359,11 @@
                                     <button class="btn m-0 w-100 d-flex align-items-center justify-content-center" id="add_to_cart" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
                                         <i class="fas fa-shopping-cart" style="margin-right: 8px;"></i><span>Add to Cart</span>
                                     </button>
-                                    <button class="btn m-0 w-100 d-flex align-items-center justify-content-center" id="but_to_cart" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
-                                        <i class="fas fa-bolt" style="margin-right: 8px;"></i><span>Buy Now</span>
-                                    </button>
                                     <button type="button" onclick="window.open('https://wa.me/{{ $wa_phone }}?text={{ urlencode('Hello, I want to order this product: ' . $item->name . ' - ' . route('front.product', $item->slug)) }}', '_blank')" class="btn m-0 w-100 d-flex align-items-center justify-content-center" style="background-color: #25D366 !important; border-color: #25D366 !important; color: #ffffff !important; height: 44px; font-weight: 600 !important; border-radius: 6px; box-shadow: none;">
                                         <i class="fab fa-whatsapp" style="font-size: 18px; color: #ffffff !important; margin-right: 8px;"></i><span style="font-size: 15px; color: #ffffff !important;">Order via WhatsApp</span>
+                                    </button>
+                                    <button class="btn m-0 w-100 d-flex align-items-center justify-content-center" id="but_to_cart" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
+                                        <i class="fas fa-bolt" style="margin-right: 8px;"></i><span>Buy Now</span>
                                     </button>
                                     @else
                                     <button class="btn btn-secondary m-0 w-100 d-flex align-items-center justify-content-center" style="height: 44px; font-weight: 600; border-radius: 6px;" disabled>
