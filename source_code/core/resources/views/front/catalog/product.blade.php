@@ -18,6 +18,21 @@
         margin: 15px auto !important;
         clear: both !important;
         float: none !important;
+        position: relative !important;
+        transform: none !important;
+        z-index: 1;
+    }
+    .product-landing-details h1, 
+    .product-landing-details h2, 
+    .product-landing-details h3, 
+    .product-landing-details h4, 
+    .product-landing-details h5, 
+    .product-landing-details h6 {
+        clear: both;
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+        background-color: #fff;
     }
     .product-landing-details {
         overflow-wrap: break-word;
