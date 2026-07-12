@@ -741,64 +741,66 @@
 
 
 @auth
-<form class="modal fade ratingForm" action="{{route('front.review.submit')}}" method="post" id="leaveReview" tabindex="-1">
-  @csrf
+<div class="modal fade" id="leaveReview" tabindex="-1" aria-labelledby="leaveReviewLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">{{__('Leave a Review')}}</h4>
-        <button class="close modal_close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-        @php
-            $user = Auth::user();
-        @endphp
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="review-name">{{__('Your Name')}}</label>
-              <input class="form-control" type="text" id="review-name" value="{{$user->first_name}}" required>
+      <form class="ratingForm" action="{{route('front.review.submit')}}" method="post">
+        @csrf
+        <div class="modal-header">
+          <h4 class="modal-title" id="leaveReviewLabel">{{__('Leave a Review')}}</h4>
+          <button class="close modal_close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          @php
+              $user = Auth::user();
+          @endphp
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="review-name">{{__('Your Name')}}</label>
+                <input class="form-control" type="text" id="review-name" value="{{$user->first_name}}" required>
+              </div>
+            </div>
+            <input type="hidden" name="item_id" value="{{$item->id}}">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="review-email">{{__('Your Email')}}</label>
+                <input class="form-control" type="email" id="review-email" value="{{$user->email}}" required>
+              </div>
             </div>
           </div>
-          <input type="hidden" name="item_id" value="{{$item->id}}">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="review-email">{{__('Your Email')}}</label>
-              <input class="form-control" type="email" id="review-email" value="{{$user->email}}" required>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="review-subject">{{__('Subject')}}</label>
+                <input class="form-control" type="text" name="subject" id="review-subject" required>
+              </div>
             </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="review-rating">{{__('Rating')}}</label>
+                <select name="rating" class="form-control" id="review-rating">
+                  <option value="5">5 {{__('Stars')}}</option>
+                  <option value="4">4 {{__('Stars')}}</option>
+                  <option value="3">3 {{__('Stars')}}</option>
+                  <option value="2">2 {{__('Stars')}}</option>
+                  <option value="1">1 {{__('Star')}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="review-message">{{__('Review')}}</label>
+            <textarea class="form-control" name="review" id="review-message" rows="8" required></textarea>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="review-subject">{{__('Subject')}}</label>
-              <input class="form-control" type="text" name="subject" id="review-subject" required>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="review-rating">{{__('Rating')}}</label>
-              <select name="rating" class="form-control" id="review-rating">
-                <option value="5">5 {{__('Stars')}}</option>
-                <option value="4">4 {{__('Stars')}}</option>
-                <option value="3">3 {{__('Stars')}}</option>
-                <option value="2">2 {{__('Stars')}}</option>
-                <option value="1">1 {{__('Star')}}</option>
-              </select>
-            </div>
-          </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="submit"><span>{{__('Submit Review')}}</span></button>
         </div>
-        <div class="form-group">
-          <label for="review-message">{{__('Review')}}</label>
-          <textarea class="form-control" name="review" id="review-message" rows="8" required></textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" type="submit"><span>{{__('Submit Review')}}</span></button>
-      </div>
+      </form>
     </div>
   </div>
-</form>
+</div>
 @endauth
 
 @endsection
