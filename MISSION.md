@@ -91,4 +91,5 @@ N/A
 - [x] Integrate Steadfast Courier API for parcel dispatching and tracking.
 - [x] Moved the FAQ and Rating system into the main review section on the product details page.
 - [x] Added "Order via WhatsApp" functionality directly on the product view page.
+- [x] Updated the default FAQ questions on the product details page to cover COD, delivery times, couriers, tracking, and delivery charges.
 - [x] Determine user requirements for further development or production deployment (Deployed to cPanel).
