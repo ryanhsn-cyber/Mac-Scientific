@@ -622,7 +622,7 @@
               @forelse ($reviews as $review)
               <div class="single-review">
                   <div class="comment">
-                    <div class="comment-author-ava"><img class="lazy" data-src="{{asset('assets/images/'.$review->user->photo)}}" alt="Comment author"></div>
+                    <div class="comment-author-ava"><img class="lazy" data-src="{{ $review->user->photo ? asset('assets/images/'.$review->user->photo) : asset('assets/images/placeholder.png') }}" alt="Comment author"></div>
                     <div class="comment-body">
                       <div class="comment-header d-flex flex-wrap justify-content-between">
                         <div>
@@ -632,11 +632,7 @@
                         </div>
                         <div class="mb-2">
                           <div class="rating-stars">
-                            @php
-                                for($i=0; $i<$review->rating;$i++){
-                                 echo "<i class = 'far fa-star filled'></i>";
-                                }
-                            @endphp
+                            {!! renderStarRating($review->rating) !!}
                           </div>
                         </div>
                       </div>
