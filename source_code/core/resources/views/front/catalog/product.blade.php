@@ -541,12 +541,12 @@
                         <div class="accordion-item border-0 mb-1" style="border: 1px solid #f1f1f1 !important; border-radius: 6px; overflow: hidden;">
                             <h2 class="accordion-header" id="headingOne" style="margin: 0;">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 14px; font-weight: 600; padding: 12px 15px; color: #003399; background-color: #f8f9fa; box-shadow: none;">
-                                    Is this suitable for PRP or Exosome therapy?
+                                    Do you offer Cash on Delivery (COD)?
                                 </button>
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body p-3 text-muted" style="font-size: 13.5px; background-color: #fff;">
-                                    Yes, it is highly suitable for both PRP and Exosome therapies, helping active ingredients penetrate deeply.
+                                    Yes. We offer Cash on Delivery (COD) in most areas across Bangladesh. COD availability may vary depending on your location and the order value.
                                 </div>
                             </div>
                         </div>
@@ -555,12 +555,12 @@
                         <div class="accordion-item border-0 mb-1" style="border: 1px solid #f1f1f1 !important; border-radius: 6px; overflow: hidden;">
                             <h2 class="accordion-header" id="headingTwo" style="margin: 0;">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 14px; font-weight: 600; padding: 12px 15px; color: #003399; background-color: #f8f9fa; box-shadow: none;">
-                                    How many speed levels are available?
+                                    How long does delivery take?
                                 </button>
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body p-3 text-muted" style="font-size: 13.5px; background-color: #fff;">
-                                    It comes with 5 adjustable speed levels for customized treatments.
+                                    Inside Dhaka: 1–2 business days. Outside Dhaka: 2–5 business days. Delivery times may vary due to courier operations, weather, or public holidays.
                                 </div>
                             </div>
                         </div>
@@ -569,12 +569,12 @@
                         <div class="accordion-item border-0 mb-1" style="border: 1px solid #f1f1f1 !important; border-radius: 6px; overflow: hidden;">
                             <h2 class="accordion-header" id="headingThree" style="margin: 0;">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size: 14px; font-weight: 600; padding: 12px 15px; color: #003399; background-color: #f8f9fa; box-shadow: none;">
-                                    Is it rechargeable?
+                                    Which courier services do you use?
                                 </button>
                             </h2>
                             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body p-3 text-muted" style="font-size: 13.5px; background-color: #fff;">
-                                    Yes, it features a built-in rechargeable battery for cordless operation.
+                                    We work with trusted courier partners across Bangladesh to ensure fast and secure delivery. The courier is selected based on your location and product type.
                                 </div>
                             </div>
                         </div>
@@ -583,12 +583,12 @@
                         <div class="accordion-item border-0 mb-1" style="border: 1px solid #f1f1f1 !important; border-radius: 6px; overflow: hidden;">
                             <h2 class="accordion-header" id="headingFour" style="margin: 0;">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="font-size: 14px; font-weight: 600; padding: 12px 15px; color: #003399; background-color: #f8f9fa; box-shadow: none;">
-                                    How do I clean and sterilize the pen?
+                                    How can I track my order?
                                 </button>
                             </h2>
                             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body p-3 text-muted" style="font-size: 13.5px; background-color: #fff;">
-                                    Wipe the pen body with alcohol. The cartridges are single-use and should be discarded safely.
+                                    Once your order is shipped, you will receive your tracking number via SMS, WhatsApp, or email.
                                 </div>
                             </div>
                         </div>
@@ -597,12 +597,12 @@
                         <div class="accordion-item border-0" style="border: 1px solid #f1f1f1 !important; border-radius: 6px; overflow: hidden;">
                             <h2 class="accordion-header" id="headingFive" style="margin: 0;">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="font-size: 14px; font-weight: 600; padding: 12px 15px; color: #003399; background-color: #f8f9fa; box-shadow: none;">
-                                    What is the warranty?
+                                    Is there a delivery charge?
                                 </button>
                             </h2>
                             <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body p-3 text-muted" style="font-size: 13.5px; background-color: #fff;">
-                                    We provide a 1-year warranty covering manufacturing defects.
+                                    Delivery charges depend on your location, product size, and selected courier service. The applicable delivery fee will be shown during checkout.
                                 </div>
                             </div>
                         </div>
