@@ -68,8 +68,9 @@ class FrontRepository
         }
 
         // Removed purchase requirement check to allow all logged-in users to review
-        
-        $user->reviews()->create($request->all());
+        $data = $request->all();
+        $data['status'] = 1;
+        $user->reviews()->create($data);
         return __('Your Review Submitted Successfully.');
 
     }

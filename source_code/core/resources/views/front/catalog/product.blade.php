@@ -140,9 +140,9 @@
         @php
         function renderStarRating($rating,$maxRating=5) {
 
-            $fullStar = "<i class = 'far fa-star filled'></i>";
-            $halfStar = "<i class = 'far fa-star-half filled'></i>";
-            $emptyStar = "<i class = 'far fa-star'></i>";
+            $fullStar = "<i class='fas fa-star filled'></i>";
+            $halfStar = "<i class='fas fa-star-half-alt filled'></i>";
+            $emptyStar = "<i class='far fa-star'></i>";
             $rating = $rating <= $maxRating?$rating:$maxRating;
 
             $fullStarCount = (int)$rating;
@@ -622,7 +622,7 @@
               @forelse ($reviews as $review)
               <div class="single-review">
                   <div class="comment">
-                    <div class="comment-author-ava"><img class="lazy" data-src="{{ $review->user->photo ? asset('assets/images/'.$review->user->photo) : asset('assets/images/placeholder.png') }}" alt="Comment author"></div>
+                    <div class="comment-author-ava"><img src="{{ $review->user->photo ? asset('assets/images/'.$review->user->photo) : asset('assets/images/placeholder.png') }}" alt="Comment author"></div>
                     <div class="comment-body">
                       <div class="comment-header d-flex flex-wrap justify-content-between">
                         <div>
