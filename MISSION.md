@@ -92,4 +92,6 @@ N/A
 - [x] Moved the FAQ and Rating system into the main review section on the product details page.
 - [x] Added "Order via WhatsApp" functionality directly on the product view page.
 - [x] Updated the default FAQ questions on the product details page to cover COD, delivery times, couriers, tracking, and delivery charges.
+- [x] Fixed review submission logic to auto-approve reviews and allow all logged-in users to review without requiring prior purchase.
+- [x] Repolished the Customer Reviews summary card with premium UI/UX, gradient progress bars, and properly styled solid golden stars.
 - [x] Determine user requirements for further development or production deployment (Deployed to cPanel).
