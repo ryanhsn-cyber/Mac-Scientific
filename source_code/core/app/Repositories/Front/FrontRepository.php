@@ -67,30 +67,8 @@ class FrontRepository
             return __('Your Review Updated Successfully.');
         }
 
-        $orders = Order::where('user_id',$user->id)->get();
-        $ck = 0;
-        foreach($orders as $order)
-        {
-        $cart = json_decode($order->cart,true);
-
-            foreach($cart as $key => $product)
-            {
-                if($request->item_id == PriceHelper::GetItemId($key))
-                {
-                    $ck = 1;
-                    break;
-                }
-            }
-        }
-
-        if($ck == 0){
-            return [
-                'errors' => [
-                    0 =>  __("Buy This Product First")
-                ]
-            ];
-        }
-
+        // Removed purchase requirement check to allow all logged-in users to review
+        
         $user->reviews()->create($request->all());
         return __('Your Review Submitted Successfully.');
 
