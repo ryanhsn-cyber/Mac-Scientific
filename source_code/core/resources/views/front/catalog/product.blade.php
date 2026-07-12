@@ -521,7 +521,7 @@
                     </div>
                     
                     @if (Auth::check())
-                        <a href="#" data-toggle="modal" data-target="#leaveReview" class="btn btn-outline-primary btn-block py-2 mt-auto" style="border-radius: 6px; font-size: 14px; font-weight: 600; border-color: #003399; color: #003399; background: transparent;">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#leaveReview" class="btn btn-outline-primary btn-block py-2 mt-auto" style="border-radius: 6px; font-size: 14px; font-weight: 600; border-color: #003399; color: #003399; background: transparent;">
                             <i class="far fa-edit mr-1"></i> {{ $item->reviews->count() > 0 ? 'Write a review' : 'Be the first to review this product' }}
                         </a>
                     @else
@@ -747,7 +747,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">{{__('Leave a Review')}}</h4>
-        <button class="close modal_close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button class="close modal_close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
         @php
