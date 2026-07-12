@@ -490,45 +490,62 @@
         <div class="row mt-4 mb-4">
             <!-- Customer Reviews Section -->
             <div class="col-md-6 mb-3">
-                <div class="p-4 d-flex flex-column h-100" style="border: 1px solid #e0e0e0; border-radius: 8px; background: #fff;">
-                    <h6 class="font-weight-bold mb-4" style="color: #003399; font-size: 16px;">Customer Reviews</h6>
+                <style>
+                    .review-summary-card { border: 1px solid #e2e8f0; border-radius: 12px; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: box-shadow 0.3s ease; }
+                    .review-summary-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
+                    .review-btn { border-radius: 8px; font-size: 15px; font-weight: 600; background: #0f172a; color: #fff; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(15, 23, 42, 0.1); border: none; }
+                    .review-btn:hover { background: #1e293b; color: #fff; transform: translateY(-1px); box-shadow: 0 6px 12px rgba(15, 23, 42, 0.15); }
+                    .review-login-btn { border-radius: 8px; font-size: 15px; font-weight: 600; border: 1px solid #e2e8f0; color: #0f172a; background: #f8fafc; transition: all 0.3s ease; }
+                    .review-login-btn:hover { background: #e2e8f0; color: #0f172a; text-decoration: none; }
+                    .rating-bar-track { height: 8px; border-radius: 8px; background-color: #f0f2f5; overflow: hidden; box-shadow: inset 0 1px 2px rgba(0,0,0,0.03); }
+                    .rating-bar-fill { border-radius: 8px; background: linear-gradient(90deg, #ffb800, #ffc107); }
+                </style>
+                <div class="p-4 d-flex flex-column h-100 review-summary-card">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h6 class="font-weight-bold mb-0" style="color: #1e293b; font-size: 18px; letter-spacing: -0.3px;">Customer Reviews</h6>
+                    </div>
                     
                     <div class="d-flex mb-4 align-items-center">
-                        <div class="mr-4 text-center pr-4" style="border-right: 1px solid #f1f1f1;">
-                            <h2 class="font-weight-bold text-dark mb-1" style="font-size: 48px; line-height: 1;">{{ number_format($item->reviews->avg('rating') ?: 0, 1) }}</h2>
-                            <div class="rating-stars" style="color: #ffb800; font-size: 16px; margin-bottom: 5px;">
+                        <div class="text-center pr-4" style="border-right: 1px solid #e2e8f0; min-width: 140px;">
+                            <h2 class="font-weight-bold mb-1" style="font-size: 56px; line-height: 1; color: #0f172a; letter-spacing: -1.5px;">{{ number_format($item->reviews->avg('rating') ?: 0, 1) }}</h2>
+                            <div class="rating-stars mb-2" style="font-size: 16px;">
                                 {!!renderStarRating($item->reviews->avg('rating'))!!}
                             </div>
-                            <div class="text-dark font-weight-bold" style="font-size: 13px;">{{ $item->reviews->count() }} Reviews</div>
+                            <div class="text-muted font-weight-medium" style="font-size: 14px;">Based on {{ $item->reviews->count() }} Reviews</div>
                         </div>
-                        <div class="flex-grow-1">
+                        <div class="flex-grow-1 pl-4">
                             @for($i = 5; $i >= 1; $i--)
                                 @php
                                     $count = $item->reviews->where('status',1)->where('rating',$i)->count();
                                     $total = $item->reviews->where('status',1)->count() ?: 1;
                                     $percent = round(($count / $total) * 100);
                                 @endphp
-                                <div class="d-flex align-items-center mb-2" style="font-size: 12px;">
-                                    <span class="text-dark font-weight-bold" style="width: 20px;">{{ $i }} <i class="fas fa-star" style="color: #ffb800; font-size: 10px;"></i></span>
-                                    <div class="progress mx-3 flex-grow-1" style="height: 8px; border-radius: 4px; background-color: #f1f1f1;">
-                                        <div class="progress-bar" role="progressbar" style="width: {{ $percent }}%; border-radius: 4px; background-color: #ffb800;" aria-valuenow="{{ $percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="d-flex align-items-center mb-2" style="font-size: 13px;">
+                                    <div class="d-flex justify-content-end align-items-center" style="width: 35px; white-space: nowrap;">
+                                        <span class="font-weight-bold mr-1" style="color: #334155;">{{ $i }}</span>
+                                        <i class="fas fa-star" style="color: #ffb800; font-size: 10px;"></i>
                                     </div>
-                                    <span style="width: 35px; text-align: right; color: #555; font-weight: 600;">{{ $percent }}%</span>
-                                    <span style="width: 30px; text-align: right; color: #999;">({{ $count }})</span>
+                                    <div class="progress mx-3 flex-grow-1 rating-bar-track">
+                                        <div class="progress-bar rating-bar-fill" role="progressbar" style="width: {{ $percent }}%;" aria-valuenow="{{ $percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span style="width: 35px; text-align: right; color: #475569; font-weight: 600;">{{ $percent }}%</span>
+                                    <span style="width: 35px; text-align: right; color: #94a3b8;">({{ $count }})</span>
                                 </div>
                             @endfor
                         </div>
                     </div>
                     
-                    @if (Auth::check())
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#leaveReview" class="btn btn-outline-primary btn-block py-2 mt-auto" style="border-radius: 6px; font-size: 14px; font-weight: 600; border-color: #003399; color: #003399; background: transparent;">
-                            <i class="far fa-edit mr-1"></i> {{ $item->reviews->count() > 0 ? 'Write a review' : 'Be the first to review this product' }}
-                        </a>
-                    @else
-                        <a href="{{ route('user.login') }}" class="btn btn-outline-primary btn-block py-2 mt-auto" style="border-radius: 6px; font-size: 14px; font-weight: 600; border-color: #003399; color: #003399; background: transparent;">
-                            <i class="fas fa-sign-in-alt mr-1"></i> Login to write a review
-                        </a>
-                    @endif
+                    <div class="mt-auto pt-3">
+                        @if (Auth::check())
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#leaveReview" class="btn btn-block py-3 review-btn">
+                                <i class="far fa-edit mr-2"></i> {{ $item->reviews->count() > 0 ? 'Write a Review' : 'Be the first to review' }}
+                            </a>
+                        @else
+                            <a href="{{ route('user.login') }}" class="btn btn-block py-3 review-login-btn">
+                                <i class="fas fa-sign-in-alt mr-2"></i> Login to write a review
+                            </a>
+                        @endif
+                    </div>
                 </div>
             </div>
 
