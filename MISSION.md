@@ -11,16 +11,18 @@ Local Docker environment successfully running. Catalog data has been cleared fro
 **Media Integration:** Removed legacy external "Browse Image" buttons in favor of native toolbar integration. Modified Summernote initialization in `custom.js` to override the default video button, allowing users to upload native video files directly from their machine into the editor. Videos are uploaded asynchronously via AJAX and injected using Summernote's internal `insertNode` API to properly update the editor state. The PHP environment's `upload_max_filesize` and `post_max_size` limits were increased to 100MB via a custom `uploads.ini` generated in the Dockerfile.
 
 **Storefront & Admin UI Cleanup:**
-- Removed redundant "Manage FAQ" sidebar items from admin interfaces.
 
-**SMS Integration:**
-- Configured dual SMS notification system for order confirmations using smsbangladesh.com.
-- Implemented robust `OrderTotal` calculations for SMS content to display accurate pricing.
-- Rewrote SMS trigger functionality to execute asynchronously in the background via `exec()` cURL calls, resolving frontend checkout delay bottlenecks.
+- Removed redundant "Manage FAQ" sidebar items from admin interfaces.
 - Simplified "Category Management" by removing image upload fields/previews from forms and tables.
 - Enabled "Featured Products" section on the homepage and populated it by updating product `is_type` attributes.
 - Integrated a full-width promotional banner ("Regenerative Medicine") into the "Our Current Highlight" section for Theme 2.
 - Created a new "Highlight Banner" configuration tab in the Admin Panel to dynamically upload and replace the "Our Current Highlight" image without needing manual file uploads.
+
+**SMS Integration:**
+
+- Configured dual SMS notification system for order confirmations using smsbangladesh.com.
+- Implemented robust `OrderTotal` calculations for SMS content to display accurate pricing.
+- Rewrote SMS trigger functionality to execute asynchronously in the background via `exec()` cURL calls, resolving frontend checkout delay bottlenecks.
 
 **Tiered/Bulk Pricing:**
 
