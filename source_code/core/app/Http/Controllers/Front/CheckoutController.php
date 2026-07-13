@@ -496,7 +496,7 @@ class CheckoutController extends Controller
                 
                 $orderAmount = PriceHelper::setCurrencyPrice($order->pay_amount);
 
-                $merchantMessage = "Order #{$order->transaction_number} by {$customerName} ({$customerPhone}). Items: {$productsString}. Total: {$orderAmount}. Address: {$addressString}";
+                $merchantMessage = "You Got New Order Order Details:Order #{$order->transaction_number} by {$customerName} ({$customerPhone}). Items: {$productsString}. Total: {$orderAmount}. Address: {$addressString}";
                 
                 $sms = new SmsHelper();
                 $sms->SendCustomSms($setting->footer_phone, $merchantMessage);
