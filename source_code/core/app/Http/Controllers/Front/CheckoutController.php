@@ -477,14 +477,7 @@ class CheckoutController extends Controller
                 'currency' => PriceHelper::setCurrencyName()
             ], $userData);
 
-            if($setting->is_twilio == 1){
-                // message
-                $sms = new SmsHelper();
-                $user_number = $order->user ? $order->user->phone : '';
-                if($user_number){
-                    $sms->SendSms($user_number,"'purchase'");
-                }
-            }
+
             return view('front.checkout.success',compact('order','cart'));
         }
         return redirect()->route('front.index');
