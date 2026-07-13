@@ -9620,7 +9620,7 @@ screen and (-ms-high-contrast:none) {
 }
 
 .payment-methods .single-payment-method {
-    width: 33.33%;
+    width: 25%;
     padding-left: 10px;
     padding-right: 10px;
     margin-bottom: 20px
@@ -9629,18 +9629,19 @@ screen and (-ms-high-contrast:none) {
 .payment-methods .single-payment-method a {
     display: block;
     border: 1px solid #f5f5f5;
-    padding: 20px 10px;
+    padding: 10px 5px;
     text-align: center;
     background: #f5f6f9
 }
 
 .payment-methods .single-payment-method a img {
-    height: 50px
+    height: 40px
 }
 
 .payment-methods .single-payment-method a p {
     color: #555;
-    margin-top: 10px
+    margin-top: 5px;
+    font-size: 14px;
 }
 
 .hi-50 {
