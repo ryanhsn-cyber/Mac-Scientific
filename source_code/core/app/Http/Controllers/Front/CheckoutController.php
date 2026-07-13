@@ -479,28 +479,8 @@ class CheckoutController extends Controller
 
 
             if($setting->is_twilio == 1 && !empty($setting->footer_phone)){
-                $productNames = [];
-                foreach($cart as $item) {
-                    $productNames[] = $item['name'] . ' x ' . $item['qty'];
-                }
-                $productsString = implode(', ', $productNames);
-                
-                $billing = json_decode($order->billing_info, true);
-                $customerName = ($billing['bill_first_name'] ?? '') . ' ' . ($billing['bill_last_name'] ?? '');
-                $customerPhone = $billing['bill_phone'] ?? '';
-                
-                $addressFields = [];
-                if(!empty($billing['bill_address1'])) $addressFields[] = $billing['bill_address1'];
-                if(!empty($billing['bill_city'])) $addressFields[] = $billing['bill_city'];
-                $addressString = implode(', ', $addressFields);
-                
-                $total = \App\Helpers\PriceHelper::OrderTotal($order);
-                $orderAmount = ($setting->currency_direction == 1) ? $order->currency_sign . $total : $total . $order->currency_sign;
-
-                $merchantMessage = "You Got New Order Order Details:Order #{$order->transaction_number} by {$customerName} ({$customerPhone}). Items: {$productsString}. Total: {$orderAmount}. Address: {$addressString}";
-                
                 $sms = new SmsHelper();
-                $sms->SendCustomSms($setting->footer_phone, $merchantMessage);
+                $sms->SendSms($setting->footer_phone, "'merchant_purchase'", $order->transaction_number);
             }
 
             return view('front.checkout.success',compact('order','cart'));

@@ -107,16 +107,28 @@
                                                     @php
                                                         $sms_section = json_decode($setting->twilio_section,true);
                                                     @endphp
-                                                        <p>Order Number : {order_number} <code>If you need order number then use this tag</code></p>
+                                                        <p>Available Tags:</p>
+                                                        <ul>
+                                                            <li><code>{order_number}</code> - Order Number</li>
+                                                            <li><code>{order_amount}</code> - Total Order Price</li>
+                                                            <li><code>{order_date}</code> - Order Date</li>
+                                                            <li><code>{customer_name}</code>, <code>{customer_phone}</code>, <code>{customer_address}</code> - Customer Info (Merchant SMS)</li>
+                                                            <li><code>{order_items}</code> - List of items (Merchant SMS)</li>
+                                                        </ul>
                                                         
                                                         <div class="form-group ">
-                                                            <label for="order_purchase">{{ __('Order Purchase') }}</label>
+                                                            <label for="order_purchase">{{ __('Customer Order Confirmation') }}</label>
                                                             <textarea name="twilio_section['purchase']" class="form-control" id="order_purchase" placeholder="{{__('Enter Message')}}">{{$sms_section["'purchase'"]}}</textarea>
                                                         </div>
 
                                                         <div class="form-group ">
-                                                            <label for="order_status">{{ __('Order Status') }}</label>
+                                                            <label for="order_status">{{ __('Customer Order Status Update') }}</label>
                                                             <textarea name="twilio_section['order_status']" class="form-control" id="order_status" placeholder="{{__('Enter Message')}}">{{$sms_section["'order_status'"]}}</textarea>
+                                                        </div>
+
+                                                        <div class="form-group ">
+                                                            <label for="merchant_purchase">{{ __('Merchant Notification (New Order)') }}</label>
+                                                            <textarea name="twilio_section['merchant_purchase']" class="form-control" id="merchant_purchase" placeholder="{{__('Enter Message')}}">{{$sms_section["'merchant_purchase'"] ?? ''}}</textarea>
                                                         </div>
 
                                                         <div class="form-group d-flex justify-content-center">
