@@ -377,6 +377,8 @@ class CheckoutController extends Controller
             break;
 
             case 'Bank':
+            case 'bKash':
+            case 'Nagad':
                 $checkout = true;
                 $payment = $this->BankSubmit($input);
             break;

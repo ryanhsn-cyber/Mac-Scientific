@@ -76,7 +76,7 @@ trait BankCheckout
         $orderData['state_price'] = PriceHelper::StatePrce($data['state_id'],$cart_total);
         $orderData['shipping_info'] = json_encode(Session::get('shipping_address'),true);
         $orderData['billing_info'] = json_encode(Session::get('billing_address'),true);
-        $orderData['payment_method'] = 'Bank Transfer';
+        $orderData['payment_method'] = $data['payment_method'] ?? 'Manual Transfer';
         $orderData['user_id'] = isset($user) ? $user->id : 0;
         $orderData['transaction_number'] = Str::random(10);
         $orderData['currency_sign'] = PriceHelper::setCurrencySign();
