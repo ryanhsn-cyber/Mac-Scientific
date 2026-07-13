@@ -30,4 +30,27 @@ class SmsHelper {
             // throw $th;
         }
     }
+
+    public function SendCustomSms($to_number, $body)
+    {
+        $setting = Setting::first();
+        if ($setting->is_twilio == 0 || empty($setting->sms_url) || empty($to_number)) {
+            return;
+        }
+
+        try {
+            $url = $setting->sms_url;
+            $url = str_replace('{number}', $to_number, $url);
+            $url = str_replace('{message}', urlencode($body), $url);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            $response = curl_exec($ch);
+            curl_close($ch);
+        } catch (\Throwable $th) {
+            // throw $th;
+        }
+    }
 }

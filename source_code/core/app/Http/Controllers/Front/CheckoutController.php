@@ -478,6 +478,23 @@ class CheckoutController extends Controller
             ], $userData);
 
 
+            if($setting->is_twilio == 1 && !empty($setting->footer_phone)){
+                $productNames = [];
+                foreach($cart as $item) {
+                    $productNames[] = $item['name'] . ' x ' . $item['qty'];
+                }
+                $productsString = implode(', ', $productNames);
+                
+                $billing = json_decode($order->billing_info, true);
+                $customerName = ($billing['bill_first_name'] ?? '') . ' ' . ($billing['bill_last_name'] ?? '');
+                $customerPhone = $billing['bill_phone'] ?? '';
+
+                $merchantMessage = "New Order (#{$order->transaction_number}) by {$customerName} ({$customerPhone}). Items: {$productsString}";
+                
+                $sms = new SmsHelper();
+                $sms->SendCustomSms($setting->footer_phone, $merchantMessage);
+            }
+
             return view('front.checkout.success',compact('order','cart'));
         }
         return redirect()->route('front.index');
