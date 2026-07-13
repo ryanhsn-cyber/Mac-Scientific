@@ -42,12 +42,15 @@ class SmsHelper {
             }
             $order_items = implode(', ', $items);
 
+            $payment_method = $order->payment_method ?? 'Unknown';
+
             $body = preg_replace("/{order_amount}/", $order_amount, $body);
             $body = preg_replace("/{order_date}/", $order_date, $body);
             $body = preg_replace("/{customer_name}/", $customer_name, $body);
             $body = preg_replace("/{customer_phone}/", $customer_phone, $body);
             $body = preg_replace("/{customer_address}/", $customer_address, $body);
             $body = preg_replace("/{order_items}/", $order_items, $body);
+            $body = preg_replace("/{payment_method}/", $payment_method, $body);
         }
 
         try {

@@ -23,6 +23,8 @@ Local Docker environment successfully running. Catalog data has been cleared fro
 - Configured dual SMS notification system for order confirmations using smsbangladesh.com.
 - Implemented robust `OrderTotal` calculations for SMS content to display accurate pricing.
 - Rewrote SMS trigger functionality to execute asynchronously in the background via `exec()` cURL calls, resolving frontend checkout delay bottlenecks.
+- Extended the Admin Panel (Settings -> SMS) to expose a new text area specifically for "Merchant Notification (New Order)".
+- Made the SMS messaging completely dynamic, allowing the merchant to configure custom SMS bodies using parsed tags (e.g., `{customer_name}`, `{order_items}`, `{customer_address}`) for both customers and merchants.
 
 **Tiered/Bulk Pricing:**
 

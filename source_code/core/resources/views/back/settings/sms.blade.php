@@ -112,6 +112,7 @@
                                                             <li><code>{order_number}</code> - Order Number</li>
                                                             <li><code>{order_amount}</code> - Total Order Price</li>
                                                             <li><code>{order_date}</code> - Order Date</li>
+                                                            <li><code>{payment_method}</code> - Payment Method used (e.g. Stripe, Cash On Delivery)</li>
                                                             <li><code>{customer_name}</code>, <code>{customer_phone}</code>, <code>{customer_address}</code> - Customer Info (Merchant SMS)</li>
                                                             <li><code>{order_items}</code> - List of items (Merchant SMS)</li>
                                                         </ul>
