@@ -488,8 +488,15 @@ class CheckoutController extends Controller
                 $billing = json_decode($order->billing_info, true);
                 $customerName = ($billing['bill_first_name'] ?? '') . ' ' . ($billing['bill_last_name'] ?? '');
                 $customerPhone = $billing['bill_phone'] ?? '';
+                
+                $addressFields = [];
+                if(!empty($billing['bill_address1'])) $addressFields[] = $billing['bill_address1'];
+                if(!empty($billing['bill_city'])) $addressFields[] = $billing['bill_city'];
+                $addressString = implode(', ', $addressFields);
+                
+                $orderAmount = PriceHelper::setCurrencyPrice($order->pay_amount);
 
-                $merchantMessage = "New Order (#{$order->transaction_number}) by {$customerName} ({$customerPhone}). Items: {$productsString}";
+                $merchantMessage = "Order #{$order->transaction_number} by {$customerName} ({$customerPhone}). Items: {$productsString}. Total: {$orderAmount}. Address: {$addressString}";
                 
                 $sms = new SmsHelper();
                 $sms->SendCustomSms($setting->footer_phone, $merchantMessage);
