@@ -473,7 +473,7 @@ class CheckoutController extends Controller
             \App\Helpers\FacebookCapiHelper::sendEvent('Purchase', [
                 'content_ids' => $content_ids,
                 'content_type' => 'product',
-                'value' => (float)PriceHelper::setConvertPrice($order->pay_amount),
+                'value' => (float)\App\Helpers\PriceHelper::OrderTotal($order, true),
                 'currency' => PriceHelper::setCurrencyName()
             ], $userData);
 
@@ -494,7 +494,8 @@ class CheckoutController extends Controller
                 if(!empty($billing['bill_city'])) $addressFields[] = $billing['bill_city'];
                 $addressString = implode(', ', $addressFields);
                 
-                $orderAmount = PriceHelper::setCurrencyPrice($order->pay_amount);
+                $total = \App\Helpers\PriceHelper::OrderTotal($order);
+                $orderAmount = ($setting->currency_direction == 1) ? $order->currency_sign . $total : $total . $order->currency_sign;
 
                 $merchantMessage = "You Got New Order Order Details:Order #{$order->transaction_number} by {$customerName} ({$customerPhone}). Items: {$productsString}. Total: {$orderAmount}. Address: {$addressString}";
                 

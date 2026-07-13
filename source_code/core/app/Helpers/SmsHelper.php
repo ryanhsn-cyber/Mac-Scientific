@@ -17,7 +17,9 @@ class SmsHelper {
         
         $order = \App\Models\Order::where('transaction_number', $order_number)->first();
         if($order) {
-            $order_amount = \App\Helpers\PriceHelper::setCurrencyPrice($order->pay_amount);
+            $total = \App\Helpers\PriceHelper::OrderTotal($order);
+            $order_amount = ($setting->currency_direction == 1) ? $order->currency_sign . $total : $total . $order->currency_sign;
+            
             $order_date = $order->created_at->format('d M Y');
             $body = preg_replace("/{order_amount}/", $order_amount, $body);
             $body = preg_replace("/{order_date}/", $order_date, $body);
