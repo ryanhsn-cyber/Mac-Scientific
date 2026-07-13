@@ -46,7 +46,7 @@ class SMSSettingController extends Controller
     {
        
         $request->validate([
-            "sms_url" => "required|url",
+            "sms_url" => "required",
         ]);
         $input = $request->all();
         if(isset($request['is_twilio'])){
