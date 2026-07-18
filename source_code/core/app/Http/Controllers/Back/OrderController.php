@@ -216,7 +216,7 @@ class OrderController extends Controller
         }
 
         // \App\Helpers\PriceHelper::OrderTotal is not always available statically, let's calculate directly or use it if available
-        $cod_amount = $order->payment_method == 'Cash On Delivery' ? \App\Helpers\PriceHelper::OrderTotal($order) : 0;
+        $cod_amount = $order->payment_method == 'Cash On Delivery' ? \App\Helpers\PriceHelper::OrderTotal($order, true) : 0;
 
         $data = [
             'invoice' => $order->transaction_number,

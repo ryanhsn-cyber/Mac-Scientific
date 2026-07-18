@@ -102,4 +102,7 @@ N/A
 - [x] Updated the default FAQ questions on the product details page to cover COD, delivery times, couriers, tracking, and delivery charges.
 - [x] Fixed review submission logic to auto-approve reviews and allow all logged-in users to review without requiring prior purchase.
 - [x] Repolished the Customer Reviews summary card with premium UI/UX, gradient progress bars, and properly styled solid golden stars.
+- [x] Integrated bKash and Nagad manual payment gateways into the checkout page.
+- [x] Styled and customized the checkout payment gateway selection buttons (fitting 4 per row with smaller logos).
+- [x] Uploaded custom bKash and Nagad logos as requested by the merchant.
 - [x] Determine user requirements for further development or production deployment (Deployed to cPanel).
