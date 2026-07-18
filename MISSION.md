@@ -105,4 +105,5 @@ N/A
 - [x] Integrated bKash and Nagad manual payment gateways into the checkout page.
 - [x] Styled and customized the checkout payment gateway selection buttons (fitting 4 per row with smaller logos).
 - [x] Uploaded custom bKash and Nagad logos as requested by the merchant.
+- [x] Fixed `cod_amount` validation error in Steadfast Courier API integration by sending unformatted numeric values instead of comma-formatted strings.
 - [x] Determine user requirements for further development or production deployment (Deployed to cPanel).
