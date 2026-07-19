@@ -70,46 +70,64 @@
     <div class="row">
       <!-- Poduct Gallery-->
       <div class="col-xxl-5 col-lg-6 col-md-6">
-        <div class="product-gallery">
-            @if ($item->video)
-            <div class="gallery-wrapper">
-                <div class="gallery-item video-btn text-center">
-                    <a href="{{ $item->video }}" title="Watch video"></a>
+        @php
+            $video_id = '';
+            if ($item->video) {
+                preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i', $item->video, $matches);
+                $video_id = $matches[1] ?? '';
+            }
+        @endphp
+
+        <div class="product-gallery" style="position: relative;">
+            @if ($item->video && $video_id)
+            <div class="media-tabs" style="position: absolute; top: 15px; right: 15px; z-index: 10; background: #f8f9fa; border-radius: 20px; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); display: flex; gap: 4px;">
+                <button id="tab-photos" class="media-tab-btn" onclick="switchMediaTab('photos')" style="border: none; background: #6f42c1; color: white; border-radius: 16px; padding: 5px 12px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.3s;">
+                    <i class="fas fa-camera"></i> Photos
+                </button>
+                <button id="tab-video" class="media-tab-btn" onclick="switchMediaTab('video')" style="border: none; background: transparent; color: #555; border-radius: 16px; padding: 5px 12px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.3s;">
+                    <i class="fas fa-play"></i> Video
+                </button>
+            </div>
+            @endif
+
+            <div id="media-photos" class="media-container" style="display: block;">
+                @if($item->is_stock())
+                <span class="product-badge
+                @if($item->is_type == 'feature')
+                bg-warning
+                @elseif($item->is_type == 'new')
+                bg-success
+                @elseif($item->is_type == 'top')
+                bg-info
+                @elseif($item->is_type == 'best')
+                bg-dark
+                @elseif($item->is_type == 'flash_deal')
+                bg-success
+                @endif
+                ">{{  $item->is_type != 'undefine' ?  ucfirst(str_replace('_',' ',$item->is_type)) : ''   }}</span>
+                @else
+                <span class="product-badge bg-secondary border-default text-body">{{__('out of stock')}}</span>
+                @endif
+
+                @if($item->previous_price && $item->previous_price !=0)
+                <div class="product-badge bg-goldenrod ppp-t"> -{{PriceHelper::DiscountPercentage($item)}}</div>
+                @endif
+
+                <div class="product-thumbnails insize">
+                    <div class="product-details-slider owl-carousel">
+                        <div class="item"><img src="{{asset('assets/images/'.$item->photo)}}" alt="zoom" /></div>
+                        @foreach ($galleries as $key => $gallery)
+                        <div class="item"><img src="{{asset('assets/images/'.$gallery->photo)}}" alt="zoom" /></div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-          @endif
-          @if($item->is_stock())
-          <span class="product-badge
-          @if($item->is_type == 'feature')
-          bg-warning
-          @elseif($item->is_type == 'new')
-          bg-success
-          @elseif($item->is_type == 'top')
-          bg-info
-          @elseif($item->is_type == 'best')
-          bg-dark
-          @elseif($item->is_type == 'flash_deal')
-            bg-success
-          @endif
-          ">{{  $item->is_type != 'undefine' ?  ucfirst(str_replace('_',' ',$item->is_type)) : ''   }}</span>
 
-          @else
-          <span class="product-badge bg-secondary border-default text-body
-          ">{{__('out of stock')}}</span>
-          @endif
-
-          @if($item->previous_price && $item->previous_price !=0)
-          <div class="product-badge bg-goldenrod  ppp-t"> -{{PriceHelper::DiscountPercentage($item)}}</div>
-          @endif
-
-          <div class="product-thumbnails insize">
-            <div class="product-details-slider owl-carousel" >
-            <div class="item"><img src="{{asset('assets/images/'.$item->photo)}}" alt="zoom"  /></div>
-            @foreach ($galleries as $key => $gallery)
-            <div class="item"><img src="{{asset('assets/images/'.$gallery->photo)}}" alt="zoom"  /></div>
-            @endforeach
-        </div>
-      </div>
+            @if ($item->video && $video_id)
+            <div id="media-video" class="media-container" style="display: none; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; position: relative;">
+                <iframe id="youtube-iframe" data-src="https://www.youtube.com/embed/{{ $video_id }}?rel=0&showinfo=0&autoplay=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            @endif
         </div>
         
         <!-- Store Stats Box (Alibaba Style) -->
@@ -815,5 +833,41 @@
   </div>
 </div>
 @endauth
+
+<script>
+    function switchMediaTab(tab) {
+        const photosTab = document.getElementById('tab-photos');
+        const videoTab = document.getElementById('tab-video');
+        const photosMedia = document.getElementById('media-photos');
+        const videoMedia = document.getElementById('media-video');
+        const iframe = document.getElementById('youtube-iframe');
+
+        if (tab === 'photos') {
+            photosTab.style.background = '#6f42c1';
+            photosTab.style.color = 'white';
+            videoTab.style.background = 'transparent';
+            videoTab.style.color = '#555';
+            photosMedia.style.display = 'block';
+            videoMedia.style.display = 'none';
+            
+            // Stop video
+            if (iframe && iframe.src) {
+                iframe.src = iframe.src;
+            }
+        } else {
+            videoTab.style.background = '#6f42c1';
+            videoTab.style.color = 'white';
+            photosTab.style.background = 'transparent';
+            photosTab.style.color = '#555';
+            videoMedia.style.display = 'block';
+            photosMedia.style.display = 'none';
+            
+            // Lazy load iframe
+            if (iframe && !iframe.src) {
+                iframe.src = iframe.getAttribute('data-src');
+            }
+        }
+    }
+</script>
 
 @endsection
