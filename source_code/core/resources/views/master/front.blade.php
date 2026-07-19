@@ -22,6 +22,11 @@
 <link rel="apple-touch-icon" sizes="152x152" href="{{asset('assets/images/'.$setting->favicon)}}">
 <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/'.$setting->favicon)}}">
 <link rel="apple-touch-icon" sizes="167x167" href="{{asset('assets/images/'.$setting->favicon)}}">
+<!-- Preload Critical CSS -->
+<link rel="preload" href="{{asset('assets/front/css/plugins.min.css')}}" as="style">
+<link rel="preload" href="{{asset('assets/front/css/styles.min.css')}}" as="style">
+<link rel="preload" href="{{asset('assets/front/css/responsive.css')}}" as="style">
+
 <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
 <link rel="stylesheet" media="screen" href="{{asset('assets/front/css/plugins.min.css')}}">
 
@@ -29,7 +34,7 @@
 
 <link id="mainStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/styles.min.css')}}">
 
-<link id="mainStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/responsive.css')}}">
+<link id="responsiveStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/responsive.css')}}">
 <!-- Color css -->
 <link href="{{ asset('assets/front/css/color.php?primary_color=').str_replace('#','',$setting->primary_color) }}" rel="stylesheet">
 
@@ -412,9 +417,9 @@ body_theme4
                                 <form class="input-group" id="header_search_form" action="{{route('front.catalog')}}" method="get">
                                     <input type="hidden" name="category" value="" id="search__category">
                                     <span class="input-group-btn">
-                                    <button type="submit"><i class="icon-search"></i></button>
+                                    <button type="submit" aria-label="Search"><i class="icon-search"></i></button>
                                     </span>
-                                    <input class="form-control" type="text" data-target="{{route('front.search.suggest')}}" id="__product__search" name="search" placeholder="{{__('Search by product name')}}">
+                                    <input class="form-control" type="text" data-target="{{route('front.search.suggest')}}" id="__product__search" name="search" placeholder="{{__('Search by product name')}}" aria-label="Search by product name">
                                     <div class="serch-result d-none">
                                        {{-- search result --}}
                                     </div>
@@ -654,12 +659,12 @@ body_theme4
 
 
 <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
-<script type="text/javascript" src="{{asset('assets/front/js/plugins.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/back/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/front/js/scripts.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/front/js/lazy.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/front/js/lazy.plugin.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/front/js/myscript.js?v=') . time()}}"></script>
+<script defer type="text/javascript" src="{{asset('assets/front/js/plugins.min.js')}}"></script>
+<script defer type="text/javascript" src="{{asset('assets/back/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+<script defer type="text/javascript" src="{{asset('assets/front/js/scripts.min.js')}}"></script>
+<script defer type="text/javascript" src="{{asset('assets/front/js/lazy.min.js')}}"></script>
+<script defer type="text/javascript" src="{{asset('assets/front/js/lazy.plugin.js')}}"></script>
+<script defer type="text/javascript" src="{{asset('assets/front/js/myscript.js?v=') . time()}}"></script>
 @yield('script')
 
 @if($setting->is_facebook_messenger	== '1')
@@ -801,8 +806,8 @@ body_theme4
             }
         }
     </style>
-    <a href="https://wa.me/8801410699221" class="whatsapp-fab" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-whatsapp"></i>
+    <a href="https://wa.me/8801410699221" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
     </a>
 
 </body>

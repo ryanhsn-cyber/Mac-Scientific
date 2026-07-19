@@ -115,9 +115,9 @@
 
                 <div class="product-thumbnails insize">
                     <div class="product-details-slider owl-carousel">
-                        <div class="item"><img src="{{asset('assets/images/'.$item->photo)}}" alt="zoom" /></div>
+                        <div class="item"><img src="{{asset('assets/images/'.$item->photo)}}" alt="{{$item->name}}" fetchpriority="high" /></div>
                         @foreach ($galleries as $key => $gallery)
-                        <div class="item"><img src="{{asset('assets/images/'.$gallery->photo)}}" alt="zoom" /></div>
+                        <div class="item"><img src="{{asset('assets/images/'.$gallery->photo)}}" alt="{{$item->name}} Gallery Image {{$key + 1}}" loading="lazy" /></div>
                         @endforeach
                     </div>
                 </div>
@@ -171,7 +171,7 @@
                     <div style="width: 40px; height: 1px; background-color: #e0e0e0;"></div>
                 </div>
                 <div class="d-flex align-items-center justify-content-center flex-wrap" style="gap: 8px;">
-                    <img class="d-block" src="{{ $setting->footer_gateway_img ? asset('assets/images/'.$setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}" style="max-height: 32px; object-fit: contain;">
+                    <img class="d-block" src="{{ $setting->footer_gateway_img ? asset('assets/images/'.$setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}" style="max-height: 32px; object-fit: contain;" alt="Payment Methods" loading="lazy">
                     <div style="border: 1px solid #e0e0e0; border-radius: 4px; background-color: #fff; height: 32px; padding: 0 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
                         <i class="fas fa-hand-holding-usd text-success" style="font-size: 15px; margin-right: 5px;"></i>
                         <span style="font-size: 11px; font-weight: 700; color: #333;">COD</span>
