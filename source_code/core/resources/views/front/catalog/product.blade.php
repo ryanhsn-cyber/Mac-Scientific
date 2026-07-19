@@ -152,8 +152,8 @@
         }
         @endphp
         <!-- Product Info-->
-        <div class="col-xxl-7 col-lg-6 col-md-6 d-flex flex-column">
-            <div class="details-page-top-right-content d-flex align-items-start" style="height: auto; flex-grow: 1;">
+        <div class="col-xxl-7 col-lg-6 col-md-6">
+            <div class="details-page-top-right-content d-flex align-items-start" style="height: max-content;">
                 <div class="div w-100">
                     <input type="hidden" id="item_id" value="{{$item->id}}">
                     <input type="hidden" id="demo_price" value="{{PriceHelper::setConvertPrice($item->discount_price)}}">
