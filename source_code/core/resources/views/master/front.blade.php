@@ -59,6 +59,11 @@
         width: auto !important;
         max-width: 250px !important;
     }
+    /* Hero Slider Border Radius */
+    .hero-slider, .heroarea-slider {
+        border-radius: 12px !important;
+        overflow: hidden !important;
+    }
     .site-header .site-branding .site-logo img {
         width: auto !important;
         max-height: 80px !important;
