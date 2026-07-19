@@ -108,3 +108,4 @@ N/A
 - [x] Fixed `cod_amount` validation error in Steadfast Courier API integration by sending unformatted numeric values instead of comma-formatted strings.
 - [x] Determine user requirements for further development or production deployment (Deployed to cPanel).
 - [x] Standardized hero slider layout across all themes to match header navigation max-width constraints (boxed layout instead of full-width).
+- [x] Applied a 12px border-radius to the hero slider wrapper for a modern curved look.

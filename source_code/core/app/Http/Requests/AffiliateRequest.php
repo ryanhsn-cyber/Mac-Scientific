@@ -37,7 +37,7 @@ class AffiliateRequest extends FormRequest
             'sort_details'    => 'required',
             'discount_price'  => 'required|max:50',
             'previous_price'  => 'max:50',
-            'photo'           => $required, 'mimes:jpeg,jpg,png,svg'
+            'photo'           => $required, 'mimes:jpeg,jpg,png,svg,avif,webp'
         ];
     }
 
@@ -60,7 +60,7 @@ class AffiliateRequest extends FormRequest
             'sort_details.required'    =>  __('Sort Description field is required.'),
             'discount_price.required'  =>  __('Current Price field is required.'),
             'photo.required'           =>  __('Image field is required.'),
-            'photo.mimes'              =>  __('Image type must be jpg,jpeg,png,svg.')
+            'photo.mimes'              =>  __('Image type must be jpg,jpeg,png,svg,avif,webp.')
         ];
     }
 

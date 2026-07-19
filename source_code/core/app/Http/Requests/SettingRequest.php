@@ -34,15 +34,15 @@ class SettingRequest extends FormRequest
                 'friday_end' => 'required|max:255',
                 'satureday_start' => 'required|max:255',
                 'satureday_end' => 'required|max:255',
-                'logo' => 'mimes:jpeg,jpg,png,svg',
-                'loader' => 'mimes:jpeg,jpg,png,svg,gif',
-                'favicon' => 'mimes:jpeg,jpg,png,svg,ico',
-                'feature_image' => 'mimes:jpeg,jpg,png,svg',
-                'home_background' => 'mimes:jpeg,jpg,png,svg',
-                'breadcumb_background' => 'mimes:jpeg,jpg,png,svg',
-                'footer_background' => 'mimes:jpeg,jpg,png,svg',
-                'popup_banner' => 'mimes:jpeg,jpg,png,svg',
-                'footer_gateway_img' => 'mimes:jpeg,jpg,png,svg'
+                'logo' => 'mimes:jpeg,jpg,png,svg,avif,webp',
+                'loader' => 'mimes:jpeg,jpg,png,svg,avif,webp,gif',
+                'favicon' => 'mimes:jpeg,jpg,png,svg,avif,webp,ico',
+                'feature_image' => 'mimes:jpeg,jpg,png,svg,avif,webp',
+                'home_background' => 'mimes:jpeg,jpg,png,svg,avif,webp',
+                'breadcumb_background' => 'mimes:jpeg,jpg,png,svg,avif,webp',
+                'footer_background' => 'mimes:jpeg,jpg,png,svg,avif,webp',
+                'popup_banner' => 'mimes:jpeg,jpg,png,svg,avif,webp',
+                'footer_gateway_img' => 'mimes:jpeg,jpg,png,svg,avif,webp'
             ];
         }else{
             return [
@@ -60,14 +60,14 @@ class SettingRequest extends FormRequest
     public function messages()
     {
         return [
-            'logo.mimes'    => __('Logo Image type must be jpg,jpeg,png,svg.'),
-            'loader.mimes'    => __('Loader Image type must be jpg,jpeg,png,svg,gif.'),
-            'favicon.mimes'    => __('Favicon Image type must be jpg,jpeg,png,svg,ico.'),
-            'feature_image.mimes'    => __('Feature Image type must be jpg,jpeg,png,svg.'),
-            'home_background.mimes'    => __('Background Image type must be jpg,jpeg,png,svg.'),
-            'breadcumb_background.mimes'    => __('Background Image type must be jpg,jpeg,png,svg.'),
-            'footer_background.mimes'    => __('Background Image type must be jpg,jpeg,png,svg.'),
-            'popup_banner.mimes'    => __('Popup Banner must be jpg,jpeg,png,svg.'),
+            'logo.mimes'    => __('Logo Image type must be jpg,jpeg,png,svg,avif,webp.'),
+            'loader.mimes'    => __('Loader Image type must be jpg,jpeg,png,svg,gif,avif,webp.'),
+            'favicon.mimes'    => __('Favicon Image type must be jpg,jpeg,png,svg,ico,avif,webp.'),
+            'feature_image.mimes'    => __('Feature Image type must be jpg,jpeg,png,svg,avif,webp.'),
+            'home_background.mimes'    => __('Background Image type must be jpg,jpeg,png,svg,avif,webp.'),
+            'breadcumb_background.mimes'    => __('Background Image type must be jpg,jpeg,png,svg,avif,webp.'),
+            'footer_background.mimes'    => __('Background Image type must be jpg,jpeg,png,svg,avif,webp.'),
+            'popup_banner.mimes'    => __('Popup Banner must be jpg,jpeg,png,svg,avif,webp.'),
         ];
     }
 

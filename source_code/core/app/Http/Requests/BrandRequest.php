@@ -27,7 +27,7 @@ class BrandRequest extends FormRequest
         $required = $this->brand ? '' : 'required';
 
         return [
-            'photo'      => [$required,'mimes:jpeg,jpg,png,svg'],
+            'photo'      => [$required,'mimes:jpeg,jpg,png,svg,avif,webp'],
             'name'      => 'required|max:255',
             'slug'      => [$required,'unique:brands,slug'. $id,'regex:/^[a-zA-Z0-9-]+$/'],
         ];

@@ -24,7 +24,7 @@ class PaymentSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo'  => 'mimes:jpeg,jpg,png,svg'
+            'photo'  => 'mimes:jpeg,jpg,png,svg,avif,webp'
         ];
     }
 
@@ -36,7 +36,7 @@ class PaymentSettingRequest extends FormRequest
     public function messages()
     {
         return [
-            'photo.mimes'    => __('Image type must be jpg,jpeg,png,svg.')
+            'photo.mimes'    => __('Image type must be jpg,jpeg,png,svg,avif,webp.')
         ];
     }
 

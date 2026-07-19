@@ -29,7 +29,7 @@ class CategoryRequest extends FormRequest
 
         return [
             'slug'      => [$required,'unique:categories,slug'. $id,'regex:/^[a-zA-Z0-9-]+$/'],
-            'photo'     => [$required,'mimes:jpeg,jpg,png,svg'],
+            'photo'     => [$required,'mimes:jpeg,jpg,png,svg,avif,webp'],
             'name'      => 'required|max:255',
             'meta_keywords'=> 'max:255',
         ];
@@ -47,7 +47,7 @@ class CategoryRequest extends FormRequest
             'slug.unique'    => __('This slug has already been taken.'),
             'slug.regex'     => __('Slug Must Not Have Any Special Characters.'),
             'photo.required' => __('Image field is required.'),
-            'photo.mimes'    => __('Image type must be jpg,jpeg,png,svg.'),
+            'photo.mimes'    => __('Image type must be jpg,jpeg,png,svg,avif,webp.'),
         ];
     }
 }

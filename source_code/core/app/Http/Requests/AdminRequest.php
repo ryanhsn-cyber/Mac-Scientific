@@ -29,7 +29,7 @@ class AdminRequest extends FormRequest
 
         return [
             'email'      => [$required,'unique:admins,email'. $id],
-            'photo'     => [$required,'mimes:jpeg,jpg,png,svg']
+            'photo'     => [$required,'mimes:jpeg,jpg,png,svg,avif,webp']
         ];
     }
 
@@ -43,7 +43,7 @@ class AdminRequest extends FormRequest
         return [
             'email.unique'    => __('This email has already been taken.'),
             'photo.required' => __('Image field is required.'),
-            'photo.mimes'    => __('Image type must be jpg,jpeg,png,svg.'),
+            'photo.mimes'    => __('Image type must be jpg,jpeg,png,svg,avif,webp.'),
         ];
     }
 }

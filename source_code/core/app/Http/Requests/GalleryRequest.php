@@ -24,7 +24,7 @@ class GalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'galleries.*' => 'mimes:jpeg,jpg,png,svg'
+            'galleries.*' => 'mimes:jpeg,jpg,png,svg,avif,webp'
         ];
     }
 
@@ -36,7 +36,7 @@ class GalleryRequest extends FormRequest
     public function messages()
     {
         return [
-            'galleries.*.mimes'    => __('Each gallery image must be jpg,jpeg,png,svg.')
+            'galleries.*.mimes'    => __('Each gallery image must be jpg,jpeg,png,svg,avif,webp.')
         ];
     }
 
