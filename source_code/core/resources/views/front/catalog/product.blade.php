@@ -399,50 +399,51 @@
                             @endif
                         </div>
                     </div>
+                </div> <!-- Closes div w-100 -->
+            </div> <!-- Closes details-page-top-right-content -->
 
-                    <!-- Delivery & Warranty Info -->
-                    <div class="row mb-4">
-                        <div class="col-md-6 mb-3 mb-md-0 pr-md-2">
-                            <div class="p-3 d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fafafa; height: 100%;">
-                                <i class="fas fa-truck text-primary mr-3" style="font-size: 24px;"></i>
-                                <div>
-                                    <div class="font-weight-bold text-dark mb-1" style="font-size: 13px;">Delivery Information</div>
-                                    <div style="font-size: 11px; color: #555; line-height: 1.4;">
-                                        Dhaka: 1 Day Delivery<br>
-                                        Outside Dhaka: 2-3 Days<br>
-                                        Cash on Delivery Available
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 pl-md-2">
-                            <div class="p-3 d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fafafa; height: 100%;">
-                                <i class="fas fa-shield-alt text-primary mr-3" style="font-size: 24px;"></i>
-                                <div>
-                                    <div class="font-weight-bold text-dark mb-1" style="font-size: 13px;">Warranty</div>
-                                    <div style="font-size: 11px; color: #555; line-height: 1.4;">
-                                        6 Months Warranty<br>
-                                        Service Support<br>
-                                        Genuine Spare Parts
-                                    </div>
+            <!-- Delivery, Warranty, Payment Modules (Outside the white box but inside right column) -->
+            <div class="mt-4">
+                <!-- Delivery & Warranty Info -->
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3 mb-md-0 pr-md-2">
+                        <div class="p-3 d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fafafa; height: 100%;">
+                            <i class="fas fa-truck text-primary mr-3" style="font-size: 24px;"></i>
+                            <div>
+                                <div class="font-weight-bold text-dark mb-1" style="font-size: 13px;">Delivery Information</div>
+                                <div style="font-size: 11px; color: #555; line-height: 1.4;">
+                                    Dhaka: 1 Day Delivery<br>
+                                    Outside Dhaka: 2-3 Days<br>
+                                    Cash on Delivery Available
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Payment Methods -->
-                    <div class="payment-methods p-3 mb-4" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fff;">
-                        <div class="font-weight-bold text-dark mb-3" style="font-size: 13px;">Payment Methods</div>
-                        <div class="d-flex align-items-center justify-content-center flex-wrap" style="gap: 8px;">
-                            <img class="d-block" src="{{ $setting->footer_gateway_img ? asset('assets/images/'.$setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}" style="max-height: 35px; object-fit: contain;">
-                            <div class="d-flex align-items-center justify-content-center" style="border: 1px solid #ddd; border-radius: 4px; background-color: #fff; height: 35px; padding: 0 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
-                                <i class="fas fa-hand-holding-usd text-success" style="font-size: 16px; margin-right: 6px;"></i>
-                                <span style="font-size: 11px; font-weight: 700; color: #555;">COD</span>
+                    <div class="col-md-6 pl-md-2">
+                        <div class="p-3 d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fafafa; height: 100%;">
+                            <i class="fas fa-shield-alt text-primary mr-3" style="font-size: 24px;"></i>
+                            <div>
+                                <div class="font-weight-bold text-dark mb-1" style="font-size: 13px;">Warranty</div>
+                                <div style="font-size: 11px; color: #555; line-height: 1.4;">
+                                    6 Months Warranty<br>
+                                    Service Support<br>
+                                    Genuine Spare Parts
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-
+                <!-- Payment Methods -->
+                <div class="payment-methods p-3 mb-4" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fff;">
+                    <div class="font-weight-bold text-dark mb-3" style="font-size: 13px;">Payment Methods</div>
+                    <div class="d-flex align-items-center justify-content-center flex-wrap" style="gap: 8px;">
+                        <img class="d-block" src="{{ $setting->footer_gateway_img ? asset('assets/images/'.$setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}" style="max-height: 35px; object-fit: contain;">
+                        <div class="d-flex align-items-center justify-content-center" style="border: 1px solid #ddd; border-radius: 4px; background-color: #fff; height: 35px; padding: 0 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                            <i class="fas fa-hand-holding-usd text-success" style="font-size: 16px; margin-right: 6px;"></i>
+                            <span style="font-size: 11px; font-weight: 700; color: #555;">COD</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
