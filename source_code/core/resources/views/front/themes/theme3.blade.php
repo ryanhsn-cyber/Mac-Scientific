@@ -30,11 +30,13 @@
     @if ($extra_settings->is_t3_slider == 1)
         <div  class="hero-area3" >
             <div class="background"></div>
-            <div class="heroarea-slider owl-carousel">
-                @foreach ($sliders as $slider)
-                <div class="item" style="background: url('{{ asset('assets/images/' . $slider->photo) }}')">
-                    <div class="container">
-                    <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="heroarea-slider owl-carousel">
+                            @foreach ($sliders as $slider)
+                            <div class="item" style="background: url('{{ asset('assets/images/' . $slider->photo) }}')">
+                                <div class="row">
                         <div class="col-xl-5 col-lg-6 d-flex align-self-center">
                             <div class="left-content color-white">
                                 <div class="content">
@@ -67,10 +69,12 @@
                             </div>
                         </div>
                         </div>
-                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-                @endforeach
             </div>
         </div>
     @endif

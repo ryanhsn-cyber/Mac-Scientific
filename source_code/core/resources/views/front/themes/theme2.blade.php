@@ -29,19 +29,19 @@
 
     @if ($extra_settings->is_t2_slider == 1)
         <div class="slider-area-wrapper mt-0">
-            <!-- Main Slider-->
-            <div class="hero-slider">
-                <div class="hero-slider-main owl-carousel dots-inside" >
-                    @foreach ($sliders as $slider)
-                        <div class="item
-                            @if (DB::table('languages')->where('is_default',1)->first()->rtl == 1)
-                            d-flex justify-content-end
-                            @endif
-                            "
-                            style="background: url('{{ asset('assets/images/' . $slider->photo) }}')">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-8">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Main Slider-->
+                        <div class="hero-slider">
+                            <div class="hero-slider-main owl-carousel dots-inside" >
+                                @foreach ($sliders as $slider)
+                                    <div class="item
+                                        @if (DB::table('languages')->where('is_default',1)->first()->rtl == 1)
+                                        d-flex justify-content-end
+                                        @endif
+                                        "
+                                        style="background: url('{{ asset('assets/images/' . $slider->photo) }}')">
                                         <div class="item-inner">
                                             <div class="from-bottom">
                                                 @if ($slider->logo)
@@ -52,13 +52,12 @@
                                                 <div class="title text-body"></div>
                                                 <div class="subtitle text-body"></div>
                                             </div>
-              
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
-                    @endforeach
+                    </div>
                 </div>
             </div>
         </div>
