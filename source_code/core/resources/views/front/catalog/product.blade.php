@@ -130,51 +130,51 @@
             @endif
         </div>
 
-        <div class="mt-4 mb-4">
-            <div class="row gx-2 mb-3">
-                <div class="col-md-6 mb-2 mb-md-0 pr-md-1">
-                    <div style="border: 1px solid #eaeaea; border-radius: 8px; background-color: #fff; padding: 15px; height: 100%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                        <div style="margin-right: 15px; color: #0d47a1;">
-                            <i class="fas fa-truck" style="font-size: 45px;"></i>
+        <div class="mt-3 mb-3">
+            <div class="row gx-2 mb-2">
+                <div class="col-sm-6 mb-2 mb-sm-0 pr-sm-1">
+                    <div style="border: 1px solid #eaeaea; border-radius: 6px; background-color: #fff; padding: 10px 8px; height: 100%; display: flex; align-items: flex-start; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                        <div style="margin-right: 8px; color: #0d47a1; margin-top: 2px;">
+                            <i class="fas fa-truck" style="font-size: 24px;"></i>
                         </div>
                         <div>
-                            <div style="font-weight: 700; font-size: 16px; color: #222; margin-bottom: 5px;">Delivery Information</div>
-                            <div style="font-size: 13px; color: #444; line-height: 1.8;">
-                                <div><i class="fas fa-check-circle" style="color: #0d47a1; margin-right: 5px;"></i> Dhaka: 1 Day Delivery</div>
-                                <div><i class="fas fa-check-circle" style="color: #0d47a1; margin-right: 5px;"></i> Outside Dhaka: 2-3 Days</div>
-                                <div><i class="fas fa-check-circle" style="color: #0d47a1; margin-right: 5px;"></i> Cash on Delivery Available</div>
+                            <div style="font-weight: 700; font-size: 12px; color: #222; margin-bottom: 4px;">Delivery Info</div>
+                            <div style="font-size: 10.5px; color: #555; line-height: 1.4;">
+                                <div style="margin-bottom: 2px;"><i class="fas fa-check-circle" style="color: #0d47a1; font-size: 10px; margin-right: 4px;"></i>Dhaka: 1 Day</div>
+                                <div style="margin-bottom: 2px;"><i class="fas fa-check-circle" style="color: #0d47a1; font-size: 10px; margin-right: 4px;"></i>Outside: 2-3 Days</div>
+                                <div><i class="fas fa-check-circle" style="color: #0d47a1; font-size: 10px; margin-right: 4px;"></i>COD Available</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 pl-md-1">
-                    <div style="border: 1px solid #eaeaea; border-radius: 8px; background-color: #fff; padding: 15px; height: 100%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                        <div style="margin-right: 15px; color: #0d47a1;">
-                            <i class="fas fa-shield-alt" style="font-size: 45px;"></i>
+                <div class="col-sm-6 pl-sm-1">
+                    <div style="border: 1px solid #eaeaea; border-radius: 6px; background-color: #fff; padding: 10px 8px; height: 100%; display: flex; align-items: flex-start; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                        <div style="margin-right: 8px; color: #0d47a1; margin-top: 2px;">
+                            <i class="fas fa-shield-alt" style="font-size: 24px;"></i>
                         </div>
                         <div>
-                            <div style="font-weight: 700; font-size: 16px; color: #222; margin-bottom: 5px;">Warranty</div>
-                            <div style="font-size: 13px; color: #444; line-height: 1.8;">
-                                <div><i class="fas fa-check-circle" style="color: #0d47a1; margin-right: 5px;"></i> 6 Months Warranty</div>
-                                <div><i class="fas fa-check-circle" style="color: #0d47a1; margin-right: 5px;"></i> Service Support</div>
-                                <div><i class="fas fa-check-circle" style="color: #0d47a1; margin-right: 5px;"></i> Genuine Spare Parts</div>
+                            <div style="font-weight: 700; font-size: 12px; color: #222; margin-bottom: 4px;">Warranty</div>
+                            <div style="font-size: 10.5px; color: #555; line-height: 1.4;">
+                                <div style="margin-bottom: 2px;"><i class="fas fa-check-circle" style="color: #0d47a1; font-size: 10px; margin-right: 4px;"></i>6 Months Warranty</div>
+                                <div style="margin-bottom: 2px;"><i class="fas fa-check-circle" style="color: #0d47a1; font-size: 10px; margin-right: 4px;"></i>Service Support</div>
+                                <div><i class="fas fa-check-circle" style="color: #0d47a1; font-size: 10px; margin-right: 4px;"></i>Genuine Parts</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div style="border: 1px solid #eaeaea; border-radius: 8px; background-color: #fff; padding: 15px 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <div style="display: flex; align-items: center; margin-bottom: 15px; justify-content: center;">
-                    <div style="width: 60px; height: 1px; background-color: #eaeaea;"></div>
-                    <div style="padding: 0 15px; font-weight: 700; font-size: 16px; color: #222;">Payment Methods</div>
-                    <div style="width: 60px; height: 1px; background-color: #eaeaea;"></div>
+            <div style="border: 1px solid #eaeaea; border-radius: 6px; background-color: #fff; padding: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: center;">
+                    <div style="width: 40px; height: 1px; background-color: #eaeaea;"></div>
+                    <div style="padding: 0 10px; font-weight: 700; font-size: 12px; color: #222;">Payment Methods</div>
+                    <div style="width: 40px; height: 1px; background-color: #eaeaea;"></div>
                 </div>
-                <div class="d-flex align-items-center justify-content-center flex-wrap" style="gap: 8px;">
-                    <img class="d-block" src="{{ $setting->footer_gateway_img ? asset('assets/images/'.$setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}" style="max-height: 40px; object-fit: contain;">
-                    <div style="border: 1px solid #eaeaea; border-radius: 6px; background-color: #fff; height: 40px; padding: 0 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
-                        <i class="fas fa-hand-holding-usd text-success" style="font-size: 18px; margin-right: 6px;"></i>
-                        <span style="font-size: 12px; font-weight: 700; color: #333;">COD</span>
+                <div class="d-flex align-items-center justify-content-center flex-wrap" style="gap: 6px;">
+                    <img class="d-block" src="{{ $setting->footer_gateway_img ? asset('assets/images/'.$setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}" style="max-height: 24px; object-fit: contain;">
+                    <div style="border: 1px solid #eaeaea; border-radius: 4px; background-color: #fff; height: 24px; padding: 0 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+                        <i class="fas fa-hand-holding-usd text-success" style="font-size: 12px; margin-right: 4px;"></i>
+                        <span style="font-size: 10px; font-weight: 700; color: #333;">COD</span>
                     </div>
                 </div>
             </div>
