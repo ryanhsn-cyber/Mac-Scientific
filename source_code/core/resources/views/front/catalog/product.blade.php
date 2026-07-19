@@ -399,8 +399,6 @@
                             @endif
                         </div>
                     </div>
-                </div> <!-- Closes div w-100 -->
-            </div> <!-- Closes details-page-top-right-content -->
 
             <!-- Delivery, Warranty, Payment Modules (Outside the white box but inside right column) -->
             <div class="mt-4">
@@ -444,6 +442,8 @@
                             <span style="font-size: 11px; font-weight: 700; color: #555;">COD</span>
                         </div>
                     </div>
+                </div>
+            </div>
                 </div>
             </div>
         </div>
