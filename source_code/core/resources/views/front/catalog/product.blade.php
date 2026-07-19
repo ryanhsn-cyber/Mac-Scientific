@@ -129,30 +129,6 @@
             </div>
             @endif
         </div>
-        
-        <!-- Store Stats Box (Alibaba Style) -->
-        <div class="store-stats-box mt-4 p-3" style="background-color: #f8f9fa; border-radius: 8px;">
-            <div class="row text-left">
-                <div class="col-6 col-sm-3 mb-3 mb-sm-0">
-                    <div class="stat-value font-weight-bold text-dark" style="font-size: 15px;">{{ number_format($item->reviews->avg('rating') ?: 0, 1) }}/5 <span class="text-muted font-weight-normal" style="font-size: 13px; text-decoration: underline;">({{ $item->reviews->count() }})</span></div>
-                    <div class="stat-label text-muted" style="font-size: 12px; line-height: 1.3; margin-top: 2px;">Product rating</div>
-                </div>
-                <div class="col-6 col-sm-3 mb-3 mb-sm-0">
-                    <div class="stat-value font-weight-bold text-dark" style="font-size: 15px;">{!! $setting->store_response_time !!}</div>
-                    <div class="stat-label text-muted" style="font-size: 12px; line-height: 1.3; margin-top: 2px;">Response Time</div>
-                </div>
-                <div class="col-6 col-sm-3">
-                    <div class="stat-value font-weight-bold text-dark" style="font-size: 15px;">{!! $setting->store_on_time_delivery !!}</div>
-                    <div class="stat-label text-muted" style="font-size: 12px; line-height: 1.3; margin-top: 2px;">On-time delivery<br>rate</div>
-                </div>
-                <div class="col-6 col-sm-3">
-                    <div class="stat-value font-weight-bold text-dark" style="font-size: 15px;">{!! $setting->store_reorder_rate !!}</div>
-                    <div class="stat-label text-muted" style="font-size: 12px; line-height: 1.3; margin-top: 2px;">Reorder rate</div>
-                </div>
-            </div>
-        </div>
-
-        
       </div>
 
         @php
@@ -199,7 +175,16 @@
                     <input type="hidden" value="{{PriceHelper::setCurrencyValue()}}" id="set_currency_val">
                     <input type="hidden" value="{{$setting->currency_direction}}" id="currency_direction">
                     <h4 class="mb-2 p-title-main" style="font-weight: 700; color: #1a1a1a;">{{$item->name}}</h4>
+                    
+                    @if($item->brand)
+                    <div class="mb-2 d-flex align-items-center">
+                        <span class="text-muted mr-2" style="font-size: 14px;">Brand:</span>
+                        <a href="{{route('front.catalog').'?brand='.$item->brand->slug}}" class="font-weight-bold" style="font-size: 14px; color: #0d47a1;">{{$item->brand->name}}</a>
+                    </div>
+                    @endif
+
                     <p class="text-muted" style="font-size: 15px; margin-bottom: 15px;">{{$item->sort_details}}</p>
+
 
                     <div class="mb-3 d-flex align-items-center flex-wrap" style="gap: 10px;">
                         <div class="rating-stars d-inline-block" style="color: #ffb800; font-size: 14px;">
@@ -372,11 +357,10 @@
 
                     <!-- Action Buttons -->
                     <div class="action-buttons mb-4 pt-3" style="border-top: 1px solid #eee;">
-                        
-                        <div class="d-flex mb-3 flex-wrap" style="gap: 15px;">
+                        <div class="d-flex flex-column w-100" style="gap: 12px;">
                             @if ($item->item_type == 'normal')
-                            <div class="d-flex align-items-start pt-1">
-                                <span class="font-weight-bold mr-3" style="font-size: 15px; color: #333; line-height: 44px;">Quantity</span>
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="font-weight-bold mr-3" style="font-size: 15px; color: #333;">Quantity</span>
                                 <div class="qtySelector product-quantity d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 4px; overflow: hidden; height: 44px; width: 110px;">
                                     <span class="decreaseQty subclick" style="width: 35px; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #f8f9fa; color: #333;"><i class="fas fa-minus" style="font-size: 12px;"></i></span>
                                     <input type="text" class="qtyValue cart-amount text-center font-weight-bold m-0" value="1" style="width: 40px; height: 100%; border: none; border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0; padding: 0;">
@@ -386,21 +370,20 @@
                             </div>
                             @endif
 
-                            <div class="d-flex flex-column flex-grow-1" style="gap: 10px;">
-                                @php
-                                    $wa_phone = '8801410699221';
-                                @endphp
-                                @if ($item->item_type != 'affiliate')
-                                    @if ($item->is_stock())
-                                    <button class="btn m-0 w-100 d-flex align-items-center justify-content-center" id="add_to_cart" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
-                                        <i class="fas fa-shopping-cart" style="margin-right: 8px;"></i><span>Add to Cart</span>
-                                    </button>
-                                    <button type="button" onclick="window.open('https://wa.me/{{ $wa_phone }}?text={{ urlencode('Hello, I want to order this product: ' . $item->name . ' - ' . route('front.product', $item->slug)) }}', '_blank')" class="btn m-0 w-100 d-flex align-items-center justify-content-center" style="background-color: #25D366 !important; border-color: #25D366 !important; color: #ffffff !important; height: 44px; font-weight: 600 !important; border-radius: 6px; box-shadow: none;">
-                                        <i class="fab fa-whatsapp" style="font-size: 18px; color: #ffffff !important; margin-right: 8px;"></i><span style="font-size: 15px; color: #ffffff !important;">Order via WhatsApp</span>
-                                    </button>
-                                    <button class="btn m-0 w-100 d-flex align-items-center justify-content-center" id="but_to_cart" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
-                                        <i class="fas fa-bolt" style="margin-right: 8px;"></i><span>Buy Now</span>
-                                    </button>
+                            @php
+                                $wa_phone = '8801410699221';
+                            @endphp
+                            @if ($item->item_type != 'affiliate')
+                                @if ($item->is_stock())
+                                <button class="btn m-0 w-100 d-flex align-items-center justify-content-center" id="add_to_cart" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
+                                    <i class="fas fa-shopping-cart" style="margin-right: 8px;"></i><span>Add to Cart</span>
+                                </button>
+                                <button type="button" onclick="window.open('https://wa.me/{{ $wa_phone }}?text={{ urlencode('Hello, I want to order this product: ' . $item->name . ' - ' . route('front.product', $item->slug)) }}', '_blank')" class="btn m-0 w-100 d-flex align-items-center justify-content-center" style="background-color: #25D366 !important; border-color: #25D366 !important; color: #ffffff !important; height: 44px; font-weight: 600 !important; border-radius: 6px; box-shadow: none;">
+                                    <i class="fab fa-whatsapp" style="font-size: 18px; color: #ffffff !important; margin-right: 8px;"></i><span style="font-size: 15px; color: #ffffff !important;">Order via WhatsApp</span>
+                                </button>
+                                <button class="btn m-0 w-100 d-flex align-items-center justify-content-center" id="but_to_cart" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
+                                    <i class="fas fa-bolt" style="margin-right: 8px;"></i><span>Buy Now</span>
+                                </button>
                                     @else
                                     <button class="btn btn-secondary m-0 w-100 d-flex align-items-center justify-content-center" style="height: 44px; font-weight: 600; border-radius: 6px;" disabled>
                                         <i class="fas fa-shopping-cart" style="margin-right: 8px;"></i><span>Out of stock</span>
@@ -414,18 +397,17 @@
                                         <i class="fas fa-shopping-cart mr-2"></i><span>Buy Now</span>
                                     </a>
                                 @endif
-                            </div>
                         </div>
                     </div>
 
                     <!-- Delivery & Warranty Info -->
                     <div class="row mb-4">
-                        <div class="col-6 pr-2">
+                        <div class="col-md-6 mb-3 mb-md-0 pr-md-2">
                             <div class="p-3 d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fafafa; height: 100%;">
                                 <i class="fas fa-truck text-primary mr-3" style="font-size: 24px;"></i>
                                 <div>
-                                    <div class="font-weight-bold text-dark mb-1" style="font-size: 12px;">Delivery Information</div>
-                                    <div style="font-size: 10px; color: #555; line-height: 1.4;">
+                                    <div class="font-weight-bold text-dark mb-1" style="font-size: 13px;">Delivery Information</div>
+                                    <div style="font-size: 11px; color: #555; line-height: 1.4;">
                                         Dhaka: 1 Day Delivery<br>
                                         Outside Dhaka: 2-3 Days<br>
                                         Cash on Delivery Available
@@ -433,12 +415,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 pl-2">
+                        <div class="col-md-6 pl-md-2">
                             <div class="p-3 d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fafafa; height: 100%;">
                                 <i class="fas fa-shield-alt text-primary mr-3" style="font-size: 24px;"></i>
                                 <div>
-                                    <div class="font-weight-bold text-dark mb-1" style="font-size: 12px;">Warranty</div>
-                                    <div style="font-size: 10px; color: #555; line-height: 1.4;">
+                                    <div class="font-weight-bold text-dark mb-1" style="font-size: 13px;">Warranty</div>
+                                    <div style="font-size: 11px; color: #555; line-height: 1.4;">
                                         6 Months Warranty<br>
                                         Service Support<br>
                                         Genuine Spare Parts
