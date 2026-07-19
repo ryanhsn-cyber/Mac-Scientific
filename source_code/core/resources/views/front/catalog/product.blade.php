@@ -69,7 +69,7 @@
 <div class="container padding-bottom-1x mb-1">
     <div class="row">
       <!-- Poduct Gallery-->
-      <div class="col-xxl-5 col-lg-6 col-md-6">
+      <div class="col-xxl-5 col-lg-6 col-md-6 d-flex flex-column justify-content-between">
         @php
             $video_id = '';
             if ($item->video) {
@@ -130,10 +130,10 @@
             @endif
         </div>
 
-        <div class="mt-3 mb-3">
+        <div class="mt-3">
             <div class="row gx-2 mb-2">
                 <div class="col-sm-6 mb-2 mb-sm-0 pr-sm-1">
-                    <div style="border: 1px solid #e0e0e0; border-radius: 6px; background-color: #fff; padding: 10px 8px; height: 100%; display: flex; align-items: flex-start; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                    <div style="border: 1px solid #e0e0e0; border-radius: 10px; background-color: #fff; padding: 10px 8px; height: 100%; display: flex; align-items: flex-start; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
                         <div style="margin-right: 8px; color: #0d47a1; margin-top: 2px;">
                             <i class="fas fa-truck" style="font-size: 24px;"></i>
                         </div>
@@ -148,7 +148,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6 pl-sm-1">
-                    <div style="border: 1px solid #e0e0e0; border-radius: 6px; background-color: #fff; padding: 10px 8px; height: 100%; display: flex; align-items: flex-start; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                    <div style="border: 1px solid #e0e0e0; border-radius: 10px; background-color: #fff; padding: 10px 8px; height: 100%; display: flex; align-items: flex-start; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
                         <div style="margin-right: 8px; color: #0d47a1; margin-top: 2px;">
                             <i class="fas fa-shield-alt" style="font-size: 24px;"></i>
                         </div>
@@ -164,7 +164,7 @@
                 </div>
             </div>
 
-            <div style="border: 1px solid #e0e0e0; border-radius: 6px; background-color: #fff; padding: 15px 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+            <div style="border: 1px solid #e0e0e0; border-radius: 10px; background-color: #fff; padding: 15px 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
                 <div style="display: flex; align-items: center; margin-bottom: 12px; justify-content: center;">
                     <div style="width: 40px; height: 1px; background-color: #e0e0e0;"></div>
                     <div style="padding: 0 10px; font-weight: 700; font-size: 12px; color: #222;">Payment Methods</div>
