@@ -111,3 +111,4 @@ N/A
 - [x] Applied a 12px border-radius to the hero slider wrapper for a modern curved look.
 - [x] Implemented automatic AVIF to WebP image conversion interceptor for seamless media optimization.
 - [x] Integrated product media tab system (Photos/Video) on product details page with lazy-loaded YouTube embeds.
+- [x] Refactored Product Details layout (Removed left-column stats, stacked action buttons, responsive 50/50 delivery/warranty blocks).
