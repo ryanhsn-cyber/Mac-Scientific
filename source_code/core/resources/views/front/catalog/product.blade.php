@@ -129,7 +129,8 @@
             </div>
             @endif
         </div>
-      </div>
+        
+        </div>
 
         @php
         function renderStarRating($rating,$maxRating=5) {
@@ -184,7 +185,6 @@
                     @endif
 
                     <p class="text-muted" style="font-size: 15px; margin-bottom: 15px;">{{$item->sort_details}}</p>
-
 
                     <div class="mb-3 d-flex align-items-center flex-wrap" style="gap: 10px;">
                         <div class="rating-stars d-inline-block" style="color: #ffb800; font-size: 14px;">
@@ -384,19 +384,19 @@
                                 <button class="btn m-0 w-100 d-flex align-items-center justify-content-center" id="but_to_cart" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px; box-shadow: none;">
                                     <i class="fas fa-bolt" style="margin-right: 8px;"></i><span>Buy Now</span>
                                 </button>
-                                    @else
-                                    <button class="btn btn-secondary m-0 w-100 d-flex align-items-center justify-content-center" style="height: 44px; font-weight: 600; border-radius: 6px;" disabled>
-                                        <i class="fas fa-shopping-cart" style="margin-right: 8px;"></i><span>Out of stock</span>
-                                    </button>
-                                    <button type="button" onclick="window.open('https://wa.me/{{ $wa_phone }}?text={{ urlencode('Hello, is this product available? ' . $item->name . ' - ' . route('front.product', $item->slug)) }}', '_blank')" class="btn m-0 w-100 d-flex align-items-center justify-content-center" style="background-color: #25D366 !important; border-color: #25D366 !important; color: #ffffff !important; height: 44px; font-weight: 600 !important; border-radius: 6px; box-shadow: none;">
-                                        <i class="fab fa-whatsapp" style="font-size: 18px; color: #ffffff !important; margin-right: 8px;"></i><span style="font-size: 15px; color: #ffffff !important;">Inquire via WhatsApp</span>
-                                    </button>
-                                    @endif
                                 @else
-                                    <a href="{{$item->affiliate_link}}" target="_blank" class="btn m-0 w-100 d-flex align-items-center justify-content-center" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px;">
-                                        <i class="fas fa-shopping-cart mr-2"></i><span>Buy Now</span>
-                                    </a>
+                                <button class="btn btn-secondary m-0 w-100 d-flex align-items-center justify-content-center" style="height: 44px; font-weight: 600; border-radius: 6px;" disabled>
+                                    <i class="fas fa-shopping-cart" style="margin-right: 8px;"></i><span>Out of stock</span>
+                                </button>
+                                <button type="button" onclick="window.open('https://wa.me/{{ $wa_phone }}?text={{ urlencode('Hello, is this product available? ' . $item->name . ' - ' . route('front.product', $item->slug)) }}', '_blank')" class="btn m-0 w-100 d-flex align-items-center justify-content-center" style="background-color: #25D366 !important; border-color: #25D366 !important; color: #ffffff !important; height: 44px; font-weight: 600 !important; border-radius: 6px; box-shadow: none;">
+                                    <i class="fab fa-whatsapp" style="font-size: 18px; color: #ffffff !important; margin-right: 8px;"></i><span style="font-size: 15px; color: #ffffff !important;">Inquire via WhatsApp</span>
+                                </button>
                                 @endif
+                            @else
+                                <a href="{{$item->affiliate_link}}" target="_blank" class="btn m-0 w-100 d-flex align-items-center justify-content-center" style="background-color: #0d47a1; color: #fff; height: 44px; font-weight: 600; border-radius: 6px;">
+                                    <i class="fas fa-shopping-cart mr-2"></i><span>Buy Now</span>
+                                </a>
+                            @endif
                         </div>
                     </div>
 
