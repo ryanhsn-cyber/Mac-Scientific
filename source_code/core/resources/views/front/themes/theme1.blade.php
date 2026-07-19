@@ -2,6 +2,9 @@
 @section('meta')
     <meta name="keywords" content="{{ $setting->meta_keywords }}">
     <meta name="description" content="{{ $setting->meta_description }}">
+    @if(isset($sliders) && count($sliders) > 0)
+        <link rel="preload" as="image" href="{{ asset('assets/images/' . $sliders[0]->photo) }}">
+    @endif
 @endsection
 
 @section('content')
@@ -63,7 +66,7 @@
                     @if (isset($hero_banner))
                     <div class="col-lg-4 d-none d-lg-block">
                         <a href="{{$hero_banner['url1']}}" class="sright-image">
-                            <img src="{{asset('assets/images/'.$hero_banner['img1'])}}" alt="">
+                            <img src="{{asset('assets/images/'.$hero_banner['img1'])}}" alt="Hero Banner 1" fetchpriority="high">
                             <div class="inner-content">
 
                                 @if (isset($hero_banner['subtitle1']))
@@ -76,7 +79,7 @@
                             </div>
                         </a>
                         <a href="{{$hero_banner['url2']}}" class="sright-image mb-0">
-                            <img src="{{asset('assets/images/'.$hero_banner['img2'])}}" alt="">
+                            <img src="{{asset('assets/images/'.$hero_banner['img2'])}}" alt="Hero Banner 2" fetchpriority="high">
                             <div class="inner-content">
                                 @if (isset($hero_banner['subtitle2']))
                                  <p></p>
@@ -102,7 +105,7 @@
                     @foreach ($services as $service)
                         <div class="col-lg-3 col-sm-6 text-center mb-30">
                             <div class="single-service single-service2">
-                                <img src="{{ asset('assets/images/'.$service->photo) }}" alt="Shipping">
+                                <img src="{{ asset('assets/images/'.$service->photo) }}" alt="Shipping" loading="lazy">
                                 <div class="content">
                                     <h6 class="mb-2">{{ $service->title }}</h6>
                                     <p class="text-sm text-muted mb-0">{{ $service->details }}</p>
@@ -386,7 +389,7 @@
                             <img src="/assets/images/featured-banner.png"
                                  alt="Regenerative Medicine - All About The Procedure And Treatment Options"
                                  class="img-fluid w-100"
-                                 style="border-radius: 8px; max-height: 320px; object-fit: cover;">
+                                 style="border-radius: 8px; max-height: 320px; object-fit: cover;" loading="lazy">
                         </a>
                     </div>
                 </div>
