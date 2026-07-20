@@ -170,7 +170,7 @@
                     <div class="col-lg-12">
                         <div class="main-content">
                             <div class="flash-deal-slider owl-carousel" >
-                                @foreach ($products->orderBy('id','DESC')->get()->where('is_type', 'flash_deal')->whereNotNull('date')->take(4) as $item)
+                                @foreach (\App\Models\Item::with('category')->whereStatus(1)->where('is_type', 'flash_deal')->whereNotNull('date')->orderBy('id','DESC')->take(4)->get() as $item)
                                     <div class="slider-item">
                                         <div class="product-card ">
                                             <div class="product-thumb">
@@ -297,7 +297,7 @@
         </div>
     @endif
 
-    @if ($extra_settings->is_t2_featured_product == 1 && $products->where('is_type', 'feature')->count() > 0)
+    @if ($extra_settings->is_t2_featured_product == 1 && \App\Models\Item::whereStatus(1)->where('is_type', 'feature')->exists())
         <section class="selected-product-section mt-50 theme2">
             <div class="container">
                 <div class="row">
@@ -312,7 +312,7 @@
                     <div class="col-lg-12" >
 
                         <div class="features-slider  owl-carousel" >
-                            @foreach ($products->orderBy('id','DESC')->get()->where('is_type', 'feature')->take(4) as $item)
+                            @foreach (\App\Models\Item::with('category')->whereStatus(1)->where('is_type', 'feature')->orderBy('id','DESC')->take(4)->get() as $item)
                                     <div class="slider-item">
                                         <div class="product-card ">
                                             <div class="product-thumb" >
@@ -419,7 +419,7 @@
         </div>
     </section>
 
-    @if ($extra_settings->is_t2_bestseller_product == 1 && $products->where('is_type', 'best')->count() > 0)
+    @if ($extra_settings->is_t2_bestseller_product == 1 && \App\Models\Item::whereStatus(1)->where('is_type', 'best')->exists())
         <section class="selected-product-section mt-50  theme2">
             <div class="container">
                 <div class="row">
@@ -432,7 +432,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="features-slider  owl-carousel" >
-                            @foreach ($products->orderBy('id','DESC')->get()->where('is_type', 'best')->take(4) as $item)
+                            @foreach (\App\Models\Item::with('category')->whereStatus(1)->where('is_type', 'best')->orderBy('id','DESC')->take(4)->get() as $item)
                                     <div class="slider-item">
                                         <div class="product-card ">
                                             <div class="product-thumb">
@@ -494,7 +494,7 @@
                     <div class="col-lg-12">
 
                         <div class="features-slider  owl-carousel" >
-                            @foreach ($products->orderBy('id','DESC')->get()->where('is_type', 'top')->take(4) as $item)
+                            @foreach (\App\Models\Item::with('category')->whereStatus(1)->where('is_type', 'top')->orderBy('id','DESC')->take(4)->get() as $item)
                                     <div class="slider-item">
                                         <div class="product-card ">
                                             <div class="product-thumb">
