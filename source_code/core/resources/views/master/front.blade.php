@@ -23,6 +23,9 @@
 <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/'.$setting->favicon)}}">
 <link rel="apple-touch-icon" sizes="167x167" href="{{asset('assets/images/'.$setting->favicon)}}">
 <!-- Preload Critical CSS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="preload" href="{{asset('assets/front/css/plugins.min.css')}}" as="style">
 <link rel="preload" href="{{asset('assets/front/css/styles.min.css')}}" as="style">
 <link rel="preload" href="{{asset('assets/front/css/responsive.css')}}" as="style">
@@ -35,9 +38,189 @@
 <link id="mainStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/styles.min.css')}}">
 
 <link id="responsiveStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/responsive.css')}}">
+<link rel="stylesheet" media="screen" href="{{asset('assets/front/css/paymentfont.min.css')}}">
 <!-- Color css -->
-<link href="{{ asset('assets/front/css/color.php?primary_color=').str_replace('#','',$setting->primary_color) }}" rel="stylesheet">
+<style>
+@php
+    $color = $setting->primary_color ?? '#FF6A00';
+@endphp
+.left-category-area .category-header h4,
+.section-title h2::before,
+.product-card .countdown span,
+.flash-deal-slider.owl-carousel .owl-nav div:hover,
+.features-slider.owl-carousel .owl-nav div:hover,
+.newproduct-slider.owl-carousel .owl-nav div:hover,
+.bestseller-slider.owl-carousel .owl-nav div:hover,
+.toprated-slider.owl-carousel .owl-nav div:hover,
+.pagination li a:hover, .pagination li span:hover,
+.pagination li.active span, .pagination li.active a,
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active,
+.u-d-d i,
+.details-page-top-right-content .countdown span,
+.mm-heading-area,
+.section-title .links a::before,
+.flash-sell-area.theme2 .product-card .countdown,
+.menu-top-area,
+.product-card .product-button-group .product-button,
+.deal-of-day-section .countdown,
+.bestseller-slider.owl-carousel .owl-nav div:hover, 
+.brand-slider.owl-carousel .owl-nav div:hover, 
+.features-slider.owl-carousel .owl-nav div:hover, 
+.flash-deal-slider.owl-carousel .owl-nav div:hover, 
+.home-blog-slider.owl-carousel .owl-nav div:hover, 
+.newproduct-slider.owl-carousel .owl-nav div:hover, 
+.popular-category-slider.owl-carousel .owl-nav div:hover, 
+.toprated-slider.owl-carousel .owl-nav div:hover,
+.btn,
+.footer-social-links a,
+.a2a_kit a
+{
+    background : {{ $color }}  !important;
+}
 
+.site-header .toolbar .toolbar-item > a > div > .compare-icon > .count-label, .site-header .toolbar .toolbar-item > a > div > .cart-icon > .count-label,
+.btn-primary,
+.hero-slider > .owl-carousel.dots-inside .owl-dots .owl-dot,
+.widget-title::after,
+.scroll-to-top-btn:hover,
+a.list-group-item::before, .list-group-item-action::before
+{
+    background-color : {{ $color }} !important;
+}
+
+
+.hero-slider .owl-carousel .owl-nav div,
+.left-category-area .category-list .navi-link:hover span.text-gray-dark,
+.site-header .navbar .nav-inner .right-info i,
+.h-t-social-area ul li a:hover,
+.menu-top-area .login-register:hover,
+.t-h-dropdown a:hover,
+.t-h-dropdown a.active,
+.product-card .product-price,
+.genius-banner .content .content-inner p,
+.navi-link:hover,
+.site-header .site-menu > ul > li:hover > a,
+.widget-categories ul > li.active > a,
+.widget-links ul > li.active > a,
+.details-page-top-right-content  a,
+.widget-categories ul > li > a:hover,
+.widget-links ul > li > a:hover,
+.product-card .product-title > a:hover,
+.product-card .product-category > a:hover,
+.nav-tabs .nav-link:hover,
+.post-title > a:hover,
+.post-meta > li > a:hover,
+.widget-featured-posts > .entry .entry-title > a:hover,
+.widget-featured-products > .entry .entry-title > a:hover,
+.widget-cart > .entry .entry-title > a:hover,
+.entry .entry-delete a,
+.steps .step.active .step-title, .steps .step.active > i,
+.text-primary,
+.shopping-cart .product-item .product-title > a:hover,
+.wishlist-table .product-item .product-title > a:hover,
+.order-table .product-item .product-title > a:hover,
+.list-group-item.active,
+a.list-group-item:hover,
+ a.list-group-item:focus, a.list-group-item:active,
+ .list-group-item-action:hover,
+ .list-group-item-action:focus,
+ .list-group-item-action:active,
+ .progress-steps li.active .icon,
+ .comparison-table .comparison-item .comparison-item-title:hover,
+ .site-header .site-menu > ul > li.active > a,
+ .breadcrumbs > li > a:hover,
+ .faq-box:hover .link,
+ .left-category-area .category-list .sub-c-box .title:hover,
+ .left-category-area .category-list .sub-c-box .child-category a:hover,
+ .section-title .links a:hover, 
+ .section-title .links a.active,
+ #quick_filter li a:hover,
+ #quick_filter li a.active,
+ .section-title .right_link:hover,
+ .popular-category.theme3 .links a.active,
+ .popular-category.theme3 .links a:hover,
+ .site-header .search-box-wrap .input-group .serch-result .bottom-area a:hover,
+ .shop-view>a,
+ .genius-banner .inner-content p,
+ .details-page-top-right-content .price-area .main-price,
+ .free-shippin-aa
+{
+    color : {{ $color }} !important;
+}
+
+
+
+.site-header .toolbar .toolbar-item > a > div > .compare-icon > .count-label,
+.btn-primary:hover,
+.scroll-to-top-btn:hover,
+.pagination li a:hover,
+.pagination li span:hover,
+.pagination li.active span,
+.pagination li.active a,
+.nav-tabs .nav-link.active:hover,
+.btn
+{
+    color : #fff !important;
+}
+
+.shop-view>a.active{
+    color: #fff !important;
+}
+
+.category-scroll::-webkit-scrollbar-thumb {
+    background-color:  {{ $color }};
+}
+
+.category-scroll {
+    scrollbar-color:  {{ $color }} #e4e4e4;
+    scrollbar-width: thin;
+}
+
+.btn-outline-primary {
+    border-color: {{ $color }};
+    color: {{ $color }};
+    background: none;
+}
+.btn-outline-primary:hover {
+    background-color: {{ $color }};
+    color: #fff !important;
+}
+.t-h-dropdown .t-h-dropdown-menu {
+    border-top: 2px solid {{ $color }};
+}
+.product-card:hover,
+.brand-slider .slider-item a:hover,
+.genius-banner:hover
+{
+    border-color: {{ $color }};
+}
+.form-control:focus {
+    border-color: {{ $color }};
+}
+.input-group .form-control:focus ~ .input-group-addon {
+    color: {{ $color }};
+}
+.shop-view > a.active {
+    border-color: {{ $color }};
+    background-color: {{ $color }};
+}
+.custom-control .custom-control-input:checked ~ .custom-control-label::before {
+    border-color: {{ $color }};
+    background-color: {{ $color }};
+}
+.product-gallery .product-thumbnails > li.active > a,
+.steps .step.active
+{
+    border-color: {{ $color }};
+}
+
+.quickFilter .quickFilter-title:hover {
+    border-color: {{ $color }} !important;
+}
+#quick_filter {
+    border-color: {{ $color }};
+}
+</style>
 <!-- Modernizr-->
 <script defer src="{{asset('assets/front/js/modernizr.min.js')}}"></script>
 
