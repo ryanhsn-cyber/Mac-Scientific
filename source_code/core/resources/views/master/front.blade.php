@@ -38,6 +38,12 @@ body { font-family: "Open Sans", sans-serif; font-size: 14px; margin: 0; padding
 @media (max-width: 991px) { .hero-slider { min-height: 200px; } }
 </style>
 
+<!-- Preload CSS files -->
+<link rel="preload" as="style" href="{{asset('assets/front/css/plugins.min.css')}}">
+<link rel="preload" as="style" href="{{asset('assets/front/css/styles.min.css')}}">
+<link rel="preload" as="style" href="{{asset('assets/front/css/responsive.css')}}">
+<link rel="preload" as="style" href="{{asset('assets/front/css/paymentfont.min.css')}}">
+
 <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
 <link rel="stylesheet" media="screen" href="{{asset('assets/front/css/plugins.min.css')}}">
 
