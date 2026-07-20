@@ -2,6 +2,9 @@
 @section('meta')
     <meta name="keywords" content="{{ $setting->meta_keywords }}">
     <meta name="description" content="{{ $setting->meta_description }}">
+    @if(isset($sliders) && $sliders->count() > 0)
+        <link rel="preload" as="image" href="{{ asset('assets/images/' . $sliders->first()->photo) }}" fetchpriority="high">
+    @endif
 @endsection
 
 @section('content')
