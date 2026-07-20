@@ -39,7 +39,7 @@
 <link href="{{ asset('assets/front/css/color.php?primary_color=').str_replace('#','',$setting->primary_color) }}" rel="stylesheet">
 
 <!-- Modernizr-->
-<script src="{{asset('assets/front/js/modernizr.min.js')}}"></script>
+<script defer src="{{asset('assets/front/js/modernizr.min.js')}}"></script>
 
 @if (DB::table('languages')->where('is_default',1)->first()->rtl == 1)
     <link rel="stylesheet" href="{{asset('assets/front/css/rtl.css')}}">
@@ -408,7 +408,7 @@ body_theme4
                         <div class="search-box-wrap d-none d-lg-block d-flex">
                         <div class="search-box-inner align-self-center">
                             <div class="search-box d-flex">
-                                <select name="category" id="category_select" class="categoris">
+                                <select name="category" id="category_select" class="categoris" aria-label="{{__('Category')}}">
 									<option value="">{{__('All')}}</option>
                                     @foreach (DB::table('categories')->whereStatus(1)->get() as $category)
                                     <option value="{{$category->slug}}">{{$category->name}}</option>
@@ -431,13 +431,13 @@ body_theme4
                         <!-- Toolbar-->
                         <div class="toolbar d-flex align-items-center">
 
-                        <div class="toolbar-item close-m-serch visible-on-mobile"><a href="#">
+                        <div class="toolbar-item close-m-serch visible-on-mobile"><a href="#" aria-label="Toggle Search">
                             <div>
                                 <i class="icon-search"></i>
                             </div>
                             </a>
                         </div>
-                        <div class="toolbar-item visible-on-mobile mobile-menu-toggle"><a href="#">
+                        <div class="toolbar-item visible-on-mobile mobile-menu-toggle"><a href="#" aria-label="Toggle Menu">
                             <div><i class="icon-menu"></i><span class="text-label">{{__('Menu')}}</span></div>
                             </a>
                         </div>
@@ -472,7 +472,7 @@ body_theme4
                             <div class="mm-heading-area">
                                 <h4>{{ __('Navigation') }}</h4>
                                 <div class="toolbar-item visible-on-mobile mobile-menu-toggle mm-t-two">
-                                    <a href="#">
+                                    <a href="#" aria-label="Close Menu">
                                         <div> <i class="icon-x"></i></div>
                                     </a>
                                 </div>
@@ -562,7 +562,7 @@ body_theme4
             @endphp
             <div class="footer-social-links">
                 @foreach ($links as $link_key => $link)
-                <a href="{{$link}}" target="_blank"><span><i class="{{$icons[$link_key]}}"></i></span></a>
+                <a href="{{$link}}" target="_blank" aria-label="Social link {{$link_key}}"><span><i class="{{$icons[$link_key]}}"></i></span></a>
                 @endforeach
             </div>
           </section>
@@ -593,7 +593,7 @@ body_theme4
                 @csrf
                 <div class="col-sm-12">
                   <div class="input-group">
-                    <input class="form-control" type="email" name="email" placeholder="{{__('Your e-mail')}}">
+                    <input class="form-control" type="email" name="email" placeholder="{{__('Your e-mail')}}" aria-label="{{__('Your e-mail')}}">
                     <span class="input-group-addon"><i class="icon-mail"></i></span> </div>
                   <div aria-hidden="true">
                     <input type="hidden" name="b_c7103e2c981361a6639545bd5_1194bb7544" tabindex="-1">
@@ -618,7 +618,7 @@ body_theme4
   </footer>
 
 <!-- Back To Top Button-->
-<a class="scroll-to-top-btn" href="#">
+<a class="scroll-to-top-btn" href="#" aria-label="Scroll to top">
     <i class="icon-chevron-up"></i>
 </a>
 <!-- Backdrop-->
@@ -754,17 +754,17 @@ body_theme4
 
     @if(Session::has('error'))
     <script>
-      $(document).ready(function(){
-        DangerNotification('{{Session::get('error')}}')
-      })
+      window.addEventListener('DOMContentLoaded', function() {
+        DangerNotification('{{Session::get('error')}}');
+      });
 
     </script>
     @endif
     @if(Session::has('success'))
     <script>
-      $(document).ready(function(){
+      window.addEventListener('DOMContentLoaded', function() {
         SuccessNotification('{{Session::get('success')}}');
-      })
+      });
 
     </script>
     @endif

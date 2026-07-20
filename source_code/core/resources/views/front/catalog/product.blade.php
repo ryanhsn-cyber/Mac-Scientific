@@ -412,9 +412,9 @@
                             <div class="d-flex align-items-center mb-1">
                                 <span class="font-weight-bold mr-3" style="font-size: 15px; color: #333;">Quantity</span>
                                 <div class="qtySelector product-quantity d-flex align-items-center" style="border: 1px solid #e0e0e0; border-radius: 4px; overflow: hidden; height: 44px; width: 110px;">
-                                    <span class="decreaseQty subclick" style="width: 35px; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #f8f9fa; color: #333;"><i class="fas fa-minus" style="font-size: 12px;"></i></span>
-                                    <input type="text" class="qtyValue cart-amount text-center font-weight-bold m-0" value="1" style="width: 40px; height: 100%; border: none; border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0; padding: 0;">
-                                    <span class="increaseQty addclick" style="width: 35px; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #f8f9fa; color: #333;"><i class="fas fa-plus" style="font-size: 12px;"></i></span>
+                                    <span class="decreaseQty subclick" aria-label="Decrease quantity" style="width: 35px; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #f8f9fa; color: #333;"><i class="fas fa-minus" style="font-size: 12px;"></i></span>
+                                    <input type="text" class="qtyValue cart-amount text-center font-weight-bold m-0" aria-label="Quantity" value="1" style="width: 40px; height: 100%; border: none; border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0; padding: 0;">
+                                    <span class="increaseQty addclick" aria-label="Increase quantity" style="width: 35px; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #f8f9fa; color: #333;"><i class="fas fa-plus" style="font-size: 12px;"></i></span>
                                     <input type="hidden" value="3333" id="current_stock">
                                 </div>
                             </div>
@@ -647,7 +647,7 @@
               @forelse ($reviews as $review)
               <div class="single-review">
                   <div class="comment">
-                    <div class="comment-author-ava"><img src="{{ $review->user->photo ? asset('assets/images/'.$review->user->photo) : asset('assets/images/placeholder.png') }}" alt="Comment author"></div>
+                    <div class="comment-author-ava"><img src="{{ $review->user->photo ? asset('assets/images/'.$review->user->photo) : asset('assets/images/placeholder.png') }}" alt="Comment author" loading="lazy"></div>
                     <div class="comment-body">
                       <div class="comment-header d-flex flex-wrap justify-content-between">
                         <div>

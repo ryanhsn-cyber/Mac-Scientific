@@ -86,7 +86,7 @@
                     @foreach ($services as $service)
                         <div class="col-lg-3 col-sm-6 text-center mb-30">
                             <div class="single-service single-service2">
-                                <img src="{{ asset('assets/images/'.$service->photo) }}" alt="Shipping">
+                                <img src="{{ asset('assets/images/'.$service->photo) }}" alt="Shipping" loading="lazy">
                                 <div class="content">
                                     <h6 class="mb-2">{{ $service->title }}</h6>
                                     <p class="text-sm text-muted mb-0">{{ $service->details }}</p>
@@ -105,7 +105,7 @@
                 <div class="row gx-3">
                     <div class="col-md-4">
                         <a href="{{$banner_first['firsturl1']}}" class="genius-banner">
-                            <img src="{{ asset('assets/images/'.$banner_first['img1']) }}" alt="">
+                            <img src="{{ asset('assets/images/'.$banner_first['img1']) }}" alt="" loading="lazy">
                             <div class="inner-content">
                                 @if (isset($banner_first['subtitle1']))
                                     <p>{{$banner_first['subtitle1']}}</p>
@@ -118,7 +118,7 @@
                     </div>
                     <div class="col-md-4">
                         <a href="{{$banner_first['firsturl2']}}" class="genius-banner">
-                            <img src="{{ asset('assets/images/'.$banner_first['img2']) }}" alt="">
+                            <img src="{{ asset('assets/images/'.$banner_first['img2']) }}" alt="" loading="lazy">
                             <div class="inner-content">
                                 @if (isset($banner_first['subtitle2']))
                                     <p>{{$banner_first['subtitle2']}}</p>
@@ -131,7 +131,7 @@
                     </div>
                     <div class="col-md-4">
                         <a href="{{$banner_first['firsturl3']}}" class="genius-banner">
-                            <img src="{{ asset('assets/images/'.$banner_first['img3']) }}" alt="">
+                            <img src="{{ asset('assets/images/'.$banner_first['img3']) }}" alt="" loading="lazy">
                             <div class="inner-content">
                                 @if (isset($banner_first['subtitle3']))
                                     <p>{{$banner_first['subtitle3']}} </p>

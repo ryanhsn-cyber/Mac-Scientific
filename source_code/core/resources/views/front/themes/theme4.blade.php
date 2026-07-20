@@ -69,11 +69,11 @@
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <a href="{{isset($home_page4_banner['url4']) ? $home_page4_banner['url4'] : ''}}" class="h3-category">
-                            <img src="{{asset('assets/images/'.$home_page4_banner['img4'])}}" alt="">
+                            <img src="{{asset('assets/images/'.$home_page4_banner['img4'])}}" alt="" loading="lazy">
                             <h4>{{isset($home_page4_banner['label4']) ? $home_page4_banner['label4'] : ''}}</h4>
                         </a>
                         <a href="{{isset($home_page4_banner['url5']) ? $home_page4_banner['url5'] : ''}}" class="h3-category">
-                            <img src="{{asset('assets/images/'.$home_page4_banner['img5'])}}" alt="">
+                            <img src="{{asset('assets/images/'.$home_page4_banner['img5'])}}" alt="" loading="lazy">
                             <h4>{{isset($home_page4_banner['label5']) ? $home_page4_banner['label5'] : ''}}</h4>
                         </a>
                     </div>
@@ -164,7 +164,7 @@
             <div class="row gx-3">
                 <div class="col-md-4">
                     <a href="{{$banner_first['firsturl1']}}" class="genius-banner">
-                        <img src="{{ asset('assets/images/'.$banner_first['img1']) }}" alt="">
+                        <img src="{{ asset('assets/images/'.$banner_first['img1']) }}" alt="" loading="lazy">
                         <div class="inner-content">
                             @if (isset($banner_first['subtitle1']))
                                 <p>{{$banner_first['subtitle1']}}</p>
@@ -177,7 +177,7 @@
                 </div>
                 <div class="col-md-4">
                     <a href="{{$banner_first['firsturl2']}}" class="genius-banner">
-                        <img src="{{ asset('assets/images/'.$banner_first['img2']) }}" alt="">
+                        <img src="{{ asset('assets/images/'.$banner_first['img2']) }}" alt="" loading="lazy">
                         <div class="inner-content">
                             @if (isset($banner_first['subtitle2']))
                                 <p>{{$banner_first['subtitle2']}}</p>
@@ -190,7 +190,7 @@
                 </div>
                 <div class="col-md-4">
                     <a href="{{$banner_first['firsturl3']}}" class="genius-banner">
-                        <img src="{{ asset('assets/images/'.$banner_first['img3']) }}" alt="">
+                        <img src="{{ asset('assets/images/'.$banner_first['img3']) }}" alt="" loading="lazy">
                         <div class="inner-content">
                             @if (isset($banner_first['subtitle3']))
                                 <p>{{$banner_first['subtitle3']}} </p>
