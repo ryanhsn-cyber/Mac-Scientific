@@ -34,7 +34,8 @@
 <link rel="preload" href="{{asset('assets/front/css/responsive.css')}}" as="style">
 
 <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
-<link rel="stylesheet" media="screen" href="{{asset('assets/front/css/plugins.min.css')}}">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/plugins.min.css')}}">
+<noscript><link rel="stylesheet" href="{{asset('assets/front/css/plugins.min.css')}}"></noscript>
 
 @yield('styleplugins')
 
@@ -42,7 +43,8 @@
 
 <link id="responsiveStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/responsive.css')}}">
 <link rel="preload" href="{{asset('assets/front/css/paymentfont.min.css')}}" as="style">
-<link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/paymentfont.min.css')}}">
+<noscript><link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}"></noscript>
 <!-- Color css -->
 <style>
 @php
