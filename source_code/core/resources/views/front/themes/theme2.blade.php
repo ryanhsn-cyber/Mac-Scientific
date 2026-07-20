@@ -43,7 +43,7 @@
                         <style>
                             .hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; }
                             .hero-slider-main:not(.owl-loaded) .item { display: none; }
-                            .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; }
+                            .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; height: 100%; }
                         </style>
                         @php
                             $first_slider_photo = '';
@@ -53,9 +53,9 @@
                         @endphp
                         <div class="hero-slider" style="position: relative; overflow: hidden; border-radius: 10px;">
                             @if($first_slider_photo)
-                                <img src="{{ $first_slider_photo }}" fetchpriority="high" alt="Hero Background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                                <img src="{{ $first_slider_photo }}" fetchpriority="high" alt="Hero Background" style="position: relative; width: 100%; height: auto; display: block; z-index: 0;">
                             @endif
-                            <div class="hero-slider-main owl-carousel dots-inside" style="position: relative; z-index: 1;">
+                            <div class="hero-slider-main owl-carousel dots-inside" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
                                 @foreach ($sliders as $index => $slider)
                                     @php
                                         $encoded_slider_photo = implode('/', array_map('rawurlencode', explode('/', $slider->photo)));
