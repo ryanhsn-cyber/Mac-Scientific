@@ -13,9 +13,11 @@ class AddVideoToItemsTable extends Migration
      */
     public function up()
     {
-        Schema::table('items', function (Blueprint $table) {
-            $table->string('video')->nullable()->after('photo');
-        });
+        if (!Schema::hasColumn('items', 'video')) {
+            Schema::table('items', function (Blueprint $table) {
+                $table->string('video')->nullable()->after('photo');
+            });
+        }
     }
 
     /**

@@ -43,7 +43,7 @@
                         <style>
                             .hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; }
                             .hero-slider-main:not(.owl-loaded) .item { display: none; }
-                            .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; background: transparent !important; }
+                            .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; }
                         </style>
                         @php
                             $first_slider_photo = '';
@@ -64,15 +64,9 @@
                                     @if (DB::table('languages')->where('is_default',1)->first()->rtl == 1)
                                     d-flex justify-content-end
                                     @endif
-                                    "
-                                        style="
-                                        @if($index !== 0)
-                                            background: url('{{ asset('assets/images/' . $encoded_slider_photo) }}')
-                                        @else
-                                            background: transparent;
-                                        @endif
-                                        ">
-                                        <div class="item-inner">
+                                    " style="position: relative;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                                        <div class="item-inner" style="position: relative; z-index: 1;">
                                             <div class="from-bottom">
                                                 @if ($slider->logo)
                                                     <img class="d-inline-block brand-logo"

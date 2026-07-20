@@ -29,9 +29,9 @@
 <style>
 @include('master.fonts')
 </style>
-<link rel="preload" href="{{asset('assets/front/css/plugins.min.css')}}" as="style">
-<link rel="preload" href="{{asset('assets/front/css/styles.min.css')}}" as="style">
-<link rel="preload" href="{{asset('assets/front/css/responsive.css')}}" as="style">
+<link rel="preload" href="{{asset('assets/front/css/plugins.min.css')}}" as="style" fetchpriority="high">
+<link rel="preload" href="{{asset('assets/front/css/styles.min.css')}}" as="style" fetchpriority="high">
+<link rel="preload" href="{{asset('assets/front/css/responsive.css')}}" as="style" fetchpriority="high">
 
 <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
 <link rel="stylesheet" media="screen" href="{{asset('assets/front/css/plugins.min.css')}}">
@@ -39,13 +39,9 @@
 @yield('styleplugins')
 
 <link id="mainStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/styles.min.css')}}">
-
-<!-- Async Non-Critical CSS -->
-<link id="responsiveStyles" rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/responsive.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/responsive.css')}}"></noscript>
-
-<link rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/paymentfont.min.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}"></noscript>
+<link id="responsiveStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/responsive.css')}}">
+<link rel="preload" href="{{asset('assets/front/css/paymentfont.min.css')}}" as="style">
+<link rel="stylesheet" media="screen" href="{{asset('assets/front/css/paymentfont.min.css')}}">
 <!-- Color css -->
 <style>
 @php
