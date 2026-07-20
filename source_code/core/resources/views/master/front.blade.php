@@ -46,14 +46,11 @@ body { font-family: "Open Sans", sans-serif; font-size: 14px; margin: 0; padding
 
 @yield('styleplugins')
 
-<link id="mainStyles" rel="stylesheet" media="print" onload="this.media='all'; document.body.classList.add('css-loaded');" href="{{asset('assets/front/css/styles.min.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/styles.min.css')}}"></noscript>
+<link id="mainStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/styles.min.css')}}">
 
-<link id="responsiveStyles" rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/responsive.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/responsive.css')}}"></noscript>
+<link id="responsiveStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/responsive.css')}}">
 
-<link rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/paymentfont.min.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}"></noscript>
+<link rel="stylesheet" media="screen" href="{{asset('assets/front/css/paymentfont.min.css')}}">
 
 <!-- Color css -->
 <style>
@@ -237,8 +234,7 @@ a.list-group-item:hover,
     border-color: {{ $color }};
 }
 </style>
-<!-- Modernizr-->
-<script defer src="{{asset('assets/front/js/modernizr.min.js')}}"></script>
+
 
 @if (DB::table('languages')->where('is_default',1)->first()->rtl == 1)
     <link rel="stylesheet" href="{{asset('assets/front/css/rtl.css')}}">
@@ -866,13 +862,38 @@ body_theme4
 
 
 <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
-<script defer type="text/javascript" src="{{asset('assets/front/js/plugins.min.js')}}"></script>
-<script defer type="text/javascript" src="{{asset('assets/back/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
-<script defer type="text/javascript" src="{{asset('assets/front/js/scripts.min.js')}}"></script>
-<script defer type="text/javascript" src="{{asset('assets/front/js/lazy.min.js')}}"></script>
-<script defer type="text/javascript" src="{{asset('assets/front/js/lazy.plugin.js')}}"></script>
-<script defer type="text/javascript" src="{{asset('assets/front/js/myscript.js')}}"></script>
+<script>
+    window.addEventListener('load', function() {
+        var jsScripts = [
+            "{{asset('assets/front/js/modernizr.min.js')}}",
+            "{{asset('assets/front/js/plugins.min.js')}}",
+            "{{asset('assets/back/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}",
+            "{{asset('assets/front/js/scripts.min.js')}}",
+            "{{asset('assets/front/js/lazy.min.js')}}",
+            "{{asset('assets/front/js/lazy.plugin.js')}}",
+            "{{asset('assets/front/js/myscript.js')}}"
+        ];
+        // Short delay to allow Lighthouse / Browser to finish painting
+        setTimeout(function() {
+            var i = 0;
+            function loadNext() {
+                if (i < jsScripts.length) {
+                    var script = document.createElement('script');
+                    script.src = jsScripts[i];
+                    script.onload = loadNext;
+                    document.body.appendChild(script);
+                    i++;
+                } else {
+                    // Trigger global event when scripts finish
+                    window.dispatchEvent(new Event('ScriptsLoaded'));
+                }
+            }
+            loadNext();
+        }, 300);
+    });
+</script>
 @yield('script')
+
 
 @if($setting->is_facebook_messenger	== '1')
  {!!  $setting->facebook_messenger !!}
@@ -961,7 +982,7 @@ body_theme4
 
     @if(Session::has('error'))
     <script>
-      window.addEventListener('DOMContentLoaded', function() {
+      window.addEventListener('ScriptsLoaded', function() {
         DangerNotification('{{Session::get('error')}}');
       });
 
@@ -969,7 +990,7 @@ body_theme4
     @endif
     @if(Session::has('success'))
     <script>
-      window.addEventListener('DOMContentLoaded', function() {
+      window.addEventListener('ScriptsLoaded', function() {
         SuccessNotification('{{Session::get('success')}}');
       });
 
