@@ -14,7 +14,7 @@
 <meta name="author" content="{{$setting->title}}">
 <meta name="distribution" content="web">
 <!-- Mobile Specific Meta Tag-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Favicon Icons-->
 <link rel="icon" type="image/png" href="{{asset('assets/images/'.$setting->favicon)}}">

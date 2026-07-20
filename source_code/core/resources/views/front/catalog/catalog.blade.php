@@ -50,7 +50,7 @@
                         @endif
                         <div class="product-thumb">
                             <a href="{{route('front.product',$item->slug)}}">
-<img class="lazy" data-src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
+<img class="lazy" width="400" height="400" data-src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
 </a>
                             <div class="product-button-group">
                                 <a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
@@ -109,7 +109,7 @@
                                     @endif
 
                                     <a href="{{route('front.product',$item->slug)}}">
-<img class="lazy" data-src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
+<img class="lazy" width="400" height="400" data-src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
 </a>
                                     <div class="product-button-group">
                                         <a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
