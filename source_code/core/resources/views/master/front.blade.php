@@ -26,8 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="preload" as="style">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="preload" href="{{asset('assets/front/css/plugins.min.css')}}" as="style">
 <link rel="preload" href="{{asset('assets/front/css/styles.min.css')}}" as="style">
 <link rel="preload" href="{{asset('assets/front/css/responsive.css')}}" as="style">
@@ -41,8 +40,7 @@
 
 <link id="responsiveStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/responsive.css')}}">
 <link rel="preload" href="{{asset('assets/front/css/paymentfont.min.css')}}" as="style">
-<link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}"></noscript>
+<link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}">
 <!-- Color css -->
 <style>
 @php
