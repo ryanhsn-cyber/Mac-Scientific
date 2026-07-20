@@ -43,7 +43,7 @@
                         <style>
                             .hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; }
                             .hero-slider-main:not(.owl-loaded) .item { display: none; }
-                            .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; }
+                            .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; background: transparent !important; }
                         </style>
                         @php
                             $first_slider_photo = '';
@@ -51,8 +51,11 @@
                                 $first_slider_photo = asset('assets/images/' . implode('/', array_map('rawurlencode', explode('/', $sliders[0]->photo))));
                             }
                         @endphp
-                        <div class="hero-slider" style="background: url('{{ $first_slider_photo }}') center center / cover no-repeat; position: relative;">
-                            <div class="hero-slider-main owl-carousel dots-inside" >
+                        <div class="hero-slider" style="position: relative; overflow: hidden; border-radius: 10px;">
+                            @if($first_slider_photo)
+                                <img src="{{ $first_slider_photo }}" fetchpriority="high" alt="Hero Background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                            @endif
+                            <div class="hero-slider-main owl-carousel dots-inside" style="position: relative; z-index: 1;">
                                 @foreach ($sliders as $slider)
                                     @php
                                         $encoded_slider_photo = implode('/', array_map('rawurlencode', explode('/', $slider->photo)));
