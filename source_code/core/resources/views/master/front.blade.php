@@ -29,31 +29,15 @@
 <style>
 @include('master.fonts')
 </style>
-<style>
-/* Prevent CLS when styles.min.css is deferred */
-.site-header { min-height: 120px; }
-@media (max-width: 991px) { .site-header { min-height: 80px; } }
-.hero-slider { min-height: 450px; }
-@media (max-width: 991px) { .hero-slider { min-height: 200px; } }
-/* Hide potentially shifting textual elements in header until styled */
-.menu-top-area, .t-h-dropdown, .right-area { visibility: hidden; }
-body.css-loaded .menu-top-area, body.css-loaded .t-h-dropdown, body.css-loaded .right-area { visibility: visible; }
-</style>
-
 <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
 <link rel="stylesheet" media="screen" href="{{asset('assets/front/css/plugins.min.css')}}">
 
 @yield('styleplugins')
 
-<link id="mainStyles" rel="preload" href="{{asset('assets/front/css/styles.min.css')}}" as="style" onload="this.onload=null;this.rel='stylesheet'; document.body.classList.add('css-loaded');">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/styles.min.css')}}"></noscript>
-
-<link id="responsiveStyles" rel="preload" href="{{asset('assets/front/css/responsive.css')}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/responsive.css')}}"></noscript>
-
-<link rel="preload" href="{{asset('assets/front/css/paymentfont.min.css')}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}"></noscript>
-
+<link id="mainStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/styles.min.css')}}">
+<link id="responsiveStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/responsive.css')}}">
+<link rel="preload" href="{{asset('assets/front/css/paymentfont.min.css')}}" as="style">
+<link rel="stylesheet" media="screen" href="{{asset('assets/front/css/paymentfont.min.css')}}">
 <!-- Color css -->
 <style>
 @php
