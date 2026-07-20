@@ -170,8 +170,7 @@
                     <div class="col-lg-12">
                         <div class="main-content">
                             <div class="flash-deal-slider owl-carousel" >
-                                @foreach ($products->orderBy('id','DESC')->get()  as $item)
-                                @if ($item->is_type == 'flash_deal' && $item->date != null)
+                                @foreach ($products->orderBy('id','DESC')->get()->where('is_type', 'flash_deal')->whereNotNull('date')->take(8) as $item)
                                     <div class="slider-item">
                                         <div class="product-card ">
                                             <div class="product-thumb">
@@ -216,7 +215,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endif
                                 @endforeach
                             </div>
                         </div>
@@ -314,8 +312,7 @@
                     <div class="col-lg-12" >
 
                         <div class="features-slider  owl-carousel" >
-                            @foreach ($products->orderBy('id','DESC')->get()  as $item)
-                                @if ($item->is_type == 'feature')
+                            @foreach ($products->orderBy('id','DESC')->get()->where('is_type', 'feature')->take(8) as $item)
                                     <div class="slider-item">
                                         <div class="product-card ">
                                             <div class="product-thumb" >
@@ -354,7 +351,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -374,7 +370,7 @@
                 </div>
             </div>
             <div class="row">
-                @foreach (\App\Models\Item::with('category')->whereStatus(1)->orderBy('created_at','DESC')->get() as $item)
+                @foreach (\App\Models\Item::with('category')->whereStatus(1)->orderBy('created_at','DESC')->take(8)->get() as $item)
                     <div class="col-lg-3 col-md-4 col-6 mb-4">
                         <div class="product-card ">
                             <div class="product-thumb" >
@@ -436,8 +432,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="features-slider  owl-carousel" >
-                            @foreach ($products->orderBy('id','DESC')->get()  as $item)
-                                @if ($item->is_type == 'best')
+                            @foreach ($products->orderBy('id','DESC')->get()->where('is_type', 'best')->take(8) as $item)
                                     <div class="slider-item">
                                         <div class="product-card ">
                                             <div class="product-thumb">
@@ -476,7 +471,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -500,8 +494,7 @@
                     <div class="col-lg-12">
 
                         <div class="features-slider  owl-carousel" >
-                            @foreach ($products->orderBy('id','DESC')->get()  as $item)
-                                @if ($item->is_type == 'top')
+                            @foreach ($products->orderBy('id','DESC')->get()->where('is_type', 'top')->take(8) as $item)
                                     <div class="slider-item">
                                         <div class="product-card ">
                                             <div class="product-thumb">
@@ -539,7 +532,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endif
                             @endforeach
                         </div>
                     </div>
