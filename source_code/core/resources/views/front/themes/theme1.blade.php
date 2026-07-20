@@ -395,7 +395,7 @@
                         <a href="{{ route('front.catalog') }}" class="d-block">
                             <img src="/assets/images/featured-banner.png"
                                  alt="Regenerative Medicine - All About The Procedure And Treatment Options"
-                                 class="img-fluid w-100"
+                                 class="img-fluid w-100" width="1114" height="320"
                                  style="border-radius: 8px; max-height: 320px; object-fit: cover;" loading="lazy">
                         </a>
                     </div>

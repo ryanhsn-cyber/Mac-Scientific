@@ -594,7 +594,7 @@ body_theme4
                 <div class="col-lg-12">
                     <div class="d-flex justify-content-between align-items-center">
                         <!-- Logo-->
-                        <div class="site-branding"><a class="site-logo align-self-center" href="{{route('front.index')}}"><img src="{{asset('assets/images/'.$setting->logo)}}" alt="{{$setting->title}}"></a></div>
+                        <div class="site-branding"><a class="site-logo align-self-center" href="{{route('front.index')}}"><img width="120" height="80" src="{{asset('assets/images/'.$setting->logo)}}" alt="{{$setting->title}}"></a></div>
                         <!-- Search / Categories-->
                         <div class="search-box-wrap d-none d-lg-block d-flex">
                         <div class="search-box-inner align-self-center">
@@ -800,7 +800,7 @@ body_theme4
                     <p class="text-sm opacity-80 pt-2">{{__('Subscribe to our Newsletter to receive early discount offers, latest news, sales and promo information.')}}</p>
                 </div>
               </form>
-              <div class="pt-3"><img class="d-block gateway_image" src="{{ $setting->footer_gateway_img ? asset('assets/images/'.$setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}"></div>
+              <div class="pt-3"><img class="d-block gateway_image" width="324" height="31" src="{{ $setting->footer_gateway_img ? asset('assets/images/'.$setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}"></div>
             </section>
           </div>
       </div>
