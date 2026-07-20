@@ -29,69 +29,16 @@
 <style>
 @include('master.fonts')
 </style>
-<!-- Critical inline CSS to prevent CLS -->
-<style>
-body { font-family: "Open Sans", sans-serif; font-size: 14px; margin: 0; padding: 0; }
-.site-header { min-height: 110px; background: #fff; }
-@media (max-width: 991px) { .site-header { min-height: 70px; } }
-.hero-slider { min-height: 450px; }
-@media (max-width: 991px) { .hero-slider { min-height: 200px; } }
-</style>
-
-<!-- Preload CSS files -->
-<link rel="preload" as="style" href="{{asset('assets/front/css/plugins.min.css')}}">
-<link rel="preload" as="style" href="{{asset('assets/front/css/styles.min.css')}}">
-<link rel="preload" as="style" href="{{asset('assets/front/css/responsive.css')}}">
-<link rel="preload" as="style" href="{{asset('assets/front/css/paymentfont.min.css')}}">
-
-<!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
-<link rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/plugins.min.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/plugins.min.css')}}"></noscript>
+<!-- Vendor Styles: Bootstrap, Font Icons, Plugins -->
+<link rel="stylesheet" href="{{asset('assets/front/css/plugins.min.css')}}">
 
 @yield('styleplugins')
 
-<link id="mainStyles" rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/styles.min.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/styles.min.css')}}"></noscript>
-
-<link id="responsiveStyles" rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/responsive.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/responsive.css')}}"></noscript>
-
-<link rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/paymentfont.min.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}"></noscript>
+<link rel="stylesheet" href="{{asset('assets/front/css/styles.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/front/css/responsive.css')}}">
+<link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}">
 
 <!-- Color css -->
-<style>
-/* Critical Grid & Header Layout to prevent CLS */
-body { margin: 0; font-family: 'Open Sans', sans-serif; background: #fff; overflow-x: hidden; }
-.row { display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px; }
-.col-lg-12, .col-lg-9, .col-lg-4, .col-lg-3, .col-md-8, .col-md-4 { position: relative; width: 100%; padding-right: 15px; padding-left: 15px; }
-@media (min-width: 992px) {
-    .col-lg-3 { flex: 0 0 25%; max-width: 25%; }
-    .col-lg-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
-    .col-lg-9 { flex: 0 0 75%; max-width: 75%; }
-    .col-lg-12 { flex: 0 0 100%; max-width: 100%; }
-}
-@media (min-width: 768px) {
-    .col-md-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
-    .col-md-8 { flex: 0 0 66.666667%; max-width: 66.666667%; }
-}
-
-.site-header { width: 100%; background: #fff; z-index: 1000; position: relative; display: block; }
-.menu-top-area { padding: 5px 0; border-bottom: 1px solid #f1f1f1; display: block; }
-.menu-top-area .row { align-items: center; }
-.topbar { padding: 15px 0; display: block; }
-.topbar .row { align-items: center; justify-content: space-between; }
-
-/* Hide elements until plugins CSS loads to prevent ugly unstyled flashes */
-.site-menu, .t-h-dropdown-menu, .toolbar-dropdown { display: none !important; }
-
-.hero-slider { width: 100%; min-height: 450px; background: #f4f4f4; border-radius: 12px; overflow: hidden; position: relative; }
-@media (max-width: 991px) { .hero-slider { min-height: 200px; } }
-.hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; }
-.hero-slider-main:not(.owl-loaded) .item { display: none; }
-.hero-slider-main:not(.owl-loaded) .item:first-child { display: block; height: 100%; }
-
-.product-card { display: block; min-height: 300px; background: #fff; border: 1px solid #f1f1f1; margin-bottom: 20px; }
 
 @php
     $color = $setting->primary_color ?? '#FF6A00';
