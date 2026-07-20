@@ -45,6 +45,14 @@
     <link rel="stylesheet" href="{{asset('assets/front/css/rtl.css')}}">
 @endif
 <style>
+    /* Fix LCP render delay for hero slider */
+    .hero-slider-main.owl-carousel:not(.owl-loaded) {
+        display: block !important;
+    }
+    .hero-slider-main.owl-carousel:not(.owl-loaded) .item:not(:first-child) {
+        display: none !important;
+    }
+    
     {{$setting->custom_css}}
     .site-header .site-menu > ul > li > a {
         padding: 12px 8px !important;
@@ -664,7 +672,7 @@ body_theme4
 <script defer type="text/javascript" src="{{asset('assets/front/js/scripts.min.js')}}"></script>
 <script defer type="text/javascript" src="{{asset('assets/front/js/lazy.min.js')}}"></script>
 <script defer type="text/javascript" src="{{asset('assets/front/js/lazy.plugin.js')}}"></script>
-<script defer type="text/javascript" src="{{asset('assets/front/js/myscript.js?v=') . time()}}"></script>
+<script defer type="text/javascript" src="{{asset('assets/front/js/myscript.js')}}"></script>
 @yield('script')
 
 @if($setting->is_facebook_messenger	== '1')
