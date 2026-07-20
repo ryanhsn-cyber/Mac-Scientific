@@ -69,7 +69,7 @@
                                         @if($loop->first)
                                         <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0;">
                                         @else
-                                        <img class="lazy" data-src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;" loading="lazy">
+                                        <img class="lazy" loading="lazy" src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;" loading="lazy">
                                         @endif
                                         <div class="item-inner" style="position: relative; z-index: 1;">
                                             <div class="from-bottom">
@@ -187,7 +187,7 @@
                                                 <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($item)}}</div>
                                                 @endif
                                                 <a href="{{route('front.product',$item->slug)}}">
-<img class="lazy" width="400" height="400" data-src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
 </a>
                                                 <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                                     <a data-target="{{route('fornt.compare.product',$item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
@@ -257,7 +257,7 @@
                 <div class="row gx-3">
                     <div class="col-md-4">
                         <a href="{{$banner_secend['url1']}}" class="genius-banner">
-                            <img class="lazy" width="400" height="400" data-src="{{ asset('assets/images/'.$banner_secend['img1']) }}" alt="">
+                            <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/'.$banner_secend['img1']) }}" alt="">
                             <div class="inner-content">
                                 @if (isset($banner_secend['subtitle1']))
                                     <p>{{$banner_secend['subtitle1']}}</p>
@@ -271,7 +271,7 @@
                     </div>
                     <div class="col-md-4">
                         <a href="{{$banner_secend['url2']}}" class="genius-banner">
-                            <img class="lazy" width="400" height="400" data-src="{{ asset('assets/images/'.$banner_secend['img2']) }}" alt="">
+                            <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/'.$banner_secend['img2']) }}" alt="">
                             <div class="inner-content">
                                 @if (isset($banner_secend['subtitle2']))
                                     <p>{{$banner_secend['subtitle2']}}</p>
@@ -285,7 +285,7 @@
                     </div>
                     <div class="col-md-4">
                         <a href="{{$banner_secend['url3']}}" class="genius-banner">
-                            <img class="lazy" width="400" height="400" data-src="{{ asset('assets/images/'.$banner_secend['img3']) }}" alt="">
+                            <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/'.$banner_secend['img3']) }}" alt="">
                             <div class="inner-content">
                                 @if (isset($banner_secend['subtitle3']))
                                     <p>{{$banner_secend['subtitle3']}} </p>
@@ -329,7 +329,7 @@
                                                 <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($item)}}</div>
                                                 @endif
                                                 <a href="{{route('front.product',$item->slug)}}">
-<img class="lazy" width="400" height="400" data-src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
 </a>
                                                 <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                                     <a data-target="{{route('fornt.compare.product',$item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
@@ -387,7 +387,7 @@
                                 <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($item)}}</div>
                                 @endif
                                 <a href="{{route('front.product',$item->slug)}}">
-                                    <img class="lazy" width="400" height="400" data-src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
+                                    <img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
                                 </a>
                                 <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                     <a data-target="{{route('fornt.compare.product',$item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
@@ -449,7 +449,7 @@
                                             <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($item)}}</div>
                                             @endif
                                             <a href="{{route('front.product',$item->slug)}}">
-<img class="lazy" width="400" height="400" data-src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
 </a>
                                             <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                                 <a data-target="{{route('fornt.compare.product',$item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
@@ -511,7 +511,7 @@
                                             <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($item)}}</div>
                                             @endif
                                             <a href="{{route('front.product',$item->slug)}}">
-<img class="lazy" width="400" height="400" data-src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
 </a>
                                             <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                                 <a data-target="{{route('fornt.compare.product',$item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
@@ -552,7 +552,7 @@
                 <div class="row gx-3">
                     <div class="col-md-6">
                         <a href="{{$banner_third['url1']}}" class="genius-banner">
-                            <img class="lazy" width="400" height="400" data-src="{{ asset('assets/images/'.$banner_third['img1']) }}" alt="">
+                            <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/'.$banner_third['img1']) }}" alt="">
                             <div class="inner-content">
                                 @if (isset($banner_third['subtitle1']))
                                     <p>{{$banner_third['subtitle1']}}</p>
@@ -565,7 +565,7 @@
                     </div>
                     <div class="col-md-6">
                         <a href="{{$banner_third['url2']}}" class="genius-banner">
-                            <img class="lazy" width="400" height="400" data-src="{{ asset('assets/images/'.$banner_third['img2']) }}" alt="">
+                            <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/'.$banner_third['img2']) }}" alt="">
                             <div class="inner-content">
                                 @if (isset($banner_third['subtitle2']))
                                     <p>{{$banner_third['subtitle2']}} </p>
@@ -603,7 +603,7 @@
                                                 @endif
 
                                             <a href="{{route('front.product',$two_column_category_item->slug)}}">
-<img class="lazy" width="400" height="400" data-src="{{asset('assets/images/'.$two_column_category_item->thumbnail)}}" alt="Product">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$two_column_category_item->thumbnail)}}" alt="Product">
 </a></a>
                                         <div class="product-card-body">
                                             <h3 class="product-title"><a href="{{route('front.product',$two_column_category_item->slug)}}">

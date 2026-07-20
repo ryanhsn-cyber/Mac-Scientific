@@ -125,7 +125,7 @@
 
             @if ($item->video && $video_id)
             <div id="media-video" class="media-container" style="display: none; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; position: relative;">
-                <iframe id="youtube-iframe" data-src="https://www.youtube.com/embed/{{ $video_id }}?rel=0&showinfo=0&autoplay=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe id="youtube-iframe" src="https://www.youtube.com/embed/{{ $video_id }}?rel=0&showinfo=0&autoplay=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             @endif
         </div>
@@ -729,7 +729,7 @@
                             @endif
                             <div class="product-thumb">
                                 <a href="{{route('front.product',$related->slug)}}">
-<img class="lazy" width="400" height="400" data-src="{{asset('assets/images/'.$related->thumbnail)}}" alt="Product">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$related->thumbnail)}}" alt="Product">
 </a>
                                 <div class="product-button-group">
                                     <a class="product-button wishlist_store" href="{{route('user.wishlist.store',$related->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>

@@ -29,7 +29,7 @@
                         <div class="col-md-6">
                             <a href="{{route('front.blog.details',$post->slug)}}" class="blog-post">
                                 <div class="post-thumb">
-                                    <img class="lazy" width="400" height="400" data-src="{{ asset('assets/images/' . json_decode($post->photo, true)[array_key_first(json_decode($post->photo, true))]) }}"
+                                    <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/' . json_decode($post->photo, true)[array_key_first(json_decode($post->photo, true))]) }}"
                                         alt="Blog Post">
                                     </div>
                                 <div class="post-body">
