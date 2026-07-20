@@ -29,10 +29,6 @@
 <style>
 @include('master.fonts')
 </style>
-<link rel="preload" href="{{asset('assets/front/css/plugins.min.css')}}" as="style" fetchpriority="high">
-<link rel="preload" href="{{asset('assets/front/css/styles.min.css')}}" as="style" fetchpriority="high">
-<link rel="preload" href="{{asset('assets/front/css/responsive.css')}}" as="style" fetchpriority="high">
-
 <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
 <link rel="stylesheet" media="screen" href="{{asset('assets/front/css/plugins.min.css')}}">
 
