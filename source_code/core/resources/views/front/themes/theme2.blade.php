@@ -65,7 +65,7 @@
                                         d-flex justify-content-end
                                         @endif
                                         " style="position: relative;">
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; {{ $loop->first ? 'opacity: 0;' : '' }}">
                                         <div class="item-inner" style="position: relative; z-index: 1;">
                                             <div class="from-bottom">
                                                 @if ($slider->logo)
