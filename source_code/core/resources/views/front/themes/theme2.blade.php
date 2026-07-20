@@ -40,9 +40,23 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <!-- Main Slider-->
-                        <div class="hero-slider">
-                            <div class="hero-slider-main owl-carousel dots-inside" >
-                                @foreach ($sliders as $slider)
+                        <style>
+                            .hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; }
+                            .hero-slider-main:not(.owl-loaded) .item { display: none; }
+                            .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; }
+                        </style>
+                        @php
+                            $first_slider_photo = '';
+                            if(count($sliders) > 0) {
+                                $first_slider_photo = asset('assets/images/' . implode('/', array_map('rawurlencode', explode('/', $sliders[0]->photo))));
+                            }
+                        @endphp
+                        <div class="hero-slider" style="position: relative; overflow: hidden; border-radius: 10px;">
+                            @if($first_slider_photo)
+                                <img src="{{ $first_slider_photo }}" fetchpriority="high" alt="Hero Background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                            @endif
+                            <div class="hero-slider-main owl-carousel dots-inside" style="position: relative; z-index: 1;">
+                                @foreach ($sliders as $index => $slider)
                                     @php
                                         $encoded_slider_photo = implode('/', array_map('rawurlencode', explode('/', $slider->photo)));
                                     @endphp
@@ -50,9 +64,9 @@
                                         @if (DB::table('languages')->where('is_default',1)->first()->rtl == 1)
                                         d-flex justify-content-end
                                         @endif
-                                        "
-                                        style="background: url('{{ asset('assets/images/' . $encoded_slider_photo) }}')">
-                                        <div class="item-inner">
+                                        " style="position: relative;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                                        <div class="item-inner" style="position: relative; z-index: 1;">
                                             <div class="from-bottom">
                                                 @if ($slider->logo)
                                                     <img class="d-inline-block brand-logo"
