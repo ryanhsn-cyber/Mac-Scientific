@@ -40,6 +40,11 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <!-- Main Slider-->
+                        <style>
+                            .hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; }
+                            .hero-slider-main:not(.owl-loaded) .item { display: none; }
+                            .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; }
+                        </style>
                         <div class="hero-slider">
                             <div class="hero-slider-main owl-carousel dots-inside" >
                                 @foreach ($sliders as $slider)
