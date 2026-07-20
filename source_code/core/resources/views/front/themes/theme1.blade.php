@@ -45,7 +45,13 @@
                             .hero-slider-main:not(.owl-loaded) .item { display: none; }
                             .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; }
                         </style>
-                        <div class="hero-slider">
+                        @php
+                            $first_slider_photo = '';
+                            if(count($sliders) > 0) {
+                                $first_slider_photo = asset('assets/images/' . implode('/', array_map('rawurlencode', explode('/', $sliders[0]->photo))));
+                            }
+                        @endphp
+                        <div class="hero-slider" style="background: url('{{ $first_slider_photo }}') center center / cover no-repeat; position: relative;">
                             <div class="hero-slider-main owl-carousel dots-inside" >
                                 @foreach ($sliders as $slider)
                                     @php

@@ -26,7 +26,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="preload" as="style">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@include('master.fonts')
+</style>
 <link rel="preload" href="{{asset('assets/front/css/plugins.min.css')}}" as="style">
 <link rel="preload" href="{{asset('assets/front/css/styles.min.css')}}" as="style">
 <link rel="preload" href="{{asset('assets/front/css/responsive.css')}}" as="style">
