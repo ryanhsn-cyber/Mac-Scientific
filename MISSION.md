@@ -114,3 +114,4 @@ N/A
 - [x] Refactored Product Details layout (Removed left-column stats, stacked action buttons, responsive 50/50 delivery/warranty blocks).
 - [x] Removed Delivery Information, Warranty, and Payment Methods sections from the right column of the frontend product details page.
 - [x] Rebuilt and relocated the Delivery, Warranty, and Payment Methods block below the product gallery image with an updated bordered design.
+- [x] Implemented performance and accessibility optimizations: Added lazy loading to images across all themes, added aria-labels to forms and inputs, and fixed deferred scripts execution logic.

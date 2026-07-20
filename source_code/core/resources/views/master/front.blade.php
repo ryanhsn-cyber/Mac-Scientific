@@ -36,9 +36,6 @@ body { font-family: "Open Sans", sans-serif; font-size: 14px; margin: 0; padding
 @media (max-width: 991px) { .site-header { min-height: 70px; } }
 .hero-slider { min-height: 450px; }
 @media (max-width: 991px) { .hero-slider { min-height: 200px; } }
-/* Hide elements that shift until CSS loads */
-.site-header * { opacity: 0; }
-.css-loaded .site-header * { opacity: 1; transition: opacity 0.2s; }
 </style>
 
 <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
