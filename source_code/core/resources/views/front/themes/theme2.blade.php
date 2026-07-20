@@ -56,16 +56,21 @@
                                 <img src="{{ $first_slider_photo }}" fetchpriority="high" alt="Hero Background" style="position: relative; width: 100%; height: auto; display: block; z-index: 0;">
                             @endif
                             <div class="hero-slider-main owl-carousel dots-inside" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+                                @php $is_rtl = DB::table('languages')->where('is_default',1)->first()->rtl == 1; @endphp
                                 @foreach ($sliders as $index => $slider)
                                     @php
                                         $encoded_slider_photo = implode('/', array_map('rawurlencode', explode('/', $slider->photo)));
                                     @endphp
                                     <div class="item
-                                        @if (DB::table('languages')->where('is_default',1)->first()->rtl == 1)
+                                        @if ($is_rtl)
                                         d-flex justify-content-end
                                         @endif
                                         " style="position: relative;">
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; {{ $loop->first ? 'opacity: 0;' : '' }}">
+                                        @if($loop->first)
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0;">
+                                        @else
+                                        <img class="lazy" data-src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;" loading="lazy">
+                                        @endif
                                         <div class="item-inner" style="position: relative; z-index: 1;">
                                             <div class="from-bottom">
                                                 @if ($slider->logo)
