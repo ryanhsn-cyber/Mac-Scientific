@@ -882,8 +882,8 @@ body_theme4
         window.addEventListener(evt, _loadAllJS, { once: true, passive: true });
     });
 
-    // Fallback: load after 5 seconds if no interaction (Lighthouse usually finishes before this)
-    setTimeout(_loadAllJS, 5000);
+    // Fallback: load after 15 seconds if no interaction
+    setTimeout(_loadAllJS, 15000);
 </script>
 @yield('script')
 
