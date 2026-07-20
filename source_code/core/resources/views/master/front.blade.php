@@ -45,19 +45,15 @@ body { font-family: "Open Sans", sans-serif; font-size: 14px; margin: 0; padding
 <link rel="preload" as="style" href="{{asset('assets/front/css/paymentfont.min.css')}}">
 
 <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
-<link rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/plugins.min.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/plugins.min.css')}}"></noscript>
+<link rel="stylesheet" media="screen" href="{{asset('assets/front/css/plugins.min.css')}}">
 
 @yield('styleplugins')
 
-<link id="mainStyles" rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/styles.min.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/styles.min.css')}}"></noscript>
+<link id="mainStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/styles.min.css')}}">
 
-<link id="responsiveStyles" rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/responsive.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/responsive.css')}}"></noscript>
+<link id="responsiveStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/responsive.css')}}">
 
-<link rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/paymentfont.min.css')}}">
-<noscript><link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}"></noscript>
+<link rel="stylesheet" media="screen" href="{{asset('assets/front/css/paymentfont.min.css')}}">
 
 <!-- Color css -->
 <style>
