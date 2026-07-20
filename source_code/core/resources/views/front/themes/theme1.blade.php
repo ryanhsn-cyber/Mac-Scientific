@@ -56,7 +56,7 @@
                                 <img src="{{ $first_slider_photo }}" fetchpriority="high" alt="Hero Background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
                             @endif
                             <div class="hero-slider-main owl-carousel dots-inside" style="position: relative; z-index: 1;">
-                                @foreach ($sliders as $slider)
+                                @foreach ($sliders as $index => $slider)
                                     @php
                                         $encoded_slider_photo = implode('/', array_map('rawurlencode', explode('/', $slider->photo)));
                                     @endphp
@@ -65,7 +65,13 @@
                                     d-flex justify-content-end
                                     @endif
                                     "
-                                        style="background: url('{{ asset('assets/images/' . $encoded_slider_photo) }}')">
+                                        style="
+                                        @if($index !== 0)
+                                            background: url('{{ asset('assets/images/' . $encoded_slider_photo) }}')
+                                        @else
+                                            background: transparent;
+                                        @endif
+                                        ">
                                         <div class="item-inner">
                                             <div class="from-bottom">
                                                 @if ($slider->logo)
