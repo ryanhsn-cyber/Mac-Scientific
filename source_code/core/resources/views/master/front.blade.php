@@ -38,6 +38,7 @@
 
 <!-- Color css -->
 
+<style>
 @php
     $color = $setting->primary_color ?? '#FF6A00';
 @endphp
