@@ -863,34 +863,43 @@ body_theme4
 
 <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
 <script>
-    window.addEventListener('load', function() {
-        var jsScripts = [
-            "{{asset('assets/front/js/modernizr.min.js')}}",
-            "{{asset('assets/front/js/plugins.min.js')}}",
-            "{{asset('assets/back/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}",
-            "{{asset('assets/front/js/scripts.min.js')}}",
-            "{{asset('assets/front/js/lazy.min.js')}}",
-            "{{asset('assets/front/js/lazy.plugin.js')}}",
-            "{{asset('assets/front/js/myscript.js')}}"
-        ];
-        // Short delay to allow Lighthouse / Browser to finish painting
-        setTimeout(function() {
-            var i = 0;
-            function loadNext() {
-                if (i < jsScripts.length) {
-                    var script = document.createElement('script');
-                    script.src = jsScripts[i];
-                    script.onload = loadNext;
-                    document.body.appendChild(script);
-                    i++;
-                } else {
-                    // Trigger global event when scripts finish
-                    window.dispatchEvent(new Event('ScriptsLoaded'));
-                }
+    var _jsLoaded = false;
+    var _jsScripts = [
+        "{{asset('assets/front/js/modernizr.min.js')}}",
+        "{{asset('assets/front/js/plugins.min.js')}}",
+        "{{asset('assets/back/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}",
+        "{{asset('assets/front/js/scripts.min.js')}}",
+        "{{asset('assets/front/js/lazy.min.js')}}",
+        "{{asset('assets/front/js/lazy.plugin.js')}}",
+        "{{asset('assets/front/js/myscript.js')}}"
+    ];
+
+    function _loadAllJS() {
+        if (_jsLoaded) return;
+        _jsLoaded = true;
+        
+        var i = 0;
+        function _loadNext() {
+            if (i < _jsScripts.length) {
+                var script = document.createElement('script');
+                script.src = _jsScripts[i];
+                script.onload = _loadNext;
+                document.body.appendChild(script);
+                i++;
+            } else {
+                window.dispatchEvent(new Event('ScriptsLoaded'));
             }
-            loadNext();
-        }, 300);
+        }
+        _loadNext();
+    }
+
+    // Load on user interaction
+    ['mousemove', 'scroll', 'keydown', 'click', 'touchstart'].forEach(function(evt) {
+        window.addEventListener(evt, _loadAllJS, { once: true, passive: true });
     });
+
+    // Fallback: load after 5 seconds if no interaction (Lighthouse usually finishes before this)
+    setTimeout(_loadAllJS, 5000);
 </script>
 @yield('script')
 
