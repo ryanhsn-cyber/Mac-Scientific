@@ -115,3 +115,4 @@ N/A
 - [x] Removed Delivery Information, Warranty, and Payment Methods sections from the right column of the frontend product details page.
 - [x] Rebuilt and relocated the Delivery, Warranty, and Payment Methods block below the product gallery image with an updated bordered design.
 - [x] Implemented performance and accessibility optimizations: Added lazy loading to images across all themes, added aria-labels to forms and inputs, and fixed deferred scripts execution logic.
+- [x] Fixed missing `<style>` tag around dynamically generated CSS in `master/front.blade.php` that caused raw CSS to render on the live storefront.
