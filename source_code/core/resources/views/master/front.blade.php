@@ -22,10 +22,7 @@
 <link rel="apple-touch-icon" sizes="152x152" href="{{asset('assets/images/'.$setting->favicon)}}">
 <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/'.$setting->favicon)}}">
 <link rel="apple-touch-icon" sizes="167x167" href="{{asset('assets/images/'.$setting->favicon)}}">
-<!-- Preload Critical CSS -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="preload" as="style">
+<!-- Fonts already inlined via @font-face below -->
 <style>
 @include('master.fonts')
 </style>
@@ -36,7 +33,8 @@
 
 <link rel="stylesheet" href="{{asset('assets/front/css/styles.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/front/css/responsive.css')}}">
-<link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/paymentfont.min.css')}}">
+<noscript><link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}"></noscript>
 
 <!-- Color css -->
 
