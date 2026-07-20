@@ -29,15 +29,32 @@
 <style>
 @include('master.fonts')
 </style>
+<!-- Critical inline CSS to prevent CLS -->
+<style>
+body { font-family: "Open Sans", sans-serif; font-size: 14px; margin: 0; padding: 0; }
+.site-header { min-height: 110px; background: #fff; }
+@media (max-width: 991px) { .site-header { min-height: 70px; } }
+.hero-slider { min-height: 450px; }
+@media (max-width: 991px) { .hero-slider { min-height: 200px; } }
+/* Hide elements that shift until CSS loads */
+.site-header * { opacity: 0; }
+.css-loaded .site-header * { opacity: 1; transition: opacity 0.2s; }
+</style>
+
 <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
 <link rel="stylesheet" media="screen" href="{{asset('assets/front/css/plugins.min.css')}}">
 
 @yield('styleplugins')
 
-<link id="mainStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/styles.min.css')}}">
-<link id="responsiveStyles" rel="stylesheet" media="screen" href="{{asset('assets/front/css/responsive.css')}}">
-<link rel="preload" href="{{asset('assets/front/css/paymentfont.min.css')}}" as="style">
-<link rel="stylesheet" media="screen" href="{{asset('assets/front/css/paymentfont.min.css')}}">
+<link id="mainStyles" rel="stylesheet" media="print" onload="this.media='all'; document.body.classList.add('css-loaded');" href="{{asset('assets/front/css/styles.min.css')}}">
+<noscript><link rel="stylesheet" href="{{asset('assets/front/css/styles.min.css')}}"></noscript>
+
+<link id="responsiveStyles" rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/responsive.css')}}">
+<noscript><link rel="stylesheet" href="{{asset('assets/front/css/responsive.css')}}"></noscript>
+
+<link rel="stylesheet" media="print" onload="this.media='all'" href="{{asset('assets/front/css/paymentfont.min.css')}}">
+<noscript><link rel="stylesheet" href="{{asset('assets/front/css/paymentfont.min.css')}}"></noscript>
+
 <!-- Color css -->
 <style>
 @php
