@@ -89,6 +89,18 @@
           <div class="col-12">
             <div class="payment-methods">
               @php
+                  // Auto-insert custom gateways if missing from database
+                  foreach (['bkash' => 'bKash', 'nagad' => 'Nagad'] as $kw => $name) {
+                      if (!DB::table('payment_settings')->where('unique_keyword', $kw)->exists()) {
+                          DB::table('payment_settings')->insert([
+                              'unique_keyword' => $kw,
+                              'name' => $name,
+                              'photo' => null,
+                              'text' => 'Please pay using ' . $name,
+                              'status' => 1
+                          ]);
+                      }
+                  }
                   $gateways = DB::table('payment_settings')->whereStatus(1)->get();
               @endphp
               @foreach ($gateways as $gateway)
@@ -96,8 +108,10 @@
               @if ($gateway->unique_keyword != 'cod')
               <div class="single-payment-method">
                 <a class="text-decoration-none " href="#" data-bs-toggle="modal" data-bs-target="#{{$gateway->unique_keyword}}">
+                    @if($gateway->photo)
                     <img class="" src="{{asset('assets/images/'.$gateway->photo)}}" alt="{{$gateway->name}}" title="{{$gateway->name}}">
-                    <p>{{$gateway->name}}</p>
+                    @endif
+                    <p style="{{ !$gateway->photo ? 'padding-top: 15px; font-weight: bold;' : '' }}">{{$gateway->name}}</p>
                 </a>
               </div>
               @endif
@@ -105,8 +119,10 @@
               @else
               <div class="single-payment-method">
                 <a class="text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#{{$gateway->unique_keyword}}">
+                    @if($gateway->photo)
                     <img class="" src="{{asset('assets/images/'.$gateway->photo)}}" alt="{{$gateway->name}}" title="{{$gateway->name}}">
-                    <p>{{$gateway->name}}</p>
+                    @endif
+                    <p style="{{ !$gateway->photo ? 'padding-top: 15px; font-weight: bold;' : '' }}">{{$gateway->name}}</p>
                 </a>
               </div>
               @endif
