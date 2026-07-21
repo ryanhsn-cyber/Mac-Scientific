@@ -295,10 +295,10 @@
 
 @php
     $paymentData = App\Models\PaymentSetting::where('unique_keyword','mercadopago')->first();
-    $paydata = $paymentData->convertJsonData();
+    $paydata = $paymentData ? $paymentData->convertJsonData() : [];
 @endphp
 
-@if ($paymentData->status == 1)
+@if ($paymentData && $paymentData->status == 1)
 {{-- MERCADOPAGO --}}
   <div class="modal fade" id="mercadopago" tabindex="-1"  aria-hidden="true">
     <form class="interactive-credit-card row" id="mercadopagofrom" action="{{route('front.mercadopago.submit')}}" method="POST">
@@ -512,7 +512,7 @@
 
 @php
 $data = App\Models\PaymentSetting::whereUniqueKeyword('paystack')->first();
-$paydata = $data->convertJsonData();
+$paydata = $data ? $data->convertJsonData() : ['key' => ''];
 $billing = Session::get('billing_address');
 @endphp
 @section('script')
