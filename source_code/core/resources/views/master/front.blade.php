@@ -233,6 +233,27 @@ a.list-group-item:hover,
         display: none !important;
     }
     
+    /* Performance and Accessibility Fixes */
+    .track-order-link {
+        padding: 8px 12px !important;
+        display: inline-block;
+    }
+    .text-muted { color: #595959 !important; }
+    .product-badge.bg-info { color: #fff !important; }
+    .site-footer .widget-light-skin p,
+    .site-footer .widget-light-skin strong,
+    .site-footer .widget-light-skin a,
+    .site-footer .widget-light-skin li > a {
+        color: #f8f9fa !important;
+    }
+    .site-footer .widget-light-skin a:hover {
+        color: #fff !important;
+        text-decoration: underline;
+    }
+    del { color: #6c757d !important; }
+    .text-sm.opacity-80 { opacity: 1 !important; color: #f8f9fa !important; }
+    
+    
     {{$setting->custom_css}}
     .site-header .site-menu > ul > li > a {
         padding: 12px 8px !important;
@@ -728,7 +749,9 @@ body_theme4
 
 </header>
 <!-- Page Content-->
+<main>
 @yield('content')
+</main>
 
 <!--    announcement banner section removed   -->
 
@@ -797,7 +820,7 @@ body_theme4
                     <p class="text-sm opacity-80 pt-2">{{__('Subscribe to our Newsletter to receive early discount offers, latest news, sales and promo information.')}}</p>
                 </div>
               </form>
-              <div class="pt-3"><img class="d-block gateway_image" width="324" height="31" src="{{ $setting->footer_gateway_img ? asset('assets/images/'.$setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}"></div>
+              <div class="pt-3"><img class="d-block gateway_image" width="324" height="31" src="{{ $setting->footer_gateway_img ? asset('assets/images/'.$setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}" alt="Payment Gateways"></div>
             </section>
           </div>
       </div>

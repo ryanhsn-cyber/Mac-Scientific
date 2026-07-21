@@ -53,7 +53,7 @@
                         @endphp
                         <div class="hero-slider" style="position: relative; overflow: hidden; border-radius: 10px;">
                             @if($first_slider_photo)
-                                <img src="{{ $first_slider_photo }}" fetchpriority="high" alt="Hero Background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                                <img src="{{ $first_slider_photo }}" fetchpriority="high" alt="Hero Background" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
                             @endif
                             <div class="hero-slider-main owl-carousel dots-inside" style="position: relative; z-index: 1;">
                                 @foreach ($sliders as $index => $slider)
@@ -65,13 +65,17 @@
                                     d-flex justify-content-end
                                     @endif
                                     " style="position: relative;">
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                                        @if($index == 0)
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" fetchpriority="high" alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                                        @else
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" loading="lazy" alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                                        @endif
                                         <div class="item-inner" style="position: relative; z-index: 1;">
                                             <div class="from-bottom">
                                                 @if ($slider->logo)
                                                     <img class="d-inline-block brand-logo"
                                                     src="{{ asset('assets/images/' . $slider->logo) }}"
-                                                    alt="logo">
+                                                    alt="Brand Logo">
                                                 @endif
                                                 <div class="title text-body"></div>
                                                 <div class="subtitle text-body"></div>

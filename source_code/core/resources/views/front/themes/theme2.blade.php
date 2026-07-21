@@ -53,7 +53,7 @@
                         @endphp
                         <div class="hero-slider" style="position: relative; overflow: hidden; border-radius: 10px;">
                             @if($first_slider_photo)
-                                <img src="{{ $first_slider_photo }}" fetchpriority="high" alt="Hero Background" style="position: relative; width: 100%; height: auto; display: block; z-index: 0;">
+                                <img src="{{ $first_slider_photo }}" fetchpriority="high" alt="Hero Background" width="1920" height="1080" style="position: relative; width: 100%; height: auto; display: block; z-index: 0;">
                             @endif
                             <div class="hero-slider-main owl-carousel dots-inside" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
                                 @php $is_rtl = DB::table('languages')->where('is_default',1)->first()->rtl == 1; @endphp
@@ -67,15 +67,15 @@
                                         @endif
                                         " style="position: relative;">
                                         @if($loop->first)
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0;">
                                         @else
-                                        <img class="lazy" loading="lazy" src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;" loading="lazy">
+                                        <img class="lazy" loading="lazy" src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
                                         @endif
                                         <div class="item-inner" style="position: relative; z-index: 1;">
                                             <div class="from-bottom">
                                                 @if ($slider->logo)
                                                     <img class="d-inline-block brand-logo"
-                                                    src="">
+                                                    src="{{ asset('assets/images/' . $slider->logo) }}" alt="Brand Logo">
                                                 @endif
 
                                                 <div class="title text-body"></div>
@@ -243,7 +243,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="genius-banner">
-                            <img class="img-fluid w-100 rounded" src="/assets/images/featured-banner.png" alt="Our Current Highlight" loading="lazy">
+                            <img class="img-fluid w-100 rounded" src="/assets/images/featured-banner.png" alt="Our Current Highlight" width="1200" height="300" loading="lazy">
                         </div>
                     </div>
                 </div>
