@@ -90,14 +90,23 @@
             <div class="payment-methods">
               @php
                   // Auto-insert custom gateways if missing from database
-                  foreach (['bkash' => 'bKash', 'nagad' => 'Nagad'] as $kw => $name) {
-                      if (!DB::table('payment_settings')->where('unique_keyword', $kw)->exists()) {
+                  $customGateways = [
+                      'bkash' => ['name' => 'bKash', 'photo' => 'payments/bkash_logo.jpg'],
+                      'nagad' => ['name' => 'Nagad', 'photo' => 'payments/nagad_logo.png']
+                  ];
+                  foreach ($customGateways as $kw => $data) {
+                      $exists = DB::table('payment_settings')->where('unique_keyword', $kw)->first();
+                      if (!$exists) {
                           DB::table('payment_settings')->insert([
                               'unique_keyword' => $kw,
-                              'name' => $name,
-                              'photo' => null,
-                              'text' => 'Please pay using ' . $name,
+                              'name' => $data['name'],
+                              'photo' => $data['photo'],
+                              'text' => 'Please pay using ' . $data['name'],
                               'status' => 1
+                          ]);
+                      } elseif (!$exists->photo) {
+                          DB::table('payment_settings')->where('unique_keyword', $kw)->update([
+                              'photo' => $data['photo']
                           ]);
                       }
                   }
