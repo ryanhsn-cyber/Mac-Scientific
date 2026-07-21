@@ -229,7 +229,7 @@
                 <div class="row gx-3">
                     <div class="col-md-4">
                         <a href="{{$banner_first['firsturl1']}}" class="genius-banner">
-                            <img src="{{ asset('assets/images/'.$banner_first['img1']) }}" alt="" loading="lazy">
+                            <img src="{{ asset('assets/images/'.$banner_first['img1']) }}" alt="Banner 1" width="400" height="200" loading="lazy">
                             <div class="inner-content">
                                 @if (isset($banner_first['subtitle1']))
                                     <p>{{$banner_first['subtitle1']}}</p>
@@ -242,7 +242,7 @@
                     </div>
                     <div class="col-md-4">
                         <a href="{{$banner_first['firsturl2']}}" class="genius-banner">
-                            <img src="{{ asset('assets/images/'.$banner_first['img2']) }}" alt="" loading="lazy">
+                            <img src="{{ asset('assets/images/'.$banner_first['img2']) }}" alt="Banner 2" width="400" height="200" loading="lazy">
                             <div class="inner-content">
                                 @if (isset($banner_first['subtitle2']))
                                     <p>{{$banner_first['subtitle2']}}</p>
@@ -255,7 +255,7 @@
                     </div>
                     <div class="col-md-4">
                         <a href="{{$banner_first['firsturl3']}}" class="genius-banner">
-                            <img src="{{ asset('assets/images/'.$banner_first['img3']) }}" alt="" loading="lazy">
+                            <img src="{{ asset('assets/images/'.$banner_first['img3']) }}" alt="Banner 3" width="400" height="200" loading="lazy">
                             <div class="inner-content">
                                 @if (isset($banner_first['subtitle3']))
                                     <p>{{$banner_first['subtitle3']}} </p>
