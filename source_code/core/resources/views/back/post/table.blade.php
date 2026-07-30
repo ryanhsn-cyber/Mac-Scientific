@@ -3,7 +3,13 @@
     <td><input type="checkbox" class="bulk-item" value="{{$data->id}}"></td>
 
   <td>
-      <img src="{{ isset(json_decode($data->photo,true)[0]) ?  asset('assets/images/'.json_decode($data->photo,true)[0]) : asset('assets/images/placeholder.png')}}" alt="">
+      @php
+          $decoded = json_decode($data->photo, true);
+          $photoPath = is_array($decoded) && count($decoded) > 0 ? $decoded[array_key_first($decoded)] : (is_string($decoded) ? $decoded : $data->photo);
+          $photoPath = trim($photoPath, '"\'');
+          $photoPath = empty($photoPath) ? 'placeholder.png' : $photoPath;
+      @endphp
+      <img src="{{ asset('assets/images/' . $photoPath) }}" alt="">
 
   </td>
     <td>

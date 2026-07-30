@@ -41,7 +41,17 @@
 
                                     <div class="d-block">
 
-                                        @forelse(json_decode($post->photo,true) as $key => $photo)
+                                        @php
+                                            $decoded = json_decode($post->photo, true);
+                                            if (is_array($decoded) && count($decoded) > 0) {
+                                                $photoArray = $decoded;
+                                            } else {
+                                                $photoStr = is_string($decoded) ? $decoded : $post->photo;
+                                                $photoStr = trim($photoStr, '"\'');
+                                                $photoArray = empty($photoStr) ? [] : [$photoStr];
+                                            }
+                                        @endphp
+                                        @forelse($photoArray as $key => $photo)
                                             <div class="single-g-item d-inline-block m-2">
                                                     <span data-toggle="modal"
                                                     data-target="#confirm-delete" href="javascript:;"
