@@ -31,15 +31,18 @@
                 <div class="blog-details-slider owl-carousel">
 
                     @php
-                        $photoArray = json_decode($post->photo, true);
+                        $decoded = json_decode($post->photo, true);
+                        if (is_array($decoded) && count($decoded) > 0) {
+                            $photoArray = $decoded;
+                        } else {
+                            $photoStr = is_string($decoded) ? $decoded : $post->photo;
+                            $photoStr = trim($photoStr, '"\'');
+                            $photoArray = empty($photoStr) ? ['placeholder.png'] : [$photoStr];
+                        }
                     @endphp
-                    @if (is_array($photoArray))
-                        @foreach ($photoArray as $photo)
+                    @foreach ($photoArray as $photo)
                         <img src="{{asset('assets/images/'.$photo)}}" alt="Image">
-                        @endforeach
-                    @else
-                        <img src="{{asset('assets/images/'.$post->photo)}}" alt="Image">
-                    @endif
+                    @endforeach
                 </div>
                 <div class="blog-details-main-content">
                     <h4 class="pt-4 b-d-title">{{$post->title}}</h4>
@@ -113,8 +116,10 @@
                     <div class="widget widget-featured-posts">
                         <div class="entry">
                         @php
-                            $likePhotoArray = json_decode($like_post->photo, true);
-                            $likePhotoPath = is_array($likePhotoArray) && count($likePhotoArray) > 0 ? $likePhotoArray[array_key_first($likePhotoArray)] : $like_post->photo;
+                            $decoded = json_decode($like_post->photo, true);
+                            $likePhotoPath = is_array($decoded) && count($decoded) > 0 ? $decoded[array_key_first($decoded)] : (is_string($decoded) ? $decoded : $like_post->photo);
+                            $likePhotoPath = trim($likePhotoPath, '"\'');
+                            $likePhotoPath = empty($likePhotoPath) ? 'placeholder.png' : $likePhotoPath;
                         @endphp
                         <div class="entry-thumb"><a href="{{route('front.blog.details',$like_post->slug)}}"><img src="{{asset('assets/images/' . $likePhotoPath)}}" alt="Post"></a></div>
                         <div class="entry-content">
@@ -156,8 +161,10 @@
                @foreach ($posts as $recent)
                <div class="entry">
                 @php
-                    $recentPhotoArray = json_decode($recent->photo, true);
-                    $recentPhotoPath = is_array($recentPhotoArray) && count($recentPhotoArray) > 0 ? $recentPhotoArray[array_key_first($recentPhotoArray)] : $recent->photo;
+                    $decoded = json_decode($recent->photo, true);
+                    $recentPhotoPath = is_array($decoded) && count($decoded) > 0 ? $decoded[array_key_first($decoded)] : (is_string($decoded) ? $decoded : $recent->photo);
+                    $recentPhotoPath = trim($recentPhotoPath, '"\'');
+                    $recentPhotoPath = empty($recentPhotoPath) ? 'placeholder.png' : $recentPhotoPath;
                 @endphp
                 <div class="entry-thumb"><a href="{{route('front.blog.details',$recent->slug)}}"><img src="{{ asset('assets/images/' . $recentPhotoPath) }}" alt="Post"></a></div>
                 <div class="entry-content">
