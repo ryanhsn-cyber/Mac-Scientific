@@ -88,6 +88,7 @@ class ConvertToWebpCommand extends Command
                             $newFullPath = $foundPath . $newFilename;
                             
                             $image->encode('webp', 90)->save($newFullPath);
+                            $image->destroy();
                             
                             $record->{$column} = $newFilename;
                             $record->save();
