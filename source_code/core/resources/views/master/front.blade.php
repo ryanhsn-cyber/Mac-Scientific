@@ -910,8 +910,8 @@ body_theme4
         window.addEventListener(evt, _loadAllJS, { once: true, passive: true });
     });
 
-    // Fallback: load after 3 seconds if no interaction
-    setTimeout(_loadAllJS, 3500);
+    // Fallback: load after 8.5 seconds if no interaction
+    setTimeout(_loadAllJS, 8500);
 </script>
 @yield('script')
 
