@@ -69,7 +69,14 @@ class PostRepository
     public function UpdateImageData($request,$post)
     {
         
-        $storeData = json_decode($post->photo,true);
+        $decoded = json_decode($post->photo, true);
+        if (is_array($decoded)) {
+            $storeData = $decoded;
+        } else {
+            $photoStr = is_string($decoded) ? $decoded : $post->photo;
+            $photoStr = trim($photoStr, '"\'');
+            $storeData = empty($photoStr) ? [] : [$photoStr];
+        }
         
         if ($photos = $request->file('photo')) {
             foreach($photos as $key => $photo){
@@ -90,7 +97,15 @@ class PostRepository
 
     public function delete($post)
     {
-        $images = json_decode($post->photo,true);
+        $decoded = json_decode($post->photo, true);
+        if (is_array($decoded)) {
+            $images = $decoded;
+        } else {
+            $photoStr = is_string($decoded) ? $decoded : $post->photo;
+            $photoStr = trim($photoStr, '"\'');
+            $images = empty($photoStr) ? [] : [$photoStr];
+        }
+
         foreach($images as $image){
             if (file_exists(base_path('../').'assets/images/'.$image)) {
                 unlink(base_path('../').'assets/images/'.$image);
@@ -109,13 +124,24 @@ class PostRepository
     public function photoDelete($key,$id)
     {
         $post = Post::findOrFail($id);
-        $photos = json_decode($post->photo,true);
-        $delete_photo = $photos[$key];
-        if (file_exists(base_path('../').'assets/images/'.$delete_photo)) {
-            unlink(base_path('../').'assets/images/'.$delete_photo);
+        $decoded = json_decode($post->photo, true);
+        if (is_array($decoded)) {
+            $photos = $decoded;
+        } else {
+            $photoStr = is_string($decoded) ? $decoded : $post->photo;
+            $photoStr = trim($photoStr, '"\'');
+            $photos = empty($photoStr) ? [] : [$photoStr];
+        }
+
+        if (isset($photos[$key])) {
+            $delete_photo = $photos[$key];
+            if (file_exists(base_path('../').'assets/images/'.$delete_photo)) {
+                unlink(base_path('../').'assets/images/'.$delete_photo);
+            }
+            unset($photos[$key]);
+            $photos = array_values($photos);
         }
         
-        unset($photos[$key]);
         $new_photos = json_encode($photos,true);
         $post->update(['photo'=> $new_photos]);
     }
