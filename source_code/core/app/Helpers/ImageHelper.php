@@ -106,8 +106,9 @@ class ImageHelper
                     unlink(base_path('../').$path.'/'.$delete);
                 }
             }
-            $name = Str::random(4).$file->getClientOriginalName();
-            $file->move($path,$name);
+            $name = Str::random(4).time().'.webp';
+            $image = \Image::make($file)->encode('webp', 90);
+            $image->save(base_path('../').$path.'/'.$name);
             return $name;
         }
     }
@@ -120,22 +121,25 @@ class ImageHelper
                 }
             }
 
-            $thum = Str::random(8).'.'.$file->getClientOriginalExtension();
-            $image = \Image::make($file)->resize(230,230);
-    
+            $thum = Str::random(8).'.webp';
+            $image = \Image::make($file)->resize(230,230)->encode('webp', 90);
             $image->save(base_path('../').$path.'/'.$thum);
     
-            $photo = time().$file->getClientOriginalName();
-            $file->move($path,$photo);
+            $photo = time().'.webp';
+            $mainImage = \Image::make($file)->encode('webp', 90);
+            $mainImage->save(base_path('../').$path.'/'.$photo);
+            
             return [$photo,$thum];
         }
     }
 
     public static function handleUpdatedUploadedImage($file,$path,$data,$delete_path,$field) {
         $file = self::convertUploadedAvifToWebp($file);
-        $name = time().$file->getClientOriginalName();
-   
-        $file->move(base_path('..').$path,$name);
+        $name = time().'.webp';
+        
+        $image = \Image::make($file)->encode('webp', 90);
+        $image->save(base_path('..').$path.'/'.$name);
+        
         if($data[$field] != null){
             if (file_exists(base_path('../').$delete_path.$data[$field])) {
                 unlink(base_path('../').$delete_path.$data[$field]);
@@ -147,14 +151,14 @@ class ImageHelper
 
     public static function ItemhandleUpdatedUploadedImage($file,$path,$data,$delete_path,$field) {
         $file = self::convertUploadedAvifToWebp($file);
-        $photo = time().$file->getClientOriginalName();
-        $thum = Str::random(8).'.'.$file->getClientOriginalExtension();
+        $photo = time().'.webp';
+        $thum = Str::random(8).'.webp';
       
-        $image = \Image::make($file)->resize(230,230);
-
+        $image = \Image::make($file)->resize(230,230)->encode('webp', 90);
         $image->save(base_path('..').$path.'/'.$thum);
 
-        $file->move(base_path('..').$path,$photo);
+        $mainImage = \Image::make($file)->encode('webp', 90);
+        $mainImage->save(base_path('..').$path.'/'.$photo);
 
         if($data['thumbnail'] != null){
             if (file_exists(base_path('../').$delete_path.$data['thumbnail'])) {

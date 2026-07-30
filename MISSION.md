@@ -118,3 +118,4 @@ N/A
 - [x] Fixed missing `<style>` tag around dynamically generated CSS in `master/front.blade.php` that caused raw CSS to render on the live storefront.
 - [x] Resolved image visibility issue by migrating from deferred JS `data-src` lazy-loading to native `loading="lazy"` with standard `src` attributes, ensuring above-the-fold images render immediately.
 - [x] Fixed Lighthouse accessibility issues (contrast, alt text, target sizes) and layout shifts (unsized images) on themes.
+- [x] Converted all existing images to WebP format and modified ImageHelper to automatically encode all future uploads to WebP for optimization and enforcement.
