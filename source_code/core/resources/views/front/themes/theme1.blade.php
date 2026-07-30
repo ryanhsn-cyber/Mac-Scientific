@@ -68,7 +68,7 @@
                                         @if($index == 0)
                                         <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" fetchpriority="high" alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
                                         @else
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" loading="lazy" alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" @if($loop->first) fetchpriority="high" @else loading="lazy" @endif alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
                                         @endif
                                         <div class="item-inner" style="position: relative; z-index: 1;">
                                             <div class="from-bottom">

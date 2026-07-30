@@ -40,13 +40,19 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
+                        <style>
+                            .heroarea-slider:not(.owl-loaded) { display: block !important; overflow: hidden; border-radius: 12px; }
+                            .heroarea-slider:not(.owl-loaded) > a { display: none; }
+                            .heroarea-slider:not(.owl-loaded) > a:first-child { display: block; width: 100%; }
+                        </style>
                         <div class="heroarea-slider owl-carousel">
                             @foreach ($sliders as $slider)
                             @php
                                 $encoded_slider_photo = implode('/', array_map('rawurlencode', explode('/', $slider->photo)));
                             @endphp
                             <a href="{{$slider->link}}">
-                                <div  class="item" style="background: url('{{ asset('assets/images/' . $encoded_slider_photo) }}')">
+                                <div class="item" style="position: relative;">
+                                    <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Banner" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" @if($loop->first) fetchpriority="high" @else loading="lazy" @endif>
                                 </div>
                             </a>
                             @endforeach
