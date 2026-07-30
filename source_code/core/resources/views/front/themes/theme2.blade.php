@@ -75,7 +75,7 @@
                                             <div class="from-bottom">
                                                 @if ($slider->logo)
                                                     <img class="d-inline-block brand-logo"
-                                                    src="{{ asset('assets/images/' . $slider->logo) }}" alt="Brand Logo">
+                                                    src="{{ asset('assets/images/' . $slider->logo) }}" alt="Brand Logo" width="200" height="133">
                                                 @endif
 
                                                 <div class="title text-body"></div>
