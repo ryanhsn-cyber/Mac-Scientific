@@ -30,9 +30,16 @@
                 <!-- Gallery-->
                 <div class="blog-details-slider owl-carousel">
 
-                    @foreach (json_decode($post->photo,true) as $photo)
-                    <img src="{{asset('assets/images/'.$photo)}}" alt="Image">
-                    @endforeach
+                    @php
+                        $photoArray = json_decode($post->photo, true);
+                    @endphp
+                    @if (is_array($photoArray))
+                        @foreach ($photoArray as $photo)
+                        <img src="{{asset('assets/images/'.$photo)}}" alt="Image">
+                        @endforeach
+                    @else
+                        <img src="{{asset('assets/images/'.$post->photo)}}" alt="Image">
+                    @endif
                 </div>
                 <div class="blog-details-main-content">
                     <h4 class="pt-4 b-d-title">{{$post->title}}</h4>
@@ -105,7 +112,11 @@
                     @foreach ($post->category->posts->where('id','!=',$post->id) as $like_post)
                     <div class="widget widget-featured-posts">
                         <div class="entry">
-                        <div class="entry-thumb"><a href="{{route('front.blog.details',$like_post->slug)}}"><img src="{{asset('assets/images/'.json_decode($like_post->photo,true)[array_key_first(json_decode($like_post->photo,true))])}}" alt="Post"></a></div>
+                        @php
+                            $likePhotoArray = json_decode($like_post->photo, true);
+                            $likePhotoPath = is_array($likePhotoArray) && count($likePhotoArray) > 0 ? $likePhotoArray[array_key_first($likePhotoArray)] : $like_post->photo;
+                        @endphp
+                        <div class="entry-thumb"><a href="{{route('front.blog.details',$like_post->slug)}}"><img src="{{asset('assets/images/' . $likePhotoPath)}}" alt="Post"></a></div>
                         <div class="entry-content">
                             <h4 class="entry-title"><a href="{{route('front.blog.details',$like_post->slug)}}">
                                 {{ strlen(strip_tags($like_post->title)) > 75 ? substr(strip_tags($like_post->title), 0, 75) . '...' : strip_tags($like_post->title) }}
@@ -144,7 +155,11 @@
                 <h3 class="widget-title">{{__('Most Recent Added Posts')}}</h3>
                @foreach ($posts as $recent)
                <div class="entry">
-                <div class="entry-thumb"><a href="{{route('front.blog.details',$recent->slug)}}"><img src="{{ asset('assets/images/'.json_decode($recent->photo,true)[array_key_first(json_decode($recent->photo,true))]) }}" alt="Post"></a></div>
+                @php
+                    $recentPhotoArray = json_decode($recent->photo, true);
+                    $recentPhotoPath = is_array($recentPhotoArray) && count($recentPhotoArray) > 0 ? $recentPhotoArray[array_key_first($recentPhotoArray)] : $recent->photo;
+                @endphp
+                <div class="entry-thumb"><a href="{{route('front.blog.details',$recent->slug)}}"><img src="{{ asset('assets/images/' . $recentPhotoPath) }}" alt="Post"></a></div>
                 <div class="entry-content">
                   <h4 class="entry-title"><a href="{{route('front.blog.details',$recent->slug)}}">
                     {{ strlen(strip_tags($recent->title)) > 55 ? substr(strip_tags($recent->title), 0, 55) . '...' : strip_tags($recent->title) }}

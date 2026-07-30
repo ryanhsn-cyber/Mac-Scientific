@@ -29,7 +29,11 @@
                         <div class="col-md-6">
                             <a href="{{route('front.blog.details',$post->slug)}}" class="blog-post">
                                 <div class="post-thumb">
-                                    <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/' . json_decode($post->photo, true)[array_key_first(json_decode($post->photo, true))]) }}"
+                                    @php
+                                        $photoArray = json_decode($post->photo, true);
+                                        $photoPath = is_array($photoArray) && count($photoArray) > 0 ? $photoArray[array_key_first($photoArray)] : $post->photo;
+                                    @endphp
+                                    <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/' . $photoPath) }}"
                                         alt="Blog Post">
                                     </div>
                                 <div class="post-body">
@@ -89,7 +93,11 @@
                   <h3 class="widget-title">{{__('Most Recent Added Posts')}}</h3>
                  @foreach ($recent_posts as $recent)
                  <div class="entry">
-                  <div class="entry-thumb"><a href="{{route('front.blog.details',$recent->slug)}}"><img src="{{ asset('assets/images/'.json_decode($recent->photo,true)[array_key_first(json_decode($recent->photo,true))]) }}" alt="Post"></a></div>
+                  @php
+                      $recentPhotoArray = json_decode($recent->photo, true);
+                      $recentPhotoPath = is_array($recentPhotoArray) && count($recentPhotoArray) > 0 ? $recentPhotoArray[array_key_first($recentPhotoArray)] : $recent->photo;
+                  @endphp
+                  <div class="entry-thumb"><a href="{{route('front.blog.details',$recent->slug)}}"><img src="{{ asset('assets/images/' . $recentPhotoPath) }}" alt="Post"></a></div>
                   <div class="entry-content">
                     <h4 class="entry-title"><a href="{{route('front.blog.details',$recent->slug)}}">
                       {{ strlen(strip_tags($recent->title)) > 55 ? substr(strip_tags($recent->title), 0, 55) . '...' : strip_tags($recent->title) }}
