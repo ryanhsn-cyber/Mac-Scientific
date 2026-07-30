@@ -397,7 +397,15 @@ Route::group(['middleware' => 'maintainance'], function () {
         // ************************************ FRONTEND **********************************************
 
         //------------ FRONT ------------
-        Route::get('/run-webp-conversion', function () {
+        Route::get('/clear-cache', function() {
+    \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    \Illuminate\Support\Facades\Artisan::call('view:clear');
+    \Illuminate\Support\Facades\Artisan::call('config:clear');
+    \Illuminate\Support\Facades\Artisan::call('route:clear');
+    return "All caches (including views) have been successfully cleared!";
+});
+
+Route::get('/run-webp-conversion', function () {
     try {
         \Illuminate\Support\Facades\Artisan::call('images:convert-webp');
         return "WebP conversion command executed successfully! " . \Illuminate\Support\Facades\Artisan::output();
