@@ -27,6 +27,10 @@
 @include('master.fonts')
 </style>
 <!-- Vendor Styles: Bootstrap, Font Icons, Plugins -->
+<link rel="preload" href="{{asset('assets/front/css/plugins.min.css')}}" as="style">
+<link rel="preload" href="{{asset('assets/front/css/styles.min.css')}}" as="style">
+<link rel="preload" href="{{asset('assets/front/css/responsive.css')}}" as="style">
+
 <link rel="stylesheet" href="{{asset('assets/front/css/plugins.min.css')}}">
 
 @yield('styleplugins')
@@ -612,7 +616,7 @@ body_theme4
                 <div class="col-lg-12">
                     <div class="d-flex justify-content-between align-items-center">
                         <!-- Logo-->
-                        <div class="site-branding"><a class="site-logo align-self-center" href="{{route('front.index')}}"><img width="120" height="80" src="{{asset('assets/images/'.$setting->logo)}}" alt="{{$setting->title}}"></a></div>
+                        <div class="site-branding"><a class="site-logo align-self-center" href="{{route('front.index')}}"><img width="120" height="80" src="{{asset('assets/images/'.$setting->logo)}}" alt="{{$setting->title}}" fetchpriority="high"></a></div>
                         <!-- Search / Categories-->
                         <div class="search-box-wrap d-none d-lg-block d-flex">
                         <div class="search-box-inner align-self-center">
@@ -906,8 +910,8 @@ body_theme4
         window.addEventListener(evt, _loadAllJS, { once: true, passive: true });
     });
 
-    // Fallback: load after 15 seconds if no interaction
-    setTimeout(_loadAllJS, 15000);
+    // Fallback: load after 3 seconds if no interaction
+    setTimeout(_loadAllJS, 3500);
 </script>
 @yield('script')
 
