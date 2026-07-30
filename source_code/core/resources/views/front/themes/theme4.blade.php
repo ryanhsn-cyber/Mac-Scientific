@@ -52,7 +52,7 @@
                             @endphp
                             <a href="{{$slider->link}}">
                                 <div class="item" style="position: relative;">
-                                    <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Banner" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" @if($loop->first) fetchpriority="high" @else loading="lazy" @endif>
+                                    <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" alt="Slider Banner" width="1000" height="400" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" @if($loop->first) fetchpriority="high" @else loading="lazy" @endif>
                                 </div>
                             </a>
                             @endforeach
