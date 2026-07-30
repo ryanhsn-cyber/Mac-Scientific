@@ -533,7 +533,11 @@
                                 <div class="slider-item">
                                     <a href="{{route('front.blog.details',$post->slug)}}" class="blog-post">
                                         <div class="post-thumb">
-                                            <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/' . json_decode($post->photo, true)[array_key_first(json_decode($post->photo, true))]) }}"
+                                            @php
+                                                $photoArray = json_decode($post->photo, true);
+                                                $photoPath = is_array($photoArray) && count($photoArray) > 0 ? $photoArray[array_key_first($photoArray)] : $post->photo;
+                                            @endphp
+                                            <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/' . $photoPath) }}"
                                                 alt="Blog Post">
                                             </div>
                                         <div class="post-body">
