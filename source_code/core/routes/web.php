@@ -397,7 +397,16 @@ Route::group(['middleware' => 'maintainance'], function () {
         // ************************************ FRONTEND **********************************************
 
         //------------ FRONT ------------
-        Route::get('/', 'Front\FrontendController@index')->name('front.index');
+        Route::get('/run-webp-conversion', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('images:convert-webp');
+        return "WebP conversion command executed successfully! " . \Illuminate\Support\Facades\Artisan::output();
+    } catch (\Exception $e) {
+        return "Error: " . $e->getMessage();
+    }
+});
+
+Route::get('/', 'Front\FrontendController@index')->name('front.index');
         Route::get('/extra-index', 'Front\FrontendController@extraIndex')->name('front.extraindex');
         Route::get('/product/{slug}', 'Front\FrontendController@product')->name('front.product');
         Route::get('/campaign/products', 'Front\FrontendController@compaignProduct')->name('front.campaign');
