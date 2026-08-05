@@ -34,7 +34,7 @@ class PageRequest extends FormRequest
 
         return  [
             'title'  => 'required|max:255',
-            'slug' => 'required|max:255|regex:/^[a-zA-Z0-9-]+$/', Rule::notIn($mains) , 'unique:pages,slug' . $id,
+            'slug' => ['required', 'max:255', 'regex:/^[a-zA-Z0-9-]+$/', Rule::notIn($mains), 'unique:pages,slug' . $id],
             'details'  => 'required',
         ];
     }

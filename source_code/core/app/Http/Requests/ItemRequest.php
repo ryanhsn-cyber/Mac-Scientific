@@ -52,7 +52,7 @@ class ItemRequest extends FormRequest
 
         return [
             'name'            => 'required|max:255',
-            'slug'            => 'required','unique:items,slug' . $id, 'regex:/^[a-zA-Z0-9-]+$/',
+            'slug'            => ['required', 'unique:items,slug' . $id, 'regex:/^[a-zA-Z0-9-]+$/'],
             'category_id'     => 'required',
             'details'         => 'required',
             'link'            => $check_link,
@@ -62,7 +62,7 @@ class ItemRequest extends FormRequest
             'previous_price'  => 'max:50',
             'stock'           => 'numeric|max:9999999999',
             'tax_id'          => 'nullable',
-            'photo'           => $required, 'mimes:jpeg,jpg,png,svg,avif,webp',
+            'photo'           => $required . 'mimes:jpeg,jpg,png,svg,avif,webp',
             'video'           => 'nullable|url|regex:/^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/',
         ];
     }

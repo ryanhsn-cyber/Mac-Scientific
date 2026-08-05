@@ -30,14 +30,14 @@ class AffiliateRequest extends FormRequest
 
         return [
             'name'            => 'required|max:255',
-            'slug'            => 'required','unique:items,slug' . $id, 'regex:/^[a-zA-Z0-9-]+$/',
+            'slug'            => ['required', 'unique:items,slug' . $id, 'regex:/^[a-zA-Z0-9-]+$/'],
             'category_id'     => 'required',
             'details'         => 'required',
             'affiliate_link'  => 'required',
             'sort_details'    => 'required',
             'discount_price'  => 'required|max:50',
             'previous_price'  => 'max:50',
-            'photo'           => $required, 'mimes:jpeg,jpg,png,svg,avif,webp'
+            'photo'           => $required . 'mimes:jpeg,jpg,png,svg,avif,webp'
         ];
     }
 
