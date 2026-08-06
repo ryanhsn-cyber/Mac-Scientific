@@ -283,8 +283,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="stock">{{ __('Total in stock') }}
-                            *</label>
+                        <label for="stock">{{ __('Total in stock') }}</label>
                         <div class="input-group mb-3">
                             <input type="number" id="stock"
                                 name="stock" class="form-control"
@@ -324,4 +323,15 @@
 
 </div>
 
+@section('scripts')
+<script>
+document.querySelectorAll('.admin-form button[type="submit"]').forEach(button => {
+    button.addEventListener('click', function(e) {
+        const form = this.closest('form');
+        if (!form.checkValidity()) {
+            alert('{{ __("Please fill out all required fields.") }}');
+        }
+    });
+});
+</script>
 @endsection
