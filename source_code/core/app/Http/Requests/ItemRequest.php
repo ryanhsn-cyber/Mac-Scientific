@@ -63,7 +63,7 @@ class ItemRequest extends FormRequest
             'stock'           => 'numeric|max:9999999999',
             'tax_id'          => 'nullable',
             'photo'           => $required . 'mimes:jpeg,jpg,png,svg,avif,webp',
-            'video'           => 'nullable|url|regex:/^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/',
+            'video'           => ['nullable', 'url', 'regex:/^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/'],
         ];
     }
 
