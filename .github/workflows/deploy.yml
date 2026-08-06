@@ -1,16 +1,30 @@
-name: Deploy to Website
+name: Deploy to cPanel via FTP
+
 on:
   push:
     branches:
       - main
+
 jobs:
-  deploy:
+  web-deploy:
+    name: Deploy Code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: public_html/
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+    
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./source_code/
+        server-dir: ./public_html/
+        danger-action: overwrite
+        exclude: |
+          **/.git*
+          **/.git*/**
+          node_modules/**
