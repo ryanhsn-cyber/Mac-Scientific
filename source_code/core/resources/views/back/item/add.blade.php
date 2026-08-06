@@ -51,60 +51,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-sm-6 col-md-6">
-            <a href="{{ route('back.digital.item.create') }}" class="card card-stats card-round">
-                <div class="card-body">
-                    <div class="text-center py-3">
-                        <div class="d-inline-block">
-                            <div class="icon-big text-center icon-info bubble-shadow-small  px-3">
-                                <i class="fab fa-digital-ocean"></i>
-                            </div>
-                        </div>
-                        <div class="d-block mt-3">
-                            <div class="numbers">
-                                <h2 class="card-title"><b>{{__('Add Digital Product')}}</b></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-sm-6 col-md-6">
-            <a href="{{ route('back.license.item.create') }}" class="card card-stats card-round">
-                <div class="card-body">
-                    <div class="text-center py-3">
-                        <div class="d-inline-block">
-                            <div class="icon-big text-center icon-success bubble-shadow-small  px-3">
-                                <i class="far fa-copyright"></i>
-                            </div>
-                        </div>
-                        <div class="d-block mt-3">
-                            <div class="numbers">
-                                <h2 class="card-title"><b>{{__('Add Licence Product')}}</b></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-sm-6 col-md-6">
-            <a href="{{ route('back.affiliate.create') }}" class="card card-stats card-round">
-                <div class="card-body">
-                    <div class="text-center py-3">
-                        <div class="d-inline-block">
-                            <div class="icon-big text-center icon-success bubble-shadow-small  px-3">
-                                <i class="fab fa-affiliatetheme"></i>
-                            </div>
-                        </div>
-                        <div class="d-block mt-3">
-                            <div class="numbers">
-                                <h2 class="card-title"><b>{{__('Add Affiliate Product')}}</b></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
+
     </div>
 @endif
 
