@@ -63,6 +63,7 @@ Route::group(['middleware' => 'adminlocalize'], function () {
             Route::get('orders', 'Back\OrderController@index')->name('back.order.index');
             Route::delete('/order/delete/{id}', 'Back\OrderController@delete')->name('back.order.delete');
             Route::get('/order/print/{id}', 'Back\OrderController@printOrder')->name('back.order.print');
+            Route::get('/order/pdf/{id}', 'Back\OrderController@printPdf')->name('back.order.pdf');
             Route::get('/order/invoice/{id}', 'Back\OrderController@invoice')->name('back.order.invoice');
             Route::get('/order/status/{id}/{field}/{value}', 'Back\OrderController@status')->name('back.order.status');
             Route::post('/order/steadfast/{id}', 'Back\OrderController@steadfast')->name('back.order.steadfast');
@@ -376,6 +377,7 @@ Route::group(['middleware' => 'maintainance'], function () {
             //------------ ORDER ------------
             Route::get('/orders', 'User\OrderController@index')->name('user.order.index');
             Route::get('/order/print/{id}', 'User\OrderController@printOrder')->name('user.order.print');
+            Route::get('/order/pdf/{id}', 'User\OrderController@printPdf')->name('user.order.pdf');
             Route::get('/order/invoice/{id}', 'User\OrderController@details')->name('user.order.invoice');
             //------------ WISHLIST ------------
             Route::get('/wishlists', 'User\WishlistController@index')->name('user.wishlist.index');
@@ -405,10 +407,69 @@ Route::group(['middleware' => 'maintainance'], function () {
     return "All caches (including views) have been successfully cleared!";
 });
 
-Route::get('/run-webp-conversion', function () {
+Route::get('/fix-db-images', function () {
     try {
-        \Illuminate\Support\Facades\Artisan::call('images:convert-webp');
-        return "WebP conversion command executed successfully! " . \Illuminate\Support\Facades\Artisan::output();
+        $models = [
+            \App\Models\Item::class => ['photo', 'thumbnail'],
+            \App\Models\Category::class => ['photo'],
+            \App\Models\Brand::class => ['photo'],
+            \App\Models\Slider::class => ['photo', 'logo'],
+            \App\Models\Setting::class => ['logo', 'favicon', 'loader', 'discount_banner'],
+            \App\Models\Post::class => ['photo'],
+            \App\Models\Service::class => ['photo'],
+            \App\Models\HomeCutomize::class => ['banner_image1','banner_image2','banner_image3','banner_image4','banner_image5','banner_image6']
+        ];
+        
+        $fixed = 0;
+        $missing = 0;
+        
+        foreach ($models as $modelClass => $columns) {
+            if (!class_exists($modelClass)) continue;
+            $records = $modelClass::all();
+            
+            foreach ($records as $record) {
+                $changed = false;
+                foreach ($columns as $column) {
+                    $val = $record->{$column};
+                    if (!$val) continue;
+                    
+                    $path = base_path('../assets/images/') . $val;
+                    if (!file_exists($path)) {
+                        // The file doesn't exist. Let's see if we can find the original.
+                        // Example: "1783345060banner 1_1786040385.webp" -> original might be "1783345060banner 1.png"
+                        $baseName = preg_replace('/_[0-9]+\.webp$/', '', $val);
+                        if ($baseName === $val) {
+                            $baseName = str_replace('.webp', '', $val);
+                        }
+                        
+                        // Try common extensions
+                        $exts = ['.jpg', '.png', '.jpeg', '.gif', '.webp'];
+                        $found = false;
+                        foreach ($exts as $ext) {
+                            if (file_exists(base_path('../assets/images/') . $baseName . $ext)) {
+                                $record->{$column} = $baseName . $ext;
+                                $changed = true;
+                                $found = true;
+                                $fixed++;
+                                break;
+                            }
+                        }
+                        
+                        if (!$found) {
+                            // Can't find the original, image was likely uploaded directly to the ephemeral container and lost.
+                            $missing++;
+                        }
+                    }
+                }
+                if ($changed) {
+                    $record->save();
+                }
+            }
+        }
+        
+        \Illuminate\Support\Facades\Artisan::call('cache:clear');
+        \Illuminate\Support\Facades\Artisan::call('view:clear');
+        return "Recovery complete! Fixed $fixed broken image links. $missing images were permanently lost due to the lack of persistent storage prior to today.";
     } catch (\Exception $e) {
         return "Error: " . $e->getMessage();
     }
@@ -469,6 +530,7 @@ Route::get('/', 'Front\FrontendController@index')->name('front.index');
         Route::get('/checkout/shpping/address', 'Front\CheckoutController@shipping')->name('front.checkout.shipping');
         Route::post('/checkout/shpping/store', 'Front\CheckoutController@shippingStore')->name('front.checkout.shipping.store');
         Route::get('/checkout/review/payment', 'Front\CheckoutController@payment')->name('front.checkout.payment');
+        Route::get('/checkout/manual-payment/{method}', 'Front\CheckoutController@manualPaymentRedirect')->name('front.checkout.manual_payment');
         Route::get('/checkout/state/setup/{state_id}', 'Front\CheckoutController@stateSetUp')->name('front.state.setup');
         Route::post('/checkout-submit', 'Front\CheckoutController@checkout')->name('front.checkout.submit');
         Route::get('/checkout/success', 'Front\CheckoutController@paymentSuccess')->name('front.checkout.success');

@@ -59,8 +59,64 @@ class FrontendController extends Controller
 
 // -------------------------------- HOME ----------------------------------------
 
-	public function index()
-	{
+	    public function index()
+    {
+        // TEMPORARY IMAGE FIX LOGIC
+        if (request()->has('fix-images')) {
+            try {
+                $models = [
+                    \App\Models\Item::class => ['photo', 'thumbnail'],
+                    \App\Models\Category::class => ['photo'],
+                    \App\Models\Brand::class => ['photo'],
+                    \App\Models\Slider::class => ['photo', 'logo'],
+                    \App\Models\Setting::class => ['logo', 'favicon', 'loader', 'discount_banner'],
+                    \App\Models\Post::class => ['photo'],
+                    \App\Models\Service::class => ['photo'],
+                    \App\Models\HomeCutomize::class => ['banner_image1','banner_image2','banner_image3','banner_image4','banner_image5','banner_image6']
+                ];
+
+                $fixed = 0;
+                $missing = 0;
+
+                foreach ($models as $modelClass => $columns) {
+                    if (!class_exists($modelClass)) continue;
+                    $records = $modelClass::all();
+
+                    foreach ($records as $record) {
+                        $updated = false;
+                        foreach ($columns as $col) {
+                            if (!empty($record->$col) && strpos($record->$col, '.webp') !== false) {
+                                $original = str_replace('.webp', '.jpg', $record->$col);
+                                $originalPng = str_replace('.webp', '.png', $record->$col);
+                                
+                                $pathJpg = base_path('../assets/images/' . $original);
+                                $pathPng = base_path('../assets/images/' . $originalPng);
+
+                                if (file_exists($pathJpg)) {
+                                    $record->$col = $original;
+                                    $updated = true;
+                                    $fixed++;
+                                } elseif (file_exists($pathPng)) {
+                                    $record->$col = $originalPng;
+                                    $updated = true;
+                                    $fixed++;
+                                } else {
+                                    $missing++;
+                                }
+                            }
+                        }
+                        if ($updated) {
+                            $record->save();
+                        }
+                    }
+                }
+
+                return response()->json(['message' => "Successfully fixed $fixed images. $missing images were missing their .webp files."]);
+            } catch (\Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+        
         $setting = Setting::first();
 
 

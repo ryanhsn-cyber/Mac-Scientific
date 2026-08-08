@@ -12,6 +12,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        \Illuminate\Support\Facades\URL::forceScheme('https');
 
         view()->composer('*',function($settings){
             $settings->with('setting', DB::table('settings')->find(1));

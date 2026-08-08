@@ -86,6 +86,14 @@ class OrderController extends Controller
         return view('back.order.print',compact('order','cart'));
     }
 
+    public function printPdf($id)
+    {
+        $order = Order::findOrfail($id);
+        $cart = json_decode($order->cart, true);
+        $pdf = \PDF::loadView('back.order.print', compact('order','cart'));
+        return $pdf->download('invoice-'.$order->transaction_number.'.pdf');
+    }
+
 
     /**
      * Change the status for editing the specified resource.

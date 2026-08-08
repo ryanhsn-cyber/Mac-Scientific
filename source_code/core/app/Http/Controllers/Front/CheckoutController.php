@@ -314,6 +314,53 @@ class CheckoutController extends Controller
         return view('front.checkout.payment',$data);
     }
 
+    public function manualPaymentRedirect($method)
+    {
+        if(!Session::has('cart')){
+            return redirect()->route('front.cart');
+        }
+
+        $gateway = PaymentSetting::where('unique_keyword', $method)->first();
+        if(!$gateway || $gateway->status == 0) {
+            return redirect()->back()->with('error', __('Invalid Payment Gateway.'));
+        }
+
+        $data['gateway'] = $gateway;
+
+        $cart = Session::get('cart');
+        $total_tax = 0;
+        $cart_total = 0;
+        $total = 0;
+        foreach($cart as $key => $item){
+            $total += $item['main_price'] * $item['qty'];
+            $cart_total += $item['main_price'] * $item['qty'];
+            if($item['tax'] > 0){
+                $total_tax += $item['tax'] * $item['qty'];
+            }
+        }
+        $shipping = [];
+        if(Session::has('shipping')){
+            $shipping = Session::get('shipping');
+        }
+        $discount = [];
+        if(Session::has('coupon')){
+            $discount = Session::get('coupon');
+        }
+
+        $data['cart'] = $cart;
+        $data['cart_total'] = $cart_total;
+        $data['grand_total'] = ($total + ($shipping ? $shipping['price'] : 0)) + $total_tax;
+        $data['grand_total'] = $data['grand_total'] - ($discount ? $discount['discount'] : 0);
+        $state_tax = \Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->state_id ? \Illuminate\Support\Facades\Auth::user()->state->price : 0;
+        $data['grand_total'] = $data['grand_total'] + $state_tax;
+        $data['total_amount'] = $data['grand_total'];
+        $data['discount'] = $discount;
+        $data['shipping'] = $shipping;
+        $data['tax'] = $total_tax;
+        
+        return view('front.checkout.manual_payment', $data);
+    }
+
 	public function checkout(PaymentRequest $request)
 	{
 

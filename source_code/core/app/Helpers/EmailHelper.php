@@ -60,6 +60,21 @@ class EmailHelper
             $this->mail->isHTML(true);
             $this->mail->Subject = $template->subject;
             $this->mail->Body = $email_body;
+
+            if ($emailData['type'] == 'Order' && isset($emailData['transaction_number'])) {
+                $order = \App\Models\Order::where('transaction_number', $emailData['transaction_number'])->first();
+                if ($order) {
+                    $cart = json_decode($order->cart, true);
+                    $user = \App\Models\User::find($order->user_id);
+                    $pdf = \PDF::loadView('user.order.print', compact('order', 'cart', 'user'));
+                    $this->mail->addStringAttachment($pdf->output(), 'invoice.pdf');
+                }
+            }
+
+            if (isset($emailData['pdf'])) {
+                $this->mail->addStringAttachment($emailData['pdf'], 'invoice.pdf');
+            }
+
             $this->mail->send();
         }
 

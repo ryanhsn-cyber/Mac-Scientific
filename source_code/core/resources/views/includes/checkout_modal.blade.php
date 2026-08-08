@@ -579,61 +579,7 @@ $billing = Session::get('billing_address');
       </div>
     </div>
 
-  <!-- Modal bKash -->
-  <div class="modal fade" id="bkash" tabindex="-1"  aria-hidden="true">
-      <div class="modal-dialog" >
-        <div class="modal-content">
-          <div class="modal-header">
-            <h6 class="modal-title">{{ __('Transactions via bKash') }}</h6>
-            <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          </div>
-          <form action="{{route('front.checkout.submit')}}" method="POST">
-          <div class="modal-body">
-            <div class="col-lg-12 form-group">
-              <label for="bkash_transaction">{{ __('bKash Transaction ID (TrxID)') }}</label>
-              <input class="form-control" name="txn_id" id="bkash_transaction" placeholder="{{__('Enter Your Transaction Number')}}" required />
-          </div>
-            <p>{!!PriceHelper::GatewayText('bkash')!!}</p>
-          </div>
-          <div class="modal-footer">
 
-              @csrf
-              <input type="hidden" name="payment_method" value="bKash">
-              <input type="hidden" name="state_id" value="{{auth()->check() && auth()->user()->state_id ? auth()->user()->state_id : ''}}" class="state_id_setup">
-            <button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-            <button class="btn btn-primary btn-sm" type="submit"><span>{{ __('Checkout With bKash') }}</span></button>
-          </form>
-          </div>
-        </div>
-      </div>
-    </div>
 
-  <!-- Modal Nagad -->
-  <div class="modal fade" id="nagad" tabindex="-1"  aria-hidden="true">
-      <div class="modal-dialog" >
-        <div class="modal-content">
-          <div class="modal-header">
-            <h6 class="modal-title">{{ __('Transactions via Nagad') }}</h6>
-            <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          </div>
-          <form action="{{route('front.checkout.submit')}}" method="POST">
-          <div class="modal-body">
-            <div class="col-lg-12 form-group">
-              <label for="nagad_transaction">{{ __('Nagad Transaction ID (TrxID)') }}</label>
-              <input class="form-control" name="txn_id" id="nagad_transaction" placeholder="{{__('Enter Your Transaction Number')}}" required />
-          </div>
-            <p>{!!PriceHelper::GatewayText('nagad')!!}</p>
-          </div>
-          <div class="modal-footer">
 
-              @csrf
-              <input type="hidden" name="payment_method" value="Nagad">
-              <input type="hidden" name="state_id" value="{{auth()->check() && auth()->user()->state_id ? auth()->user()->state_id : ''}}" class="state_id_setup">
-            <button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-            <button class="btn btn-primary btn-sm" type="submit"><span>{{ __('Checkout With Nagad') }}</span></button>
-          </form>
-          </div>
-        </div>
-      </div>
-    </div>
 

@@ -28,3 +28,5 @@ jobs:
           **/.git*
           **/.git*/**
           node_modules/**
+          source_code/assets/images/**
+          source_code/assets/front/images/**

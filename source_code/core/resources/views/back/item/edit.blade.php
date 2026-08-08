@@ -34,18 +34,18 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">{{ __('Name') }} *</label>
+                        <label for="name">{{ __('Name') ?: 'Name' }} *</label>
                         <input type="text" name="name" class="form-control item-name"
                             id="name"
-                            placeholder="{{ __('Enter Name') }}"
+                            placeholder="{{ __('Enter Name') ?: 'Enter Name' }}"
                             value="{{ $item->name }}" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="slug">{{ __('Slug') }} *</label>
+                        <label for="slug">{{ __('Slug') ?: 'Slug' }} *</label>
                         <input type="text" name="slug" class="form-control"
                             id="slug"
-                            placeholder="{{ __('Enter Slug') }}"
+                            placeholder="{{ __('Enter Slug') ?: 'Enter Slug' }}"
                             value="{{ $item->slug }}" required>
                     </div>
 
@@ -54,7 +54,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group pb-0  mb-0">
-                        <label class="d-block">{{ __('Featured Image') }} *</label>
+                        <label class="d-block">{{ __('Featured Image') ?: 'Featured Image' }} *</label>
                     </div>
                     <div class="form-group pb-0 pt-0 mt-0 mb-0">
                     <img class="admin-img lg" src="{{ $item->photo ? asset('assets/images/'.$item->photo) : asset('assets/images/placeholder.png') }}" >
@@ -64,7 +64,7 @@
                             <input type="file"  accept="image/*"   class="upload-photo" name="photo"
                                 id="file"  aria-label="File browser example">
                             <span
-                                class="file-custom text-left">{{ __('Upload Image...') }}</span>
+                                class="file-custom text-left">{{ __('Upload Image...') ?: 'Upload Image...' }}</span>
                         </label>
                         <br>
                         <span class="mt-1 text-info">{{ __('Image Size Should Be 800 x 800. or square size') }}</span>
@@ -103,7 +103,7 @@
                             <input type="file"  accept="image/*"   name="galleries[]" id="gallery_file"
                                     aria-label="File browser example" accept="image/*" multiple>
                             <span
-                                class="file-custom text-left">{{ __('Upload Image...') }}</span>
+                                class="file-custom text-left">{{ __('Upload Image...') ?: 'Upload Image...' }}</span>
                         </label>
                         <br>
                         <span class="mt-1 text-info">{{ __('Image Size Should Be 800 x 800. or square size') }}</span>
@@ -396,6 +396,7 @@
   </div>
 
 {{-- DELETE MODAL ENDS --}}
+@endsection
 
 @section('scripts')
 <script>

@@ -796,7 +796,7 @@ body_theme4
                 <li><a href="{{route('front.page',$page->slug)}}">{{$page->title}}</a></li>
 
                 @endforeach
-
+                <li><a href="{{route('front.blog')}}">{{__('Blog')}}</a></li>
             </ul>
           </div>
         </div>

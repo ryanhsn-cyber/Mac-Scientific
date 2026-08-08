@@ -28,6 +28,8 @@
                                     <a class="nav-link active" data-toggle="pill" href="#cod">{{ __('Cash On Delivery') }}</a>
                                     <a class="nav-link" data-toggle="pill" href="#sslcommerz">{{ __('SSL commerz') }}</a>
                                     <a class="nav-link" data-toggle="pill" href="#bank">{{ __('Bank Transfer') }}</a>
+                                    <a class="nav-link" data-toggle="pill" href="#bkash">{{ __('bKash') }}</a>
+                                    <a class="nav-link" data-toggle="pill" href="#nagad">{{ __('Nagad') }}</a>
 
                             </div>
                         </div>
@@ -1053,6 +1055,98 @@
                                                                 <button type="submit" class="btn btn-secondary btn-block w-50">{{ __('Submit') }}</button>
                                                             </div>
                                                         </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                          </div>
+
+                                          <div id="bkash" class="container tab-pane"><br>
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-8">
+                                                    <form action="{{ route('back.setting.payment.update') }}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label class="switch-primary">
+                                                            <input type="checkbox" class="switch switch-bootstrap " name="status" value="1" {{ $bkash->status == 1 ? 'checked' : '' }}>
+                                                            <span class="switch-body"></span>
+                                                            <span class="switch-text">{{ __('Display bKash') }}</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="image-show {{ $bkash->status == 1 ? '' : 'd-none' }}">
+                                                        <div class="form-group col-xl-12">
+                                                            <label for="name">{{ __('Current Image') }}</label>
+                                                            <div class="col-lg-12 pb-1">
+                                                                <img class="admin-setting-img" src="{{ $bkash->photo ? asset('assets/images/'.$bkash->photo) : asset('assets/images/placeholder.png') }}" alt="No Image Found">
+                                                            </div>
+                                                            <span>{{ __('Image Size Should Be 52 x 35.') }}</span>
+                                                        </div>
+                                                        <div class="form-group position-relative col-xl-12">
+                                                            <label class="file">
+                                                                <input type="file" class="upload-photo" name="photo" aria-label="File browser example">
+                                                                <span class="file-custom text-left">{{ __('Upload Image...') }}</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="name">{{ __('Enter Name') }} *</label>
+                                                            <input type="text" class="form-control" name="name" value="{{$bkash->name}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="text">{{ __('Enter Text') }} *</label>
+                                                            <textarea name="text" class="form-control text-editor" rows="5" placeholder="{{ __('Enter Text') }}">{{ $bkash->text }}</textarea>
+                                                        </div>
+                                                        <input type="hidden" name="unique_keyword" value="bkash">
+                                                    </div>
+                                                    <div>
+                                                        <div class="form-group d-flex justify-content-center">
+                                                            <button type="submit" class="btn btn-secondary btn-block w-50">{{ __('Submit') }}</button>
+                                                        </div>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                          </div>
+
+                                          <div id="nagad" class="container tab-pane"><br>
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-8">
+                                                    <form action="{{ route('back.setting.payment.update') }}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label class="switch-primary">
+                                                            <input type="checkbox" class="switch switch-bootstrap " name="status" value="1" {{ $nagad->status == 1 ? 'checked' : '' }}>
+                                                            <span class="switch-body"></span>
+                                                            <span class="switch-text">{{ __('Display Nagad') }}</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="image-show {{ $nagad->status == 1 ? '' : 'd-none' }}">
+                                                        <div class="form-group col-xl-12">
+                                                            <label for="name">{{ __('Current Image') }}</label>
+                                                            <div class="col-lg-12 pb-1">
+                                                                <img class="admin-setting-img" src="{{ $nagad->photo ? asset('assets/images/'.$nagad->photo) : asset('assets/images/placeholder.png') }}" alt="No Image Found">
+                                                            </div>
+                                                            <span>{{ __('Image Size Should Be 52 x 35.') }}</span>
+                                                        </div>
+                                                        <div class="form-group position-relative col-xl-12">
+                                                            <label class="file">
+                                                                <input type="file" class="upload-photo" name="photo" aria-label="File browser example">
+                                                                <span class="file-custom text-left">{{ __('Upload Image...') }}</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="name">{{ __('Enter Name') }} *</label>
+                                                            <input type="text" class="form-control" name="name" value="{{$nagad->name}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="text">{{ __('Enter Text') }} *</label>
+                                                            <textarea name="text" class="form-control text-editor" rows="5" placeholder="{{ __('Enter Text') }}">{{ $nagad->text }}</textarea>
+                                                        </div>
+                                                        <input type="hidden" name="unique_keyword" value="nagad">
+                                                    </div>
+                                                    <div>
+                                                        <div class="form-group d-flex justify-content-center">
+                                                            <button type="submit" class="btn btn-secondary btn-block w-50">{{ __('Submit') }}</button>
+                                                        </div>
+                                                    </div>
                                                     </form>
                                                 </div>
                                             </div>

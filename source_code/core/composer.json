@@ -11,6 +11,7 @@
         "php": "^7.2.5",
         "anhskohbo/no-captcha": "^3.3",
         "authorizenet/authorizenet": "^2.0",
+        "barryvdh/laravel-dompdf": "^2.2",
         "cartalyst/stripe-laravel": "^12.0",
         "doctrine/dbal": "^2.12.1",
         "fideloper/proxy": "^4.2",

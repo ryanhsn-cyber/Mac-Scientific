@@ -13,6 +13,7 @@
                 <div>
                     <a class="btn btn-primary btn-sm" href="{{route('back.order.index')}}"><i class="fas fa-chevron-left"></i> {{ __('Back') }}</a>
                     <a class="btn btn-primary btn-sm" href="{{ route('back.order.print',$order->id) }}" target="_blank"><i class="fas fa-print"></i> {{ __('print') }}</a>
+                    <a class="btn btn-success btn-sm" href="{{ route('back.order.pdf',$order->id) }}"><i class="fas fa-file-pdf"></i> {{ __('PDF') }}</a>
                 </div>
                 </div>
         </div>

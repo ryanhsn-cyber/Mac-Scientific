@@ -116,7 +116,11 @@
               @if (PriceHelper::CheckDigitalPaymentGateway())
               @if ($gateway->unique_keyword != 'cod')
               <div class="single-payment-method">
+                @if(in_array($gateway->unique_keyword, ['bkash', 'nagad']))
+                <a class="text-decoration-none" href="{{ route('front.checkout.manual_payment', $gateway->unique_keyword) }}">
+                @else
                 <a class="text-decoration-none " href="#" data-bs-toggle="modal" data-bs-target="#{{$gateway->unique_keyword}}">
+                @endif
                     @if($gateway->photo)
                     <img class="" src="{{asset('assets/images/'.$gateway->photo)}}" alt="{{$gateway->name}}" title="{{$gateway->name}}">
                     @endif
@@ -127,7 +131,11 @@
 
               @else
               <div class="single-payment-method">
+                @if(in_array($gateway->unique_keyword, ['bkash', 'nagad']))
+                <a class="text-decoration-none" href="{{ route('front.checkout.manual_payment', $gateway->unique_keyword) }}">
+                @else
                 <a class="text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#{{$gateway->unique_keyword}}">
+                @endif
                     @if($gateway->photo)
                     <img class="" src="{{asset('assets/images/'.$gateway->photo)}}" alt="{{$gateway->name}}" title="{{$gateway->name}}">
                     @endif

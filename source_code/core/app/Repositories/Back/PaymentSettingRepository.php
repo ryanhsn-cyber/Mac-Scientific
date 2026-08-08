@@ -64,6 +64,12 @@ class PaymentSettingRepository
         $cod = PaymentSetting::whereUniqueKeyword('cod')->first();
         $data['cod'] = $cod;
 
+        $bkash = PaymentSetting::whereUniqueKeyword('bkash')->first();
+        $data['bkash'] = $bkash;
+
+        $nagad = PaymentSetting::whereUniqueKeyword('nagad')->first();
+        $data['nagad'] = $nagad;
+
         return $data;
     }
 

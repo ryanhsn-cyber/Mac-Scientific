@@ -50,4 +50,13 @@ class OrderController extends Controller
         $cart = json_decode($order->cart, true);
         return view('user.order.print',compact('user','order','cart'));
     }
+
+    public function printPdf($id)
+    {
+        $user = Auth::user();
+        $order = Order::findOrfail($id);
+        $cart = json_decode($order->cart, true);
+        $pdf = \PDF::loadView('user.order.print', compact('user','order','cart'));
+        return $pdf->download('invoice-'.$order->transaction_number.'.pdf');
+    }
 }

@@ -32,6 +32,7 @@
                     <div class="col-lg-12">
                         <a href="{{route('user.order.index')}}" class="btn btn-sm btn-primary d-inline-block"><span>{{__('Back')}}</span></a>
                         <a href="{{route('user.order.print',$order->id)}}" target="_blank" class="btn btn-sm btn-primary invoice_price d-inline-block"><span>{{__('Print')}}</span></a>
+                        <a href="{{route('user.order.pdf',$order->id)}}" class="btn btn-sm btn-success invoice_price d-inline-block"><span>{{__('Download PDF')}}</span></a>
                     </div>
                 </div> <!-- / .row -->
                 <div class="row">

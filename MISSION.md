@@ -119,3 +119,14 @@ N/A
 - [x] Resolved image visibility issue by migrating from deferred JS `data-src` lazy-loading to native `loading="lazy"` with standard `src` attributes, ensuring above-the-fold images render immediately.
 - [x] Fixed Lighthouse accessibility issues (contrast, alt text, target sizes) and layout shifts (unsized images) on themes.
 - [x] Converted all existing images to WebP format and modified ImageHelper to automatically encode all future uploads to WebP for optimization and enforcement.
+- [x] Added Blog link to the Usefull Links section in the footer.
+- [x] Fixed "CSS Broken" issue on live storefront by forcing HTTPS via `AppServiceProvider.php` to prevent browsers from blocking mixed content (HTTP assets over HTTPS).
+- [x] Added `latest_db_dump.sql` to Git tracking and automated DB import on the live server to load catalog data instead of the empty template.
+- [x] Restored missing `prp_logo.png` image file referenced by the live database to fix the broken header logo.
+- [x] Implemented a database image path recovery script (`/fix-db-images`) to rescue missing `.webp` images and revert database fields to the available `.jpg` files after a git deployment wiped out ephemeral storage uploads on Coolify.
+- [x] Added persistent volume storage to Coolify container for `/var/www/html/assets/images` to prevent future data loss.
+- [x] Switched Coolify application domain from `msbd.shohojsolution.com` to `ms-bd.com` and `www.ms-bd.com`.
+- [x] Diagnosed SSLCommerz Sandbox/Test Mode redirect issue for bKash.
+- [x] Added missing cPanel product images to the repository to rescue broken images on the new Coolify server.
+- [x] Guided user through updating cPanel Zone Editor A and MX records to safely launch the Coolify site while preserving business emails.
+- [x] Finalized full site migration from cPanel to Coolify VPS.

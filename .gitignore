@@ -4,3 +4,4 @@ node_modules/
 vendor/
 .DS_Store
 latest_db_dump.sql
+source_code/assets/images.zip

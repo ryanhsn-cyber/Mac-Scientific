@@ -341,6 +341,8 @@
 @endsection
 
 
+@endsection
+
 @section('scripts')
     <script>
         $(document).on('change','#file_type',function(){

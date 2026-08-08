@@ -1,0 +1,11 @@
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED        STATUS                 PORTS                                                    NAMES
+8bedb17f9f64   postgres:15                           "docker-entrypoint.s…"   6 days ago     Up 2 hours             0.0.0.0:5434->5432/tcp, [::]:5434->5432/tcp              shohoj_print_db
+972341ade39d   postgres:16                           "docker-entrypoint.s…"   3 weeks ago    Up 2 hours             0.0.0.0:5433->5432/tcp, [::]:5433->5432/tcp              shohojledger-postgres-1
+e737e46137ee   e-commerce_14-app                     "docker-php-entrypoi…"   4 weeks ago    Up 2 hours             9000/tcp                                                 ecommerce14_app
+2d0bbc74ecb6   mysql:8.0                             "docker-entrypoint.s…"   4 weeks ago    Up 2 hours             33060/tcp, 0.0.0.0:3312->3306/tcp, [::]:3312->3306/tcp   ecommerce12-db
+7dcf4eabbec9   ecommerce12-app                       "docker-php-entrypoi…"   4 weeks ago    Up 2 hours             9000/tcp                                                 ecommerce12-app
+734bf700c9b4   fleetbase/fleetbase-api:latest        "docker-php-entrypoi…"   5 weeks ago    Up 2 hours (healthy)   80/tcp, 443/tcp, 2019/tcp, 443/udp                       fleetbase-main-queue-1
+0d2aacaca0b4   redis:4-alpine                        "docker-entrypoint.s…"   5 weeks ago    Up 2 hours (healthy)   6379/tcp                                                 fleetbase-main-cache-1
+7fb5e439d91e   socketcluster/socketcluster:v17.4.0   "docker-entrypoint.s…"   5 weeks ago    Up 2 hours             0.0.0.0:38000->8000/tcp, [::]:38000->8000/tcp            fleetbase-main-socket-1
+3a7a848ce5a5   dpage/pgadmin4:latest                 "/entrypoint.sh"         2 months ago   Up 2 hours             443/tcp, 0.0.0.0:5050->80/tcp, [::]:5050->80/tcp         sohojsites_pgadmin
+cdfda527844a   postgres:15-alpine                    "docker-entrypoint.s…"   2 months ago   Up 2 hours (healthy)   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp              sohojsites_postgres
