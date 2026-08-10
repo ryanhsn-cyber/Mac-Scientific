@@ -56,7 +56,10 @@ class BcategoryController extends Controller
      */
     public function store(BcategoryRequest $request)
     {
-        $this->repository->store($request);
+        $category = $this->repository->store($request);
+        if ($request->ajax()) {
+            return response()->json(['status' => true, 'category' => $category, 'message' => __('New Category Added Successfully.')]);
+        }
         return redirect()->route('back.bcategory.index')->withSuccess(__('New Category Added Successfully.'));
     }
 

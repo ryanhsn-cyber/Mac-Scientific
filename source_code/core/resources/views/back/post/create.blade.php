@@ -55,12 +55,17 @@
 
 									<div class="form-group">
 										<label for="category_id">{{ __('Select Category') }} *</label>
-										<select name="category_id" id="category_id" class="form-control" >
-											<option value="" selected disabled>{{__('Select Category')}}</option>
-											@foreach(DB::table('bcategories')->whereStatus(1)->get() as $category)
-											<option value="{{ $category->id }}">{{ $category->name }}</option>
-											@endforeach
-										</select>
+										<div class="input-group">
+											<select name="category_id" id="category_id" class="form-control" >
+												<option value="" selected disabled>{{__('Select Category')}}</option>
+												@foreach(DB::table('bcategories')->whereStatus(1)->get() as $category)
+												<option value="{{ $category->id }}">{{ $category->name }}</option>
+												@endforeach
+											</select>
+											<div class="input-group-append">
+												<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addCategoryModal"><i class="fas fa-plus"></i></button>
+											</div>
+										</div>
 									</div>
 
 									<div class="form-group">
@@ -114,5 +119,78 @@
 	</div>
 
 </div>
+
+<!-- Add Category Modal -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCategoryModalLabel">{{ __('Add New Category') }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="addCategoryForm" action="{{ route('back.bcategory.store') }}" method="POST">
+          @csrf
+          <div class="modal-body">
+              <div class="form-group">
+                  <label for="cat_name">{{ __('Name') }} *</label>
+                  <input type="text" name="name" class="form-control item-name" id="cat_name" placeholder="{{ __('Enter Name') }}" required>
+              </div>
+              <div class="form-group">
+                  <label for="cat_slug">{{ __('Slug') }} *</label>
+                  <input type="text" name="slug" class="form-control" id="cat_slug" placeholder="{{ __('Enter Slug') }}" required>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>
+              <button type="submit" class="btn btn-primary">{{ __('Save Category') }}</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.getElementById('addCategoryForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        let form = this;
+        let submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        
+        let formData = new FormData(form);
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            submitBtn.disabled = false;
+            if(data.status) {
+                let select = document.getElementById('category_id');
+                let option = document.createElement('option');
+                option.value = data.category.id;
+                option.text = data.category.name;
+                option.selected = true;
+                select.appendChild(option);
+                $('#addCategoryModal').modal('hide');
+                form.reset();
+                // Optional: show a success toast here
+            } else if (data.errors) {
+                alert(Object.values(data.errors).join('\n'));
+            } else if (data.message) {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            submitBtn.disabled = false;
+            console.error('Error:', error);
+            alert('An error occurred while saving the category.');
+        });
+    });
+</script>
 
 @endsection

@@ -17,7 +17,7 @@ class BcategoryRepository
     public function store($request)
     {
         $input = $request->all();
-        Bcategory::create($input);
+        return Bcategory::create($input);
     }
 
     /**
