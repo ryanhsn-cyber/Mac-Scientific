@@ -722,6 +722,7 @@ body_theme4
                                             @foreach (DB::table('categories')->whereStatus(1)->orderBy('serial', 'asc')->get() as $category)
                                             <li class="{{ request()->fullUrl() == route('front.catalog').'?category='.$category->slug ? 'active' : '' }}"><a href="{{route('front.catalog').'?category='.$category->slug}}"><i class="icon-chevron-right"></i>{{$category->name}}</a></li>
                                             @endforeach
+                                            <li class="{{ request()->routeIs('front.blog') ? 'active' : '' }}"><a href="{{route('front.blog')}}"><i class="icon-chevron-right"></i>{{__('Blog')}}</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -753,6 +754,7 @@ body_theme4
                                 @foreach (DB::table('categories')->whereStatus(1)->orderBy('serial', 'asc')->get() as $category)
                                 <li class="{{ request()->fullUrl() == route('front.catalog').'?category='.$category->slug ? 'active' : '' }}"><a href="{{route('front.catalog').'?category='.$category->slug}}">{{$category->name}}</a></li>
                                 @endforeach
+                                <li class="{{ request()->routeIs('front.blog') ? 'active' : '' }}"><a href="{{route('front.blog')}}">{{__('Blog')}}</a></li>
                             </ul>
                         </nav>
 
