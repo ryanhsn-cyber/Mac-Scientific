@@ -26,6 +26,9 @@
 							<th>{{ __('Name') }}</th>
 							<th>{{ __('Email') }}</th>
 							<th>{{ __('Phone') }}</th>
+							<th>{{ __('First Order Date') }}</th>
+							<th>{{ __('Order Counts') }}</th>
+							<th>{{ __('Total Spent') }}</th>
 							<th>{{ __('Actions') }}</th>
 						</tr>
 					</thead>

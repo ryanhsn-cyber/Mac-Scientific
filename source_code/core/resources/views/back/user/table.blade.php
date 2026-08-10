@@ -9,6 +9,26 @@
     <td>
         {{ $data->phone }}
     </td>
+    <td>
+        @php
+            $first_order = $data->orders->sortBy('created_at')->first();
+        @endphp
+        {{ $first_order ? $first_order->created_at->format('Y-m-d') : __('N/A') }}
+    </td>
+    <td>
+        {{ $data->orders->count() }}
+    </td>
+    <td>
+        @php
+            $total_spent = 0;
+            foreach($data->orders as $order) {
+                if ($order->currency_value) {
+                    $total_spent += \App\Helpers\PriceHelper::OrderTotal($order, true) / $order->currency_value;
+                }
+            }
+        @endphp
+        {{ \App\Helpers\PriceHelper::adminCurrencyPrice($total_spent) }}
+    </td>
 
     <td>
         <div class="action-list">

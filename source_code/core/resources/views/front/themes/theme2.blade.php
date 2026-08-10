@@ -45,17 +45,8 @@
                             .hero-slider-main:not(.owl-loaded) .item { display: none; }
                             .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; height: 100%; }
                         </style>
-                        @php
-                            $first_slider_photo = '';
-                            if(count($sliders) > 0) {
-                                $first_slider_photo = asset('assets/images/' . implode('/', array_map('rawurlencode', explode('/', $sliders[0]->photo)))) . "?v=" . strtotime($sliders[0]->updated_at ?? "now");
-                            }
-                        @endphp
-                        <div class="hero-slider" style="position: relative; overflow: hidden; border-radius: 10px;">
-                            @if($first_slider_photo)
-                                <img src="{{ $first_slider_photo }}" fetchpriority="high" alt="Hero Background" width="1920" height="1080" style="position: relative; width: 100%; height: auto; display: block; z-index: 0;">
-                            @endif
-                            <div class="hero-slider-main owl-carousel dots-inside" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+                        <div class="hero-slider" style="border-radius: 10px; overflow: hidden;">
+                            <div class="hero-slider-main owl-carousel dots-inside">
                                 @php $is_rtl = DB::table('languages')->where('is_default',1)->first()->rtl == 1; @endphp
                                 @foreach ($sliders as $index => $slider)
                                     @php
@@ -67,15 +58,15 @@
                                         @endif
                                         " style="position: relative;">
                                         @if($loop->first)
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" fetchpriority="high" alt="Slider Image" width="1920" height="1080" style="width: 100%; height: auto; display: block; object-fit: cover;">
                                         @else
-                                        <img class="lazy" loading="lazy" src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                                        <img class="lazy" loading="lazy" src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" alt="Slider Image" width="1920" height="1080" style="width: 100%; height: auto; display: block; object-fit: cover;">
                                         @endif
-                                        <div class="item-inner" style="position: relative; z-index: 1;">
-                                            <div class="from-bottom">
+                                        <div class="item-inner" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;">
+                                            <div class="from-bottom" style="pointer-events: auto;">
                                                 @if ($slider->logo)
                                                     <img class="d-inline-block brand-logo"
-                                                    src="{{ asset('assets/images/' . $slider->logo) }}" alt="Brand Logo" width="200" height="133">
+                                                    src="{{ asset('assets/images/' . $slider->logo) }}" alt="Brand Logo" width="200" height="133" style="width: auto; height: auto;">
                                                 @endif
 
                                                 <div class="title text-body"></div>

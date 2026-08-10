@@ -41,7 +41,7 @@ class UserController extends Controller
     {
         
         return view('back.user.index',[
-            'datas' => User::latest()->get()
+            'datas' => User::with('orders')->latest()->get()
         ]);
     }
 
