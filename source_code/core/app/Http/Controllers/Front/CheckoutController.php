@@ -545,7 +545,8 @@ class CheckoutController extends Controller
             $order = Order::find($order_id);
             $cart = json_decode($order->cart, true);
             $user = Auth::user();
-            $pdf = \PDF::loadView('user.order.print', compact('order','cart','user'));
+            $is_pdf = true;
+            $pdf = \PDF::loadView('user.order.print', compact('order','cart','user','is_pdf'));
             return $pdf->download('invoice-'.$order->transaction_number.'.pdf');
         }
         return redirect()->route('front.index');
