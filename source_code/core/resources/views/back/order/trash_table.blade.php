@@ -1,7 +1,5 @@
 @foreach($datas as $data)
 <tr id="order-bulk-delete">
-  <td><input type="checkbox" class="bulk-item" value="{{$data->id}}"></td>
-
     <td>
         {{ $data->transaction_number}}
     </td>
@@ -73,18 +71,14 @@
     </td>
     <td>
         <div class="action-list">
-            <a class="btn btn-secondary btn-sm"
-                href="{{ route('back.order.invoice',$data->id) }}">
-                <i class="fas fa-eye"></i>
-            </a>
-            <a class="btn btn-success btn-sm"
-                href="{{ route('back.order.pdf',$data->id) }}">
-                <i class="fas fa-file-pdf"></i>
+            <a class="btn btn-info btn-sm"
+                href="{{ route('back.order.restore',$data->id) }}">
+                <i class="fas fa-reply"></i> {{ __('Restore') }}
             </a>
             <a class="btn btn-danger btn-sm " data-toggle="modal"
                 data-target="#confirm-delete" href="javascript:;"
-                data-href="{{ route('back.order.delete',$data->id) }}">
-                <i class="fas fa-trash-alt"></i>
+                data-href="{{ route('back.order.hardDelete',$data->id) }}">
+                <i class="fas fa-trash-alt"></i> {{ __('Permanent Delete') }}
             </a>
         </div>
     </td>

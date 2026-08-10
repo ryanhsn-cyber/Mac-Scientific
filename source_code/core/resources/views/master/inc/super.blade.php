@@ -114,6 +114,11 @@
                         <span class="sub-item">{{ __('Canceled Orders') }}</span>
                     </a>
                 </li>
+                <li>
+                    <a class="sub-link" href="{{ route('back.order.trash') }}">
+                        <span class="sub-item">{{ __('Trashed Orders') }}</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </li>

@@ -329,7 +329,29 @@ class OrderController extends Controller
     public function delete($id)
     {
         $order = Order::findOrFail($id);
-        $order->tranaction->delete();
+        $order->delete();
+        return redirect()->back()->withSuccess(__('Order Trashed Successfully.'));
+    }
+
+    public function trash(Request $request)
+    {
+        $datas = Order::onlyTrashed()->latest('id')->get();
+        return view('back.order.trash', compact('datas'));
+    }
+
+    public function restore($id)
+    {
+        $order = Order::withTrashed()->findOrFail($id);
+        $order->restore();
+        return redirect()->back()->withSuccess(__('Order Restored Successfully.'));
+    }
+
+    public function hardDelete($id)
+    {
+        $order = Order::withTrashed()->findOrFail($id);
+        if($order->tranaction) {
+            $order->tranaction->delete();
+        }
         if(Notification::where('order_id',$id)->exists()){
             Notification::where('order_id',$id)->delete();
         }
@@ -338,8 +360,8 @@ class OrderController extends Controller
                 $track->delete();
             }
         }
-        $order->delete();
-        return redirect()->back()->withSuccess(__('Order Deleted Successfully.'));
+        $order->forceDelete();
+        return redirect()->back()->withSuccess(__('Order Permanently Deleted.'));
     }
 
 }

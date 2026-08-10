@@ -13,16 +13,10 @@
     <div class="card mb-4">
         <div class="card-body">
             <div class="d-sm-flex align-items-center justify-content-between">
-                <h3 class=" mb-0 bc-title"><b>{{request()->input('type') ? request()->input('type') : __('All')}} {{ __('Orders') }}</b></h3>
+                <h3 class=" mb-0 bc-title"><b>{{ __('Trashed') }} {{ __('Orders') }}</b></h3>
                 <div class="right">
-                <a href="{{route('back.csv.order.export')}}" class="btn btn-info btn-sm d-inline-block">{{__('CSV Export')}}</a>
-                  <form class="d-inline-block" action="{{route('back.bulk.delete')}}" method="get">
-                    <input type="hidden" value="" name="ids[]" id="bulk_delete">
-                    <input type="hidden" value="orders" name="table">
-                    <button class="btn btn-danger btn-sm">{{__('Delete')}}</button>
-                  </form>
-              </div>
-              </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -30,41 +24,12 @@
 	<div class="card shadow mb-4">
 		<div class="card-body">
 
-        <form action="{{route('back.order.index')}}" method="GET">
-          <div class="row mb-4 justify-content-center">
-            <div class="col-md-6 col-sm-6 col-lg-4">
-                <div class="form-group p-0">
-                <label for="start_date">{{ __('Start Date') }} *</label>
-                <input type="text" name="start_date" id="datepicker" class="form-control datepicker"
-                    id="start_date"
-                    placeholder="{{ __('Start Date') }}"
-                    value="">
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-lg-4">
-                <div class="form-group  p-0">
-                <label for="end_date">{{ __('End Date') }} *</label>
-                <input type="text" name="end_date" id="datepicker1" class="form-control datepicker"
-                    id="end_date"
-                    placeholder="{{ __('End Date') }}"
-                    value="">
-                </div>
-            </div>
-            <div class="col-lg-12 text-center mt-3">
-                <button class="btn btn-success py-1 mr-2">{{__('Filter')}}</button>
-                <a href="{{route('back.order.index')}}" class="btn btn-info py-1">{{__('Reset')}}</a>
-            </div>
-        </div>
-        </form>
-
-
 			@include('alerts.alerts')
 			<div class="gd-responsive-table">
 				<table class="table table-bordered table-striped" id="admin-table" width="100%" cellspacing="0">
 
 					<thead>
 						<tr>
-              <th> <input type="checkbox" data-target="order-bulk-delete" class="form-control bulk_all_delete"> </th>
               <th>{{ __('Order ID') }}</th>
               <th>{{ __('User') }}</th>
               <th>{{ __('Total Amount') }}</th>
@@ -77,7 +42,7 @@
 					</thead>
 
 					<tbody>
-              @include('back.order.table',compact('datas'))
+              @include('back.order.trash_table',compact('datas'))
 					</tbody>
 
 				</table>

@@ -68,6 +68,9 @@ Route::group(['middleware' => 'adminlocalize'], function () {
             Route::get('/order/status/{id}/{field}/{value}', 'Back\OrderController@status')->name('back.order.status');
             Route::post('/order/steadfast/{id}', 'Back\OrderController@steadfast')->name('back.order.steadfast');
             Route::get('/order/steadfast/status/{id}', 'Back\OrderController@steadfastUpdateStatus')->name('back.order.steadfast.status');
+            Route::get('/orders/trash', 'Back\OrderController@trash')->name('back.order.trash');
+            Route::get('/order/restore/{id}', 'Back\OrderController@restore')->name('back.order.restore');
+            Route::delete('/order/hard-delete/{id}', 'Back\OrderController@hardDelete')->name('back.order.hardDelete');
         });
 
 
