@@ -335,6 +335,11 @@ Route::group(['middleware' => 'adminlocalize'], function () {
 
 // ************************************ GLOBAL LOCALIZATION **********************************************
 
+Route::get('/migrate-db-temp', function() {
+    \Artisan::call('migrate', ['--force' => true]);
+    return "Migrated: " . \Artisan::output();
+});
+
 Route::group(['middleware' => 'maintainance'], function () {
     Route::group(['middleware' => 'localize'], function () {
 
