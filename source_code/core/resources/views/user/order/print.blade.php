@@ -5,7 +5,7 @@
     <title>{{__('Invoice')}} - {{ $order->transaction_number }}</title>
     <style>
         body {
-            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            font-family: 'DejaVu Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             color: #333;
             font-size: 14px;
             line-height: 1.4;

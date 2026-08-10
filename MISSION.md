@@ -129,7 +129,11 @@ N/A
 - [x] Diagnosed SSLCommerz Sandbox/Test Mode redirect issue for bKash.
 - [x] Added missing cPanel product images to the repository to rescue broken images on the new Coolify server.
 - [x] Guided user through updating cPanel Zone Editor A and MX records to safely launch the Coolify site while preserving business emails.
-- [x] Finalized full site migration from cPanel to Coolify VPS.
+- [x] Finalized full site migration from cPanel to Coolify.
+- [x] Fixed DomPDF `Class Not Found` error by pushing an updated `vendor.zip` via bash script, correctly installing all required backend packages.
+- [x] Configured DomPDF `public_path` and `chroot` variables to point precisely to the `source_code/` directory, resolving image rendering issues in generated PDFs.
+- [x] Implemented a dedicated "Download Invoice" button directly on the checkout success view and connected it to a secure new route for guest PDF generation.
+- [x] Completely revamped the invoice layout (`print.blade.php`) with a clean, professional, table-based design optimized specifically for DomPDF, avoiding rendering issues caused by complex Bootstrap flexbox/grid classes.
 - [x] Fixed slider image browser caching issue by dynamically appending cache-busting timestamps to image URLs across all frontend themes.
 - [x] Resolved PDF invoice generation crash by updating the `barryvdh/laravel-dompdf` facade namespace for v2 compatibility in `config/app.php` and re-zipping `vendor.zip` (Coolify deployment strictly relies on `vendor.zip` extraction rather than `composer install`).
 - [x] Added an immediate "Download Invoice" button to the checkout success page for buyers (works for guests and logged-in users).
