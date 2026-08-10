@@ -528,6 +528,21 @@ a.list-group-item:hover,
         font-weight: 600;
         color: #1e293b;
     }
+    
+    .blog-post-details,
+    .blog-post-details p,
+    .blog-post-details span,
+    .blog-post-details div,
+    .blog-post-details li {
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+    }
+    .blog-post-details h1 { font-size: 2rem !important; }
+    .blog-post-details h2 { font-size: 1.75rem !important; }
+    .blog-post-details h3 { font-size: 1.5rem !important; }
+    .blog-post-details h4 { font-size: 1.25rem !important; }
+    .blog-post-details h5 { font-size: 1.1rem !important; }
+    .blog-post-details h6 { font-size: 1rem !important; }
 </style>
 {{-- Google AdSense Start --}}
 @if ($setting->is_google_adsense == '1')

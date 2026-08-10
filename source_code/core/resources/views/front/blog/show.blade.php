@@ -51,7 +51,7 @@
                     <li><i class="icon-tag"></i><a href="{{route('front.blog').'?category='.$post->category->slug}}">{{$post->category->name}}</a></li>
                     <li><i class="icon-clock"></i><a href="javascript:;">{{ date('jS F, Y', strtotime($post->created_at)) }}</a></li>
                     </ul>
-                <div>
+                <div class="blog-post-details">
                     {!! $post->details !!}
                 </div>
 
