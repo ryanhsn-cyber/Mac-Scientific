@@ -130,3 +130,4 @@ N/A
 - [x] Added missing cPanel product images to the repository to rescue broken images on the new Coolify server.
 - [x] Guided user through updating cPanel Zone Editor A and MX records to safely launch the Coolify site while preserving business emails.
 - [x] Finalized full site migration from cPanel to Coolify VPS.
+- [x] Fixed slider image browser caching issue by dynamically appending cache-busting timestamps to image URLs across all frontend themes.

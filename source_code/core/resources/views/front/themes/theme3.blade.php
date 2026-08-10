@@ -7,7 +7,7 @@
             $first_photo = $sliders->first()->photo;
             $encoded_photo = implode('/', array_map('rawurlencode', explode('/', $first_photo)));
         @endphp
-        <link rel="preload" as="image" href="{{ asset('assets/images/' . $encoded_photo) }}" fetchpriority="high">
+        <link rel="preload" as="image" href="{{ asset('assets/images/' . $encoded_photo) }}?v={{ strtotime(isset($sliders[0]) ? ($sliders[0]->updated_at ?? 'now') : ($sliders->first()->updated_at ?? 'now')) }}" fetchpriority="high">
     @endif
 @endsection
 
@@ -50,7 +50,7 @@
                             @php
                                 $encoded_slider_photo = implode('/', array_map('rawurlencode', explode('/', $slider->photo)));
                             @endphp
-                            <div class="item" style="background: url('{{ asset('assets/images/' . $encoded_slider_photo) }}')">
+                            <div class="item" style="background: url('{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}')">
                                 <div class="row">
                         <div class="col-xl-5 col-lg-6 d-flex align-self-center">
                             <div class="left-content color-white">
@@ -541,7 +541,7 @@
                                             @php
                                                 $decoded = json_decode($post->photo, true);
                                                 $photoPath = is_array($decoded) && count($decoded) > 0 ? $decoded[array_key_first($decoded)] : (is_string($decoded) ? $decoded : $post->photo);
-                                                $photoPath = trim($photoPath, '"\'');
+                                                $photoPath = trim($photoPath, '"'');
                                                 $photoPath = empty($photoPath) ? 'placeholder.png' : $photoPath;
                                             @endphp
                                             <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/' . $photoPath) }}"

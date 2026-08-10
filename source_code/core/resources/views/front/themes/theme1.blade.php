@@ -7,7 +7,7 @@
             $first_photo = $sliders[0]->photo;
             $encoded_photo = implode('/', array_map('rawurlencode', explode('/', $first_photo)));
         @endphp
-        <link rel="preload" as="image" href="{{ asset('assets/images/' . $encoded_photo) }}" fetchpriority="high">
+        <link rel="preload" as="image" href="{{ asset('assets/images/' . $encoded_photo) }}?v={{ strtotime(isset($sliders[0]) ? ($sliders[0]->updated_at ?? 'now') : ($sliders->first()->updated_at ?? 'now')) }}" fetchpriority="high">
     @endif
 @endsection
 
@@ -48,7 +48,7 @@
                         @php
                             $first_slider_photo = '';
                             if(count($sliders) > 0) {
-                                $first_slider_photo = asset('assets/images/' . implode('/', array_map('rawurlencode', explode('/', $sliders[0]->photo))));
+                                $first_slider_photo = asset('assets/images/' . implode('/', array_map('rawurlencode', explode('/', $sliders[0]->photo)))) . "?v=" . strtotime($sliders[0]->updated_at ?? "now");
                             }
                         @endphp
                         <div class="hero-slider" style="position: relative; overflow: hidden; border-radius: 10px;">
@@ -66,9 +66,9 @@
                                     @endif
                                     " style="position: relative;">
                                         @if($index == 0)
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" fetchpriority="high" alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" fetchpriority="high" alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
                                         @else
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" @if($loop->first) fetchpriority="high" @else loading="lazy" @endif alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" @if($loop->first) fetchpriority="high" @else loading="lazy" @endif alt="Slider Image" width="1920" height="1080" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
                                         @endif
                                         <div class="item-inner" style="position: relative; z-index: 1;">
                                             <div class="from-bottom">
