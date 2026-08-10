@@ -371,11 +371,7 @@
                         <span class="sub-item">{{ __('System Backup') }}</span>
                     </a>
                 </li>
-                <li>
-                    <a class="sub-link" href="{{ route('back.database.backup') }}">
-                        <span class="sub-item">{{ __('Database Backup') }}</span>
-                    </a>
-                </li>
+
             </ul>
         </div>
     </li>

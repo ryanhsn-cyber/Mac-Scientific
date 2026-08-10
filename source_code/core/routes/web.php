@@ -199,7 +199,7 @@ Route::group(['middleware' => 'adminlocalize'], function () {
 
             // -------------- SYSTEM BACKUP ---------------//
             Route::get('system/backup', 'Back\BackupController@systemBackup')->name('back.system.backup');
-            Route::get('database/backup', 'Back\BackupController@databaseBackup')->name('back.database.backup');
+
         });
 
 
