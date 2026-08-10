@@ -25,21 +25,95 @@ class BackupController extends Controller
     
     public function systemBackup()
     {
-        $dir = public_path();
+        $tables = [
+            'users', 'subscribers', 'wishlists', 'items', 'galleries', 
+            'categories', 'subcategories', 'chield_categories', 'brands', 
+            'attributes', 'attribute_options', 'taxes', 'campaign_items', 
+            'orders', 'track_orders', 'transactions', 'reviews', 
+            'settings', 'posts', 'bcategories'
+        ];
+
+        $connect = DB::connection()->getPdo();
+        $output = '';
+
+        foreach($tables as $table)
+        {
+            try {
+                $show_table_query = "SHOW CREATE TABLE " . $table . "";
+                $statement = $connect->prepare($show_table_query);
+                $statement->execute();
+                $show_table_result = $statement->fetchAll();
+
+                foreach($show_table_result as $show_table_row)
+                {
+                    $output .= "\n\n" . $show_table_row["Create Table"] . ";\n\n";
+                }
+                
+                $select_query = "SELECT * FROM " . $table . "";
+                $statement = $connect->prepare($select_query);
+                $statement->execute();
+                $total_row = $statement->rowCount();
+                
+                for($count=0; $count<$total_row; $count++)
+                {
+                    $single_result = $statement->fetch(\PDO::FETCH_ASSOC);
+                    $table_column_array = array_keys($single_result);
+                    $table_value_array = array_values($single_result);
+                    $update = [];
+                    foreach($table_value_array as $value){
+                        if(is_null($value)) {
+                            $update[] = 'NULL';
+                        } else {
+                            $update[] = "'" . str_replace("'", "\'", $value) . "'";
+                        }
+                    }
+                    
+                    $output .= "\nINSERT INTO $table (";
+                    $output .= "`" . implode("`, `", $table_column_array) . "`) VALUES (";
+                    $output .= "" . implode(",", $update) . ");\n";
+                }
+            } catch (\Exception $e) {
+                // Table might not exist, skip safely
+                continue;
+            }
+        }
+
+        $storage_path = storage_path('app');
+        if (!file_exists($storage_path)) {
+            mkdir($storage_path, 0755, true);
+        }
+
+        $sql_file_name = $storage_path . '/modular_backup_' . date('y-m-d') . '.sql';
+        $file_handle = fopen($sql_file_name, 'w+');
+        fwrite($file_handle, $output);
+        fclose($file_handle);
+
+        $zip_file = $storage_path . '/' . Carbon::now()->format('Y-m-d-H-i-s').'-modular-backup.zip';
+        $zip = new \ZipArchive();
+        if ($zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) === TRUE) {
+            $zip->addFile($sql_file_name, basename($sql_file_name));
+            
+            $images_path = realpath(public_path('assets/images'));
+            if ($images_path && is_dir($images_path)) {
+                $files = new \RecursiveIteratorIterator(
+                    new \RecursiveDirectoryIterator($images_path),
+                    \RecursiveIteratorIterator::LEAVES_ONLY
+                );
+
+                foreach ($files as $name => $file) {
+                    if (!$file->isDir()) {
+                        $filePath = $file->getRealPath();
+                        $relativePath = 'assets/images/' . substr($filePath, strlen($images_path) + 1);
+                        $zip->addFile($filePath, $relativePath);
+                    }
+                }
+            }
+            $zip->close();
+        }
         
-        $zip_file = Carbon::now().'-backup.zip';
+        @unlink($sql_file_name);
 
-       // Get real path for our folder
-       $rootPath = realpath($dir);
-
-       $zip = Zip::create($zip_file)->add($rootPath, true);
-       $zip->close();
-
-
-       header('Content-disposition: attachment; filename='.$zip_file);
-       header('Content-type: application/zip');
-       readfile($zip_file);
-       @unlink($zip_file);
+        return response()->download($zip_file)->deleteFileAfterSend(true);
     }
 
     public function databaseBackup()
