@@ -553,6 +553,11 @@ Route::get('/', 'Front\FrontendController@index')->name('front.index');
         Route::post('/sslcommerz/notify', 'Payment\SslCommerzController@notify')->name('front.sslcommerz.notify');
         Route::post('/sslcommerz/submit', 'Payment\SslCommerzController@store')->name('front.sslcommerz.submit');
 
+        // bKash API & Webhook Routes
+        Route::post('/bkash/process', 'Payment\BkashPaymentController@process')->name('front.bkash.process');
+        Route::get('/checkout/bkash/callback', 'Payment\BkashPaymentController@callback')->name('front.bkash.callback');
+        Route::post('/webhook/bkash', 'Payment\BkashPaymentController@webhook')->name('front.bkash.webhook');
+
         // ----------- TRACK ORDER ----------//
         Route::get('/track/order', 'Front\FrontendController@trackOrder')->name('front.order.track');
         Route::get('/order/track/submit', 'Front\FrontendController@track')->name('front.order.track.submit');

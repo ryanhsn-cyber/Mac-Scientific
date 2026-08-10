@@ -15,6 +15,7 @@ class VerifyCsrfToken extends Middleware
         '/paytm/notify',
         '/sslcommerz/notify',
         'razorpay/notify',
-        'flutterwave/notify'
+        'flutterwave/notify',
+        '/webhook/bkash'
     ];
 }

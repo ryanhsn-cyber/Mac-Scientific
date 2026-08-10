@@ -367,6 +367,10 @@ class CheckoutController extends Controller
 
         $input = $request->all();
 
+        if ($input['payment_method'] === 'bKash API') {
+            return app(\App\Http\Controllers\Payment\BkashPaymentController::class)->process($request);
+        }
+
         $checkout = false;
         $payment_redirect = false;
         $payment = null;
