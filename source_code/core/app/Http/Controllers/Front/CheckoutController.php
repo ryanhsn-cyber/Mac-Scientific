@@ -538,6 +538,19 @@ class CheckoutController extends Controller
 
 	}
 
+	public function paymentPdf()
+	{
+        if(Session::has('order_id')){
+            $order_id = Session::get('order_id');
+            $order = Order::find($order_id);
+            $cart = json_decode($order->cart, true);
+            $user = Auth::user();
+            $pdf = \PDF::loadView('user.order.print', compact('order','cart','user'));
+            return $pdf->download('invoice-'.$order->transaction_number.'.pdf');
+        }
+        return redirect()->route('front.index');
+	}
+
 
 
 	public function paymentCancle()

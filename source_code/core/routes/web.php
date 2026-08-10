@@ -534,6 +534,7 @@ Route::get('/', 'Front\FrontendController@index')->name('front.index');
         Route::get('/checkout/state/setup/{state_id}', 'Front\CheckoutController@stateSetUp')->name('front.state.setup');
         Route::post('/checkout-submit', 'Front\CheckoutController@checkout')->name('front.checkout.submit');
         Route::get('/checkout/success', 'Front\CheckoutController@paymentSuccess')->name('front.checkout.success');
+        Route::get('/checkout/success/pdf', 'Front\CheckoutController@paymentPdf')->name('front.checkout.pdf');
         Route::get('/checkout/cancle', 'Front\CheckoutController@paymentCancle')->name('front.checkout.cancle');
         Route::get('/paypal/checkout/redirect', 'Front\CheckoutController@paymentRedirect')->name('front.checkout.redirect');
         Route::get('/checkout/mollie/notify', 'Front\CheckoutController@mollieRedirect')->name('front.checkout.mollie.redirect');

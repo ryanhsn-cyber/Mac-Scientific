@@ -132,3 +132,4 @@ N/A
 - [x] Finalized full site migration from cPanel to Coolify VPS.
 - [x] Fixed slider image browser caching issue by dynamically appending cache-busting timestamps to image URLs across all frontend themes.
 - [x] Resolved PDF invoice generation crash by updating the `barryvdh/laravel-dompdf` facade namespace for v2 compatibility in `config/app.php` and re-zipping `vendor.zip` (Coolify deployment strictly relies on `vendor.zip` extraction rather than `composer install`).
+- [x] Added an immediate "Download Invoice" button to the checkout success page for buyers (works for guests and logged-in users).

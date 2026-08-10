@@ -30,6 +30,7 @@
             <div class="padding-top-1x padding-bottom-1x">
 
                 <a class="btn btn-primary m-4" href="{{route('front.catalog')}}"><span><i class="icon-package pr-2"></i> {{__('View our products again')}}</span></a>
+                <a class="btn btn-success m-4" href="{{route('front.checkout.pdf')}}"><span><i class="icon-download pr-2"></i> {{__('Download Invoice')}}</span></a>
 
               </div>
           </div>
