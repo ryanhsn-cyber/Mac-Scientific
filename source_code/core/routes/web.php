@@ -317,6 +317,15 @@ Route::group(['middleware' => 'adminlocalize'], function () {
             Route::delete('/sitemap/delete/{id}/', 'Back\SitemapController@delete')->name('admin.sitemap.delete');
             Route::post('/sitemap/download', 'Back\SitemapController@download')->name('admin.sitemap.download');
         });
+
+        Route::get('/cache/clear', function () {
+            Artisan::call('cache:clear');
+            Artisan::call('config:clear');
+            Artisan::call('route:clear');
+            Artisan::call('view:clear');
+            return redirect()->route('back.dashboard')->withSuccess(__('System Cache Has Been Removed.'));
+        })->name('back.cache.clear');
+
     });
 
 
@@ -562,13 +571,7 @@ Route::get('/', 'Front\FrontendController@index')->name('front.index');
         Route::get('/track/order', 'Front\FrontendController@trackOrder')->name('front.order.track');
         Route::get('/order/track/submit', 'Front\FrontendController@track')->name('front.order.track.submit');
 
-        Route::get('/cache/clear', function () {
-            Artisan::call('cache:clear');
-            Artisan::call('config:clear');
-            Artisan::call('route:clear');
-            Artisan::call('view:clear');
-            return redirect()->route('back.dashboard')->withSuccess(__('System Cache Has Been Removed.'));
-        })->name('front.cache.clear');
+
 
         //------------ PAGE ------------
         Route::get('/{slug}', 'Front\FrontendController@page')->name('front.page');

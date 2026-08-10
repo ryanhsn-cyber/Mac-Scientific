@@ -337,7 +337,7 @@
     </li>
 
     <li class="nav-item">
-        <a href="{{ route('front.cache.clear') }}">
+        <a href="{{ route('back.cache.clear') }}">
             <i class="fas fa-broom"></i>
             <p>{{ __('Cache Clear') }}</p>
         </a>
