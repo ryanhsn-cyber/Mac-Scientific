@@ -232,7 +232,7 @@ return [
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => Intervention\Image\ImageManagerStatic::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
         'OrderHelper' => App\Helpers\OrderHelper::class,
         'PriceHelper' => App\Helpers\PriceHelper::class,
     ],
