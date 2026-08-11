@@ -329,11 +329,26 @@
         <a href="{{ route('back.subscribers.index') }}">
             <i class="fab fa-telegram-plane"></i>
             <p>{{ __('Subscribers List') }}</p>
+    @if (in_array('Manage System User',$section))
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">{{ __('Media Management') }}</h4>
+    </li>
+    <li class="nav-item {{ request()->is('admin/media*') ? 'active' : '' }}">
+        <a href="{{ route('back.media.index') }}">
+            <i class="fas fa-images"></i>
+            <p>{{ __('Media Gallery') }}</p>
         </a>
     </li>
-    @endif
 
-    @if (in_array('Manage System User',$section))
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">{{ __('Settings') }}</h4>
+    </li>
     <li class="nav-item">
         <a data-toggle="collapse" href="#user">
             <i class="far fa-user"></i>

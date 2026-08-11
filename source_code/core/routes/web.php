@@ -57,6 +57,8 @@ Route::group(['middleware' => 'adminlocalize'], function () {
 
         Route::get('bulk/deletes', 'Back\BulkDeleteController@bulkDelete')->name('back.bulk.delete');
 
+        //------------ MEDIA MANAGER ------------
+        Route::resource('media', 'Back\MediaManagerController', ['as' => 'back', 'except' => 'show']);
 
         Route::group(['middleware' => 'permissions:Manage Orders'], function () {
             //------------ ORDER ------------

@@ -297,6 +297,13 @@
         </a>
     </li>
 
+    <li class="nav-item {{ request()->is('admin/media*') ? 'active' : '' }}">
+        <a href="{{ route('back.media.index') }}">
+            <i class="fas fa-images"></i>
+            <p>{{ __('Media Gallery') }}</p>
+        </a>
+    </li>
+
     <li class="nav-item">
         <a data-toggle="collapse" href="#user">
             <i class="far fa-user"></i>
