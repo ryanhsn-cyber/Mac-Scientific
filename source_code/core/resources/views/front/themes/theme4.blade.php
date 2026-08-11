@@ -41,10 +41,16 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <style>
-                            @media (max-width: 767px) {
-                                .hero-slider .item {
-                                    height: auto !important;
-                                }
+                            .hero-area4 .item {
+                                height: auto !important;
+                                padding: 0 !important;
+                                display: block !important;
+                            }
+                            .hero-area4 .item > img {
+                                width: 100% !important;
+                                height: auto !important;
+                                object-fit: contain !important;
+                                display: block;
                             }
                             .heroarea-slider:not(.owl-loaded) { display: block !important; overflow: hidden; border-radius: 12px; }
                             .heroarea-slider:not(.owl-loaded) > a { display: none; }
@@ -57,7 +63,7 @@
                             @endphp
                             <a href="{{$slider->link}}">
                                 <div class="item" style="position: relative;">
-                                    <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" alt="Slider Banner" width="1000" height="400" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" @if($loop->first) fetchpriority="high" @else loading="lazy" @endif>
+                                    <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" alt="Slider Banner" width="3550" height="1440" style="width: 100%; height: auto; object-fit: contain; border-radius: 12px;" @if($loop->first) fetchpriority="high" @else loading="lazy" @endif>
                                 </div>
                             </a>
                             @endforeach

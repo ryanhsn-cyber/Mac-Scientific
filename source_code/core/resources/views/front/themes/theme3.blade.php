@@ -41,10 +41,16 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <style>
-                            @media (max-width: 767px) {
-                                .hero-slider .item {
-                                    height: auto !important;
-                                }
+                            .hero-area3 .item {
+                                height: auto !important;
+                                padding: 0 !important;
+                                display: block !important;
+                            }
+                            .hero-area3 .item > img {
+                                width: 100% !important;
+                                height: auto !important;
+                                object-fit: contain !important;
+                                display: block;
                             }
                             .heroarea-slider:not(.owl-loaded) { display: block !important; overflow: hidden; border-radius: 12px; }
                             .heroarea-slider:not(.owl-loaded) > .item { display: none; }
@@ -55,40 +61,49 @@
                             @php
                                 $encoded_slider_photo = implode('/', array_map('rawurlencode', explode('/', $slider->photo)));
                             @endphp
-                            <div class="item" style="background: url('{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}')">
-                                <div class="row">
-                        <div class="col-xl-5 col-lg-6 d-flex align-self-center">
-                            <div class="left-content color-white">
-                                <div class="content">
-                                    <div class="layer-1">
-                                        <p class="subtitle">
-                                            {{ $slider->title }}
-                                        </p>
-                                    </div>
-                                    <div class="layer-2">
-                                        <h1 class="title">
-                                            {{ $slider->details }}
-                                        </h1>
-                                    </div>
-                                    <div class="layer-3">
-                                        <div class="links">
-                                        <a href="{{ $slider->link }}" class="btn btn-primary">
-                                            <span>
-                                                {{ __('Buy Now') }}
-                                            </span>
-                                        </a>
+                            <div class="item" style="position: relative;">
+                                @if($loop->first)
+                                <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" fetchpriority="high" alt="Slider Image" width="3550" height="1440">
+                                @else
+                                <img class="lazy" loading="lazy" src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" alt="Slider Image" width="3550" height="1440">
+                                @endif
+                                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+                                    <div class="row h-100">
+                                        <div class="col-xl-5 col-lg-6 d-flex align-self-center">
+                                            <div class="left-content color-white" style="padding-left: 50px;">
+                                                <div class="content">
+                                                    <div class="layer-1">
+                                                        <p class="subtitle">
+                                                            {{ $slider->title }}
+                                                        </p>
+                                                    </div>
+                                                    <div class="layer-2">
+                                                        <h1 class="title">
+                                                            {{ $slider->details }}
+                                                        </h1>
+                                                    </div>
+                                                    <div class="layer-3">
+                                                        <div class="links">
+                                                        <a href="{{ $slider->link }}" class="btn btn-primary">
+                                                            <span>
+                                                                {{ __('Buy Now') }}
+                                                            </span>
+                                                        </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-7 col-lg-6 order-first order-lg-last d-flex align-self-center">
+                                            <div class="layer-4 w-100">
+                                                <div class="right-img text-center">
+                                                    @if ($slider->logo)
+                                                    <img class="img-fluid full-img d-inline-block" src="{{ asset('assets/images/' . $slider->logo) }}" alt="" style="max-width: 350px;">
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-6 order-first order-lg-last">
-                        <div class="layer-4">
-                            <div class="right-img">
-                            <img class="img-fluid full-img" src="{{ asset('assets/images/' . $slider->logo) }}" alt="">
-                            </div>
-                        </div>
-                        </div>
                                 </div>
                             </div>
                             @endforeach

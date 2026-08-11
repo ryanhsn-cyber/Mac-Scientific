@@ -142,3 +142,9 @@ N/A
 - [x] Resolved PDF invoice generation crash by updating the `barryvdh/laravel-dompdf` facade namespace for v2 compatibility in `config/app.php` and re-zipping `vendor.zip` (Coolify deployment strictly relies on `vendor.zip` extraction rather than `composer install`).
 - [x] Added an immediate "Download Invoice" button to the checkout success page for buyers (works for guests and logged-in users).
 - [x] Built a modular API Payment Gateway architecture starting with the `BkashTokenizedService` and `BkashPaymentController`, enabling fully automated Tokenized bKash Checkout and B2B Webhook IPN integrations for instant order payment statuses.
+- [x] Refactored slider creation/edit UI to remove hardcoded theme tabs, instead automatically adopting the system's global active theme.
+- [x] Removed required validation constraints and brand logo inputs from the slider forms as requested.
+- [x] Standardized slider image size recommendations to 3550x1440 across the board.
+- [x] Patched frontend slider CSS to allow responsive 'height: auto' rendering on mobile displays, preventing unwanted image shrinking or context clipping.
+- [x] Diagnosed slider missing image bug. Found that Coolify persistent volume was wrongly mounted to `/var/www/html/assets/images` instead of the web server's correct upload path `/var/www/html/source_code/assets/images`. 
+- [x] Corrected the volume mount in Coolify and redeployed. Future uploads will now correctly persist across Git deployments.

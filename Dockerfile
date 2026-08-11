@@ -27,8 +27,7 @@ WORKDIR /var/www/html/source_code/core
 # Copy application files
 COPY . /var/www/html
 
-# Extract the pre-packaged vendor directory
-RUN if [ -f "vendor.zip" ]; then unzip -q vendor.zip -d . && rm vendor.zip; fi
+RUN if [ -f "vendor.zip" ]; then unzip -oq vendor.zip -d . && rm vendor.zip; fi
 
 
 

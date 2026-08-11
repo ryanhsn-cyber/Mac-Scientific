@@ -40,16 +40,20 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <!-- Main Slider-->
-                        <style>
-                            @media (max-width: 767px) {
+                            <style>
                                 .hero-slider .item {
                                     height: auto !important;
+                                    padding: 0 !important;
                                 }
-                            }
-                            .hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; }
-                            .hero-slider-main:not(.owl-loaded) .item { display: none; }
-                            .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; }
-                        </style>
+                                .hero-slider .item img {
+                                    width: 100% !important;
+                                    height: auto !important;
+                                    object-fit: contain !important;
+                                }
+                                .hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; }
+                                .hero-slider-main:not(.owl-loaded) .item { display: none; }
+                                .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; }
+                            </style>
                         <div class="hero-slider" style="border-radius: 10px; overflow: hidden;">
                             <div class="hero-slider-main owl-carousel dots-inside">
                                 @foreach ($sliders as $index => $slider)
@@ -62,9 +66,9 @@
                                     @endif
                                     " style="position: relative;">
                                         @if($index == 0)
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" fetchpriority="high" alt="Slider Image" width="1920" height="1080" style="width: 100%; height: auto; display: block; object-fit: cover;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" fetchpriority="high" alt="Slider Image" width="3550" height="1440" style="width: 100%; height: auto; display: block; object-fit: contain;">
                                         @else
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" loading="lazy" alt="Slider Image" width="1920" height="1080" style="width: 100%; height: auto; display: block; object-fit: cover;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" loading="lazy" alt="Slider Image" width="3550" height="1440" style="width: 100%; height: auto; display: block; object-fit: contain;">
                                         @endif
                                         <div class="item-inner" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;">
                                             <div class="from-bottom" style="pointer-events: auto;">
