@@ -148,3 +148,4 @@ N/A
 - [x] Patched frontend slider CSS to allow responsive 'height: auto' rendering on mobile displays, preventing unwanted image shrinking or context clipping.
 - [x] Diagnosed slider missing image bug. Found that Coolify persistent volume was wrongly mounted to `/var/www/html/assets/images` instead of the web server's correct upload path `/var/www/html/source_code/assets/images`. 
 - [x] Corrected the volume mount in Coolify and redeployed. Future uploads will now correctly persist across Git deployments.
+- [x] Added a status column to the services table and an active/deactive dropdown toggle in the admin panel to allow hiding/unhiding individual features in the frontend Services section.
