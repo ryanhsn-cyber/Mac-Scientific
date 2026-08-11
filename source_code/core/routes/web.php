@@ -307,6 +307,7 @@ Route::group(['middleware' => 'adminlocalize'], function () {
             Route::resource('slider', 'Back\SliderController', ['as' => 'back', 'except' => 'show']);
 
             //------------ SERVICE ------------
+            Route::get('service/status/{id}/{status}', 'Back\ServiceController@status')->name('back.service.status');
             Route::resource('service', 'Back\ServiceController', ['as' => 'back', 'except' => 'show']);
 
 

@@ -1215,6 +1215,7 @@ CREATE TABLE `services` (
   `title` varchar(255) DEFAULT NULL,
   `details` text DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1223,11 +1224,11 @@ CREATE TABLE `services` (
 -- Dumping data for table `services`
 --
 
-INSERT INTO `services` (`id`, `title`, `details`, `photo`, `created_at`, `updated_at`) VALUES
-(31, 'Secure Online Payment', 'We posess SSL / Secure Certificate', '162196474904_1785426681.webp', NULL, NULL),
-(32, '24/7 Customer Support', 'Friendly 24/7 customer support', '162196471103_1785426681.webp', NULL, NULL),
-(33, 'Money Back Guarantee', 'We return money within 30 days', '162196467602_1785426681.webp', NULL, NULL),
-(34, 'Nationwide Delivery', 'Reliable shipping for all orders nationwide', '162196463701_1785426681.webp', NULL, NULL);
+INSERT INTO `services` (`id`, `title`, `details`, `photo`, `status`, `created_at`, `updated_at`) VALUES
+(31, 'Secure Online Payment', 'We posess SSL / Secure Certificate', '162196474904_1785426681.webp', 1, NULL, NULL),
+(32, '24/7 Customer Support', 'Friendly 24/7 customer support', '162196471103_1785426681.webp', 1, NULL, NULL),
+(33, 'Money Back Guarantee', 'We return money within 30 days', '162196467602_1785426681.webp', 1, NULL, NULL),
+(34, 'Nationwide Delivery', 'Reliable shipping for all orders nationwide', '162196463701_1785426681.webp', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 

@@ -308,7 +308,7 @@ class FrontendController extends Controller
                 'banner_first'   => json_decode($home_customize->banner_first,true),
                 'sliders'  => $sliders,
                 'campaign_items' => CampaignItem::with('item')->whereStatus(1)->whereIsFeature(1)->orderby('id','desc')->get(),
-                'services' => Service::orderby('id','desc')->get(),
+                'services' => Service::whereStatus(1)->orderby('id','desc')->get(),
                 'posts'    => Post::with('category')->orderby('id','desc')->take(8)->get(),
                 'brands'   => Brand::whereStatus(1)->get(),
                 'banner_secend'  => json_decode($home_customize->banner_secend,true),

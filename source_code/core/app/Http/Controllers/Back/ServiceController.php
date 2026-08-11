@@ -97,6 +97,19 @@ class ServiceController extends Controller
     }
 
     /**
+     * Change the status for editing the specified resource.
+     *
+     * @param  int  $id
+     * @param  int  $status
+     * @return \Illuminate\Http\Response
+     */
+    public function status($id, $status)
+    {
+        Service::find($id)->update(['status' => $status]);
+        return redirect()->route('back.service.index')->withSuccess(__('Status Updated Successfully.'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
