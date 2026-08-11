@@ -160,10 +160,89 @@
         $mainbs = json_encode($mainbs);
     @endphp
 
-<script>
-    var mainbs = {!! $mainbs !!};
-    var admin_url = '/admin';
-</script>
+    {{-- GLOBAL MEDIA GALLERY MODAL --}}
+    <div class="modal fade" id="mediaGalleryModal" tabindex="-1" role="dialog" aria-labelledby="mediaGalleryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mediaGalleryModalLabel">{{ __('Choose from Media Gallery') }}</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <div class="row">
+                        @php
+                            $allMedia = \App\Models\MediaManager::orderBy('id', 'desc')->get();
+                        @endphp
+                        @forelse($allMedia as $media)
+                        <div class="col-md-2 col-sm-4 mb-3">
+                            <div class="card h-100 cursor-pointer media-picker-item" data-url="{{ asset('assets/images/'.$media->photo) }}">
+                                <img src="{{ asset('assets/images/'.$media->photo) }}" class="card-img-top" style="height: 100px; object-fit: cover; cursor: pointer;">
+                            </div>
+                        </div>
+                        @empty
+                        <div class="col-12 text-center">
+                            <p class="text-muted">{{ __('No media found. Upload in the Media Gallery first.') }}</p>
+                        </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var mainbs = {!! $mainbs !!};
+        var admin_url = '/admin';
+        var currentMediaTargetId = null;
+
+        function setMediaTarget(inputId) {
+            currentMediaTargetId = inputId;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            let galleryBtnHtml = '<button type="button" class="btn btn-sm btn-info mt-2 ml-2 gallery-picker-btn" data-toggle="modal" data-target="#mediaGalleryModal"><i class="fas fa-images"></i> {{ __("Choose from Gallery") }}</button>';
+            
+            $('.upload-photo').each(function() {
+                if(!$(this).attr('id')) {
+                    $(this).attr('id', 'file_' + Math.random().toString(36).substr(2, 9));
+                }
+                $(this).parent().after($(galleryBtnHtml).attr('onclick', 'setMediaTarget("' + $(this).attr('id') + '")'));
+            });
+
+            if($('#gallery_file').length) {
+                $('#gallery_file').parent().after($(galleryBtnHtml).attr('onclick', 'setMediaTarget("gallery_file")'));
+            }
+
+            $('.media-picker-item').click(async function() {
+                if(!currentMediaTargetId) return;
+                let url = $(this).data('url');
+                let input = document.getElementById(currentMediaTargetId);
+                
+                try {
+                    let response = await fetch(url);
+                    let blob = await response.blob();
+                    let filename = url.split('/').pop();
+                    let file = new File([blob], filename, {type: blob.type});
+                    let dataTransfer = new DataTransfer();
+                    
+                    if(input.multiple) {
+                        for(let i=0; i<input.files.length; i++) {
+                            dataTransfer.items.add(input.files[i]);
+                        }
+                    }
+                    dataTransfer.items.add(file);
+                    input.files = dataTransfer.files;
+                    $(input).trigger('change');
+                    $('#mediaGalleryModal').modal('hide');
+                } catch (e) {
+                    alert('Error loading image from gallery.');
+                    console.error(e);
+                }
+            });
+        });
+    </script>
 	<!--   Core JS Files   -->
 	<script src="{{ asset('assets/back/js/core/jquery.3.6.0.min.js') }}"></script>
 	<script src="{{ asset('assets/back/js/core/popper.min.js') }}"></script>
