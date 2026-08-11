@@ -21,7 +21,6 @@ class SliderRepository
     {
         $input = $request->all();
         $input['photo'] = ImageHelper::handleUploadedImage($request->file('photo'),'assets/images');
-        $input['logo'] = ImageHelper::handleUploadedImage($request->file('logo'),'assets/images');
         Slider::create($input);
     }
 
@@ -37,9 +36,6 @@ class SliderRepository
         $input = $request->all();
         if ($file = $request->file('photo')) {
             $input['photo'] = ImageHelper::handleUpdatedUploadedImage($file,'/assets/images/',$slider,'/assets/images/','photo');
-        }
-        if ($file = $request->file('logo')) {
-            $input['logo'] = ImageHelper::handleUpdatedUploadedImage($file,'/assets/images/',$slider,'/assets/images/','logo');
         }
         $slider->update($input);
     }

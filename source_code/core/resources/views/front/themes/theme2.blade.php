@@ -41,6 +41,11 @@
                     <div class="col-lg-12">
                         <!-- Main Slider-->
                         <style>
+                            @media (max-width: 767px) {
+                                .hero-slider .item {
+                                    height: auto !important;
+                                }
+                            }
                             .hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; }
                             .hero-slider-main:not(.owl-loaded) .item { display: none; }
                             .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; height: 100%; }

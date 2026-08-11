@@ -41,6 +41,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <style>
+                            @media (max-width: 767px) {
+                                .hero-slider .item {
+                                    height: auto !important;
+                                }
+                            }
                             .heroarea-slider:not(.owl-loaded) { display: block !important; overflow: hidden; border-radius: 12px; }
                             .heroarea-slider:not(.owl-loaded) > .item { display: none; }
                             .heroarea-slider:not(.owl-loaded) > .item:first-child { display: block; }
