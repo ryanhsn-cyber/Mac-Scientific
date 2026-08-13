@@ -164,9 +164,15 @@
     <div class="modal fade" id="mediaGalleryModal" tabindex="-1" role="dialog" aria-labelledby="mediaGalleryModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header d-flex align-items-center">
                     <h5 class="modal-title" id="mediaGalleryModalLabel">{{ __('Choose from Media Gallery') }}</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <div class="ml-3">
+                        <label class="btn btn-sm btn-primary mb-0" style="cursor: pointer;">
+                            <i class="fas fa-upload"></i> {{ __('Upload New') }}
+                            <input type="file" id="mediaGalleryUploadInput" class="d-none" accept="image/*" multiple>
+                        </label>
+                    </div>
+                    <button class="close ml-auto" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
@@ -240,6 +246,33 @@
                     alert('Error loading image from gallery.');
                     console.error(e);
                 }
+            });
+
+            $('#mediaGalleryUploadInput').on('change', function() {
+                if(this.files.length === 0) return;
+                
+                let formData = new FormData();
+                formData.append('photo', this.files[0]);
+                formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+                
+                let btnLabel = $(this).parent();
+                let originalHtml = btnLabel.html();
+                btnLabel.html('<i class="fas fa-spinner fa-spin"></i> Uploading...');
+                
+                $.ajax({
+                    url: admin_url + '/media',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        window.location.reload();
+                    },
+                    error: function(err) {
+                        alert('Upload failed.');
+                        btnLabel.html(originalHtml);
+                    }
+                });
             });
         });
     </script>

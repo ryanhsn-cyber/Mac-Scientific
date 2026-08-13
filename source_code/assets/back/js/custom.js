@@ -867,21 +867,22 @@ $(document).on('click','.remove-menu',function(){
 
 
     $(document).on('change','#gallery_file',function(){
-
         
+        // Remove only previously added preview items so we don't duplicate when native file input replaces its files array
+        $(".gallery_image_view .preview-gallery-item").remove();
+
         for(let i=0;i<this.files.length;++i){
             let filereader = new FileReader();
            
-            filereader.onload = function(){
+            filereader.onload = function(e){
              
                 let xxx =`
-                    <div class="single-g-item d-inline-block m-2">
-                            <span 
-                             class="remove-gallery-img">
+                    <div class="single-g-item d-inline-block m-2 preview-gallery-item">
+                            <span class="remove-gallery-img">
                                 <i class="fas fa-trash reader_file_remove"></i>
                             </span>
-                            <a class="popup-link" href="${this.result}">
-                                <img class="admin-gallery-img" src="${this.result}"
+                            <a class="popup-link" href="${e.target.result}">
+                                <img class="admin-gallery-img" src="${e.target.result}"
                                     alt="No Image Found">
                             </a>
                     </div>
