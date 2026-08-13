@@ -222,6 +222,11 @@
                     </a>
                 </li>
                 <li>
+                    <a class="sub-link" href="{{ route('back.setting.ads') }}">
+                        <span class="sub-item">{{ __('Ads Management') }}</span>
+                    </a>
+                </li>
+                <li>
                     <a class="sub-link" href="{{ route('back.homePage') }}">
                         <span class="sub-item">{{ __('Home Page') }}</span>
                     </a>
