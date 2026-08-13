@@ -208,18 +208,33 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            let galleryBtnHtml = '<button type="button" class="btn btn-sm btn-info mt-2 ml-2 gallery-picker-btn" data-toggle="modal" data-target="#mediaGalleryModal"><i class="fas fa-images"></i> {{ __("Choose from Gallery") }}</button>';
-            
-            $('.upload-photo').each(function() {
-                if(!$(this).attr('id')) {
-                    $(this).attr('id', 'file_' + Math.random().toString(36).substr(2, 9));
+            // Replace standard file inputs with dropdowns for image selection
+            $('.upload-photo, #gallery_file').each(function() {
+                let input = $(this);
+                if(!input.attr('id')) {
+                    input.attr('id', 'file_' + Math.random().toString(36).substr(2, 9));
                 }
-                $(this).parent().after($(galleryBtnHtml).attr('onclick', 'setMediaTarget("' + $(this).attr('id') + '")'));
+                let inputId = input.attr('id');
+                let label = input.closest('label.file');
+                let labelText = label.find('.file-custom').text() || 'Upload Image...';
+                
+                // Hide the original label (keep in DOM so input works and is submitted)
+                label.addClass('d-none');
+                
+                let dropdownHtml = `
+                <div class="dropdown w-100 mb-2" style="position: relative; height: 2.5rem;">
+                    <div class="file-custom text-left dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer; border: 1px solid #ebedf2; border-radius: 0.25rem; display: block; width: 100%; height: 100%; padding: 0.5rem 1rem;">
+                        <span class="text-muted" style="display: inline-block;">${labelText}</span>
+                    </div>
+                    <div class="dropdown-menu w-100 shadow-sm" style="margin-top: 5px;">
+                        <a class="dropdown-item py-2" href="javascript:void(0)" onclick="$('#${inputId}').click();"><i class="fas fa-desktop mr-2"></i> {{ __('Upload from Computer') }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item py-2" href="javascript:void(0)" onclick="setMediaTarget('${inputId}'); $('#mediaGalleryModal').modal('show');"><i class="fas fa-images mr-2"></i> {{ __('Choose from Gallery') }}</a>
+                    </div>
+                </div>
+                `;
+                label.after(dropdownHtml);
             });
-
-            if($('#gallery_file').length) {
-                $('#gallery_file').parent().after($(galleryBtnHtml).attr('onclick', 'setMediaTarget("gallery_file")'));
-            }
 
             $('.media-picker-item').click(async function() {
                 if(!currentMediaTargetId) return;
