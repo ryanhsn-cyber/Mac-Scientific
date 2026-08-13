@@ -17,6 +17,15 @@ class ItemRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if ($this->stock === null || $this->stock === '') {
+            $this->merge([
+                'stock' => 0,
+            ]);
+        }
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
