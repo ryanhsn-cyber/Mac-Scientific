@@ -70,7 +70,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <a class="btn btn-danger btn-sm btn-block text-white delete-btn" href="javascript:;" data-toggle="modal" data-target="#confirm-delete" data-href="{{ route('back.media.destroy', $image->id) }}">
+                            <a class="btn btn-danger btn-sm btn-block text-white delete-btn" href="javascript:;" data-toggle="modal" data-target="#confirm-media-delete" data-href="{{ route('back.media.destroy', $image->id) }}">
                                 <i class="fas fa-trash-alt"></i> {{ __('Delete') }}
                             </a>
                         </div>
@@ -90,7 +90,7 @@
 <!-- End of Main Content -->
 
 {{-- DELETE MODAL --}}
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="confirm-deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirm-media-delete" tabindex="-1" role="dialog" aria-labelledby="confirm-deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -136,7 +136,7 @@
 
         $('.delete-btn').click(function() {
             var href = $(this).data('href');
-            $('#confirm-delete').find('.btn-ok').attr('action', href);
+            $('#confirm-media-delete').find('.btn-ok').attr('action', href);
         });
 
         // Initialize magnific popup for image preview
