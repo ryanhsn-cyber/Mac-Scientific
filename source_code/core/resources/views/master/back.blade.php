@@ -162,7 +162,7 @@
 
     {{-- GLOBAL MEDIA GALLERY MODAL --}}
     <div class="modal fade" id="mediaGalleryModal" tabindex="-1" role="dialog" aria-labelledby="mediaGalleryModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog" style="max-width: 1000px; width: 95%;" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex align-items-center">
                     <h5 class="modal-title" id="mediaGalleryModalLabel">{{ __('Choose from Media Gallery') }}</h5>
@@ -236,7 +236,7 @@
                 label.after(dropdownHtml);
             });
 
-            $('.media-picker-item').click(async function() {
+            $(document).on('click', '.media-picker-item', async function() {
                 if(!currentMediaTargetId) return;
                 let url = $(this).data('url');
                 let input = document.getElementById(currentMediaTargetId);
@@ -280,32 +280,18 @@
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: async function(response) {
-                        if (response.url && currentMediaTargetId) {
-                            try {
-                                let input = document.getElementById(currentMediaTargetId);
-                                let url = response.url;
-                                let res = await fetch(url);
-                                let blob = await res.blob();
-                                let filename = url.split('/').pop();
-                                let file = new File([blob], filename, {type: blob.type});
-                                let dataTransfer = new DataTransfer();
-                                
-                                if(input.multiple) {
-                                    for(let i=0; i<input.files.length; i++) {
-                                        dataTransfer.items.add(input.files[i]);
-                                    }
-                                }
-                                dataTransfer.items.add(file);
-                                input.files = dataTransfer.files;
-                                $(input).trigger('change');
-                                $('#mediaGalleryModal').modal('hide');
-                                
-                                btnLabel.html(originalHtml);
-                            } catch (e) {
-                                alert('Error setting uploaded image.');
-                                btnLabel.html(originalHtml);
-                            }
+                    success: function(response) {
+                        if (response.url) {
+                            let newItemHtml = `
+                                <div class="col-md-2 col-sm-4 mb-3">
+                                    <div class="card h-100 cursor-pointer media-picker-item" data-url="${response.url}">
+                                        <img src="${response.url}" class="card-img-top" style="height: 120px; width: 100%; object-fit: contain; background: #f8f9fa; padding: 5px; cursor: pointer;">
+                                    </div>
+                                </div>
+                            `;
+                            $('#mediaGalleryModal .modal-body .row').prepend(newItemHtml);
+                            $('#mediaGalleryModal .modal-body .text-center').remove();
+                            btnLabel.html(originalHtml);
                         } else {
                             window.location.reload();
                         }
