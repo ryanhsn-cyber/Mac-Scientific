@@ -70,12 +70,39 @@
                                     </button>
                                 </div>
                             </div>
-                            <a class="btn btn-danger btn-sm btn-block text-white delete-btn" href="javascript:;" data-toggle="modal" data-target="#confirm-media-delete" data-href="{{ route('back.media.destroy', $image->id) }}">
+                            <a class="btn btn-danger btn-sm btn-block text-white" href="javascript:;" data-toggle="modal" data-target="#confirm-media-delete-{{ $image->id }}">
                                 <i class="fas fa-trash-alt"></i> {{ __('Delete') }}
                             </a>
                         </div>
                     </div>
                 </div>
+                
+                {{-- DELETE MODAL FOR THIS ITEM --}}
+                <div class="modal fade" id="confirm-media-delete-{{ $image->id }}" tabindex="-1" role="dialog" aria-labelledby="confirm-deleteModalLabel-{{ $image->id }}" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirm-deleteModalLabel-{{ $image->id }}">{{ __('Confirm Delete?') }}</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{ __('You are going to delete this image from the gallery. It cannot be recovered.') }} {{ __('Do you want to delete it?') }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
+                                <form action="{{ route('back.media.destroy', $image->id) }}" class="d-inline" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- DELETE MODAL ENDS --}}
+                
                 @empty
                 <div class="col-12 text-center">
                     <p class="text-muted">{{ __('No media files found. Upload some images to get started.') }}</p>
@@ -88,32 +115,6 @@
 
 </div>
 <!-- End of Main Content -->
-
-{{-- DELETE MODAL --}}
-<div class="modal fade" id="confirm-media-delete" tabindex="-1" role="dialog" aria-labelledby="confirm-deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ __('Confirm Delete?') }}</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                {{ __('You are going to delete this image from the gallery. It cannot be recovered.') }} {{ __('Do you want to delete it?') }}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
-                <form action="" class="d-inline btn-ok" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-{{-- DELETE MODAL ENDS --}}
 
 @endsection
 
@@ -134,10 +135,7 @@
             }, 2000);
         });
 
-        $('.delete-btn').click(function() {
-            var href = $(this).data('href');
-            $('#confirm-media-delete').find('.btn-ok').attr('action', href);
-        });
+
 
         // Initialize magnific popup for image preview
         $('.popup-link').magnificPopup({
