@@ -812,6 +812,9 @@ $(document).on('click','.remove-menu',function(){
     $(document).on('change','#blog-bulk-delete input.bulk-item',function(){
         bulk_select('blog-bulk-delete');
     })
+    $(document).on('change','#media-bulk-delete input.bulk-item',function(){
+        bulk_select('media-bulk-delete');
+    })
 
 
     function bulk_select(target){
