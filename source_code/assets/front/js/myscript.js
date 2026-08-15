@@ -433,7 +433,7 @@ $(function ($) {
         });
 
         // Product details image zoom
-        $('.product-details-slider .item').zoom();
+        $('.product-details-slider .item').zoom({ on: 'click' });
 
         // Video popup
         $('.video-btn a').magnificPopup({
