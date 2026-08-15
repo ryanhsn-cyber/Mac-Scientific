@@ -1090,6 +1090,27 @@
                                                             <label for="name">{{ __('Enter Name') }} *</label>
                                                             <input type="text" class="form-control" name="name" value="{{$bkash->name}}">
                                                         </div>
+
+                                                        @foreach($bkashData as $pkey => $bData)
+
+                                                        @if($pkey == 'check_sandbox')
+
+                                                        <div class="form-group  col-xl-4 col-md-6">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" name="pkey[{{ __($pkey) }}]" class="custom-control-input" {{ $bData == 1  ? 'checked' : '' }} id="mer{{ $pkey }}_bkash">
+                                                                <label class="custom-control-label" for="mer{{ $pkey }}_bkash">
+                                                                {{ __( $bkash->name.' '.ucwords(str_replace('_',' ',$pkey)) ) }}
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        @else
+                                                            <div class="form-group col-xl-12">
+                                                                <label for="inp-{{ __($pkey) }}_bkash">{{ __( $bkash->name.' '.ucwords(str_replace('_',' ',$pkey)) ) }}</label>
+                                                                <input type="text" class="form-control" id="inp-{{ __($pkey) }}_bkash" name="pkey[{{ __($pkey) }}]"  placeholder="{{ __( $bkash->name.' '.ucwords(str_replace('_',' ',$pkey)) ) }}" value="{{ $bData }}" required>
+                                                            </div>
+                                                        @endif
+                                                        @endforeach
                                                         <div class="form-group">
                                                             <label for="text">{{ __('Enter Text') }} *</label>
                                                             <textarea name="text" class="form-control text-editor" rows="5" placeholder="{{ __('Enter Text') }}">{{ $bkash->text }}</textarea>
