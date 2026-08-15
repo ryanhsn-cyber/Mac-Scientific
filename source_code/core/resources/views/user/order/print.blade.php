@@ -10,6 +10,24 @@
             font-weight: normal;
             font-style: normal;
         }
+        @font-face {
+            font-family: 'kalpurush';
+            src: url('{{ storage_path("fonts/kalpurush.ttf") }}') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'kalpurush';
+            src: url('{{ storage_path("fonts/kalpurush.ttf") }}') format('truetype');
+            font-weight: normal;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'kalpurush';
+            src: url('{{ storage_path("fonts/kalpurush.ttf") }}') format('truetype');
+            font-weight: bold;
+            font-style: italic;
+        }
         body {
             font-family: 'kalpurush', 'DejaVu Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             color: #333;
