@@ -152,3 +152,4 @@ N/A
 - [x] Fixed PDF invoice generation to support Bengali text and the Taka sign (৳) by downloading and registering the `kalpurush` TTF font and explicitly defining it in the `@font-face` of the print views.
 - [x] Fixed an `Invalid argument supplied for foreach()` error during checkout submission by globally protecting against empty or expired cart sessions in the `CheckoutController`.
 - [x] Updated the "All Products" section on the homepage to display 8 products across 2 rows instead of the default 4 products.
+- [x] Added a "Made with Shohoj Solution" watermark to the bottom right corner of the admin login page.
