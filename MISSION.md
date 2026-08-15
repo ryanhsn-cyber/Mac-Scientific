@@ -157,4 +157,6 @@ N/A
 - [x] Converted bKash back to the REAL API payment integration, replacing the manual payment form by removing the manual redirect and adding the bKash API checkout modal.
 - [x] Added bKash API credential fields (App Key, App Secret, Username, Password, Sandbox Checkbox) directly to the Admin Panel (Settings -> Payment), so users no longer need to edit the .env file manually.
 - [x] Restored the Admin Payment Settings sidebar to only show local gateways (COD, SSL Commerz, Bank Transfer, bKash, Nagad) and added API credential fields (Merchant ID, Public Key, Private Key, Sandbox) for Nagad.
-- [x] Added a "Sync Existing Images" feature to the Admin Media Gallery to automatically scan the `assets/images` folder and add any unlisted images to the media database table, allowing all previously uploaded site images to be managed centrally.
+- [x] Added a "Sync Existing Images" button to the Media Gallery to scan the `assets/images/` directory and register unlisted photos into the database.
+- [x] Fixed Media Gallery delete button routing issue by switching to unique, per-item hardcoded modals.
+- [x] Added Bulk Delete feature (checkboxes and Select All) to Media Gallery.
