@@ -10,6 +10,7 @@
         <div class="card-body">
             <div class="d-sm-flex align-items-center justify-content-between">
                 <h3 class=" mb-0 pl-3"><b>{{ __('Media Gallery') }}</b></h3>
+                <a class="btn btn-primary btn-sm" href="{{ route('back.media.sync') }}"><i class="fas fa-sync"></i> {{ __('Sync Existing Images') }}</a>
             </div>
         </div>
     </div>
