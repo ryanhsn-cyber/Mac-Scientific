@@ -375,7 +375,7 @@
                 </div>
             </div>
             <div class="row">
-                @foreach (\App\Models\Item::with('category')->whereStatus(1)->orderBy('created_at','DESC')->take(4)->get() as $item)
+                @foreach (\App\Models\Item::with('category')->whereStatus(1)->orderBy('created_at','DESC')->take(8)->get() as $item)
                     <div class="col-lg-3 col-md-4 col-6 mb-4">
                         <div class="product-card ">
                             <div class="product-thumb" >
