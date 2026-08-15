@@ -160,3 +160,4 @@ N/A
 - [x] Added a "Sync Existing Images" button to the Media Gallery to scan the `assets/images/` directory and register unlisted photos into the database.
 - [x] Fixed Media Gallery delete button routing issue by switching to unique, per-item hardcoded modals.
 - [x] Added Bulk Delete feature (checkboxes and Select All) to Media Gallery.
+- [x] Added Draft & Auto-Save feature to Product Editor. Uses browser `localStorage` for offline protection and adds a dedicated 'Save Draft' and 'Cancel' button.
