@@ -70,7 +70,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <a class="btn btn-danger btn-sm btn-block text-white" data-toggle="modal" data-target="#confirm-delete" data-href="{{ route('back.media.destroy', $image->id) }}">
+                            <a class="btn btn-danger btn-sm btn-block text-white delete-btn" href="javascript:;" data-toggle="modal" data-target="#confirm-delete" data-href="{{ route('back.media.destroy', $image->id) }}">
                                 <i class="fas fa-trash-alt"></i> {{ __('Delete') }}
                             </a>
                         </div>
@@ -132,6 +132,11 @@
             setTimeout(function() {
                 btn.html(originalHtml);
             }, 2000);
+        });
+
+        $('.delete-btn').click(function() {
+            var href = $(this).data('href');
+            $('#confirm-delete').find('.btn-ok').attr('action', href);
         });
 
         // Initialize magnific popup for image preview
