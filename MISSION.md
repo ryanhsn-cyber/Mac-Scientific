@@ -149,3 +149,4 @@ N/A
 - [x] Diagnosed slider missing image bug. Found that Coolify persistent volume was wrongly mounted to `/var/www/html/assets/images` instead of the web server's correct upload path `/var/www/html/source_code/assets/images`. 
 - [x] Corrected the volume mount in Coolify and redeployed. Future uploads will now correctly persist across Git deployments.
 - [x] Added a status column to the services table and an active/deactive dropdown toggle in the admin panel to allow hiding/unhiding individual features in the frontend Services section.
+- [x] Fixed PDF invoice generation to support Bengali text and the Taka sign (৳) by downloading and registering the `kalpurush` TTF font and explicitly defining it in the `@font-face` of the print views.
