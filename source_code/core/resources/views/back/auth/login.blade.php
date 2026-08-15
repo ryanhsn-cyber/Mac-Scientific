@@ -35,5 +35,9 @@
                 </div>
             </div>
         </div>
+        
+        <div style="position: fixed; bottom: 10px; right: 15px; font-size: 12px; color: #888; z-index: 9999;">
+            Made with Shohoj Solution
+        </div>
 
 @endsection
