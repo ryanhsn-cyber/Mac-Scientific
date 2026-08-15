@@ -156,3 +156,4 @@ N/A
 - [x] Fixed the "Total Orders" column in the admin orders table to calculate based on the billing phone or email first, ensuring that orders placed by admins on behalf of customers correctly display the individual customer's total order count instead of the admin's.
 - [x] Converted bKash back to the REAL API payment integration, replacing the manual payment form by removing the manual redirect and adding the bKash API checkout modal.
 - [x] Added bKash API credential fields (App Key, App Secret, Username, Password, Sandbox Checkbox) directly to the Admin Panel (Settings -> Payment), so users no longer need to edit the .env file manually.
+- [x] Restored the Admin Payment Settings sidebar to only show local gateways (COD, SSL Commerz, Bank Transfer, bKash, Nagad) and added API credential fields (Merchant ID, Public Key, Private Key, Sandbox) for Nagad.
