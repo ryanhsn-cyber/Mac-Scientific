@@ -61,10 +61,14 @@
         @php
             $bill_info = json_decode($data->billing_info,true);
             $email = $bill_info['bill_email'] ?? '';
-            if($data->user_id) {
-                $orders_count = \App\Models\Order::where('user_id', $data->user_id)->count();
-            } elseif($email) {
+            $phone = $bill_info['bill_phone'] ?? '';
+            
+            if ($phone) {
+                $orders_count = \App\Models\Order::where('billing_info', 'like', '%"bill_phone":"'.$phone.'"%')->count();
+            } elseif ($email) {
                 $orders_count = \App\Models\Order::where('billing_info', 'like', '%"bill_email":"'.$email.'"%')->count();
+            } elseif ($data->user_id && $data->user_id != 0) {
+                $orders_count = \App\Models\Order::where('user_id', $data->user_id)->count();
             } else {
                 $orders_count = 1;
             }
