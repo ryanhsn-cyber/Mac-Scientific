@@ -35,7 +35,14 @@ class MediaManagerController extends Controller
 
         $input = $request->all();
         $input['photo'] = ImageHelper::handleUploadedImage($request->file('photo'), 'assets/images');
-        MediaManager::create($input);
+        $media = MediaManager::create($input);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => 'success',
+                'url' => asset('assets/images/' . $media->photo)
+            ]);
+        }
 
         return redirect()->route('back.media.index')->withSuccess(__('Image Uploaded Successfully.'));
     }

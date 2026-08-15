@@ -184,7 +184,7 @@
                         @forelse($allMedia as $media)
                         <div class="col-md-2 col-sm-4 mb-3">
                             <div class="card h-100 cursor-pointer media-picker-item" data-url="{{ asset('assets/images/'.$media->photo) }}">
-                                <img src="{{ asset('assets/images/'.$media->photo) }}" class="card-img-top" style="height: 100px; object-fit: cover; cursor: pointer;">
+                                <img src="{{ asset('assets/images/'.$media->photo) }}" class="card-img-top" style="height: 120px; width: 100%; object-fit: contain; background: #f8f9fa; padding: 5px; cursor: pointer;">
                             </div>
                         </div>
                         @empty
@@ -280,8 +280,35 @@
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: function(response) {
-                        window.location.reload();
+                    success: async function(response) {
+                        if (response.url && currentMediaTargetId) {
+                            try {
+                                let input = document.getElementById(currentMediaTargetId);
+                                let url = response.url;
+                                let res = await fetch(url);
+                                let blob = await res.blob();
+                                let filename = url.split('/').pop();
+                                let file = new File([blob], filename, {type: blob.type});
+                                let dataTransfer = new DataTransfer();
+                                
+                                if(input.multiple) {
+                                    for(let i=0; i<input.files.length; i++) {
+                                        dataTransfer.items.add(input.files[i]);
+                                    }
+                                }
+                                dataTransfer.items.add(file);
+                                input.files = dataTransfer.files;
+                                $(input).trigger('change');
+                                $('#mediaGalleryModal').modal('hide');
+                                
+                                btnLabel.html(originalHtml);
+                            } catch (e) {
+                                alert('Error setting uploaded image.');
+                                btnLabel.html(originalHtml);
+                            }
+                        } else {
+                            window.location.reload();
+                        }
                     },
                     error: function(err) {
                         alert('Upload failed.');
