@@ -154,3 +154,4 @@ N/A
 - [x] Updated the "All Products" section on the homepage to display 8 products across 2 rows instead of the default 4 products.
 - [x] Added a "Made with Shohoj Solution" watermark to the bottom right corner of the admin login page.
 - [x] Fixed the "Total Orders" column in the admin orders table to calculate based on the billing phone or email first, ensuring that orders placed by admins on behalf of customers correctly display the individual customer's total order count instead of the admin's.
+- [x] Converted bKash back to the REAL API payment integration, replacing the manual payment form by removing the manual redirect and adding the bKash API checkout modal.
