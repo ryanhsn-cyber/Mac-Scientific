@@ -363,7 +363,10 @@ class CheckoutController extends Controller
 
 	public function checkout(PaymentRequest $request)
 	{
-
+        if (!Session::has('cart')) {
+            Session::flash('error', __('Your cart is empty.'));
+            return redirect()->route('front.cart');
+        }
 
         $input = $request->all();
 
