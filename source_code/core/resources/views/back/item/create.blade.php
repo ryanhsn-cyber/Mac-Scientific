@@ -203,10 +203,10 @@
             <div class="card">
                 <div class="card-body">
                     <input type="hidden" class="check_button" name="is_button" value="0">
-                    <button type="submit" class="btn btn-secondary mr-2" name="status" value="1">{{ __('Save') }}</button>
-                    <button type="submit" class="btn btn-info save__edit mr-2" name="status" value="1">{{ __('Save & Edit') }}</button>
-                    <button type="submit" class="btn btn-warning mr-2" name="status" value="0">{{ __('Save Draft') }}</button>
-                    <a href="{{ route('back.item.index') }}" class="btn btn-danger btn-cancel">{{ __('Cancel') }}</a>
+                    <button type="submit" class="btn btn-secondary mr-2 mb-2" name="status" value="1">{{ __('Save') }}</button>
+                    <button type="submit" class="btn btn-info save__edit mr-2 mb-2" name="status" value="1">{{ __('Save & Edit') }}</button>
+                    <button type="submit" class="btn btn-warning mr-2 mb-2" name="status" value="0">{{ __('Save Draft') }}</button>
+                    <a href="{{ route('back.item.index') }}" class="btn btn-danger btn-cancel mb-2">{{ __('Cancel') }}</a>
                 </div>
             </div>
             <div class="card">

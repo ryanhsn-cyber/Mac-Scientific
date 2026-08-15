@@ -245,10 +245,10 @@
             <div class="card">
                 <div class="card-body">
                     <input type="hidden" class="check_button" name="is_button" value="0">
-                    <button type="submit" class="btn btn-secondary mr-2" name="status" value="1">{{ __('Update') }}</button>
-                    <button type="submit" class="btn btn-warning mr-2" name="status" value="0">{{ __('Save Draft') }}</button>
-                    <a class="btn btn-success mr-2" href="{{ route('back.attribute.index',$item->id) }}">{{ __('Manage Attributes') }}</a>
-                    <a class="btn btn-danger btn-cancel" href="{{ route('back.item.index') }}">{{ __('Cancel') }}</a>
+                    <button type="submit" class="btn btn-secondary mr-2 mb-2" name="status" value="1">{{ __('Update') }}</button>
+                    <button type="submit" class="btn btn-warning mr-2 mb-2" name="status" value="0">{{ __('Save Draft') }}</button>
+                    <a class="btn btn-success mr-2 mb-2" href="{{ route('back.attribute.index',$item->id) }}">{{ __('Manage Attributes') }}</a>
+                    <a class="btn btn-danger btn-cancel mb-2" href="{{ route('back.item.index') }}">{{ __('Cancel') }}</a>
                 </div>
             </div>
             <div class="card">
