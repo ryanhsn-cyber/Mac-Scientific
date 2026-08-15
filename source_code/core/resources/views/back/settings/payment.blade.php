@@ -26,17 +26,8 @@
                             <div class="nav flex-column m-3 nav-pills nav-secondary" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
                                     <a class="nav-link active" data-toggle="pill" href="#cod">{{ __('Cash On Delivery') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#stripe">{{ __('Stripe') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#paypal">{{ __('Paypal') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#mollie">{{ __('Mollie') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#paytm">{{ __('Paytm') }}</a>
                                     <a class="nav-link" data-toggle="pill" href="#sslcommerz">{{ __('SSL commerz') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#mercadopago">{{ __('Mercadopago') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#authorize">{{ __('Authorize') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#paystack">{{ __('Paystack') }}</a>
                                     <a class="nav-link" data-toggle="pill" href="#bank">{{ __('Bank Transfer') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#razorpay">{{ __('Razorpay') }}</a>
-                                    <a class="nav-link" data-toggle="pill" href="#flutterwave">{{ __('Flutterwave') }}</a>
                                     <a class="nav-link" data-toggle="pill" href="#bkash">{{ __('bKash') }}</a>
                                     <a class="nav-link" data-toggle="pill" href="#nagad">{{ __('Nagad') }}</a>
 
@@ -1166,6 +1157,27 @@
                                                             <label for="name">{{ __('Enter Name') }} *</label>
                                                             <input type="text" class="form-control" name="name" value="{{$nagad->name}}">
                                                         </div>
+
+                                                        @foreach($nagadData as $pkey => $nData)
+
+                                                        @if($pkey == 'check_sandbox')
+
+                                                        <div class="form-group  col-xl-4 col-md-6">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" name="pkey[{{ __($pkey) }}]" class="custom-control-input" {{ $nData == 1  ? 'checked' : '' }} id="mer{{ $pkey }}_nagad">
+                                                                <label class="custom-control-label" for="mer{{ $pkey }}_nagad">
+                                                                {{ __( $nagad->name.' '.ucwords(str_replace('_',' ',$pkey)) ) }}
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        @else
+                                                            <div class="form-group col-xl-12">
+                                                                <label for="inp-{{ __($pkey) }}_nagad">{{ __( $nagad->name.' '.ucwords(str_replace('_',' ',$pkey)) ) }}</label>
+                                                                <input type="text" class="form-control" id="inp-{{ __($pkey) }}_nagad" name="pkey[{{ __($pkey) }}]"  placeholder="{{ __( $nagad->name.' '.ucwords(str_replace('_',' ',$pkey)) ) }}" value="{{ $nData }}" required>
+                                                            </div>
+                                                        @endif
+                                                        @endforeach
                                                         <div class="form-group">
                                                             <label for="text">{{ __('Enter Text') }} *</label>
                                                             <textarea name="text" class="form-control text-editor" rows="5" placeholder="{{ __('Enter Text') }}">{{ $nagad->text }}</textarea>
