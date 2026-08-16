@@ -231,7 +231,7 @@
 
 
     @if ($extra_settings->is_t2_new_product == 1)
-        <section class="selected-product-section mt-50 theme2">
+        <section class="selected-product-section mt-0 pt-0 theme2">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
