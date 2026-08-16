@@ -219,7 +219,19 @@
     .flash-sell-area .section-title{
         text-align: left;
     }
-
+    /* Mobile Spacing Adjustments */
+    .slider-area-wrapper, 
+    .slider-area-wrapper.mt-0 {
+        margin-top: -10px !important;
+    }
+    .selected-product-section.mt-50 {
+        margin-top: 15px !important;
+    }
+    .bannner-section.mt-60, 
+    .bannner-section.mt-50, 
+    .flash-sell-new-section.mt-50 {
+        margin-top: 15px !important;
+    }
 }
 @media (max-width: 576px) {
     .shop-top-filter-wrapper  .shop-sorting #sorting{

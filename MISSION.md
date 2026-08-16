@@ -161,3 +161,4 @@ N/A
 - [x] Fixed Media Gallery delete button routing issue by switching to unique, per-item hardcoded modals.
 - [x] Added Bulk Delete feature (checkboxes and Select All) to Media Gallery.
 - [x] Added Draft & Auto-Save feature to Product Editor. Uses browser `localStorage` for offline protection and adds a dedicated 'Save Draft' and 'Cancel' button.
+- [x] Reduced the vertical spacing above the hero slider and between the "Our Current Highlight" and "Featured Products" sections specifically for mobile views (max-width: 767px).
