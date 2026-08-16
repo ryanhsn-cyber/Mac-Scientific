@@ -220,10 +220,6 @@
         text-align: left;
     }
     /* Mobile Spacing Adjustments */
-    .slider-area-wrapper, 
-    .slider-area-wrapper.mt-0 {
-        margin-top: -10px !important;
-    }
     .selected-product-section.mt-50 {
         margin-top: 15px !important;
     }
