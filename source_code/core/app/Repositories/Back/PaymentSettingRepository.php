@@ -65,9 +65,30 @@ class PaymentSettingRepository
         $data['cod'] = $cod;
 
         $bkash = PaymentSetting::whereUniqueKeyword('bkash')->first();
+        $bkashData = $bkash ? $bkash->convertJsonData() : null;
+        if (empty($bkashData)) {
+            $bkashData = [
+                'app_key' => '',
+                'app_secret' => '',
+                'username' => '',
+                'password' => '',
+                'check_sandbox' => 1,
+            ];
+        }
+        $data['bkashData'] = $bkashData;
         $data['bkash'] = $bkash;
 
         $nagad = PaymentSetting::whereUniqueKeyword('nagad')->first();
+        $nagadData = $nagad ? $nagad->convertJsonData() : null;
+        if (empty($nagadData)) {
+            $nagadData = [
+                'merchant_id' => '',
+                'public_key' => '',
+                'private_key' => '',
+                'check_sandbox' => 1,
+            ];
+        }
+        $data['nagadData'] = $nagadData;
         $data['nagad'] = $nagad;
 
         return $data;

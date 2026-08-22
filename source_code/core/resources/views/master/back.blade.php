@@ -160,10 +160,150 @@
         $mainbs = json_encode($mainbs);
     @endphp
 
-<script>
-    var mainbs = {!! $mainbs !!};
-    var admin_url = '/admin';
-</script>
+    {{-- GLOBAL MEDIA GALLERY MODAL --}}
+    <div class="modal fade" id="mediaGalleryModal" tabindex="-1" role="dialog" aria-labelledby="mediaGalleryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 1000px; width: 95%;" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex align-items-center">
+                    <h5 class="modal-title" id="mediaGalleryModalLabel">{{ __('Choose from Media Gallery') }}</h5>
+                    <div class="ml-3">
+                        <label class="btn btn-sm btn-primary mb-0" style="cursor: pointer;">
+                            <i class="fas fa-upload"></i> {{ __('Upload New') }}
+                            <input type="file" id="mediaGalleryUploadInput" class="d-none" accept="image/*" multiple>
+                        </label>
+                    </div>
+                    <button class="close ml-auto" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <div class="row">
+                        @php
+                            $allMedia = \App\Models\MediaManager::orderBy('id', 'desc')->get();
+                        @endphp
+                        @forelse($allMedia as $media)
+                        <div class="col-md-2 col-sm-4 mb-3">
+                            <div class="card h-100 cursor-pointer media-picker-item" data-url="{{ asset('assets/images/'.$media->photo) }}">
+                                <img src="{{ asset('assets/images/'.$media->photo) }}" class="card-img-top" style="height: 120px; width: 100%; object-fit: contain; background: #f8f9fa; padding: 5px; cursor: pointer;">
+                            </div>
+                        </div>
+                        @empty
+                        <div class="col-12 text-center">
+                            <p class="text-muted">{{ __('No media found. Upload in the Media Gallery first.') }}</p>
+                        </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var mainbs = {!! $mainbs !!};
+        var admin_url = '/admin';
+        var currentMediaTargetId = null;
+
+        function setMediaTarget(inputId) {
+            currentMediaTargetId = inputId;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Replace standard file inputs with dropdowns for image selection
+            $('.upload-photo, #gallery_file').each(function() {
+                let input = $(this);
+                if(!input.attr('id')) {
+                    input.attr('id', 'file_' + Math.random().toString(36).substr(2, 9));
+                }
+                let inputId = input.attr('id');
+                let label = input.closest('label.file');
+                let labelText = label.find('.file-custom').text() || 'Upload Image...';
+                
+                // Hide the original label (keep in DOM so input works and is submitted)
+                label.addClass('d-none');
+                
+                let dropdownHtml = `
+                <div class="dropdown w-100 mb-2" style="position: relative; height: 2.5rem;">
+                    <div class="file-custom text-left dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer; border: 1px solid #ebedf2; border-radius: 0.25rem; display: block; width: 100%; height: 100%; padding: 0.5rem 1rem;">
+                        <span class="text-muted" style="display: inline-block;">${labelText}</span>
+                    </div>
+                    <div class="dropdown-menu w-100 shadow-sm" style="margin-top: 5px;">
+                        <a class="dropdown-item py-2" href="javascript:void(0)" onclick="$('#${inputId}').click();"><i class="fas fa-desktop mr-2"></i> {{ __('Upload from Computer') }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item py-2" href="javascript:void(0)" onclick="setMediaTarget('${inputId}'); $('#mediaGalleryModal').modal('show');"><i class="fas fa-images mr-2"></i> {{ __('Choose from Gallery') }}</a>
+                    </div>
+                </div>
+                `;
+                label.after(dropdownHtml);
+            });
+
+            $(document).on('click', '.media-picker-item', async function() {
+                if(!currentMediaTargetId) return;
+                let url = $(this).data('url');
+                let input = document.getElementById(currentMediaTargetId);
+                
+                try {
+                    let response = await fetch(url);
+                    let blob = await response.blob();
+                    let filename = url.split('/').pop();
+                    let file = new File([blob], filename, {type: blob.type});
+                    let dataTransfer = new DataTransfer();
+                    
+                    if(input.multiple) {
+                        for(let i=0; i<input.files.length; i++) {
+                            dataTransfer.items.add(input.files[i]);
+                        }
+                    }
+                    dataTransfer.items.add(file);
+                    input.files = dataTransfer.files;
+                    $(input).trigger('change');
+                    $('#mediaGalleryModal').modal('hide');
+                } catch (e) {
+                    alert('Error loading image from gallery.');
+                    console.error(e);
+                }
+            });
+
+            $('#mediaGalleryUploadInput').on('change', function() {
+                if(this.files.length === 0) return;
+                
+                let formData = new FormData();
+                formData.append('photo', this.files[0]);
+                formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+                
+                let btnLabel = $(this).parent();
+                let originalHtml = btnLabel.html();
+                btnLabel.html('<i class="fas fa-spinner fa-spin"></i> Uploading...');
+                
+                $.ajax({
+                    url: admin_url + '/media',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.url) {
+                            let newItemHtml = `
+                                <div class="col-md-2 col-sm-4 mb-3">
+                                    <div class="card h-100 cursor-pointer media-picker-item" data-url="${response.url}">
+                                        <img src="${response.url}" class="card-img-top" style="height: 120px; width: 100%; object-fit: contain; background: #f8f9fa; padding: 5px; cursor: pointer;">
+                                    </div>
+                                </div>
+                            `;
+                            $('#mediaGalleryModal .modal-body .row').prepend(newItemHtml);
+                            $('#mediaGalleryModal .modal-body .text-center').remove();
+                            btnLabel.html(originalHtml);
+                        } else {
+                            window.location.reload();
+                        }
+                    },
+                    error: function(err) {
+                        alert('Upload failed.');
+                        btnLabel.html(originalHtml);
+                    }
+                });
+            });
+        });
+    </script>
 	<!--   Core JS Files   -->
 	<script src="{{ asset('assets/back/js/core/jquery.3.6.0.min.js') }}"></script>
 	<script src="{{ asset('assets/back/js/core/popper.min.js') }}"></script>

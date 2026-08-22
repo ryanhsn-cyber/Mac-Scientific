@@ -203,8 +203,10 @@
             <div class="card">
                 <div class="card-body">
                     <input type="hidden" class="check_button" name="is_button" value="0">
-                    <button type="submit" class="btn btn-secondary mr-2">{{ __('Save') }}</button>
-                    <button type="submit" class="btn btn-info save__edit">{{ __('Save & Edit') }}</button>
+                    <button type="submit" class="btn btn-secondary mr-2 mb-2" name="status" value="1">{{ __('Save') }}</button>
+                    <button type="submit" class="btn btn-info save__edit mr-2 mb-2" name="status" value="1">{{ __('Save & Edit') }}</button>
+                    <button type="submit" class="btn btn-warning mr-2 mb-2" name="status" value="0">{{ __('Save Draft') }}</button>
+                    <a href="{{ route('back.item.index') }}" class="btn btn-danger btn-cancel mb-2">{{ __('Cancel') }}</a>
                 </div>
             </div>
             <div class="card">
@@ -330,8 +332,53 @@ document.querySelectorAll('.admin-form button[type="submit"]').forEach(button =>
         const form = this.closest('form');
         if (!form.checkValidity()) {
             alert('{{ __("Please fill out all required fields.") }}');
+        } else {
+            localStorage.removeItem('product_draft_data_new');
         }
     });
+});
+if(document.querySelector('.btn-cancel')){
+    document.querySelector('.btn-cancel').addEventListener('click', function() {
+        localStorage.removeItem('product_draft_data_new');
+    });
+}
+
+$(document).ready(function() {
+    const draftKey = 'product_draft_data_new';
+    let savedDraft = localStorage.getItem(draftKey);
+    if (savedDraft) {
+        if (confirm("{{ __('An unsaved draft was found. Do you want to restore it?') }}")) {
+            let data = JSON.parse(savedDraft);
+            for (let name in data) {
+                let input = $('[name="'+name+'"]');
+                if (input.length > 0) {
+                    if (input.is(':checkbox') || input.is(':radio')) {
+                        input.prop('checked', data[name] == input.val());
+                    } else if (input.hasClass('text-editor')) {
+                        input.val(data[name]);
+                        setTimeout(() => input.summernote('code', data[name]), 500);
+                    } else {
+                        input.val(data[name]);
+                    }
+                }
+            }
+        } else {
+            localStorage.removeItem(draftKey);
+        }
+    }
+    
+    setInterval(function() {
+        $('.text-editor').each(function() {
+            if ($(this).next().hasClass('note-editor')) {
+                $(this).val($(this).summernote('code'));
+            }
+        });
+        let formData = {};
+        $('.admin-form').serializeArray().forEach(function(item) {
+            formData[item.name] = item.value;
+        });
+        localStorage.setItem(draftKey, JSON.stringify(formData));
+    }, 5000);
 });
 </script>
 @endsection

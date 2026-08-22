@@ -21,6 +21,29 @@
         </div>
       </div>
     </div>
+      <!-- Modal bKash -->
+    <div class="modal fade" id="bkash" tabindex="-1"  aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title">{{ __('Transactions via bKash') }}</h6>
+            <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <p>{!! PriceHelper::GatewayText('bkash') !!}</p>
+          </div>
+          <div class="modal-footer">
+            <form action="{{route('front.bkash.process')}}" method="POST">
+              @csrf
+              <input type="hidden" name="payment_method" value="bKash">
+              <input type="hidden" name="state_id" value="{{auth()->check() && auth()->user()->state_id ? auth()->user()->state_id : ''}}" class="state_id_setup">
+            <button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal"><span>{{ __('Cancel') }}</span></button>
+            <button class="btn btn-primary btn-sm" type="submit"><span>{{ __('Checkout With bKash') }}</span></button>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
       <!-- Modal MOLLIE -->
     <div class="modal fade" id="mollie" tabindex="-1"  aria-hidden="true">
       <div class="modal-dialog" >

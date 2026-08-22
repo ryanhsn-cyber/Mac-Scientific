@@ -83,37 +83,12 @@ class BackupController extends Controller
             mkdir($storage_path, 0755, true);
         }
 
-        $sql_file_name = $storage_path . '/modular_backup_' . date('y-m-d') . '.sql';
+        $sql_file_name = $storage_path . '/database_backup_' . Carbon::now()->format('Y-m-d-H-i-s') . '.sql';
         $file_handle = fopen($sql_file_name, 'w+');
         fwrite($file_handle, $output);
         fclose($file_handle);
 
-        $zip_file = $storage_path . '/' . Carbon::now()->format('Y-m-d-H-i-s').'-modular-backup.zip';
-        $zip = new \ZipArchive();
-        if ($zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) === TRUE) {
-            $zip->addFile($sql_file_name, basename($sql_file_name));
-            
-            $images_path = realpath(public_path('assets/images'));
-            if ($images_path && is_dir($images_path)) {
-                $files = new \RecursiveIteratorIterator(
-                    new \RecursiveDirectoryIterator($images_path),
-                    \RecursiveIteratorIterator::LEAVES_ONLY
-                );
-
-                foreach ($files as $name => $file) {
-                    if (!$file->isDir()) {
-                        $filePath = $file->getRealPath();
-                        $relativePath = 'assets/images/' . substr($filePath, strlen($images_path) + 1);
-                        $zip->addFile($filePath, $relativePath);
-                    }
-                }
-            }
-            $zip->close();
-        }
-        
-        @unlink($sql_file_name);
-
-        return response()->download($zip_file)->deleteFileAfterSend(true);
+        return response()->download($sql_file_name)->deleteFileAfterSend(true);
     }
 
 }

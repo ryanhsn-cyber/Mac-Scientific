@@ -43,6 +43,11 @@ class SettingController extends Controller
         return view('back.settings.system');
     }
 
+    public function ads()
+    {
+        return view('back.settings.ads');
+    }
+
 
     /**
      * Show the form for updating resource.

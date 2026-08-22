@@ -265,7 +265,7 @@
 
             @if ($item->video && $video_id)
             <div id="media-video" class="media-container" style="display: none; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; position: relative;">
-                <iframe id="youtube-iframe" src="https://www.youtube.com/embed/{{ $video_id }}?rel=0&showinfo=0&autoplay=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe id="youtube-iframe" data-src="https://www.youtube.com/embed/{{ $video_id }}?rel=0&showinfo=0&autoplay=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             @endif
         </div>

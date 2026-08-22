@@ -149,3 +149,16 @@ N/A
 - [x] Diagnosed slider missing image bug. Found that Coolify persistent volume was wrongly mounted to `/var/www/html/assets/images` instead of the web server's correct upload path `/var/www/html/source_code/assets/images`. 
 - [x] Corrected the volume mount in Coolify and redeployed. Future uploads will now correctly persist across Git deployments.
 - [x] Added a status column to the services table and an active/deactive dropdown toggle in the admin panel to allow hiding/unhiding individual features in the frontend Services section.
+- [x] Fixed PDF invoice generation to support Bengali text and the Taka sign (৳) by downloading and registering the `kalpurush` TTF font and explicitly defining it in the `@font-face` of the print views.
+- [x] Fixed an `Invalid argument supplied for foreach()` error during checkout submission by globally protecting against empty or expired cart sessions in the `CheckoutController`.
+- [x] Updated the "All Products" section on the homepage to display 8 products across 2 rows instead of the default 4 products.
+- [x] Added a "Made with Shohoj Solution" watermark to the bottom right corner of the admin login page.
+- [x] Fixed the "Total Orders" column in the admin orders table to calculate based on the billing phone or email first, ensuring that orders placed by admins on behalf of customers correctly display the individual customer's total order count instead of the admin's.
+- [x] Converted bKash back to the REAL API payment integration, replacing the manual payment form by removing the manual redirect and adding the bKash API checkout modal.
+- [x] Added bKash API credential fields (App Key, App Secret, Username, Password, Sandbox Checkbox) directly to the Admin Panel (Settings -> Payment), so users no longer need to edit the .env file manually.
+- [x] Restored the Admin Payment Settings sidebar to only show local gateways (COD, SSL Commerz, Bank Transfer, bKash, Nagad) and added API credential fields (Merchant ID, Public Key, Private Key, Sandbox) for Nagad.
+- [x] Added a "Sync Existing Images" button to the Media Gallery to scan the `assets/images/` directory and register unlisted photos into the database.
+- [x] Fixed Media Gallery delete button routing issue by switching to unique, per-item hardcoded modals.
+- [x] Added Bulk Delete feature (checkboxes and Select All) to Media Gallery.
+- [x] Added Draft & Auto-Save feature to Product Editor. Uses browser `localStorage` for offline protection and adds a dedicated 'Save Draft' and 'Cancel' button.
+- [x] Reduced the vertical spacing above the hero slider and between the "Our Current Highlight" and "Featured Products" sections specifically for mobile views (max-width: 767px).

@@ -15,11 +15,20 @@ class BkashTokenizedService implements PaymentGatewayInterface
 
     public function __construct()
     {
-        $this->appKey = env('BKASH_APP_KEY');
-        $this->appSecret = env('BKASH_APP_SECRET');
-        $this->username = env('BKASH_USERNAME');
-        $this->password = env('BKASH_PASSWORD');
-        $isSandbox = env('BKASH_SANDBOX', true);
+        $bkash = \App\Models\PaymentSetting::where('unique_keyword', 'bkash')->first();
+        $bkashData = $bkash ? $bkash->convertJsonData() : null;
+
+        $this->appKey = $bkashData['app_key'] ?? env('BKASH_APP_KEY');
+        $this->appSecret = $bkashData['app_secret'] ?? env('BKASH_APP_SECRET');
+        $this->username = $bkashData['username'] ?? env('BKASH_USERNAME');
+        $this->password = $bkashData['password'] ?? env('BKASH_PASSWORD');
+        
+        // Handle sandbox conditionally, defaulting to true if not found.
+        if (isset($bkashData['check_sandbox'])) {
+            $isSandbox = $bkashData['check_sandbox'] == 1;
+        } else {
+            $isSandbox = env('BKASH_SANDBOX', true);
+        }
         
         $this->baseUrl = $isSandbox 
             ? 'https://tokenized.sandbox.bka.sh/v1.2.0-beta' 

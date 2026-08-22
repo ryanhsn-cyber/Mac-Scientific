@@ -63,6 +63,17 @@ class BulkDeleteController extends Controller
                 }
             } 
 
+            if($request->table == 'media_managers'){
+                foreach($ids as $id){
+                    $id = (int)$id;
+                    $media = \App\Models\MediaManager::find($id);
+                    if ($media) {
+                        \App\Helpers\ImageHelper::handleDeletedImage($media, 'photo', 'assets/images/');
+                        $media->delete();
+                    }
+                }
+            } 
+
             if($request->table == 'orders'){
                 foreach($ids as $id){
                     $id = (int)$id;

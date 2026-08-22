@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{__('Invoice')}} - {{ $order->transaction_number }}</title>
     <style>
+        @font-face {
+            font-family: 'kalpurush';
+            src: url('{{ storage_path("fonts/kalpurush.ttf") }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'kalpurush';
+            src: url('{{ storage_path("fonts/kalpurush.ttf") }}') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'kalpurush';
+            src: url('{{ storage_path("fonts/kalpurush.ttf") }}') format('truetype');
+            font-weight: normal;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'kalpurush';
+            src: url('{{ storage_path("fonts/kalpurush.ttf") }}') format('truetype');
+            font-weight: bold;
+            font-style: italic;
+        }
         body {
-            font-family: 'DejaVu Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            font-family: 'kalpurush', 'DejaVu Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             color: #333;
             font-size: 14px;
             line-height: 1.4;

@@ -58,6 +58,7 @@ Route::group(['middleware' => 'adminlocalize'], function () {
         Route::get('bulk/deletes', 'Back\BulkDeleteController@bulkDelete')->name('back.bulk.delete');
 
         //------------ MEDIA MANAGER ------------
+        Route::get('media/sync', 'Back\MediaManagerController@sync')->name('back.media.sync');
         Route::resource('media', 'Back\MediaManagerController', ['as' => 'back', 'except' => 'show']);
 
         Route::group(['middleware' => 'permissions:Manage Orders'], function () {
@@ -268,6 +269,7 @@ Route::group(['middleware' => 'adminlocalize'], function () {
             Route::get('/setting/menu', 'Back\SettingController@menu')->name('back.setting.menu');
             Route::get('/setting/social', 'Back\SettingController@social')->name('back.setting.social');
             Route::get('/setting/system', 'Back\SettingController@system')->name('back.setting.system');
+            Route::get('/setting/ads', 'Back\SettingController@ads')->name('back.setting.ads');
             Route::post('/setting/update', 'Back\SettingController@update')->name('back.setting.update');
             Route::post('/setting/update/visiable', 'Back\SettingController@visiable')->name('back.setting.visible.update');
             Route::get('/announcement', 'Back\SettingController@announcement')->name('back.subscribers.announcement');

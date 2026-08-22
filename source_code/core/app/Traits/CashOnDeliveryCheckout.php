@@ -27,6 +27,12 @@ trait CashOnDeliveryCheckout
        
         $setting = Setting::first();
         $cart = Session::get('cart');
+        if(!$cart) {
+            return [
+                'status' => false,
+                'message' => __('Cart is empty')
+            ];
+        }
         $total_tax = 0;
         $cart_total = 0;
         $total = 0;
