@@ -14,8 +14,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install gd pdo pdo_mysql zip
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
+# Enable Apache mod_rewrite, headers, expires, and deflate
+RUN a2enmod rewrite headers expires deflate
 
 # Change Apache document root to /var/www/html/source_code
 RUN sed -ri -e 's!/var/www/html!/var/www/html/source_code!g' /etc/apache2/sites-available/*.conf
