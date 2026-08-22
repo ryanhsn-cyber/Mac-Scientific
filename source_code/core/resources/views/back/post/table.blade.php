@@ -6,7 +6,7 @@
       @php
           $decoded = json_decode($data->photo, true);
           $photoPath = is_array($decoded) && count($decoded) > 0 ? $decoded[array_key_first($decoded)] : (is_string($decoded) ? $decoded : $data->photo);
-          $photoPath = trim($photoPath, '"'');
+          $photoPath = str_replace(['"', "'"], '', $photoPath);
           $photoPath = empty($photoPath) ? 'placeholder.png' : $photoPath;
       @endphp
       <img src="{{ asset('assets/images/' . $photoPath) }}" alt="">

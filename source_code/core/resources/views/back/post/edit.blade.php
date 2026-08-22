@@ -47,7 +47,7 @@
                                                 $photoArray = $decoded;
                                             } else {
                                                 $photoStr = is_string($decoded) ? $decoded : $post->photo;
-                                                $photoStr = trim($photoStr, '"'');
+                                                $photoStr = str_replace(['"', "'"], '', $photoStr);
                                                 $photoArray = empty($photoStr) ? [] : [$photoStr];
                                             }
                                         @endphp

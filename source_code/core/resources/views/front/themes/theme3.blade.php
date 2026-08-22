@@ -561,7 +561,7 @@
                                             @php
                                                 $decoded = json_decode($post->photo, true);
                                                 $photoPath = is_array($decoded) && count($decoded) > 0 ? $decoded[array_key_first($decoded)] : (is_string($decoded) ? $decoded : $post->photo);
-                                                $photoPath = trim($photoPath, '"'');
+                                                $photoPath = str_replace(['"', "'"], '', $photoPath);
                                                 $photoPath = empty($photoPath) ? 'placeholder.png' : $photoPath;
                                             @endphp
                                             <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/' . $photoPath) }}"
