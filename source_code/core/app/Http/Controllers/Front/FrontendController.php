@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\{
     Http\Request,
-    Support\Facades\Session
+    Support\Facades\Session,
+    Support\Facades\Cache
 };
 
 use App\{
@@ -119,8 +120,13 @@ class FrontendController extends Controller
         }
         
         $setting = Setting::first();
+        $cacheKey = 'front_index_data_' . ($setting->theme ?? 'theme2');
 
+        if (request()->has('clear-cache')) {
+            Cache::forget($cacheKey);
+        }
 
+        $data = Cache::remember($cacheKey, 1800, function() use ($setting) {
             $home_customize = HomeCutomize::first();
 
             // feature category
@@ -312,7 +318,7 @@ class FrontendController extends Controller
 
             // {"title1":"Watchtt","subtitle1":"50% OFF","url1":"#","title2":"Man","subtitle2":"40% OFF","url2":"#","img1":"1637766462banner-h2-4-1.jpeg","img2":"1637766420banner-h2-4-1.jpeg"}
 
-            return view('front.index',[
+            return [
                 'hero_banner'   => $home_customize->hero_banner != '[]' ? json_decode($home_customize->hero_banner,true) : null,
                 'banner_first'   => json_decode($home_customize->banner_first,true),
                 'sliders'  => $sliders,
@@ -322,8 +328,6 @@ class FrontendController extends Controller
                 'brands'   => Brand::whereStatus(1)->get(),
                 'banner_secend'  => json_decode($home_customize->banner_secend,true),
                 'banner_third'   => json_decode($home_customize->banner_third,true),
-                'brands'   => Brand::whereStatus(1)->whereIsPopular(1)->get(),
-                'products' => Item::with('category')->whereStatus(1),
                 'home_page4_banner' => json_decode($home_customize->home_page4,true),
                 'pupular_cateogry_home4' => isset($pupular_cateogry_home4) ? $pupular_cateogry_home4 : [],
                 // feature category
@@ -331,15 +335,18 @@ class FrontendController extends Controller
                 'feature_categories' => $feature_categories,
                 'feature_category_title' => $feature_category_title,
 
-                // feature category
+                // popular category
                 'popular_category_items' => $popular_category_items,
                 'popular_categories' => $popular_categories,
                 'popular_category_title' => $popular_category_title,
 
                 // two column category
                 'two_column_categoriess' => $two_column_categoriess,
+            ];
+        });
 
-            ]);
+        $data['products'] = Item::with('category')->whereStatus(1);
+        return view('front.index', $data);
 	}
 
 

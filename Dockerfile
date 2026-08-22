@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     ffmpeg \
     libwebp-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
-    && docker-php-ext-install gd pdo pdo_mysql zip
+    && docker-php-ext-install gd pdo pdo_mysql zip opcache
 
 # Enable Apache mod_rewrite, headers, expires, and deflate
 RUN a2enmod rewrite headers expires deflate
@@ -31,8 +31,9 @@ RUN if [ -f "vendor.zip" ]; then unzip -oq vendor.zip -d . && rm vendor.zip; fi
 
 
 
-# Increase PHP upload limits for video uploads
-RUN echo "upload_max_filesize = 100M\npost_max_size = 100M" > /usr/local/etc/php/conf.d/uploads.ini
+# Increase PHP upload limits for video uploads and configure OPcache
+RUN echo "upload_max_filesize = 100M\npost_max_size = 100M" > /usr/local/etc/php/conf.d/uploads.ini \
+    && echo "opcache.enable=1\nopcache.memory_consumption=128\nopcache.interned_strings_buffer=8\nopcache.max_accelerated_files=10000\nopcache.revalidate_freq=2\nopcache.fast_shutdown=1" > /usr/local/etc/php/conf.d/opcache.ini
 
 # Ensure assets/videos directory exists with correct write permissions for Apache
 RUN mkdir -p /var/www/html/source_code/assets/videos \

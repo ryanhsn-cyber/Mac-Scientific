@@ -9,7 +9,8 @@
         @endphp
         <link rel="preload" as="image" href="{{ asset('assets/images/' . $encoded_photo) }}" fetchpriority="high">
     @endif
-    <link rel="preload" as="image" href="{{ asset('assets/images/featured-banner.webp') }}" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('assets/images/featured-banner-mobile.webp') }}" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('assets/images/featured-banner.webp') }}" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
 @endsection
 
 @section('content')
@@ -246,8 +247,9 @@
                     <div class="col-lg-12">
                         <div class="genius-banner">
                             <picture>
+                                <source media="(max-width: 767px)" srcset="{{ asset('assets/images/featured-banner-mobile.webp') }}" type="image/webp">
                                 <source srcset="{{ asset('assets/images/featured-banner.webp') }}" type="image/webp">
-                                <img class="img-fluid w-100 rounded" src="{{ asset('assets/images/featured-banner.png') }}" alt="Our Current Highlight" width="1200" height="300" fetchpriority="high" decoding="async">
+                                <img class="img-fluid w-100 rounded" src="{{ asset('assets/images/featured-banner.png') }}" alt="Our Current Highlight" width="1200" height="534" fetchpriority="high" decoding="async">
                             </picture>
                         </div>
                     </div>
