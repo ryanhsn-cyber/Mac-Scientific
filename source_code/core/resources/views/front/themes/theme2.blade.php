@@ -7,8 +7,9 @@
             $first_photo = $sliders->first()->photo;
             $encoded_photo = implode('/', array_map('rawurlencode', explode('/', $first_photo)));
         @endphp
-        <link rel="preload" as="image" href="{{ asset('assets/images/' . $encoded_photo) }}?v={{ strtotime(isset($sliders[0]) ? ($sliders[0]->updated_at ?? 'now') : ($sliders->first()->updated_at ?? 'now')) }}" fetchpriority="high">
+        <link rel="preload" as="image" href="{{ asset('assets/images/' . $encoded_photo) }}" fetchpriority="high">
     @endif
+    <link rel="preload" as="image" href="{{ asset('assets/images/featured-banner.webp') }}" type="image/webp" fetchpriority="high">
 @endsection
 
 @section('content')
@@ -68,7 +69,7 @@
                                         @endif
                                         " style="position: relative;">
                                         @if($loop->first)
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" fetchpriority="high" alt="{{ $setting->title }} Banner" width="3550" height="1440" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" fetchpriority="high" alt="{{ $setting->title }} Banner" width="3550" height="1440" style="width: 100%; height: auto; display: block; object-fit: contain;">
                                         @else
                                         <img class="lazy" loading="lazy" src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" alt="{{ $setting->title }} Banner" width="3550" height="1440" style="width: 100%; height: auto; display: block; object-fit: contain;">
                                         @endif
@@ -244,7 +245,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="genius-banner">
-                            <img class="img-fluid w-100 rounded" src="/assets/images/featured-banner.png" alt="Our Current Highlight" width="1200" height="300" loading="lazy">
+                            <picture>
+                                <source srcset="{{ asset('assets/images/featured-banner.webp') }}" type="image/webp">
+                                <img class="img-fluid w-100 rounded" src="{{ asset('assets/images/featured-banner.png') }}" alt="Our Current Highlight" width="1200" height="300" fetchpriority="high" decoding="async">
+                            </picture>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,5 @@
 $(function ($) {
     "use strict";
-
     function lazy() {
         $(".lazy").Lazy({
             scrollDirection: 'vertical',
@@ -13,15 +12,9 @@ $(function ($) {
             }
         });
     }
-
-
     $(document).ready(function () {
-
         lazy();
-
-
         function number_format (number, decimals =2, dec_point, thousands_sep) {
-            // Strip all characters but numerical ones.
             number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
             var n = !isFinite(+number) ? 0 : +number,
                 prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
@@ -32,7 +25,6 @@ $(function ($) {
                     var k = Math.pow(10, prec);
                     return '' + Math.round(n * k) / k;
                 };
-            // Fix for IE parseFloat(0.55).toFixed(0) = 0;
             s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
             if (s[0].length > 3) {
                 s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
@@ -43,10 +35,6 @@ $(function ($) {
             }
             return s.join(dec);
         }
-
-        
-
-        // announcement banner magnific popup
         if (mainbs.is_announcement == 1) {
             $('.announcement-banner').magnificPopup({
                 type: 'inline',
@@ -55,30 +43,19 @@ $(function ($) {
                 callbacks: {
                     open: function () {
                         $.magnificPopup.instance.close = function () {
-                            // Do whatever else you need to do here
                             sessionStorage.setItem("announcement", "closed");
-                            // console.log(sessionStorage.getItem('announcement'));
-
-                            // Call the original close method to close the announcement
                             $.magnificPopup.proto.close.call(this);
                         };
                     }
                 }
             });
         }
-
-        // Mobile Category
         $('#category_list .has-children .category_search span').on('click', function (e) {
             e.preventDefault();
         });
-
-        // Toggle mobile serch
         $('.close-m-serch').on('click', function () {
             $('.topbar .search-box-wrap').toggleClass('d-none');
         });
-
-
-        // Flash Deal Area Start
         var $hero_slider_main = $(".hero-slider-main");
         $hero_slider_main.owlCarousel({
             navText: [],
@@ -91,8 +68,6 @@ $(function ($) {
             items: 1,
             thumbs: false,
         });
-
-        // heroarea-slider
         var $testimonialSlider = $('.heroarea-slider');
         $testimonialSlider.owlCarousel({
             loop: true,
@@ -123,9 +98,6 @@ $(function ($) {
                 }
             }
         });
-
-
-        // popular_category_slider
         var $popular_category_slider = $(".popular-category-slider");
         $popular_category_slider.owlCarousel({
             navText: [],
@@ -157,10 +129,6 @@ $(function ($) {
                 }
             },
         });
-
-
-
-        // Flash Deal Area Start
         var $flash_deal_slider = $(".flash-deal-slider");
         $flash_deal_slider.owlCarousel({
             navText: [],
@@ -194,9 +162,6 @@ $(function ($) {
                 },
             },
         });
-
-
-        // col slider
         var $col_slider = $(".newproduct-slider");
         $col_slider.owlCarousel({
             navText: [],
@@ -216,8 +181,6 @@ $(function ($) {
                 },
             },
         });
-
-        // col slider 2
         var $col_slider2 = $(".toprated-slider");
         $col_slider2.owlCarousel({
             navText: [],
@@ -237,8 +200,6 @@ $(function ($) {
                 },
             },
         });
-
-        // newproduct-slider Area Start
         var $newproduct_slider = $(".features-slider");
         $newproduct_slider.owlCarousel({
             navText: [],
@@ -270,8 +231,6 @@ $(function ($) {
                 }
             },
         });
-
-        // home-blog-slider
         var $home_blog_slider = $(".home-blog-slider");
         $home_blog_slider.owlCarousel({
             navText: [],
@@ -303,9 +262,6 @@ $(function ($) {
                 }
             },
         });
-
-
-        // brand-slider
         var $brand_slider = $(".brand-slider");
         $brand_slider.owlCarousel({
             navText: [],
@@ -337,8 +293,6 @@ $(function ($) {
                 }
             },
         });
-
-        // toprated-slider Area Start
         var $relatedproductsliderv = $(".relatedproductslider");
         $relatedproductsliderv.owlCarousel({
             nav: false,
@@ -368,8 +322,6 @@ $(function ($) {
                 }
             },
         });
-
-        // Blog Details Slider Area Start
         var $hero_slider_main = $(".blog-details-slider");
         $hero_slider_main.owlCarousel({
             navText: [],
@@ -382,9 +334,6 @@ $(function ($) {
             items: 1,
             thumbs: false,
         });
-
-        
-        // Recent Blog Slider Area Start
         var $popular_category_slider = $(".resent-blog-slider");
         $popular_category_slider.owlCarousel({
             navText: [],
@@ -413,10 +362,6 @@ $(function ($) {
                 }
             },
         });
-
-      
-
-        // Product details main slider
         $('.product-details-slider').owlCarousel({
             loop: true,
             items: 1,
@@ -431,23 +376,14 @@ $(function ($) {
             thumbContainerClass: 'owl-thumbs',
             thumbItemClass: 'owl-thumb-item',
         });
-
-        // Product details image zoom
         $('.product-details-slider .item').zoom({ on: 'click' });
-
-        // Video popup
         $('.video-btn a').magnificPopup({
             type: 'iframe',
             mainClass: 'mfp-fade'
         });
-
-
-
         $('.left-category-area .category-header').on('click', function () {
             $('.left-category-area .category-list').toggleClass("active")
         });
-
-
         $("[data-date-time]").each(function () {
             var $this = $(this),
                 finalDate = $(this).attr("data-date-time");
@@ -459,8 +395,6 @@ $(function ($) {
                 );
             });
         });
-
-        // Subscriber Form Submit
         $(document).on("submit", ".subscriber-form", function (e) {
             e.preventDefault();
             var $this = $(this);
@@ -493,9 +427,6 @@ $(function ($) {
                 },
             });
         });
-        // Subscriber Form Submit ENDS
-
-        // Notifications
         function successNotification(title) {
             $.notify(
                 {
@@ -504,7 +435,6 @@ $(function ($) {
                     icon: "fas fa-check-circle",
                 },
                 {
-                    // settings
                     element: "body",
                     position: null,
                     type: "success",
@@ -534,17 +464,14 @@ $(function ($) {
                 }
             );
         }
-
         function dangerNotification(title) {
             $.notify(
                 {
-                    // options
                     title: ` <strong>${title}</strong>`,
                     message: "",
                     icon: "fas fa-exclamation-triangle",
                 },
                 {
-                    // settings
                     element: "body",
                     position: null,
                     type: "danger",
@@ -574,11 +501,6 @@ $(function ($) {
                 }
             );
         }
-        // Notifications Ends
-
-
-
-
         $(document).on('click', '.list-view', function () {
             let viewCheck = $(this).attr('data-step');
             let check = $(this);
@@ -587,33 +509,22 @@ $(function ($) {
             $("#search_button").click();
             check.addClass('active');
         })
-
-
-        // category wise product 
         $(document).on('click', '.category_get,.product_get', function () {
-
             $('.' + this.className).removeClass('active');
             $(this).addClass('active');
             let geturl = $(this).attr('data-href');
             let view = $(this).attr('data-target');
-
             $('.' + view).removeClass('d-none');
-
             $.get(geturl, function (response) {
                 $('#' + view).html(response);
                 $('.' + view).addClass('d-none');
-
                 if (response.data === undefined) {
                     $('.' + view + '_not_found').removeClass('d-none');
                 } else {
                     $('.' + view + '_not_found').addClass('d-none');
                 }
-
             });
         })
-
-
-        // product quintity select js Start
         $(document).on('click', '.subclick', function () {
             let current_qty = parseInt($('.cart-amount').val());
             if (current_qty > 1) {
@@ -621,12 +532,7 @@ $(function ($) {
             } else {
                 error('Minumum Quantity Must Be 1');
             }
-
         })
-
-        // product quintity select js Start
-    
-
         $(document).on('click', '.addclick', function () {
             let current_stock = parseInt($('#current_stock').val());
             let current_qty = parseInt($('.cart-amount').val());
@@ -636,12 +542,9 @@ $(function ($) {
                 error('Product Quantity Maximum ' + current_stock);
             }
         })
-      
-
         $(document).on('keyup', '.cart-amount', function () {
             let current_stock = parseInt($('#current_stock').val());
             let key_val = parseInt($(this).val());
-
             if (key_val > current_stock) {
                 error('Product Maximum Quantity ' + current_stock);
                 $('.cart-amount').val(current_stock);
@@ -653,10 +556,7 @@ $(function ($) {
             if (key_val > 0 && key_val < current_stock) {
                 $('.cart-amount').val(key_val);
             }
-
         })
-
-
         $(document).on('click', '.wishlist_store', function (e) {
             e.preventDefault();
             let wishlist_url = $(this).attr('href');
@@ -673,9 +573,6 @@ $(function ($) {
                 }
             })
         })
-
-
-        // catalog js start
         $(document).on("click", ".brand-select", function () {
             $('.brand-select').prop('checked', false);
             let brand = $(this).val();
@@ -684,7 +581,6 @@ $(function ($) {
             removePage();
             $("#search_button").click();
         });
-
         $(document).on("click", "#price_filter", function () {
             let min_price = parseInt($(".min_price").html());
             let max_price = parseInt($(".max_price").html());
@@ -693,14 +589,12 @@ $(function ($) {
             removePage();
             $("#search_button").click();
         });
-
         $(document).on("change", "#sorting", function () {
             let sorting = $(this).val();
             $("#search_form #sorting").val(sorting);
             removePage();
             $("#search_button").click();
         });
-
         $(document).on("click", ".widget_price_filter", function () {
             let filter_prices = $(this).val();
             if (filter_prices) {
@@ -714,15 +608,10 @@ $(function ($) {
             removePage();
             $("#search_button").click();
         });
-
-
         $(document).on('change', '#category_select', function () {
             let category = $(this).val();
             $('#search__category').val(category);
         })
-
-
-
         $(document).on('click', '#quick_filter li a', function () {
             $('#quick_filter li').removeClass('active');
             let filter = '';
@@ -736,11 +625,9 @@ $(function ($) {
             removePage();
             $("#search_button").click();
         });
-
         function removePage() {
             $("#search_form #page").val('');
         }
-
         $(document).on('keyup', '#__product__search', function () {
             let search = $(this).val();
             let category = '';
@@ -754,12 +641,10 @@ $(function ($) {
             } else {
                 $('.serch-result').addClass('d-none');
             }
-
         })
         $(document).on('click', '#view_all_search_', function () {
             $('#header_search_form').submit();
         })
-
         $(document).on('click', '#category_list li a.category_search', function () {
             $('#category_list li').removeClass('active');
             let category = '';
@@ -775,8 +660,6 @@ $(function ($) {
             $("#search_form #category").val(category);
             $("#search_button").click();
         });
-
-
         $(document).on('click', '#subcategory_list li a.subcategory', function () {
             $('#subcategory_list li').removeClass('active');
             let category = '';
@@ -790,7 +673,6 @@ $(function ($) {
             $("#search_form #subcategory").val(category);
             $("#search_button").click();
         });
-
         $(document).on('click', '#childcategory_list li a.childcategory', function () {
             $('#childcategory_list li').removeClass('active');
             let childcategory = '';
@@ -804,7 +686,6 @@ $(function ($) {
             $("#search_form #childcategory").val(childcategory);
             $("#search_button").click();
         });
-
         $(document).on('click', '#item_pagination .page-item .page-link', function (e) {
             e.preventDefault();
             let pagination = $(this).text();
@@ -817,10 +698,7 @@ $(function ($) {
             $("#search_form #page").val(pagination);
             $("#search_button").click();
         })
-
-
         $(document).on('click', '.option', function () {
-
             let option = [];
             $(this).parent().addClass('active');
             $("input.option").each(function (index) {
@@ -832,10 +710,8 @@ $(function ($) {
             $("#search_form #option").val(option);
             $("#search_button").click();
         });
-
         $(document).on('submit', '#search_form', function (e) {
             e.preventDefault();
-
             let loader = `
             <div id="view_loader_div" class="">
             <div class="product-not-found">
@@ -844,7 +720,6 @@ $(function ($) {
           </div>
             `;
             $('#list_view_ajax').html(loader);
-
             let form_url = $(this).attr('action');
             let method = $(this).attr('method');
             $.ajax({
@@ -856,12 +731,7 @@ $(function ($) {
                     $('#list_view_ajax').html(data);
                 }
             });
-
         })
-
-        // catalog script end
-
-        // rating from submit
         $(".ratingForm").on("submit", function (e) {
             e.preventDefault();
             var $this = $(this);
@@ -885,15 +755,12 @@ $(function ($) {
                         successNotification(data);
                         $this.find("textarea").val("");
                     }
-
                     $this.find("textarea").prop("readonly", false);
                     submit_btn.prop("disabled", false);
                     $(".modal_close").click();
                 },
             });
         });
-        // compare script start
-
         $(document).on("click", ".product_compare", function () {
             let compare_url = $(this).attr("data-target");
             $.get(compare_url, function (data) {
@@ -905,21 +772,15 @@ $(function ($) {
                 $(".compare_count").text(data.compare_count);
             });
         });
-
         $(document).on("click", ".compare_remove", function () {
             let removeUrl = $(this).attr("data-href");
             $.get(removeUrl, function () {
                 location.reload();
             });
         });
-        // compare script end
-
-        // cart script start
         $(document).on("change", ".attribute_option", function () {
             getData();
         });
-        
-
         $(document).on("keyup", ".cart-amount", function () {
             getData();
         });
@@ -933,22 +794,18 @@ $(function ($) {
             cartSubmit(item_key,item_id,qty);
             getData();
         });
-
         $(document).on("click", ".decreaseQty", function () {
             getData();
         });
-
         $(document).on("click", ".decreaseQtycart", function () {
             let item_key = $(this).attr('data-target');
             let item_id = $(this).attr('data-id');
             let qty = parseInt($(this).parent().find('input').val()) -1;
-            
             if(qty>0){
                 cartSubmit(item_key,item_id,qty);
                 getData();
             }
         });
-
         $(document).on("click", "#add_to_cart", function () {
             getData(1);
         });
@@ -958,12 +815,10 @@ $(function ($) {
         $(document).on("click", ".add_to_single_cart", function () {
             getData(1, $(this).attr("data-target"));
         });
-
         function cartSubmit(item_key,item_id,cartQty) {
             console.log(item_key,cartQty);
             getData(1, item_key,item_id, cartQty);
         };
-
         function getData(status = 0, check = 0, item_key = 0, qty = 0, add_type = 0) {
             let itemId;
             let type;
@@ -974,11 +829,8 @@ $(function ($) {
                 itemId = $("#item_id").val();
                 type = 0;
             }
-
-
             let options_prices = optionPrice();
             let totalOptionPrice = parseFloat(optionPriceSum(options_prices));
-            
             let attribute_ids = $(".attribute_option :selected")
                 .map(function (i, el) {
                     return $(el).attr("data-type");
@@ -989,7 +841,6 @@ $(function ($) {
                     return $(el).attr("data-href");
                 })
                 .get();
-
             let quantity;
             quantity = parseInt(getQuantity());
             if (isNaN(quantity)) {
@@ -998,7 +849,6 @@ $(function ($) {
             if (qty != 0) {
                 quantity = qty;
             }
-
             let demoPrice = parseFloat($("#demo_price").val());
             let tierPricesStr = $("#tier_prices").val();
             if (tierPricesStr) {
@@ -1017,7 +867,6 @@ $(function ($) {
                     console.error("Error parsing tier prices", e);
                 }
             }
-            
             let currency_direction = $("#currency_direction").val();
             let setCurrency = $("#set_currency").val();
             let subPrice = parseFloat(demoPrice + totalOptionPrice);
@@ -1028,8 +877,6 @@ $(function ($) {
             } else {
                 $('#main_price').html(setCurrency + mainPrice);
             }
-
-
             if (status == 1) {
                 let addToCartUrl = `${mainurl}/product/add/cart?item_id=${itemId}&options_ids=${options_ids}&attribute_ids=${attribute_ids}&quantity=${quantity}&type=${type}&item_key=${item_key}&add_type=${add_type}`;
                 $.ajax({
@@ -1051,27 +898,22 @@ $(function ($) {
                         } else {
                             successNotification(data.message);
                         }
-
                     },
                 });
             }
         }
-
         function optionPrice() {
             let option_prices = $(".attribute_option :selected")
                 .map(function (i, el) {
                     return $(el).attr("data-target");
                 })
                 .get();
-                
             return option_prices;
         }
-
         function getQuantity() {
             let quantity = $(".qtyValue").val();
             return parseInt(quantity);
         }
-
         function optionPriceSum(options_prices) {
             var price = 0;
             $.each(options_prices, function (i, v) {
@@ -1079,11 +921,8 @@ $(function ($) {
             });
             return price;
         }
-
-        // cart script end
         $(document).on("submit", "#coupon_form", function (e) {
             e.preventDefault();
-
             var form = $(this);
             var url = form.attr("action");
             $.ajax({
@@ -1102,8 +941,6 @@ $(function ($) {
                 },
             });
         });
-
-        // user panel script start
         $(document).on("change", "#avater", function () {
             var file = event.target.files[0];
             var reader = new FileReader();
@@ -1112,21 +949,13 @@ $(function ($) {
             };
             reader.readAsDataURL(file);
         });
-
-
         $('#submit_number').on('click', function (e) {
             var link = $(this).data('href') + '?order_number=' + $('#order_number').val();
             $('#track-order').load(link);
             return false;
         });
-
     });
-
 });
-
-
-// state price set up 
-
 $(document).on('change','#state_id_select',function(){
     var url = $('option:selected', this).attr('data-href');
     var state_id = $(this).val();
@@ -1134,14 +963,9 @@ $(document).on('change','#state_id_select',function(){
         $('.set__state_price_tr').removeClass('d-none');
         $('.set__state_price').text(response.state_price);
         $('.grand_total_set').text(response.grand_total);
-        
         $('.state_id_setup').val(state_id);
     })
 })
-
-
-
-
 $(document).on('click', '#trams__condition', function () {
     if ($(this).is(':checked')) {
         $('#continue__button').attr('type', 'submit');
@@ -1151,15 +975,9 @@ $(document).on('click', '#trams__condition', function () {
         $('#continue__button').prop('disabled', true);
     }
 })
-
-
-
 $(window).on('load', function (event) {
-    // Preloader
     $('#preloader').fadeOut(500);
-    // announcement
     if (mainbs.is_announcement == 1) {
-        // trigger announcement banner base on sessionStorage
         let announcement = sessionStorage.getItem('announcement') != null ? false : true;
         if (announcement) {
             setTimeout(function () {
@@ -1167,7 +985,4 @@ $(window).on('load', function (event) {
             }, mainbs.announcement_delay * 1000);
         }
     }
-
 });
-
-
