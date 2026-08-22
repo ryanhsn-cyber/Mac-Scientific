@@ -51,10 +51,9 @@
                             .hero-slider .item img {
                                 width: 100% !important;
                                 height: auto !important;
-                                aspect-ratio: 3550 / 1440;
                                 object-fit: contain !important;
                             }
-                            .hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; aspect-ratio: 3550 / 1440; }
+                            .hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; }
                             .hero-slider-main:not(.owl-loaded) .item { display: none; }
                             .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; }
                         </style>
