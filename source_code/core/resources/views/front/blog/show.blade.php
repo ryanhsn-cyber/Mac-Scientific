@@ -78,7 +78,7 @@
                             $photoArray = $decoded;
                         } else {
                             $photoStr = is_string($decoded) ? $decoded : $post->photo;
-                            $photoStr = trim($photoStr, '"\'');
+                            $photoStr = trim($photoStr, '"'');
                             $photoArray = empty($photoStr) ? ['placeholder.png'] : [$photoStr];
                         }
                     @endphp
@@ -160,7 +160,7 @@
                         @php
                             $decoded = json_decode($like_post->photo, true);
                             $likePhotoPath = is_array($decoded) && count($decoded) > 0 ? $decoded[array_key_first($decoded)] : (is_string($decoded) ? $decoded : $like_post->photo);
-                            $likePhotoPath = trim($likePhotoPath, '"\'');
+                            $likePhotoPath = trim($likePhotoPath, '"'');
                             $likePhotoPath = empty($likePhotoPath) ? 'placeholder.png' : $likePhotoPath;
                         @endphp
                         <div class="entry-thumb"><a href="{{route('front.blog.details',$like_post->slug)}}"><img src="{{asset('assets/images/' . $likePhotoPath)}}" alt="Post"></a></div>
@@ -205,7 +205,7 @@
                 @php
                     $decoded = json_decode($recent->photo, true);
                     $recentPhotoPath = is_array($decoded) && count($decoded) > 0 ? $decoded[array_key_first($decoded)] : (is_string($decoded) ? $decoded : $recent->photo);
-                    $recentPhotoPath = trim($recentPhotoPath, '"\'');
+                    $recentPhotoPath = trim($recentPhotoPath, '"'');
                     $recentPhotoPath = empty($recentPhotoPath) ? 'placeholder.png' : $recentPhotoPath;
                 @endphp
                 <div class="entry-thumb"><a href="{{route('front.blog.details',$recent->slug)}}"><img src="{{ asset('assets/images/' . $recentPhotoPath) }}" alt="Post"></a></div>

@@ -29,7 +29,7 @@
                 @endphp
                 <tr>
                     <td>
-                      <div class="product-item"><a class="product-thumb" href="{{route('front.product',$item['slug'])}}"><img src="{{asset('assets/images/'.$item['photo'])}}" alt="{{ $item[\'name\'] }}"></a>
+                      <div class="product-item"><a class="product-thumb" href="{{route('front.product',$item['slug'])}}"><img src="{{asset('assets/images/'.$item['photo'])}}" alt="{{ $item['name'] }}"></a>
                         <div class="product-info">
                           <h4 class="product-title"><a href="{{route('front.product',$item['slug'])}}">
                             {{ strlen(strip_tags($item['name'])) > 45 ? substr(strip_tags($item['name']), 0, 45) . '...' : strip_tags($item['name']) }}

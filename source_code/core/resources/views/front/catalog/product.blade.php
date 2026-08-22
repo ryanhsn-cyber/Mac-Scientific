@@ -869,7 +869,7 @@
                             @endif
                             <div class="product-thumb">
                                 <a href="{{route('front.product',$related->slug)}}">
-<img class="lazy" loading="lazy" width="400" height="400" src="{{asset(\'assets/images/\'.$related->thumbnail)}}" alt="{{ $related->name }}">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$related->thumbnail)}}" alt="{{ $related->name }}">
 </a>
                                 <div class="product-button-group">
                                     <a class="product-button wishlist_store" href="{{route('user.wishlist.store',$related->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
