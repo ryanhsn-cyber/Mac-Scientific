@@ -102,7 +102,10 @@ class CatalogController extends Controller
             return $query->where('brand_id', $brand->id);
         })
         ->when($search, function ($query, $search) {
-            return $query->whereStatus(1)->where('name', 'like', '%' . $search . '%')->orwhere('name', 'like', '%' . $search . '%');
+            return $query->where(function($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('sort_details', 'like', '%' . $search . '%');
+            });
         })
         ->when($minPrice, function($query, $minPrice) {
           return $query->where('discount_price', '>=', $minPrice);
@@ -133,22 +136,8 @@ class CatalogController extends Controller
         ->orderby('id','desc')->paginate($setting->view_product);
 
      
-        $attrubutes_check =[];
-       
-        $options = AttributeOption::groupby('name')->select('attribute_id','name','id','keyword')->get();
-        
-        foreach($options as $option){
-            if(!in_array(Attribute::withCount('options')->findOrFail($option->attribute_id)->keyword,$attrubutes_check)){
-                $attrubutes_check[] = Attribute::withCount('options')->findOrFail($option->attribute_id)->keyword;
-            }
-        }
-
-        
-        $attrubutes = [];
-
-        foreach($attrubutes_check as $attr_new_get){
-            $attrubutes[] = Attribute::whereKeyword($attr_new_get)->first();
-        }
+        $attribute_ids = AttributeOption::distinct()->pluck('attribute_id')->toArray();
+        $attrubutes = Attribute::withCount('options')->whereIn('id', $attribute_ids)->get();
       
         $blade = 'front.catalog.index';
 

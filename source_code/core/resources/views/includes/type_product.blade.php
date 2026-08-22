@@ -29,7 +29,7 @@ function renderStarRating($rating, $maxRating = 5)
                 @if($item->previous_price && $item->previous_price !=0)
                 <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($item)}}</div>
                 @endif
-                <img class="lazy" loading="lazy" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
+                <img class="lazy" loading="lazy" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="{{ $item->name }}">
                 <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                     <a data-target="{{route('fornt.compare.product',$item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
                     @include('includes.item_footer',['sitem' => $item])

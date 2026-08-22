@@ -89,28 +89,7 @@
           <div class="col-12">
             <div class="payment-methods">
               @php
-                  // Auto-insert custom gateways if missing from database
-                  $customGateways = [
-                      'bkash' => ['name' => 'bKash', 'photo' => 'payments/bkash_logo.jpg'],
-                      'nagad' => ['name' => 'Nagad', 'photo' => 'payments/nagad_logo.png']
-                  ];
-                  foreach ($customGateways as $kw => $data) {
-                      $exists = DB::table('payment_settings')->where('unique_keyword', $kw)->first();
-                      if (!$exists) {
-                          DB::table('payment_settings')->insert([
-                              'unique_keyword' => $kw,
-                              'name' => $data['name'],
-                              'photo' => $data['photo'],
-                              'text' => 'Please pay using ' . $data['name'],
-                              'status' => 1
-                          ]);
-                      } elseif (!$exists->photo) {
-                          DB::table('payment_settings')->where('unique_keyword', $kw)->update([
-                              'photo' => $data['photo']
-                          ]);
-                      }
-                  }
-                  $gateways = DB::table('payment_settings')->whereStatus(1)->get();
+                  $gateways = isset($payments) ? $payments : DB::table('payment_settings')->whereStatus(1)->get();
               @endphp
               @foreach ($gateways as $gateway)
               @if (PriceHelper::CheckDigitalPaymentGateway())

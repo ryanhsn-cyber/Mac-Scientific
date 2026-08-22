@@ -28,14 +28,14 @@
                 <h4 class="margin-bottom-1x text-center">{{__('Login')}}</h4>
 
                 <div class="form-group input-group">
-                  <input class="form-control" type="email" name="login_email" placeholder="{{ __('Email') }}" value="{{old('login_email')}}"><span class="input-group-addon"><i class="icon-mail"></i></span>
+                  <input class="form-control" type="email" name="login_email" autocomplete="username" placeholder="{{ __('Email') }}" value="{{old('login_email')}}"><span class="input-group-addon"><i class="icon-mail"></i></span>
                 </div>
                 @error('login_email')
                   <p class="text-danger">{{$message}}</p>
                   @enderror
 
                 <div class="form-group input-group">
-                  <input class="form-control" type="password" name="login_password" placeholder="{{ __('Password') }}" ><span class="input-group-addon"><i class="icon-lock"></i></span>
+                  <input class="form-control" type="password" name="login_password" autocomplete="current-password" placeholder="{{ __('Password') }}" ><span class="input-group-addon"><i class="icon-lock"></i></span>
                 </div>
                 @error('login_password')
                     <p class="text-danger">{{$message}}</p>
@@ -74,7 +74,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="reg-fn">{{__('First Name')}}</label>
-                  <input class="form-control" type="text" name="first_name" placeholder="{{__('First Name')}}" id="reg-fn" value="{{old('first_name')}}">
+                  <input class="form-control" type="text" name="first_name" autocomplete="given-name" placeholder="{{__('First Name')}}" id="reg-fn" value="{{old('first_name')}}">
                 @error('first_name')
                 <p class="text-danger">{{$message}}</p>
                 @endif
@@ -83,7 +83,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="reg-ln">{{__('Last Name')}}</label>
-                  <input class="form-control" type="text" name="last_name" placeholder="{{__('Last Name')}}" id="reg-ln" value="{{old('last_name')}}">
+                  <input class="form-control" type="text" name="last_name" autocomplete="family-name" placeholder="{{__('Last Name')}}" id="reg-ln" value="{{old('last_name')}}">
                   @error('last_name')
                 <p class="text-danger">{{$message}}</p>
                 @endif
@@ -92,7 +92,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="reg-email">{{__('E-mail Address')}}</label>
-                  <input class="form-control" type="email" name="email" placeholder="{{__('E-mail Address')}}" id="reg-email" value="{{old('email')}}">
+                  <input class="form-control" type="email" name="email" autocomplete="email" placeholder="{{__('E-mail Address')}}" id="reg-email" value="{{old('email')}}">
                   @error('email')
                   <p class="text-danger">{{$message}}</p>
                   @endif
@@ -101,7 +101,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="reg-phone">{{__('Phone Number')}}</label>
-                  <input class="form-control" name="phone" type="text" placeholder="{{__('Phone Number')}}" id="reg-phone" value="{{old('phone')}}">
+                  <input class="form-control" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="{{__('Phone Number')}}" id="reg-phone" value="{{old('phone')}}">
                   @error('phone')
                   <p class="text-danger">{{$message}}</p>
                   @endif
@@ -111,7 +111,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="reg-pass">{{__('Password')}}</label>
-                  <input class="form-control" type="password" name="password" placeholder="{{__('Password')}}" id="reg-pass">
+                  <input class="form-control" type="password" name="password" autocomplete="new-password" placeholder="{{__('Password')}}" id="reg-pass">
                   @error('password')
                   <p class="text-danger">{{$message}}</p>
                   @endif

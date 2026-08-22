@@ -490,6 +490,7 @@ Route::get('/fix-db-images', function () {
     }
 });
 
+Route::get('/sitemap.xml', 'Front\FrontendController@sitemap')->name('front.sitemap');
 Route::get('/', 'Front\FrontendController@index')->name('front.index');
         Route::get('/extra-index', 'Front\FrontendController@extraIndex')->name('front.extraindex');
         Route::get('/product/{slug}', 'Front\FrontendController@product')->name('front.product');

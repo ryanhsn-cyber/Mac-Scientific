@@ -12,6 +12,7 @@
 @endsection
 
 @section('content')
+    <h1 class="visually-hidden">{{ $setting->title }} - Medical Aesthetics, PRP, PRF & Labware Equipment</h1>
 
     @php
         function renderStarRating($rating, $maxRating = 5)
@@ -66,9 +67,9 @@
                                     @endif
                                     " style="position: relative;">
                                         @if($index == 0)
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" fetchpriority="high" alt="Slider Image" width="3550" height="1440" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" fetchpriority="high" alt="{{ $setting->title }} Banner" width="3550" height="1440" style="width: 100%; height: auto; display: block; object-fit: contain;">
                                         @else
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" loading="lazy" alt="Slider Image" width="3550" height="1440" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" loading="lazy" alt="{{ $setting->title }} Banner" width="3550" height="1440" style="width: 100%; height: auto; display: block; object-fit: contain;">
                                         @endif
                                         <div class="item-inner" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;">
                                             <div class="from-bottom" style="pointer-events: auto;">
@@ -129,7 +130,7 @@
                     @foreach ($services as $service)
                         <div class="col-lg-3 col-sm-6 text-center mb-30">
                             <div class="single-service single-service2">
-                                <img src="{{ asset('assets/images/'.$service->photo) }}" alt="Shipping" loading="lazy" width="60" height="60">
+                                <img src="{{ asset('assets/images/'.$service->photo) }}" alt="{{ $service->title }}" loading="lazy" width="60" height="60">
                                 <div class="content">
                                     <h6 class="mb-2">{{ $service->title }}</h6>
                                     <p class="text-sm text-muted mb-0">{{ $service->details }}</p>
@@ -178,7 +179,7 @@
                                         <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($compaign_item->item)}}</div>
                                     @endif
                                     <a href="{{route('front.product',$compaign_item->item->slug)}}">
-<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$compaign_item->item->thumbnail)}}" alt="Product">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$compaign_item->item->thumbnail)}}" alt="{{ $item->name ?? ($product->name ?? \'Medical Product\') }}">
 </a>
                                     <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$compaign_item->item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                         <a data-target="{{route('fornt.compare.product',$compaign_item->item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
@@ -306,7 +307,7 @@
                                         <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($popular_category_item)}}</div>
                                         @endif
                                             <a href="{{route('front.product',$popular_category_item->slug)}}">
-<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$popular_category_item->thumbnail)}}" alt="Product">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$popular_category_item->thumbnail)}}" alt="{{ $item->name ?? ($product->name ?? \'Medical Product\') }}">
 </a>
                                             <div class="product-button-group">
                                                 <a class="product-button wishlist_store" href="{{route('user.wishlist.store',$popular_category_item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
@@ -437,7 +438,7 @@
                                                 <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($item)}}</div>
                                                 @endif
                                                 <a href="{{route('front.product',$item->slug)}}">
-<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="{{ $item->name ?? ($product->name ?? \'Medical Product\') }}">
 </a>
                                                 <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                                     <a data-target="{{route('fornt.compare.product',$item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
@@ -501,7 +502,7 @@
                                             <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($item)}}</div>
                                             @endif
                                             <a href="{{route('front.product',$item->slug)}}">
-<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="Product">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="{{ $item->name ?? ($product->name ?? \'Medical Product\') }}">
 </a>
                                             <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                                 <a data-target="{{route('fornt.compare.product',$item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
@@ -565,7 +566,7 @@
                                                     ">{{__('out of stock')}}</div>
                                                     @endif
 
-                                                <img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$two_column_category_item->thumbnail)}}" alt="Product">
+                                                <img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$two_column_category_item->thumbnail)}}" alt="{{ $item->name ?? ($product->name ?? \'Medical Product\') }}">
 </a>
                                             <div class="product-card-body">
                                                 <h3 class="product-title"><a href="{{route('front.product',$two_column_category_item->slug)}}">
@@ -664,7 +665,7 @@
                                 <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($feature_category_item)}}</div>
                                 @endif
                                     <a href="{{route('front.product',$feature_category_item->slug)}}">
-<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$feature_category_item->thumbnail)}}" alt="Product">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$feature_category_item->thumbnail)}}" alt="{{ $item->name ?? ($product->name ?? \'Medical Product\') }}">
 </a>
                                     <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$feature_category_item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                         <a data-target="{{route('fornt.compare.product',$feature_category_item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>

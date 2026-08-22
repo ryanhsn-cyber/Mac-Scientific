@@ -42,7 +42,7 @@
                 @foreach ($wishlist_items as $product)
                 <tr>
                     <td>
-                      <div class="product-item"><a class="product-thumb" href="{{route('front.product',$product->slug)}}"><img src="{{asset('assets/images/'.$product->photo)}}" alt="Product"></a>
+                      <div class="product-item"><a class="product-thumb" href="{{route('front.product',$product->slug)}}"><img src="{{asset('assets/images/'.$product->photo)}}" alt="{{ $product->name }}"></a>
                         <div class="product-info">
                           <h4 class="product-title"><a href="{{route('front.product',$product->slug)}}">{{$product->name}}</a></h4>
                           <div class="text-lg mb-1">{{PriceHelper::grandCurrencyPrice($product)}}</div>

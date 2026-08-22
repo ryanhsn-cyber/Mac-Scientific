@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /user/
+Disallow: /track/order/submit
+Disallow: /search/suggest
+Disallow: /*?*sort=
+Disallow: /*?*view_check=
+
+Sitemap: https://ms-bd.com/sitemap.xml

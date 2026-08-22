@@ -5,8 +5,148 @@
 @endsection
 
 @section('meta')
-<meta name="keywords" content="{{$item->meta_keywords}}">
-<meta name="description" content="{{$item->meta_description}}">
+<meta name="keywords" content="{{$item->meta_keywords ?: $item->name}}">
+<meta name="description" content="{{$item->meta_description ?: strip_tags($item->sort_details)}}">
+
+<!-- OpenGraph Meta Tags -->
+<meta property="og:title" content="{{ $item->name }} | {{ $setting->title }}">
+<meta property="og:description" content="{{ $item->meta_description ?: strip_tags($item->sort_details) }}">
+<meta property="og:url" content="{{ route('front.product', $item->slug) }}">
+<meta property="og:type" content="product">
+<meta property="og:image" content="{{ asset('assets/images/' . ($item->photo ?: $item->thumbnail)) }}">
+<meta property="og:image:alt" content="{{ $item->name }}">
+<meta property="og:site_name" content="{{ $setting->title }}">
+<meta property="product:price:amount" content="{{ $item->discount_price }}">
+<meta property="product:price:currency" content="BDT">
+<meta property="product:availability" content="{{ $item->is_stock() ? 'in stock' : 'out of stock' }}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $item->name }} | {{ $setting->title }}">
+<meta name="twitter:description" content="{{ $item->meta_description ?: strip_tags($item->sort_details) }}">
+<meta name="twitter:image" content="{{ asset('assets/images/' . ($item->photo ?: $item->thumbnail)) }}">
+
+<!-- JSON-LD Product & Breadcrumb Schema -->
+@php
+    $rating_val = $item->reviews->count() > 0 ? round($item->reviews->avg('rating'), 1) : 5.0;
+    $rating_cnt = $item->reviews->count() > 0 ? $item->reviews->count() : 1;
+@endphp
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ addslashes($item->name) }}",
+  "image": [
+    "{{ asset('assets/images/' . ($item->photo ?: $item->thumbnail)) }}"
+  ],
+  "description": "{{ addslashes(strip_tags($item->sort_details ?: $item->name)) }}",
+  "sku": "MS-{{ $item->id }}",
+  @if($item->brand)
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ addslashes($item->brand->name) }}"
+  },
+  @else
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ addslashes($setting->title) }}"
+  },
+  @endif
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ route('front.product', $item->slug) }}",
+    "priceCurrency": "BDT",
+    "price": "{{ $item->discount_price }}",
+    "priceValidUntil": "{{ date('Y-12-31') }}",
+    "itemCondition": "https://schema.org/NewCondition",
+    "availability": "{{ $item->is_stock() ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}",
+    "seller": {
+      "@type": "Organization",
+      "name": "{{ addslashes($setting->title) }}"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ $rating_val }}",
+    "reviewCount": "{{ $rating_cnt }}"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ route('front.index') }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Shop",
+      "item": "{{ route('front.catalog') }}"
+    },
+    @if($item->category)
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ addslashes($item->category->name) }}",
+      "item": "{{ route('front.catalog') . '?category=' . $item->category->slug }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "{{ addslashes($item->name) }}",
+      "item": "{{ route('front.product', $item->slug) }}"
+    }
+    @else
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ addslashes($item->name) }}",
+      "item": "{{ route('front.product', $item->slug) }}"
+    }
+    @endif
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do you offer Cash on Delivery (COD)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, Cash on Delivery is available across all 64 districts in Bangladesh through Steadfast Courier."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the delivery time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Delivery within Dhaka takes 24 hours (1 day). Delivery outside Dhaka takes 2 to 3 business days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a warranty or service support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we provide 6 months warranty, genuine imported medical components, and dedicated after-sales support."
+      }
+    }
+  ]
+}
+</script>
 @endsection
 
 @section('styleplugins')
@@ -225,7 +365,7 @@
                     <input type="hidden" value="{{PriceHelper::setCurrencySign()}}" id="set_currency">
                     <input type="hidden" value="{{PriceHelper::setCurrencyValue()}}" id="set_currency_val">
                     <input type="hidden" value="{{$setting->currency_direction}}" id="currency_direction">
-                    <h4 class="mb-2 p-title-main" style="font-weight: 700; color: #1a1a1a;">{{$item->name}}</h4>
+                    <h1 class="mb-2 p-title-main" style="font-weight: 700; color: #1a1a1a; font-size: 24px; line-height: 1.35;">{{$item->name}}</h1>
                     
                     @if($item->brand)
                     <div class="mb-2 d-flex align-items-center">
@@ -729,7 +869,7 @@
                             @endif
                             <div class="product-thumb">
                                 <a href="{{route('front.product',$related->slug)}}">
-<img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$related->thumbnail)}}" alt="Product">
+<img class="lazy" loading="lazy" width="400" height="400" src="{{asset(\'assets/images/\'.$related->thumbnail)}}" alt="{{ $related->name }}">
 </a>
                                 <div class="product-button-group">
                                     <a class="product-button wishlist_store" href="{{route('user.wishlist.store',$related->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
@@ -858,6 +998,46 @@
             }
         }
     }
+</script>
+
+<!-- Sticky Mobile Product Action Bar -->
+<div id="sticky-product-bar" class="sticky-product-bar d-lg-none">
+    <div class="d-flex align-items-center" style="max-width: 50%;">
+        <img src="{{ asset('assets/images/' . ($item->photo ?: $item->thumbnail)) }}" alt="{{ $item->name }}" width="42" height="42" style="border-radius: 4px; object-fit: contain; margin-right: 8px; border: 1px solid #eee;">
+        <div style="line-height: 1.2;">
+            <div style="font-size: 11px; font-weight: 700; color: #1a1a1a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px;">{{ $item->name }}</div>
+            <div class="font-weight-bold" style="font-size: 13px; color: #0d47a1;">{{ PriceHelper::grandCurrencyPrice($item) }}</div>
+        </div>
+    </div>
+    <div class="d-flex align-items-center" style="gap: 6px;">
+        @if ($item->is_stock())
+        <button type="button" class="btn btn-sm btn-primary m-0 d-flex align-items-center justify-content-center" onclick="document.getElementById('add_to_cart').click()" style="height: 38px; padding: 0 12px; font-size: 12px; font-weight: 600; border-radius: 6px;">
+            <i class="fas fa-shopping-cart" style="margin-right: 4px;"></i><span>{{ __('Add') }}</span>
+        </button>
+        <button type="button" onclick="window.open('https://wa.me/{{ $wa_phone }}?text={{ urlencode('Hello, I want to order this product: ' . $item->name . ' - ' . route('front.product', $item->slug)) }}', '_blank')" class="btn btn-sm m-0 d-flex align-items-center justify-content-center" style="background-color: #25D366 !important; border-color: #25D366 !important; color: #fff !important; height: 38px; padding: 0 10px; font-size: 12px; font-weight: 600; border-radius: 6px;">
+            <i class="fab fa-whatsapp" style="font-size: 16px;"></i>
+        </button>
+        @else
+        <button class="btn btn-sm btn-secondary m-0" disabled style="height: 38px; font-size: 12px;">{{ __('Out of Stock') }}</button>
+        @endif
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var stickyBar = document.getElementById('sticky-product-bar');
+        var mainCta = document.getElementById('add_to_cart');
+        if (stickyBar && mainCta) {
+            window.addEventListener('scroll', function() {
+                var rect = mainCta.getBoundingClientRect();
+                if (rect.bottom < 0) {
+                    stickyBar.classList.add('visible');
+                } else {
+                    stickyBar.classList.remove('visible');
+                }
+            }, { passive: true });
+        }
+    });
 </script>
 
 @endsection

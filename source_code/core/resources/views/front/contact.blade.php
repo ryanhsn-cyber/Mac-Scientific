@@ -2,9 +2,14 @@
 @section('meta')
 <meta name="keywords" content="{{$setting->meta_keywords}}">
 <meta name="description" content="{{$setting->meta_description}}">
+<meta property="og:title" content="{{ __('Contact Us') }} | {{ $setting->title }}">
+<meta property="og:description" content="{{ $setting->meta_description }}">
+<meta property="og:url" content="{{ route('front.contact') }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{ asset('assets/images/'.$setting->logo) }}">
 @endsection
 @section('title')
-    {{__('Contact')}}
+    {{__('Contact Us')}}
 @endsection
 
 @section('content')
@@ -55,7 +60,7 @@
 
           <div>
             @foreach ($links as $link_key => $link)
-            <a class="social-button shape-circle sb-facebook" href="{{$link}}" data-toggle="tooltip" data-placement="top"><i class="{{$icons[$link_key]}}"></i></a>
+            <a class="social-button shape-circle sb-facebook" href="{{$link}}" data-toggle="tooltip" data-placement="top" aria-label="Social Link"><i class="{{$icons[$link_key]}}"></i></a>
             @endforeach
           </div>
         </section>
@@ -64,13 +69,13 @@
       <div class="col-lg-8 col-md-7 col-sm-7 order-lg-2 order-md-1 order-sm-1">
         <div class="contact-form-box card">
 
-            <h2 class="h4">{{ __('Tell Us Your Message :') }}</h2>
+            <h1 class="h4" style="font-size: 22px; font-weight: 700; color: #1a1a1a;">{{ __('Get In Touch With Mac Scientific') }}</h1>
             <form class="row mt-2" method="Post" action="{{route('front.contact.submit')}}">
                 @csrf
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="first-name">{{__('First Name')}}</label>
-                    <input class="form-control form-control-rounded" name="first_name" type="text" id="first-name" placeholder="{{__('First Name')}}" >
+                    <input class="form-control form-control-rounded" name="first_name" type="text" id="first-name" autocomplete="given-name" placeholder="{{__('First Name')}}" >
                     @error('first_name')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
@@ -79,7 +84,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="last-name">{{__('Last Name')}}</label>
-                    <input class="form-control form-control-rounded" name="last_name" type="text" id="last-name" placeholder="{{__('Last Name')}}" >
+                    <input class="form-control form-control-rounded" name="last_name" type="text" id="last-name" autocomplete="family-name" placeholder="{{__('Last Name')}}" >
                     @error('last_name')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
@@ -88,7 +93,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="contact-email">{{__('E-mail')}}</label>
-                    <input class="form-control form-control-rounded" type="email" name="email" id="contact-email" placeholder="{{__('E-mail')}}" >
+                    <input class="form-control form-control-rounded" type="email" name="email" id="contact-email" autocomplete="email" placeholder="{{__('E-mail')}}" >
                     @error('email')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
@@ -97,7 +102,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="contact-tel">{{__('Phone')}}</label>
-                    <input class="form-control form-control-rounded" type="text" name="phone" id="contact-tel" placeholder="{{__('Phone')}}" >
+                    <input class="form-control form-control-rounded" type="tel" inputmode="tel" name="phone" id="contact-tel" autocomplete="tel" placeholder="{{__('Phone')}}" >
                     @error('phone')
                     <p class="text-danger">{{$message}}</p>
                     @enderror

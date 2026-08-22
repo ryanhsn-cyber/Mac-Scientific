@@ -41,13 +41,13 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="checkout-fn">{{__('First Name')}}</label>
-              <input class="form-control" name="bill_first_name" type="text" required id="checkout-fn" value="{{isset($user) ? $user->first_name : ''}}">
+              <input class="form-control" name="bill_first_name" type="text" autocomplete="given-name" required id="checkout-fn" value="{{isset($user) ? $user->first_name : ''}}">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="checkout-ln">{{__('Last Name')}}</label>
-              <input class="form-control" name="bill_last_name" type="text" required id="checkout-ln" value="{{isset($user) ? $user->last_name : ''}}">
+              <input class="form-control" name="bill_last_name" type="text" autocomplete="family-name" required id="checkout-ln" value="{{isset($user) ? $user->last_name : ''}}">
             </div>
           </div>
         </div>
@@ -55,13 +55,13 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="checkout_email_billing">{{__('Email Address (Optional)')}}</label>
-              <input class="form-control" name="bill_email"  type="email" required id="checkout_email_billing" value="customer@gmail.com">
+              <input class="form-control" name="bill_email" type="email" autocomplete="email" id="checkout_email_billing" value="{{isset($user) ? $user->email : ''}}">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="checkout-phone">{{__('Phone Number')}}</label>
-              <input class="form-control" name="bill_phone" type="text" id="checkout-phone" required value="{{isset($user) ? $user->phone : ''}}">
+              <input class="form-control" name="bill_phone" type="tel" inputmode="tel" autocomplete="tel" id="checkout-phone" required value="{{isset($user) ? $user->phone : ''}}">
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="checkout-address1">{{__('Address')}} 1</label>
-              <input class="form-control" name="bill_address1" required type="text" id="checkout-address1" value="{{isset($user) ? $user->bill_address1 : ''}}">
+              <input class="form-control" name="bill_address1" required type="text" autocomplete="street-address" id="checkout-address1" value="{{isset($user) ? $user->bill_address1 : ''}}">
             </div>
           </div>
           <div class="col-sm-6">
@@ -84,13 +84,13 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="checkout-zip">{{__('Zip Code')}}</label>
-              <input class="form-control" name="bill_zip" type="text" id="checkout-zip" value="{{isset($user) ? $user->bill_zip : ''}}">
+              <input class="form-control" name="bill_zip" type="text" autocomplete="postal-code" id="checkout-zip" value="{{isset($user) ? $user->bill_zip : ''}}">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="checkout-city">{{__('City')}}</label>
-              <input class="form-control" name="bill_city" type="text" required id="checkout-city" value="{{isset($user) ? $user->bill_city : ''}}">
+              <input class="form-control" name="bill_city" type="text" autocomplete="address-level2" required id="checkout-city" value="{{isset($user) ? $user->bill_city : ''}}">
             </div>
           </div>
         </div>

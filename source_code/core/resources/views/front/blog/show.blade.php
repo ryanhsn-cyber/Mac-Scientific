@@ -1,6 +1,48 @@
 @extends('master.front')
 @section('title')
-    {{__('Blog Details')}}
+    {{$post->title}}
+@endsection
+
+@section('meta')
+<meta name="keywords" content="{{$post->meta_keywords ?: $post->title}}">
+<meta name="description" content="{{$post->meta_descriptions ?: strip_tags(substr($post->details, 0, 160))}}">
+
+<meta property="og:title" content="{{ $post->title }} | {{ $setting->title }}">
+<meta property="og:description" content="{{ $post->meta_descriptions ?: strip_tags(substr($post->details, 0, 160)) }}">
+<meta property="og:url" content="{{ route('front.blog.details', $post->slug) }}">
+<meta property="og:type" content="article">
+<meta property="og:image" content="{{ asset('assets/images/' . $post->photo) }}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $post->title }} | {{ $setting->title }}">
+<meta name="twitter:description" content="{{ $post->meta_descriptions ?: strip_tags(substr($post->details, 0, 160)) }}">
+<meta name="twitter:image" content="{{ asset('assets/images/' . $post->photo) }}">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ addslashes($post->title) }}",
+  "image": [
+    "{{ asset('assets/images/' . $post->photo) }}"
+  ],
+  "datePublished": "{{ date('Y-m-d\TH:i:sP', strtotime($post->created_at)) }}",
+  "dateModified": "{{ date('Y-m-d\TH:i:sP', strtotime($post->updated_at ?? $post->created_at)) }}",
+  "author": {
+    "@type": "Organization",
+    "name": "{{ addslashes($setting->title) }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ addslashes($setting->title) }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ asset('assets/images/'.$setting->logo) }}"
+    }
+  },
+  "description": "{{ addslashes(strip_tags(substr($post->details, 0, 200))) }}"
+}
+</script>
 @endsection
 
 @section('content')
@@ -41,11 +83,11 @@
                         }
                     @endphp
                     @foreach ($photoArray as $photo)
-                        <img src="{{asset('assets/images/'.$photo)}}" alt="Image">
+                        <img src="{{asset('assets/images/'.$photo)}}" alt="{{ $post->title }}">
                     @endforeach
                 </div>
                 <div class="blog-details-main-content">
-                    <h4 class="pt-4 b-d-title">{{$post->title}}</h4>
+                    <h1 class="pt-4 b-d-title" style="font-size: 24px; font-weight: 700; color: #1a1a1a;">{{$post->title}}</h1>
                 <ul class="post-meta mb-4">
                     <li><i class="icon-user"></i><a href="javascript:;}">{{__('Admin')}}</a></li>
                     <li><i class="icon-tag"></i><a href="{{route('front.blog').'?category='.$post->category->slug}}">{{$post->category->name}}</a></li>

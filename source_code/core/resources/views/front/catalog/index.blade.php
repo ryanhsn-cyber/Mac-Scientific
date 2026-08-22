@@ -1,10 +1,15 @@
 @extends('master.front')
 @section('meta')
-<meta name="keywords" content="{{$setting->meta_keywords}}">
-<meta name="description" content="{{$setting->meta_description}}">
+<meta name="keywords" content="{{ isset($category) && $category->meta_keywords ? $category->meta_keywords : $setting->meta_keywords }}">
+<meta name="description" content="{{ isset($category) && $category->meta_descriptions ? $category->meta_descriptions : $setting->meta_description }}">
+<meta property="og:title" content="{{ isset($category) ? $category->name : (isset($brand) ? $brand->name : __('Shop Products')) }} | {{ $setting->title }}">
+<meta property="og:description" content="{{ isset($category) && $category->meta_descriptions ? $category->meta_descriptions : $setting->meta_description }}">
+<meta property="og:url" content="{{ url()->full() }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{ asset('assets/images/'.$setting->logo) }}">
 @endsection
 @section('title')
-    {{__('Products')}}
+    {{ isset($category) ? $category->name : (isset($brand) ? $brand->name : (request()->has('search') ? __('Search: ') . request('search') : __('Products'))) }}
 @endsection
 
 @section('content')

@@ -60,7 +60,7 @@
         @foreach ($cart as $key => $item)
      
         <div class="entry">
-          <div class="entry-thumb"><a href="{{route('front.product',$item['slug'])}}"><img src="{{asset('assets/images/'.$item['photo'])}}" alt="Product"></a></div>
+          <div class="entry-thumb"><a href="{{route('front.product',$item['slug'])}}"><img src="{{asset('assets/images/'.$item['photo'])}}" alt="{{ $item[\'name\'] }}"></a></div>
           <div class="entry-content">
             <h4 class="entry-title"><a href="{{route('front.product',$item['slug'])}}">
                 {{ strlen(strip_tags($item['name'])) > 45 ? substr(strip_tags($item['name']), 0, 45) . '...' : strip_tags($item['name']) }}

@@ -39,13 +39,13 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="checkout-fn">{{__('First Name')}}</label>
-              <input class="form-control" name="ship_first_name" type="text" id="checkout-fn" value="{{isset($user) ? $user->first_name : ''}}" >
+              <input class="form-control" name="ship_first_name" type="text" autocomplete="given-name" id="checkout-fn" value="{{isset($user) ? $user->first_name : ''}}" >
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="checkout-ln">{{__('Last Name')}}</label>
-              <input class="form-control" name="ship_last_name" type="text" id="checkout-ln" value="{{isset($user) ? $user->last_name : ''}}" >
+              <input class="form-control" name="ship_last_name" type="text" autocomplete="family-name" id="checkout-ln" value="{{isset($user) ? $user->last_name : ''}}" >
             </div>
           </div>
         </div>
@@ -53,13 +53,13 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="checkout-email">{{__('E-mail Address')}}</label>
-              <input class="form-control" name="ship_email" type="email" id="checkout-email" value="{{isset($user) ? $user->email : ''}}" >
+              <input class="form-control" name="ship_email" type="email" autocomplete="email" id="checkout-email" value="{{isset($user) ? $user->email : ''}}" >
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="checkout-phone">{{__('Phone Number')}}</label>
-              <input class="form-control" name="ship_phone" type="text" id="checkout-phone" value="{{isset($user) ? $user->phone : ''}}" >
+              <input class="form-control" name="ship_phone" type="tel" inputmode="tel" autocomplete="tel" id="checkout-phone" value="{{isset($user) ? $user->phone : ''}}" >
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
           <div class="col-sm-12">
             <div class="form-group">
               <label for="checkout-company">{{__('Company')}}</label>
-              <input class="form-control" name="ship_company" type="text" id="checkout-company" value="{{isset($user) ? $user->ship_company : ''}}">
+              <input class="form-control" name="ship_company" type="text" autocomplete="organization" id="checkout-company" value="{{isset($user) ? $user->ship_company : ''}}">
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="checkout-address1">{{__('Address')}} 1</label>
-              <input class="form-control" name="ship_address1" required type="text" id="checkout-address1" value="{{isset($user) ? $user->ship_address1 : ''}}" >
+              <input class="form-control" name="ship_address1" required type="text" autocomplete="street-address" id="checkout-address1" value="{{isset($user) ? $user->ship_address1 : ''}}" >
             </div>
           </div>
           <div class="col-sm-6">

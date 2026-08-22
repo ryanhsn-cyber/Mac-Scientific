@@ -26,6 +26,7 @@ use App\Models\Fcategory;
 use App\Models\HomeCutomize;
 use App\Models\Order;
 use App\Models\Language;
+use App\Models\Page;
 use App\Models\Post;
 use App\Models\Service;
 use App\Models\Slider;
@@ -584,6 +585,21 @@ public function page($slug)
     }
 
 
+
+    public function sitemap()
+    {
+        $items = Item::whereStatus(1)->select('id', 'name', 'slug', 'thumbnail', 'photo', 'sort_details', 'updated_at')->get();
+        $categories = Category::whereStatus(1)->select('id', 'name', 'slug', 'updated_at')->get();
+        $posts = Post::select('id', 'title', 'slug', 'photo', 'updated_at')->get();
+        $pages = Page::select('id', 'title', 'slug')->get();
+
+        return response()->view('front.sitemap', [
+            'items' => $items,
+            'categories' => $categories,
+            'posts' => $posts,
+            'pages' => $pages,
+        ])->header('Content-Type', 'text/xml; charset=utf-8');
+    }
 
     public function finalize()
     {

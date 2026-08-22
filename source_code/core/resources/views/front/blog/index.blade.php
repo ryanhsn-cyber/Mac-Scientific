@@ -1,7 +1,17 @@
 @extends('master.front')
 
 @section('title')
-    {{__('Blog')}}
+    {{__('Medical Aesthetics & Technology Blog')}}
+@endsection
+
+@section('meta')
+<meta name="keywords" content="PRP, PRF, Labware, Centrifuge, Medical Aesthetics, Dermatology, Mac Scientific Blog">
+<meta name="description" content="Discover the latest scientific advancements, protocols, and equipment guides for PRP, PRF, and aesthetic medicine from Mac Scientific.">
+<meta property="og:title" content="Medical Aesthetics & Technology Blog | {{ $setting->title }}">
+<meta property="og:description" content="Discover the latest scientific advancements, protocols, and equipment guides for PRP, PRF, and aesthetic medicine from Mac Scientific.">
+<meta property="og:url" content="{{ route('front.blog') }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{ asset('assets/images/'.$setting->logo) }}">
 @endsection
 
 @section('content')
@@ -36,7 +46,7 @@
                                         $photoPath = empty($photoPath) ? 'placeholder.png' : $photoPath;
                                     @endphp
                                     <img class="lazy" loading="lazy" width="400" height="400" src="{{ asset('assets/images/' . $photoPath) }}"
-                                        alt="Blog Post">
+                                        alt="{{ $post->title }}">
                                     </div>
                                 <div class="post-body">
 

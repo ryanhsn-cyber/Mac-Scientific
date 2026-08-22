@@ -4,17 +4,85 @@
 <head>
 <meta charset="utf-8">
 @if (url()->current() == route('front.index'))
-<title>@yield('hometitle')</title>
+<title>{{ $setting->home_page_title ?: $setting->title }}</title>
 @else
-<title>{{$setting->title}} -@yield('title')</title>
+<title>@yield('title') | {{$setting->title}}</title>
 @endif
 
-<!-- SEO Meta Tags-->
-@yield('meta')
+<!-- Mobile & PWA Meta Tags-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="{{ $setting->primary_color ?? '#0d47a1' }}">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="author" content="{{$setting->title}}">
 <meta name="distribution" content="web">
-<!-- Mobile Specific Meta Tag-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ url()->current() }}">
+
+<!-- Preconnect to Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+<!-- SEO & Social Meta Tags-->
+@hasSection('meta')
+    @yield('meta')
+@else
+    <meta name="keywords" content="{{ $setting->meta_keywords }}">
+    <meta name="description" content="{{ $setting->meta_description }}">
+    <meta property="og:title" content="{{ $setting->home_page_title ?: $setting->title }}">
+    <meta property="og:description" content="{{ $setting->meta_description }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="{{ $setting->title }}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ asset('assets/images/'.$setting->logo) }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $setting->home_page_title ?: $setting->title }}">
+    <meta name="twitter:description" content="{{ $setting->meta_description }}">
+    <meta name="twitter:image" content="{{ asset('assets/images/'.$setting->logo) }}">
+@endif
+
+<!-- Global Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ route('front.index') }}#organization",
+      "name": "{{ $setting->title }}",
+      "url": "{{ route('front.index') }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ asset('assets/images/'.$setting->logo) }}"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "{{ $setting->footer_phone }}",
+        "contactType": "customer service",
+        "areaServed": "BD"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ route('front.index') }}#website",
+      "url": "{{ route('front.index') }}",
+      "name": "{{ $setting->title }}",
+      "publisher": {
+        "@id": "{{ route('front.index') }}#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ route('front.catalog') }}?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
 
 <!-- Favicon Icons-->
 <link rel="icon" type="image/png" href="{{asset('assets/images/'.$setting->favicon)}}">
@@ -1072,7 +1140,32 @@ body_theme4
             }
         }
     </style>
-    <a href="https://wa.me/8801410699221" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <!-- App-Style Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="{{ route('front.index') }}" class="nav-link-item {{ request()->routeIs('front.index') ? 'active' : '' }}">
+            <i class="icon-home"></i>
+            <span>{{ __('Home') }}</span>
+        </a>
+        <a href="{{ route('front.catalog') }}" class="nav-link-item {{ request()->routeIs('front.catalog') ? 'active' : '' }}">
+            <i class="icon-grid"></i>
+            <span>{{ __('Shop') }}</span>
+        </a>
+        <a href="javascript:;" class="nav-link-item close-m-serch" aria-label="Search">
+            <i class="icon-search"></i>
+            <span>{{ __('Search') }}</span>
+        </a>
+        <a href="{{ route('front.cart') }}" class="nav-link-item {{ request()->routeIs('front.cart') ? 'active' : '' }}">
+            <i class="icon-shopping-cart"></i>
+            <span class="cart-badge cart_count">{{ Session::has('cart') ? count(Session::get('cart')) : '0' }}</span>
+            <span>{{ __('Cart') }}</span>
+        </a>
+        <a href="https://wa.me/8801410699221" target="_blank" rel="noopener noreferrer" class="nav-link-item whatsapp-item" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+            <span>{{ __('WhatsApp') }}</span>
+        </a>
+    </nav>
+
+    <a href="https://wa.me/8801410699221" class="whatsapp-fab d-none d-lg-flex" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp" aria-hidden="true"></i>
     </a>
 

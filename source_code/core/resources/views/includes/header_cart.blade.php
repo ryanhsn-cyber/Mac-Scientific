@@ -9,7 +9,7 @@
     $grandSubtotal += ($cart['main_price'] + $cart['attribute_price']) * $cart['qty'];
 @endphp
 <div class="entry">
-  <div class="entry-thumb"><a href="{{route('front.product',$cart['slug'])}}"><img src="{{asset('assets/images/'.$cart['photo'])}}" alt="Product"></a></div>
+  <div class="entry-thumb"><a href="{{route('front.product',$cart['slug'])}}"><img src="{{asset('assets/images/'.$cart['photo'])}}" alt="{{ $cart[\'name\'] }}"></a></div>
   <div class="entry-content">
     <h4 class="entry-title"><a href="{{route('front.product',$cart['slug'])}}">
         {{ strlen(strip_tags($cart['name'])) > 15 ? substr(strip_tags($cart['name']), 0, 15) . '...' : strip_tags($cart['name']) }}
