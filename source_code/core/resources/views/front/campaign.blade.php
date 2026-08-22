@@ -28,23 +28,23 @@
   <!-- Page Content-->
 
     @php
-    function renderStarRating($rating,$maxRating=5) {
+    if (!function_exists('renderStarRating')) {
+    function renderStarRating($rating, $maxRating = 5) {
+        $fullStar = "<i class = 'far fa-star filled'></i>";
+        $halfStar = "<i class = 'far fa-star-half filled'></i>";
+        $emptyStar = "<i class = 'far fa-star'></i>";
+        $rating = $rating <= $maxRating ? $rating : $maxRating;
 
-            $fullStar = "<i class = 'far fa-star filled'></i>";
-            $halfStar = "<i class = 'far fa-star-half filled'></i>";
-            $emptyStar = "<i class = 'far fa-star'></i>";
-        $rating = $rating <= $maxRating?$rating:$maxRating;
+        $fullStarCount = (int) $rating;
+        $halfStarCount = ceil($rating) - $fullStarCount;
+        $emptyStarCount = $maxRating - $fullStarCount - $halfStarCount;
 
-        $fullStarCount = (int)$rating;
-        $halfStarCount = ceil($rating)-$fullStarCount;
-        $emptyStarCount = $maxRating -$fullStarCount-$halfStarCount;
-
-        $html = str_repeat($fullStar,$fullStarCount);
-        $html .= str_repeat($halfStar,$halfStarCount);
-        $html .= str_repeat($emptyStar,$emptyStarCount);
-        $html = $html;
+        $html = str_repeat($fullStar, $fullStarCount);
+        $html .= str_repeat($halfStar, $halfStarCount);
+        $html .= str_repeat($emptyStar, $emptyStarCount);
         return $html;
     }
+}
     @endphp
     <div class="deal-of-day-section pb-5">
         <div class="container">

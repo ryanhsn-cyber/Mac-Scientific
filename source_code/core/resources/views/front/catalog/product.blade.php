@@ -323,23 +323,23 @@
         </div>
 
         @php
-        function renderStarRating($rating,$maxRating=5) {
+        if (!function_exists('renderStarRating')) {
+    function renderStarRating($rating, $maxRating = 5) {
+        $fullStar = "<i class = 'far fa-star filled'></i>";
+        $halfStar = "<i class = 'far fa-star-half filled'></i>";
+        $emptyStar = "<i class = 'far fa-star'></i>";
+        $rating = $rating <= $maxRating ? $rating : $maxRating;
 
-            $fullStar = "<i class='fas fa-star filled'></i>";
-            $halfStar = "<i class='fas fa-star-half-alt filled'></i>";
-            $emptyStar = "<i class='far fa-star'></i>";
-            $rating = $rating <= $maxRating?$rating:$maxRating;
+        $fullStarCount = (int) $rating;
+        $halfStarCount = ceil($rating) - $fullStarCount;
+        $emptyStarCount = $maxRating - $fullStarCount - $halfStarCount;
 
-            $fullStarCount = (int)$rating;
-            $halfStarCount = ceil($rating)-$fullStarCount;
-            $emptyStarCount = $maxRating -$fullStarCount-$halfStarCount;
-
-            $html = str_repeat($fullStar,$fullStarCount);
-            $html .= str_repeat($halfStar,$halfStarCount);
-            $html .= str_repeat($emptyStar,$emptyStarCount);
-            $html = $html;
-            return $html;
-        }
+        $html = str_repeat($fullStar, $fullStarCount);
+        $html .= str_repeat($halfStar, $halfStarCount);
+        $html .= str_repeat($emptyStar, $emptyStarCount);
+        return $html;
+    }
+}
         @endphp
         <!-- Product Info-->
         <div class="col-xxl-7 col-lg-6 col-md-6">
