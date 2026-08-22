@@ -51,9 +51,10 @@
                             .hero-slider .item img {
                                 width: 100% !important;
                                 height: auto !important;
+                                aspect-ratio: 3550 / 1440;
                                 object-fit: contain !important;
                             }
-                            .hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; }
+                            .hero-slider-main:not(.owl-loaded) { display: block !important; overflow: hidden; aspect-ratio: 3550 / 1440; }
                             .hero-slider-main:not(.owl-loaded) .item { display: none; }
                             .hero-slider-main:not(.owl-loaded) .item:first-child { display: block; }
                         </style>
@@ -70,7 +71,7 @@
                                         @endif
                                         " style="position: relative;">
                                         @if($loop->first)
-                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" fetchpriority="high" alt="{{ $setting->title }} Banner" width="3550" height="1440" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                                        <img src="{{ asset('assets/images/' . $encoded_slider_photo) }}" fetchpriority="high" decoding="async" alt="{{ $setting->title }} Banner" width="3550" height="1440" style="width: 100%; height: auto; aspect-ratio: 3550 / 1440; display: block; object-fit: contain;">
                                         @else
                                         <img class="lazy" loading="lazy" src="{{ asset('assets/images/' . $encoded_slider_photo) }}?v={{ strtotime($slider->updated_at ?? 'now') }}" alt="{{ $setting->title }} Banner" width="3550" height="1440" style="width: 100%; height: auto; display: block; object-fit: contain;">
                                         @endif
