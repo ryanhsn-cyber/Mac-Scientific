@@ -137,20 +137,23 @@ class FrontendController extends Controller
 
             $feature_categories = [];
             foreach($feature_category as $key => $cat){
-                $feature_categories[] = Category::findOrFail($cat);
+                $foundCat = Category::find($cat);
+                if($foundCat){
+                    $feature_categories[] = $foundCat;
+                }
             }
             $feature_category_items = [];
             if(count($feature_categories)){
                 $index = '';
                 foreach($feature_categories as $key => $data){
-                   if($data->id == $feature_category_ids['category_id1']){
+                   if($data->id == ($feature_category_ids['category_id1'] ?? null)){
                        $index = $key;
                    }
                 }
 
-                $category = $feature_categories[$index]->id;
-                $subcategory = $feature_category_ids['subcategory_id1'];
-                $childcategory = $feature_category_ids['childcategory_id1'];
+                $category = !empty($feature_categories[$index]) ? $feature_categories[$index]->id : null;
+                $subcategory = $feature_category_ids['subcategory_id1'] ?? null;
+                $childcategory = $feature_category_ids['childcategory_id1'] ?? null;
 
                 $feature_category_items = Item::when($category, function ($query, $category) {
                     return $query->where('category_id', $category);
@@ -170,11 +173,11 @@ class FrontendController extends Controller
             // popular category
 
             $popular_category_ids = json_decode($home_customize->popular_category,true);
-            $popular_category_title = $popular_category_ids['popular_title'];
+            $popular_category_title = $popular_category_ids['popular_title'] ?? '';
 
             $popular_category = [];
                 for($i=1;$i<=4;$i++){
-                    if(!in_array($popular_category_ids['category_id'.$i],$popular_category)){
+                    if(isset($popular_category_ids['category_id'.$i]) && !in_array($popular_category_ids['category_id'.$i],$popular_category)){
                         if($popular_category_ids['category_id'.$i]){
                             $popular_category[] = $popular_category_ids['category_id'.$i];
                         }
@@ -182,7 +185,10 @@ class FrontendController extends Controller
                 }
                 $popular_categories = [];
                 foreach($popular_category as $key => $cat){
-                    $popular_categories[] = Category::findOrFail($cat);
+                    $foundCat = Category::find($cat);
+                    if($foundCat){
+                        $popular_categories[] = $foundCat;
+                    }
                 }
 
             $popular_category_items = [];
@@ -190,23 +196,25 @@ class FrontendController extends Controller
             if(count($popular_categories) > 0){
                 $index = '';
                 foreach($popular_categories as $key => $data){
-                   if($data->id == $popular_category_ids['category_id1']){
+                   if($data->id == ($popular_category_ids['category_id1'] ?? null)){
                        $index = $key;
                    }
                 }
             $pupular_cateogry_home4 = null;
             if($setting->theme == 'theme4'){
-                $pupular_cateogries_home4 = json_decode($home_customize->home_4_popular_category,true);
+                $pupular_cateogries_home4 = json_decode($home_customize->home_4_popular_category,true) ?: [];
                 $pupular_cateogry_home4 = [];
                 foreach($pupular_cateogries_home4 as $home4category){
-                    $pupular_cateogry_home4[] = Category::with('items')->findOrFail($home4category);
+                    $foundCat = Category::with('items')->find($home4category);
+                    if($foundCat){
+                        $pupular_cateogry_home4[] = $foundCat;
+                    }
                 }
             }
 
-            // dd($pupular_cateogry_home4);
-            $category = $popular_categories[$index]->id;
-            $subcategory = $popular_category_ids['subcategory_id1'];
-            $childcategory = $popular_category_ids['childcategory_id1'];
+            $category = !empty($popular_categories[$index]) ? $popular_categories[$index]->id : null;
+            $subcategory = $popular_category_ids['subcategory_id1'] ?? null;
+            $childcategory = $popular_category_ids['childcategory_id1'] ?? null;
 
             $popular_category_items = Item::when($category, function ($query, $category) {
                 return $query->where('category_id', $category);

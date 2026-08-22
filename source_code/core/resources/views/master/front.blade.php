@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 @if (url()->current() == route('front.index'))
-<title>{{ $setting->home_page_title ?: $setting->title }}</title>
+<title>{{ !empty($setting->home_page_title) ? $setting->home_page_title : $setting->title }}</title>
 @else
 <title>@yield('title') | {{$setting->title}}</title>
 @endif
@@ -33,14 +33,14 @@
 @else
     <meta name="keywords" content="{{ $setting->meta_keywords }}">
     <meta name="description" content="{{ $setting->meta_description }}">
-    <meta property="og:title" content="{{ $setting->home_page_title ?: $setting->title }}">
+    <meta property="og:title" content="{{ !empty($setting->home_page_title) ? $setting->home_page_title : $setting->title }}">
     <meta property="og:description" content="{{ $setting->meta_description }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:site_name" content="{{ $setting->title }}">
     <meta property="og:type" content="website">
     <meta property="og:image" content="{{ asset('assets/images/'.$setting->logo) }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $setting->home_page_title ?: $setting->title }}">
+    <meta name="twitter:title" content="{{ !empty($setting->home_page_title) ? $setting->home_page_title : $setting->title }}">
     <meta name="twitter:description" content="{{ $setting->meta_description }}">
     <meta name="twitter:image" content="{{ asset('assets/images/'.$setting->logo) }}">
 @endif
