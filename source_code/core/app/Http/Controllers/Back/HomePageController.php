@@ -297,6 +297,10 @@ class HomePageController extends Controller
         if($request->hasFile('highlight_banner')){
             $file = $request->file('highlight_banner');
             
+            if (!$file->isValid()) {
+                return redirect()->back()->with('error', 'File upload failed! Error code: ' . $file->getError() . '. The image might exceed the server upload size limit.');
+            }
+            
             try {
                 $img = \Image::make($file);
                 
@@ -313,9 +317,16 @@ class HomePageController extends Controller
                 })->encode('webp', 90)->save($mobileWebpPath);
             } catch (\Exception $e) {
                 \Log::error('WebP generation failed: ' . $e->getMessage());
+                return redirect()->back()->with('error', 'WebP image processing failed: ' . $e->getMessage());
             }
 
-            $file->move(base_path('../assets/images'), 'featured-banner.png');
+            try {
+                $file->move(base_path('../assets/images'), 'featured-banner.png');
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Failed to move uploaded file: ' . $e->getMessage());
+            }
+        } else {
+            return redirect()->back()->with('error', 'No file was received by the server! The image might exceed the server\'s upload limit, or the input was empty.');
         }
 
         if($request->has('highlight_banner_url')){

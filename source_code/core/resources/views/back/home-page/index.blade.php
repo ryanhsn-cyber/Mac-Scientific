@@ -1006,7 +1006,7 @@
                                 </div>
                                 <div class="form-group position-relative">
                                     <label class="file">
-                                        <input type="file" accept="image/*" class="upload-photo" name="highlight_banner" id="file"
+                                        <input type="file" accept="image/*" class="highlight-photo" name="highlight_banner" id="highlight_banner_file"
                                             aria-label="File browser example">
                                         <span class="file-custom text-left">{{ __('Upload Image...') }}</span>
                                     </label>
@@ -1039,5 +1039,10 @@
         $('#basic').select2({
 			theme: "bootstrap"
 		});
+        
+        $(".highlight-photo").on("change", function(e) {
+            var path = $(this).parent().parent().prev().find('img');
+            readURL(this, path);
+        });
     </script>
 @endsection
