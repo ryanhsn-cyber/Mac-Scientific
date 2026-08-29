@@ -293,6 +293,19 @@ class HomePageController extends Controller
         if($request->hasFile('highlight_banner')){
             $image = $request->file('highlight_banner');
             $image->move('assets/images', 'featured-banner.png');
+
+            try {
+                $img = \Image::make(base_path('../assets/images/featured-banner.png'));
+                $img->encode('webp', 90)->save(base_path('../assets/images/featured-banner.webp'));
+                
+                // generate mobile version
+                $img->resize(767, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->encode('webp', 90)->save(base_path('../assets/images/featured-banner-mobile.webp'));
+            } catch (\Exception $e) {
+                // Ignore if image library fails
+            }
         }
 
         if($request->has('highlight_banner_url')){

@@ -411,7 +411,10 @@
                 <div class="row mb-30">
                     <div class="col-lg-12">
                         <a href="{{ route('front.catalog') }}" class="d-block">
-                            <img src="/assets/images/featured-banner.webp"
+                            @php
+                                $bannerTime = @filemtime(base_path('../assets/images/featured-banner.png')) ?: time();
+                            @endphp
+                            <img src="/assets/images/featured-banner.webp?v={{ $bannerTime }}"
                                  alt="Regenerative Medicine - All About The Procedure And Treatment Options"
                                  class="img-fluid w-100" width="1114" height="320"
                                  style="border-radius: 8px; max-height: 320px; object-fit: cover;" loading="lazy">
