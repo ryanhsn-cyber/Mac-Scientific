@@ -215,7 +215,7 @@
                 let labelText = label.find('.file-custom').text() || 'Upload Image...';
                 
                 // Hide the original label (keep in DOM so input works and is submitted)
-                label.addClass('d-none');
+                label.css({position: 'absolute', opacity: 0, pointerEvents: 'none', width: '1px', height: '1px', overflow: 'hidden'});
                 
                 let dropdownHtml = $(`
                 <div class="dropdown w-100 mb-2" style="position: relative; height: 2.5rem;">
