@@ -231,7 +231,7 @@
                 `);
 
                 dropdownHtml.find('.upload-computer-btn').on('click', function() {
-                    input.click();
+                    input[0].click();
                 });
 
                 dropdownHtml.find('.upload-gallery-btn').on('click', function() {
