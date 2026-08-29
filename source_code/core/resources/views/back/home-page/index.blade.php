@@ -995,8 +995,11 @@
                                 <div class="form-group">
                                     <label for="name">{{ __('Highlight Banner') }} *</label>
                                     <br>
+                                        @php
+                                            $adminBannerTime = @filemtime(base_path('../assets/images/featured-banner.png')) ?: time();
+                                        @endphp
                                         <img class="admin-img"
-                                            src="{{ asset('assets/images/featured-banner.png') }}"
+                                            src="{{ asset('assets/images/featured-banner.png') }}?v={{ $adminBannerTime }}"
                                             alt="No Image Found">
                                     <br>
                                     <span class="mt-1">{{ __('Image Size Should Be 1200 x 300.') }}</span>

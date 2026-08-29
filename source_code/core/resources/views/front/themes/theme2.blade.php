@@ -406,7 +406,7 @@
                             </div>
                             <div class="product-card-inner">
                             <div class="product-card-body">
-                                <div class="product-category"><a href="{{route('front.catalog').'?category='.$item->category->slug}}">{{$item->category->name}}</a></div>
+                                <div class="product-category"><a href="{{route('front.catalog').'?category='.($item->category->slug ?? '')}}">{{$item->category->name ?? ''}}</a></div>
                                 <h3 class="product-title"><a href="{{route('front.product',$item->slug)}}">
                                     {{ strlen(strip_tags($item->name)) > 35 ? substr(strip_tags($item->name), 0, 35) : strip_tags($item->name) }}
                                 </a></h3>
