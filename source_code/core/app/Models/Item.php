@@ -172,5 +172,29 @@ class Item extends Model
         return $spec_name;
     }
 
+    public function getVideoInfoAttribute()
+    {
+        if (!$this->video) return null;
+        
+        $isMp4 = \Illuminate\Support\Str::endsWith(strtolower($this->video), ['.mp4', '.webm']);
+        $embedUrl = $this->video;
+        $id = null;
+        $isYoutube = false;
+        
+        if (!$isMp4) {
+            if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|shorts\/)|youtu\.be\/)([^"&?\/\s]{11})/i', $this->video, $matches)) {
+                $id = $matches[1];
+                $embedUrl = 'https://www.youtube.com/embed/' . $id;
+                $isYoutube = true;
+            }
+        }
+        
+        return (object)[
+            'is_mp4' => $isMp4,
+            'is_youtube' => $isYoutube,
+            'embed_url' => $embedUrl,
+            'id' => $id
+        ];
+    }
 }
 

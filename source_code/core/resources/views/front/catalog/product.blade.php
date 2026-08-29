@@ -211,16 +211,12 @@
       <!-- Poduct Gallery-->
       <div class="col-xxl-5 col-lg-6 col-md-6 d-flex flex-column justify-content-between">
         @php
-            $video_id = '';
-            if ($item->video) {
-                preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i', $item->video, $matches);
-                $video_id = $matches[1] ?? '';
-            }
+            $videoInfo = $item->video_info;
         @endphp
 
         <div class="product-gallery" style="position: relative;">
-            @if ($item->video && $video_id)
-            <div class="media-tabs" style="position: absolute; top: 15px; right: 15px; z-index: 10; background: #f8f9fa; border-radius: 20px; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); display: flex; gap: 4px;">
+            @if ($videoInfo)
+            <div class="media-tabs" style="position: absolute; top: 45px; right: 15px; z-index: 10; background: #f8f9fa; border-radius: 20px; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); display: flex; gap: 4px;">
                 <button id="tab-photos" class="media-tab-btn" onclick="switchMediaTab('photos')" style="border: none; background: #6f42c1; color: white; border-radius: 16px; padding: 5px 12px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.3s;">
                     <i class="fas fa-camera"></i> Photos
                 </button>
@@ -263,9 +259,16 @@
                 </div>
             </div>
 
-            @if ($item->video && $video_id)
+            @if ($videoInfo)
             <div id="media-video" class="media-container" style="display: none; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; position: relative;">
-                <iframe id="youtube-iframe" data-src="https://www.youtube.com/embed/{{ $video_id }}?rel=0&showinfo=0&autoplay=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                @if ($videoInfo->is_mp4)
+                    <video controls style="width: 100%; height: 100%; object-fit: cover;">
+                        <source src="{{ $videoInfo->embed_url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                @else
+                    <iframe id="youtube-iframe" data-src="{{ $videoInfo->embed_url }}?rel=0&showinfo=0&autoplay=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                @endif
             </div>
             @endif
         </div>
@@ -984,6 +987,15 @@
             if (iframe && iframe.src) {
                 iframe.src = iframe.src;
             }
+            const videoTag = videoMedia.querySelector('video');
+            if (videoTag) {
+                videoTag.pause();
+            }
+            
+            // Refresh Owl Carousel so it doesn't collapse
+            if ($.fn.owlCarousel) {
+                $('.product-details-slider').trigger('refresh.owl.carousel');
+            }
         } else {
             videoTab.style.background = '#6f42c1';
             videoTab.style.color = 'white';
@@ -995,6 +1007,10 @@
             // Lazy load iframe
             if (iframe && !iframe.src) {
                 iframe.src = iframe.getAttribute('data-src');
+            }
+            const videoTag = videoMedia.querySelector('video');
+            if (videoTag) {
+                videoTag.play();
             }
         }
     }

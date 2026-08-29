@@ -82,7 +82,7 @@ class ItemRequest extends FormRequest
             'stock'           => 'numeric|max:9999999999',
             'tax_id'          => 'nullable',
             'photo'           => $required . 'mimes:jpeg,jpg,png,svg,avif,webp',
-            'video'           => ['nullable', 'url', 'regex:/^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/'],
+            'video'           => ['nullable', 'url'],
         ];
     }
 
@@ -106,7 +106,6 @@ class ItemRequest extends FormRequest
             'stock.required'           =>  __('Stock field is required.'),
             'photo.required'           =>  __('Image field is required.'),
             'photo.mimes'              =>  __('Image type must be jpg,jpeg,png,svg,avif,webp.'),
-            'video.regex'              =>  __('The video URL must be a valid YouTube link.'),
             'video.url'                =>  __('The video must be a valid URL.')
         ];
     }

@@ -321,7 +321,7 @@
                             value="{{$item- required>sku}}" >
                     </div>
                     <div class="form-group">
-                        <label for="video">{{ __('Vido Link') }} </label>
+                        <label for="video">{{ __('Video Link') }} </label>
                         <input type="text" name="video" class="form-control"
                             id="video" placeholder="{{ __('Enter Video Link') }}"
                             value="{{$item->video}}" >

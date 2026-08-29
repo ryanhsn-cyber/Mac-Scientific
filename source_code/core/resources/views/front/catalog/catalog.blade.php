@@ -53,6 +53,13 @@
                             <a href="{{route('front.product',$item->slug)}}">
 <img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="{{ $item->name }}">
 </a>
+                            @if($item->video)
+                                <div class="video-btn product-video-badge" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10;">
+                                    <a href="{{ $item->video_info ? $item->video_info->embed_url : $item->video }}" title="{{ __('Watch Video') }}" style="display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255,255,255,0.8); border-radius: 50%; color: #e33; font-size: 18px; box-shadow: 0 0 10px rgba(0,0,0,0.2); transition: all 0.3s ease;" onmouseover="this.style.background='#e33'; this.style.color='#fff';" onmouseout="this.style.background='rgba(255,255,255,0.8)'; this.style.color='#e33';">
+                                        <i class="fas fa-play"></i>
+                                    </a>
+                                </div>
+                            @endif
                             <div class="product-button-group">
                                 <a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                 <a class="product-button product_compare" href="javascript:;" data-target="{{route('fornt.compare.product',$item->id)}}" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
@@ -112,6 +119,13 @@
                                     <a href="{{route('front.product',$item->slug)}}">
 <img class="lazy" loading="lazy" width="400" height="400" src="{{asset('assets/images/'.$item->thumbnail)}}" alt="{{ $item->name }}">
 </a>
+                                    @if($item->video)
+                                        <div class="video-btn product-video-badge" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10;">
+                                            <a href="{{ $item->video_info ? $item->video_info->embed_url : $item->video }}" title="{{ __('Watch Video') }}" style="display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255,255,255,0.8); border-radius: 50%; color: #e33; font-size: 18px; box-shadow: 0 0 10px rgba(0,0,0,0.2); transition: all 0.3s ease;" onmouseover="this.style.background='#e33'; this.style.color='#fff';" onmouseout="this.style.background='rgba(255,255,255,0.8)'; this.style.color='#e33';">
+                                                <i class="fas fa-play"></i>
+                                            </a>
+                                        </div>
+                                    @endif
                                     <div class="product-button-group">
                                         <a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                         <a data-target="{{route('fornt.compare.product',$item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
