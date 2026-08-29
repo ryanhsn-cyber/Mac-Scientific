@@ -6,6 +6,7 @@ use App\Helpers\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\Models\HomeCutomize;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class HomePageController extends Controller
 {
@@ -193,6 +194,7 @@ class HomePageController extends Controller
         $data = HomeCutomize::first();
         $data->popular_category = json_encode($input,true);
         $data->update();
+        $this->clearHomeCache();
         return redirect()->back()->withSuccess(__('Popular Category Update Successfully'));
     }
 
@@ -203,6 +205,7 @@ class HomePageController extends Controller
         $data = HomeCutomize::first();
         $data->two_column_category = json_encode($input,true);
         $data->update();
+        $this->clearHomeCache();
         return redirect()->back()->withSuccess(__('Tree Column Category Update Successfully'));
     }
 
@@ -217,6 +220,7 @@ class HomePageController extends Controller
         $data = HomeCutomize::first();
         $data->feature_category = json_encode($input,true);
         $data->update();
+        $this->clearHomeCache();
         return redirect()->back()->withSuccess(__('Popular Category Update Successfully'));
     }
 
@@ -291,21 +295,27 @@ class HomePageController extends Controller
         ]);
 
         if($request->hasFile('highlight_banner')){
-            $image = $request->file('highlight_banner');
-            $image->move('assets/images', 'featured-banner.png');
-
+            $file = $request->file('highlight_banner');
+            
             try {
-                $img = \Image::make(base_path('../assets/images/featured-banner.png'));
-                $img->encode('webp', 90)->save(base_path('../assets/images/featured-banner.webp'));
+                $img = \Image::make($file);
                 
-                // generate mobile version
+                $webpPath = base_path('../assets/images/featured-banner.webp');
+                $mobileWebpPath = base_path('../assets/images/featured-banner-mobile.webp');
+                
+                if (file_exists($webpPath)) { @unlink($webpPath); }
+                $img->encode('webp', 90)->save($webpPath);
+                
+                if (file_exists($mobileWebpPath)) { @unlink($mobileWebpPath); }
                 $img->resize(767, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
-                })->encode('webp', 90)->save(base_path('../assets/images/featured-banner-mobile.webp'));
+                })->encode('webp', 90)->save($mobileWebpPath);
             } catch (\Exception $e) {
-                // Ignore if image library fails
+                \Log::error('WebP generation failed: ' . $e->getMessage());
             }
+
+            $file->move(base_path('../assets/images'), 'featured-banner.png');
         }
 
         if($request->has('highlight_banner_url')){
@@ -317,6 +327,15 @@ class HomePageController extends Controller
             // But let's just stick to the image first.
         }
 
+        $this->clearHomeCache();
         return redirect()->back()->withSuccess(__('Highlight Banner Updated Successfully'));
+    }
+
+    private function clearHomeCache()
+    {
+        Cache::forget('front_index_data_theme1');
+        Cache::forget('front_index_data_theme2');
+        Cache::forget('front_index_data_theme3');
+        Cache::forget('front_index_data_theme4');
     }
 }

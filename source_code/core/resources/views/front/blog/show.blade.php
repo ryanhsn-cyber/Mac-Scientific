@@ -4,6 +4,16 @@
 @endsection
 
 @section('meta')
+@php
+    $decodedOg = json_decode($post->photo, true);
+    if (is_array($decodedOg) && count($decodedOg) > 0) {
+        $ogPhoto = $decodedOg[array_key_first($decodedOg)];
+    } else {
+        $ogPhoto = is_string($decodedOg) ? $decodedOg : $post->photo;
+        $ogPhoto = str_replace(['"', "'", '[', ']'], '', $ogPhoto);
+    }
+    $ogPhotoUrl = asset('assets/images/' . (empty($ogPhoto) ? 'placeholder.png' : $ogPhoto));
+@endphp
 <meta name="keywords" content="{{$post->meta_keywords ?: $post->title}}">
 <meta name="description" content="{{$post->meta_descriptions ?: strip_tags(substr($post->details, 0, 160))}}">
 
@@ -11,12 +21,12 @@
 <meta property="og:description" content="{{ $post->meta_descriptions ?: strip_tags(substr($post->details, 0, 160)) }}">
 <meta property="og:url" content="{{ route('front.blog.details', $post->slug) }}">
 <meta property="og:type" content="article">
-<meta property="og:image" content="{{ asset('assets/images/' . $post->photo) }}">
+<meta property="og:image" content="{{ $ogPhotoUrl }}">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ $post->title }} | {{ $setting->title }}">
 <meta name="twitter:description" content="{{ $post->meta_descriptions ?: strip_tags(substr($post->details, 0, 160)) }}">
-<meta name="twitter:image" content="{{ asset('assets/images/' . $post->photo) }}">
+<meta name="twitter:image" content="{{ $ogPhotoUrl }}">
 
 <script type="application/ld+json">
 {
@@ -24,7 +34,7 @@
   "@type": "BlogPosting",
   "headline": "{{ addslashes($post->title) }}",
   "image": [
-    "{{ asset('assets/images/' . $post->photo) }}"
+    "{{ $ogPhotoUrl }}"
   ],
   "datePublished": "{{ date('Y-m-d\TH:i:sP', strtotime($post->created_at)) }}",
   "dateModified": "{{ date('Y-m-d\TH:i:sP', strtotime($post->updated_at ?? $post->created_at)) }}",

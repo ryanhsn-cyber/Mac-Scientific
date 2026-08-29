@@ -338,16 +338,24 @@ $(document).ready(function() {
         let subUrl = $('#category_id').attr('data-href');
         if (subUrl) {
             $.get(subUrl, { category_id: oldCat }, function(data) {
-                $('#subcategory_id').html(data);
+                let response = data.data || [];
+                let view_html = '<option value="">Select One</option>';
+                $.each(response, function(key, value) {
+                    let selected = (value.id == oldSub) ? 'selected' : '';
+                    view_html += `<option value="${value.id}" ${selected}>${value.name}</option>`;
+                });
+                $('#subcategory_id').html(view_html);
                 if (oldSub) {
-                    $('#subcategory_id').val(oldSub);
                     let childUrl = $('#subcategory_id').attr('data-href');
                     if (childUrl) {
                         $.get(childUrl, { subcategory_id: oldSub }, function(childData) {
-                            $('#childcategory_id').html(childData);
-                            if (oldChild) {
-                                $('#childcategory_id').val(oldChild);
-                            }
+                            let childResponse = childData.data || [];
+                            let child_html = '<option value="">Select One</option>';
+                            $.each(childResponse, function(key, value) {
+                                let selected = (value.id == oldChild) ? 'selected' : '';
+                                child_html += `<option value="${value.id}" ${selected}>${value.name}</option>`;
+                            });
+                            $('#childcategory_id').html(child_html);
                         });
                     }
                 }

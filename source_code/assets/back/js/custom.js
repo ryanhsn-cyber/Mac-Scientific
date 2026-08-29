@@ -139,7 +139,7 @@ $('.item-name').on('input keyup', function(){
     }
 });
 
-$(document).on('input keyup', '#slug', function(){
+$(document).on('blur change', '#slug', function(){
     $(this).val(formatSlug($(this).val()));
 });
 

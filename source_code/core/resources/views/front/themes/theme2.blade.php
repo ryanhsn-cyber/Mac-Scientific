@@ -327,7 +327,7 @@
                     <div class="col-lg-12" >
 
                         <div class="features-slider  owl-carousel" >
-                            @foreach (\App\Models\Item::with('category')->whereStatus(1)->where('is_type', 'feature')->orderBy('id','DESC')->take(4)->get() as $item)
+                            @foreach (\App\Models\Item::with(['category', 'reviews'])->whereStatus(1)->where('is_type', 'feature')->orderBy('id','DESC')->take(12)->get() as $item)
                                     <div class="slider-item">
                                         <div class="product-card ">
                                             <div class="product-thumb" >
@@ -348,7 +348,7 @@
                                             </div>
                                             <div class="product-card-inner">
                                             <div class="product-card-body">
-                                                <div class="product-category"><a href="{{route('front.catalog').'?category='.$item->category->slug}}">{{$item->category->name}}</a></div>
+                                                <div class="product-category"><a href="{{route('front.catalog').'?category='.($item->category->slug ?? '')}}">{{$item->category->name ?? 'Medical Supplies'}}</a></div>
                                                 <h3 class="product-title"><a href="{{route('front.product',$item->slug)}}">
                                                     {{ strlen(strip_tags($item->name)) > 35 ? substr(strip_tags($item->name), 0, 35) : strip_tags($item->name) }}
                                                 </a></h3>
@@ -447,7 +447,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="features-slider  owl-carousel" >
-                            @foreach (\App\Models\Item::with('category')->whereStatus(1)->where('is_type', 'best')->orderBy('id','DESC')->take(4)->get() as $item)
+                            @foreach (\App\Models\Item::with(['category', 'reviews'])->whereStatus(1)->where('is_type', 'best')->orderBy('id','DESC')->take(12)->get() as $item)
                                     <div class="slider-item">
                                         <div class="product-card ">
                                             <div class="product-thumb">
@@ -469,7 +469,7 @@
                                         </div>
                                             <div class="product-card-inner">
                                             <div class="product-card-body">
-                                                <div class="product-category"><a href="{{route('front.catalog').'?category='.$item->category->slug}}">{{$item->category->name}}</a></div>
+                                                <div class="product-category"><a href="{{route('front.catalog').'?category='.($item->category->slug ?? '')}}">{{$item->category->name ?? 'Medical Supplies'}}</a></div>
                                                 <h3 class="product-title"><a href="{{route('front.product',$item->slug)}}">
                                                     {{ strlen(strip_tags($item->name)) > 35 ? substr(strip_tags($item->name), 0, 35) : strip_tags($item->name) }}
                                                 </a></h3>
@@ -509,7 +509,7 @@
                     <div class="col-lg-12">
 
                         <div class="features-slider  owl-carousel" >
-                            @foreach (\App\Models\Item::with('category')->whereStatus(1)->where('is_type', 'top')->orderBy('id','DESC')->take(4)->get() as $item)
+                            @foreach (\App\Models\Item::with(['category', 'reviews'])->whereStatus(1)->where('is_type', 'top')->orderBy('id','DESC')->take(12)->get() as $item)
                                     <div class="slider-item">
                                         <div class="product-card ">
                                             <div class="product-thumb">
@@ -530,7 +530,7 @@
                                         </div>
                                             <div class="product-card-inner">
                                             <div class="product-card-body">
-                                                <div class="product-category"><a href="{{route('front.catalog').'?category='.$item->category->slug}}">{{$item->category->name}}</a></div>
+                                                <div class="product-category"><a href="{{route('front.catalog').'?category='.($item->category->slug ?? '')}}">{{$item->category->name ?? 'Medical Supplies'}}</a></div>
                                                 <h3 class="product-title"><a href="{{route('front.product',$item->slug)}}">
                                                     {{ strlen(strip_tags($item->name)) > 35 ? substr(strip_tags($item->name), 0, 35) : strip_tags($item->name) }}
                                                 </a></h3>
