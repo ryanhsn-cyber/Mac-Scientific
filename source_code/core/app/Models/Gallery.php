@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gallery extends Model
 {
-    protected $fillable = ['item_id','photo'];
+    protected $fillable = ['item_id', 'photo', 'sort_order'];
     public $timestamps = false;
 }

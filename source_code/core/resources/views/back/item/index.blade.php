@@ -167,5 +167,13 @@
 
 @endsection
 
+@section('scripts')
+@if(Session::has('success'))
+<script>
+    localStorage.removeItem('product_draft_data_new');
+</script>
+@endif
+@endsection
+
 
 

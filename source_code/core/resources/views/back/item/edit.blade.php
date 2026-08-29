@@ -42,11 +42,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="slug">{{ __('Slug') ?: 'Slug' }} *</label>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label for="slug" class="mb-0">{{ __('Slug') ?: 'Slug' }} *</label>
+                            <button type="button" class="btn btn-xs btn-outline-secondary btn-sync-slug" style="font-size: 11px; padding: 2px 8px;" title="{{ __('Re-generate slug from current product name') }}">
+                                <i class="fas fa-sync-alt mr-1"></i> {{ __('Sync from Name') }}
+                            </button>
+                        </div>
                         <input type="text" name="slug" class="form-control"
-                            id="slug"
+                            id="slug" data-locked="true"
                             placeholder="{{ __('Enter Slug') ?: 'Enter Slug' }}"
-                            value="{{ $item->slug }}" required>
+                            value="{{ old('slug', $item->slug) }}" required>
                     </div>
 
                 </div>
@@ -73,40 +78,44 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <div class="form-group pb-0  mb-0">
-                        <label>{{ __('Gallery Images') }} </label>
+                    <div class="form-group pb-0 mb-2 d-flex justify-content-between align-items-center">
+                        <div>
+                            <label class="font-weight-bold mb-0">{{ __('Gallery Images') }}</label>
+                            <small class="text-muted d-block">{{ __('Drag & drop images to rearrange order') }}</small>
+                        </div>
+                        <span class="badge badge-primary"><span class="gallery-count-badge">{{ count($item->galleries) }}</span> {{ __('Images') }}</span>
                     </div>
-                    <div class="form-group pb-0 pt-0 mt-0 mb-0">
-                        <div id="gallery-images">
-                            <div class="d-block gallery_image_view">
-
-                                @forelse($item->galleries as $gallery)
-                                    <div class="single-g-item d-inline-block m-2">
+                    <div class="form-group pb-0 pt-0 mt-0 mb-2">
+                        <div id="gallery-images" class="gallery-scroll-container" style="max-height: 260px; overflow-y: auto; overflow-x: hidden; padding: 10px; background: #fdfdfd; border: 1px dashed #cbd5e1; border-radius: 8px;">
+                            <div class="d-block gallery_image_view sortable-gallery">
+                                @forelse($item->galleries as $index => $gallery)
+                                    <div class="single-g-item d-inline-block m-2" data-id="{{ $gallery->id }}" style="position:relative; cursor:grab;">
+                                            <span class="badge badge-dark g-order-num" style="position:absolute; top:4px; left:4px; z-index:2; font-size:10px; opacity:0.9;">{{ $index + 1 }}</span>
                                             <span data-toggle="modal"
                                             data-target="#confirm-delete" href="javascript:;"
-                                            data-href="{{ route('back.item.gallery.delete',$gallery->id) }}" class="remove-gallery-img">
+                                            data-href="{{ route('back.item.gallery.delete',$gallery->id) }}" class="remove-gallery-img" style="z-index:3;">
                                                 <i class="fas fa-trash"></i>
                                             </span>
                                             <a class="popup-link" href="{{ $gallery->photo ? asset('assets/images/'.$gallery->photo) : asset('assets/images/placeholder.png') }}">
                                                 <img class="admin-gallery-img" src="{{ $gallery->photo ? asset('assets/images/'.$gallery->photo) : asset('assets/images/placeholder.png') }}"
-                                                    alt="No Image Found">
+                                                    alt="Gallery Image">
                                             </a>
                                     </div>
                                 @empty
-                                    <h6><b>{{ __('No Images Added') }}</b></h6>
+                                    <h6 class="text-muted text-center py-3"><b>{{ __('No Images Added') }}</b></h6>
                                 @endforelse
                             </div>
                         </div>
                     </div>
                     <div class="form-group position-relative ">
                         <label class="file">
-                            <input type="file"  accept="image/*"   name="galleries[]" id="gallery_file"
-                                    aria-label="File browser example" accept="image/*" multiple>
+                            <input type="file" accept="image/*" name="galleries[]" id="gallery_file"
+                                    aria-label="File browser example" multiple>
                             <span
                                 class="file-custom text-left">{{ __('Upload Image...') ?: 'Upload Image...' }}</span>
                         </label>
                         <br>
-                        <span class="mt-1 text-info">{{ __('Image Size Should Be 800 x 800. or square size') }}</span>
+                        <span class="mt-1 text-info">{{ __('Image Size Should Be 800 x 800 or square size. You can select multiple images.') }}</span>
                     </div>
                 </div>
             </div>
@@ -419,6 +428,46 @@ if(document.querySelector('.btn-cancel')){
 }
 
 $(document).ready(function() {
+    $('.btn-sync-slug').on('click', function() {
+        let nameVal = $('#name').val();
+        if (nameVal && typeof formatSlug === 'function') {
+            $('#slug').val(formatSlug(nameVal));
+        }
+    });
+
+    if ($.fn.sortable) {
+        $(".sortable-gallery").sortable({
+            items: ".single-g-item:not(.preview-gallery-item)",
+            cursor: "grab",
+            opacity: 0.8,
+            update: function() {
+                let sortedIds = [];
+                $(".sortable-gallery .single-g-item:not(.preview-gallery-item)").each(function(i) {
+                    let id = $(this).data('id');
+                    if (id) {
+                        sortedIds.push(id);
+                        $(this).find('.g-order-num').text(i + 1);
+                    }
+                });
+                if (sortedIds.length > 0) {
+                    $.ajax({
+                        url: "{{ route('back.item.gallery.sort') }}",
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            ids: sortedIds
+                        },
+                        success: function(res) {
+                            if (typeof SuccessNotification === 'function') {
+                                SuccessNotification(res.message || 'Gallery order updated.');
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
     const draftKey = 'product_draft_data_edit_{{$item->id}}';
     let savedDraft = localStorage.getItem(draftKey);
     if (savedDraft) {

@@ -68,22 +68,23 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <div class="form-group pb-0  mb-0">
-                        <label>{{ __('Gallery Images') }} </label>
+                    <div class="form-group pb-0 mb-2 d-flex justify-content-between align-items-center">
+                        <label class="font-weight-bold">{{ __('Gallery Images') }} </label>
+                        <span class="badge badge-primary"><span class="gallery-count-badge">0</span> {{ __('Images') }}</span>
                     </div>
-                    <div class="form-group pb-0 pt-0 mt-0 mb-0">
-                        <div id="gallery-images" class="">
+                    <div class="form-group pb-0 pt-0 mt-0 mb-2">
+                        <div id="gallery-images" class="gallery-scroll-container" style="max-height: 250px; overflow-y: auto; overflow-x: hidden; padding: 10px; background: #fdfdfd; border: 1px dashed #cbd5e1; border-radius: 8px;">
                             <div class="d-block gallery_image_view">
                             </div>
                         </div>
                     </div>
                     <div class="form-group position-relative ">
                         <label class="file">
-                            <input type="file"  accept="image/*"  name="galleries[]" id="gallery_file" aria-label="File browser example" accept="image/*" multiple>
+                            <input type="file" accept="image/*" name="galleries[]" id="gallery_file" aria-label="File browser example" multiple>
                             <span class="file-custom text-left">{{ __('Upload Image...') }}</span>
                         </label>
                         <br>
-                        <span class="mt-1 text-info">{{ __('Image Size Should Be 800 x 800. or square size') }}</span>
+                        <span class="mt-1 text-info">{{ __('Image Size Should Be 800 x 800 or square size. You can select multiple images.') }}</span>
                     </div>
                 </div>
             </div>
@@ -124,7 +125,7 @@
                         <input type="text" name="features" class="tags"
                             id="features"
                             placeholder="{{ __('Key Features') }}"
-                            value="">
+                            value="{{ old('features') }}">
                     </div>
                     <div class="form-group mb-2">
                         <label for="tags">{{ __('Product Tags') }}
@@ -132,7 +133,7 @@
                         <input type="text" name="tags" class="tags"
                             id="tags"
                             placeholder="{{ __('Tags') }}"
-                            value="">
+                            value="{{ old('tags') }}">
                     </div>
                     <div class="form-group">
                         <label for="specification_name">{{ __('Specifications') }}</label>
@@ -184,7 +185,7 @@
                         <input type="text" name="meta_keywords" class="tags"
                             id="meta_keywords"
                             placeholder="{{ __('Enter Meta Keywords') }}"
-                            value="">
+                            value="{{ old('meta_keywords') }}">
                     </div>
 
                     <div class="form-group">
@@ -252,7 +253,7 @@
                         <select name="category_id" id="category_id" data-href="{{route('back.get.subcategory')}}" class="form-control" required >
                             <option value="" selected>{{__('Select One')}}</option>
                             @foreach(DB::table('categories')->whereStatus(1)->get() as $cat)
-                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                            <option value="{{ $cat->id }}" {{ old('category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -276,7 +277,7 @@
                         <select name="brand_id" id="brand_id" class="form-control" >
                             <option value="" selected>{{__('Select Brand')}}</option>
                             @foreach(DB::table('brands')->whereStatus(1)->get() as $brand)
-                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                            <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -297,7 +298,7 @@
                         <select name="tax_id" id="tax_id" class="form-control">
                             <option value="">{{__('Select One')}}</option>
                             @foreach(DB::table('taxes')->whereStatus(1)->get() as $tax)
-                            <option value="{{ $tax->id }}">{{ $tax->name }}</option>
+                            <option value="{{ $tax->id }}" {{ old('tax_id') == $tax->id ? 'selected' : '' }}>{{ $tax->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -305,7 +306,7 @@
                         <label for="sku">{{ __('SKU') }} *</label>
                         <input type="text" name="sku" class="form-control"
                             id="sku" placeholder="{{ __('Enter SKU') }}"
-                            value="{{Str::random(10)}}" required >
+                            value="{{ old('sku', Str::random(10)) }}" required >
                     </div>
                     <div class="form-group">
                         <label for="video">{{ __('Video Link') }} </label>
@@ -327,24 +328,42 @@
 
 @section('scripts')
 <script>
-document.querySelectorAll('.admin-form button[type="submit"]').forEach(button => {
-    button.addEventListener('click', function(e) {
-        const form = this.closest('form');
-        if (!form.checkValidity()) {
-            alert('{{ __("Please fill out all required fields.") }}');
-        } else {
-            localStorage.removeItem('product_draft_data_new');
-        }
-    });
-});
-if(document.querySelector('.btn-cancel')){
-    document.querySelector('.btn-cancel').addEventListener('click', function() {
-        localStorage.removeItem('product_draft_data_new');
-    });
-}
-
 $(document).ready(function() {
+    // Dynamic Subcategory and Child Category Re-hydration after validation error
+    let oldCat = "{{ old('category_id') }}";
+    let oldSub = "{{ old('subcategory_id') }}";
+    let oldChild = "{{ old('childcategory_id') }}";
+
+    if (oldCat) {
+        let subUrl = $('#category_id').attr('data-href');
+        if (subUrl) {
+            $.get(subUrl, { category_id: oldCat }, function(data) {
+                $('#subcategory_id').html(data);
+                if (oldSub) {
+                    $('#subcategory_id').val(oldSub);
+                    let childUrl = $('#subcategory_id').attr('data-href');
+                    if (childUrl) {
+                        $.get(childUrl, { subcategory_id: oldSub }, function(childData) {
+                            $('#childcategory_id').html(childData);
+                            if (oldChild) {
+                                $('#childcategory_id').val(oldChild);
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    }
+
     const draftKey = 'product_draft_data_new';
+
+    if (document.querySelector('.btn-cancel')) {
+        document.querySelector('.btn-cancel').addEventListener('click', function() {
+            localStorage.removeItem(draftKey);
+        });
+    }
+
+    @if(!$errors->any())
     let savedDraft = localStorage.getItem(draftKey);
     if (savedDraft) {
         if (confirm("{{ __('An unsaved draft was found. Do you want to restore it?') }}")) {
@@ -366,7 +385,9 @@ $(document).ready(function() {
             localStorage.removeItem(draftKey);
         }
     }
+    @endif
     
+    // Auto-save draft periodically
     setInterval(function() {
         $('.text-editor').each(function() {
             if ($(this).next().hasClass('note-editor')) {

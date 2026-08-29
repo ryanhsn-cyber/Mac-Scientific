@@ -114,14 +114,33 @@ $("form.tab-form").on("submit", function() {
 
 });
 
-$('.item-name').on('keyup',function(){
+function formatSlug(text) {
+    if (!text) return '';
+    return text
+        .toString()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[\u2013\u2014]/g, '-')
+        .replace(/[^a-z0-9\s-]/g, '')
+        .trim()
+        .replace(/[\s_]+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, '');
+}
 
-    let $this = $(this);
+$('.item-name').on('input keyup', function(){
+    let $slug = $('#slug');
+    if ($slug.length > 0) {
+        // If slug field is not locked / in create mode or empty, auto-generate
+        if ($slug.data('locked') !== true && ($slug.data('auto') !== false || !$slug.val())) {
+            $slug.val(formatSlug($(this).val()));
+        }
+    }
+});
 
-    let str = $this.val().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,'-').replace(/ /g, '-');
-
-    $('#slug').val(str);
-
+$(document).on('input keyup', '#slug', function(){
+    $(this).val(formatSlug($(this).val()));
 });
 
 $('.admin-gallery').on('mouseover',function(){
@@ -869,40 +888,99 @@ $(document).on('click','.remove-menu',function(){
     })
 
 
-    $(document).on('change','#gallery_file',function(){
-        
-        // Remove only previously added preview items so we don't duplicate when native file input replaces its files array
-        $(".gallery_image_view .preview-gallery-item").remove();
+    let galleryDataTransfer = null;
+    try {
+        galleryDataTransfer = new DataTransfer();
+    } catch(e) {
+        galleryDataTransfer = null;
+    }
 
-        for(let i=0;i<this.files.length;++i){
+    function updateGalleryCounter() {
+        let count = $(".gallery_image_view .single-g-item").length;
+        $('.gallery-count-badge').text(count);
+    }
+
+    function renderGalleryPreviews() {
+        $(".gallery_image_view .preview-gallery-item").remove();
+        if (!galleryDataTransfer) return;
+
+        const files = galleryDataTransfer.files;
+        Array.from(files).forEach((file, index) => {
             let filereader = new FileReader();
-           
-            filereader.onload = function(e){
-             
-                let xxx =`
-                    <div class="single-g-item d-inline-block m-2 preview-gallery-item">
-                            <span class="remove-gallery-img">
-                                <i class="fas fa-trash reader_file_remove"></i>
+            filereader.onload = function(e) {
+                let html = `
+                    <div class="single-g-item d-inline-block m-2 preview-gallery-item" data-file-index="${index}" style="position:relative;">
+                        <span class="remove-gallery-img reader_file_remove" title="Remove preview">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <a class="popup-link" href="${e.target.result}">
+                            <img class="admin-gallery-img" src="${e.target.result}" alt="${file.name}">
+                        </a>
+                        <span class="badge badge-secondary d-block mt-1 text-truncate" style="max-width:100px; font-size:10px;">${file.name}</span>
+                    </div>
+                `;
+                $(".gallery_image_view").append(html);
+                updateGalleryCounter();
+            };
+            filereader.readAsDataURL(file);
+        });
+        updateGalleryCounter();
+    }
+
+    $(document).on('change', '#gallery_file', function(){
+        if (!this.files || this.files.length === 0) return;
+
+        if (galleryDataTransfer) {
+            Array.from(this.files).forEach(file => {
+                galleryDataTransfer.items.add(file);
+            });
+            this.files = galleryDataTransfer.files;
+            renderGalleryPreviews();
+        } else {
+            $(".gallery_image_view .preview-gallery-item").remove();
+            for(let i = 0; i < this.files.length; ++i){
+                let filereader = new FileReader();
+                filereader.onload = function(e){
+                    let xxx = `
+                        <div class="single-g-item d-inline-block m-2 preview-gallery-item">
+                            <span class="remove-gallery-img reader_file_remove">
+                                <i class="fas fa-trash"></i>
                             </span>
                             <a class="popup-link" href="${e.target.result}">
-                                <img class="admin-gallery-img" src="${e.target.result}"
-                                    alt="No Image Found">
+                                <img class="admin-gallery-img" src="${e.target.result}" alt="Preview">
                             </a>
-                    </div>
-                
-            `;
-            $(".gallery_image_view").append(xxx);
-            };
-            filereader.readAsDataURL(this.files[i]);
+                        </div>
+                    `;
+                    $(".gallery_image_view").append(xxx);
+                    updateGalleryCounter();
+                };
+                filereader.readAsDataURL(this.files[i]);
+            }
         }
-        
-        
-    })
+    });
 
+    $(document).on('click', '.reader_file_remove', function(){
+        let item = $(this).closest('.preview-gallery-item');
+        let index = item.data('file-index');
 
-    $(document).on('click','.reader_file_remove',function(){
-        $(this).parent().parent().remove();
-    })
+        if (galleryDataTransfer && typeof index !== 'undefined') {
+            let newDt = new DataTransfer();
+            Array.from(galleryDataTransfer.files).forEach((file, i) => {
+                if (i !== index) {
+                    newDt.items.add(file);
+                }
+            });
+            galleryDataTransfer = newDt;
+            let fileInput = document.getElementById('gallery_file');
+            if (fileInput) {
+                fileInput.files = galleryDataTransfer.files;
+            }
+            renderGalleryPreviews();
+        } else {
+            item.remove();
+            updateGalleryCounter();
+        }
+    });
 
     
   

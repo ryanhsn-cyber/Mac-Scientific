@@ -19,10 +19,19 @@ class ItemRequest extends FormRequest
 
     protected function prepareForValidation()
     {
+        $mergeData = [];
         if ($this->stock === null || $this->stock === '') {
-            $this->merge([
-                'stock' => 0,
-            ]);
+            $mergeData['stock'] = 0;
+        }
+
+        if ($this->slug) {
+            $mergeData['slug'] = \Illuminate\Support\Str::slug($this->slug);
+        } elseif ($this->name) {
+            $mergeData['slug'] = \Illuminate\Support\Str::slug($this->name);
+        }
+
+        if (!empty($mergeData)) {
+            $this->merge($mergeData);
         }
     }
 
@@ -55,7 +64,8 @@ class ItemRequest extends FormRequest
         }else{
             $check_file = '';
         }
-        $id = $this->item ? ',' . $this->item->id : '';
+        $itemId = $this->item ? ($this->item instanceof \App\Models\Item ? $this->item->id : $this->item) : '';
+        $id = $itemId ? ',' . $itemId : '';
         $required = $this->item ? '' : 'required|';
 
 

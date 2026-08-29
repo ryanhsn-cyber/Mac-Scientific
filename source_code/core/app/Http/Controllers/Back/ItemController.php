@@ -234,6 +234,17 @@ class ItemController extends Controller
         return redirect()->back()->withSuccess(__('Successfully Deleted From Gallery.'));
     }
 
+    public function gallerySort(Request $request)
+    {
+        $ids = $request->ids;
+        if (is_array($ids)) {
+            foreach ($ids as $order => $id) {
+                Gallery::where('id', $id)->update(['sort_order' => $order]);
+            }
+        }
+        return response()->json(['status' => 'success', 'message' => __('Gallery order updated successfully.')]);
+    }
+
 
     public function highlight(Item $item)
     {

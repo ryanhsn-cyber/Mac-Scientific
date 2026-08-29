@@ -16,6 +16,15 @@ class SubCategoryRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if ($this->slug) {
+            $this->merge(['slug' => \Illuminate\Support\Str::slug($this->slug)]);
+        } elseif ($this->name) {
+            $this->merge(['slug' => \Illuminate\Support\Str::slug($this->name)]);
+        }
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

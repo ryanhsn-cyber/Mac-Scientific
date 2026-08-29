@@ -122,13 +122,13 @@
                  @endforeach
                 </section>
                 <!-- Widget Tags-->
-                <section class="widget widget-featured-posts card rounded p-4">
+                <section class="widget widget-popular-tags card rounded p-4 mb-4" style="overflow: hidden; clear: both;">
                   <h3 class="widget-title">{{__('Popular Tags')}}</h3>
-                 <div>
-                  @foreach ($tags as $tag)
-                  <a class="tag" href="{{route('front.blog').'?tag='.$tag}}">{{$tag}}</a>
-                  @endforeach
-                 </div>
+                  <div class="popular-tags-wrapper" style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    @foreach ($tags as $tag)
+                    <a class="tag-pill" href="{{route('front.blog').'?tag='.$tag}}" style="display: inline-block; white-space: normal; word-break: break-word; max-width: 100%; height: auto; padding: 5px 12px; border-radius: 16px; background: #f1f5f9; color: #334155; font-size: 12px; line-height: 1.4; text-decoration: none; transition: all 0.2s ease;">{{$tag}}</a>
+                    @endforeach
+                  </div>
                 </section>
               </aside>
             </div>

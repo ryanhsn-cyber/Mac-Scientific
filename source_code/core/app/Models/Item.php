@@ -47,7 +47,7 @@ class Item extends Model
 
     public function galleries()
     {
-        return $this->hasMany('App\Models\Gallery');
+        return $this->hasMany('App\Models\Gallery')->orderBy('sort_order', 'asc')->orderBy('id', 'asc');
     }
 
     public function reviews()

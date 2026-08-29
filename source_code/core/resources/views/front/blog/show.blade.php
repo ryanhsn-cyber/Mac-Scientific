@@ -112,23 +112,49 @@
                         @endforeach
                     </div>
                     @endif
-                    <div class="d-flex align-items-center">
-                        <span class="text-muted mr-1">{{__('Share')}}: </span>
-                        <div class="d-inline-block a2a_kit">
-                            <a class="facebook  a2a_button_facebook" href="">
-                                <span><i class="fab fa-facebook-f"></i></span>
+                    <div class="d-flex align-items-center flex-wrap mt-2">
+                        <span class="text-muted mr-2 font-weight-bold">{{__('Share')}}: </span>
+                        <div class="d-inline-flex align-items-center" style="gap: 8px;">
+                            <a class="btn btn-sm btn-icon" style="background:#1877f2; color:#fff; width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none;" 
+                               href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" 
+                               target="_blank" rel="noopener noreferrer" 
+                               onclick="window.open(this.href, 'share-dialog', 'width=600,height=450'); return false;" 
+                               title="Share on Facebook">
+                                <i class="fab fa-facebook-f" style="font-size:13px;"></i>
                             </a>
-                            <a class="twitter  a2a_button_twitter" href="">
-                                <span><i class="fab fa-twitter"></i></span>
+                            <a class="btn btn-sm btn-icon" style="background:#000000; color:#fff; width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none;" 
+                               href="https://twitter.com/intent/tweet?text={{ urlencode($post->title) }}&url={{ urlencode(url()->current()) }}" 
+                               target="_blank" rel="noopener noreferrer" 
+                               onclick="window.open(this.href, 'share-dialog', 'width=600,height=450'); return false;" 
+                               title="Share on X">
+                                <i class="fab fa-twitter" style="font-size:13px;"></i>
                             </a>
-                            <a class="linkedin  a2a_button_linkedin" href="">
-                                <span><i class="fab fa-linkedin-in"></i></span>
+                            <a class="btn btn-sm btn-icon" style="background:#0a66c2; color:#fff; width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none;" 
+                               href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(url()->current()) }}" 
+                               target="_blank" rel="noopener noreferrer" 
+                               onclick="window.open(this.href, 'share-dialog', 'width=600,height=450'); return false;" 
+                               title="Share on LinkedIn">
+                                <i class="fab fa-linkedin-in" style="font-size:13px;"></i>
                             </a>
-                            <a class="pinterest   a2a_button_pinterest" href="">
-                                <span><i class="fab fa-pinterest"></i></span>
+                            <a class="btn btn-sm btn-icon" style="background:#25d366; color:#fff; width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none;" 
+                               href="https://api.whatsapp.com/send?text={{ urlencode($post->title . ' ' . url()->current()) }}" 
+                               target="_blank" rel="noopener noreferrer" 
+                               onclick="window.open(this.href, 'share-dialog', 'width=600,height=450'); return false;" 
+                               title="Share on WhatsApp">
+                                <i class="fab fa-whatsapp" style="font-size:14px;"></i>
                             </a>
+                            <a class="btn btn-sm btn-icon" style="background:#bd081c; color:#fff; width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none;" 
+                               href="https://pinterest.com/pin/create/button/?url={{ urlencode(url()->current()) }}&description={{ urlencode($post->title) }}" 
+                               target="_blank" rel="noopener noreferrer" 
+                               onclick="window.open(this.href, 'share-dialog', 'width=600,height=450'); return false;" 
+                               title="Share on Pinterest">
+                                <i class="fab fa-pinterest-p" style="font-size:13px;"></i>
+                            </a>
+                            <button type="button" class="btn btn-sm btn-icon" style="background:#64748b; color:#fff; width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; border:none; cursor:pointer;" 
+                               title="{{ __('Copy Link') }}" onclick="copyBlogLink(this)">
+                                <i class="fas fa-link" style="font-size:12px;"></i>
+                            </button>
                         </div>
-                        <script async src="https://static.addtoany.com/menu/page.js"></script>
                     </div>
                 </div>
                 </div>
@@ -219,16 +245,40 @@
                @endforeach
               </section>
               <!-- Widget Tags-->
-              <section class="widget widget-featured-posts card rounded p-4">
+              <section class="widget widget-popular-tags card rounded p-4 mb-4" style="overflow: hidden; clear: both;">
                 <h3 class="widget-title">{{__('Popular Tags')}}</h3>
-               <div>
-                @foreach ($tags as $tag)
-                <a class="tag" href="{{route('front.blog').'?tag='.$tag}}">{{$tag}}</a>
-                @endforeach
-               </div>
+                <div class="popular-tags-wrapper" style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  @foreach ($tags as $tag)
+                  <a class="tag-pill" href="{{route('front.blog').'?tag='.$tag}}" style="display: inline-block; white-space: normal; word-break: break-word; max-width: 100%; height: auto; padding: 5px 12px; border-radius: 16px; background: #f1f5f9; color: #334155; font-size: 12px; line-height: 1.4; text-decoration: none; transition: all 0.2s ease;">{{$tag}}</a>
+                  @endforeach
+                </div>
               </section>
             </aside>
           </div>
         </div>
   </div>
+
+<script>
+function copyBlogLink(btn) {
+    let url = window.location.href;
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(function() {
+            let icon = btn.querySelector('i');
+            icon.className = 'fas fa-check';
+            setTimeout(() => icon.className = 'fas fa-link', 2000);
+        });
+    } else {
+        let temp = document.createElement('input');
+        document.body.appendChild(temp);
+        temp.value = url;
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        let icon = btn.querySelector('i');
+        icon.className = 'fas fa-check';
+        setTimeout(() => icon.className = 'fas fa-link', 2000);
+    }
+}
+</script>
 @endsection
+

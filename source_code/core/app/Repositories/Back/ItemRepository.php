@@ -364,10 +364,13 @@ class ItemRepository
     {
         $storeData = [];
         if ($galleries = $request->file('galleries')) {
+            $itemId = $item_id ? $item_id : $request['item_id'];
+            $maxSort = Gallery::where('item_id', $itemId)->max('sort_order') ?? 0;
             foreach($galleries as $key => $gallery){
                 $storeData[$key] = [
                     'photo'=>  ImageHelper::handleUploadedImage($gallery,'assets/images'),
-                    'item_id' => $item_id ? $item_id : $request['item_id'],
+                    'item_id' => $itemId,
+                    'sort_order' => $maxSort + $key + 1,
                 ];
             }
         }
