@@ -999,7 +999,7 @@
                                         @php
                                             $adminBannerTime = @filemtime(base_path('../assets/images/featured-banner.png')) ?: time();
                                         @endphp
-                                        <img class="admin-img"
+                                        <img class="admin-img" id="highlight_banner_preview"
                                             src="{{ asset('assets/images/featured-banner.png') }}?v={{ $adminBannerTime }}"
                                             alt="No Image Found">
                                     <br>
@@ -1007,7 +1007,7 @@
                                 </div>
                                 <div class="form-group position-relative">
                                     <label class="file">
-                                        <input type="file" accept="image/*" class="highlight-photo" name="highlight_banner" id="highlight_banner_file"
+                                        <input type="file" accept="image/*" class="upload-photo" name="highlight_banner" id="highlight_banner_file"
                                             aria-label="File browser example">
                                         <span class="file-custom text-left">{{ __('Upload Image...') }}</span>
                                     </label>
@@ -1041,9 +1041,8 @@
 			theme: "bootstrap"
 		});
         
-        $(".highlight-photo").on("change", function(e) {
-            var path = $(this).parent().parent().prev().find('img');
-            readURL(this, path);
+        $("#highlight_banner_file").on("change", function(e) {
+            readURL(this, $('#highlight_banner_preview'));
         });
     </script>
 @endsection
