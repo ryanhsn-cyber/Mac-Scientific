@@ -249,7 +249,7 @@
                 </td>
                 <td class="meta-col">
                     <span style="font-size: 9.5px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;">TRANSACTION ID</span><br>
-                    <strong style="font-size: 12.5px; color: #0f172a;">{{ rtrim($order->txnid ?: $order->transaction_number, '\') }}</strong>
+                    <strong style="font-size: 12.5px; color: #0f172a;">{{ rtrim($order->txnid ?: $order->transaction_number, '\\') }}</strong>
                 </td>
             </tr>
         </table>
