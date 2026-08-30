@@ -15,7 +15,7 @@
     
     // Include shipping/discount/tax if necessary. The order model usually has $order->total or similar.
     // Assuming $order->currency_sign and \App\Helpers\PriceHelper::OrderTotal($order) could be used.
-    $currency = $order->currency_sign ?? 'BDT';
+    $currency = 'BDT';
     $totalAmount = \App\Helpers\PriceHelper::OrderTotal($order, true);
     
     if (empty($totalAmount) || $totalAmount == 0) {

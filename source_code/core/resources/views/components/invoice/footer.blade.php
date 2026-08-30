@@ -1,7 +1,7 @@
 @props(['setting', 'order'])
 
-<div style="width: 100%; border-top: 2px solid #C92732; background-color: #FAFAFA; padding: 20px 15mm;">
-    <table>
+<div style="border-top: 2px solid #C92732; background-color: #FAFAFA; padding: 20px 15mm;">
+    <table style="width: 100%;">
         <tr>
             <!-- Left Info -->
             <td style="width: 33.33%; text-align: left; vertical-align: top;">
