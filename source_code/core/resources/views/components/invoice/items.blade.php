@@ -1,4 +1,4 @@
-@props(['cart', 'setting'])
+@props(['cart', 'setting', 'order'])
 
 <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px; table-layout: fixed;">
     <thead>
@@ -15,7 +15,8 @@
         @endphp
         @foreach($cart as $item)
             @php
-                $price = $item['price'];
+                $basePrice = ($item['main_price'] ?? $item['price'] ?? 0) + ($item['attribute_price'] ?? 0);
+                $price = round($basePrice * ($order->currency_value ?? 1), 2);
                 $qty = $item['qty'] ?? 1;
                 $amount = $price * $qty;
                 $formattedPrice = number_format($price, 2);

@@ -7,42 +7,31 @@
         $totalQty += ($it['qty'] ?? 1);
     }
     
-    // Calculate total
+    // Calculate subtotal from perfectly rounded items
     $subtotal = 0;
     foreach ($cart as $it) {
-        $subtotal += $it['price'] * ($it['qty'] ?? 1);
+        $basePrice = ($it['main_price'] ?? $it['price'] ?? 0) + ($it['attribute_price'] ?? 0);
+        $price = round($basePrice * ($order->currency_value ?? 1), 2);
+        $subtotal += $price * ($it['qty'] ?? 1);
     }
     
-    // Include shipping/discount/tax if necessary. The order model usually has $order->total or similar.
-    // Assuming $order->currency_sign and \App\Helpers\PriceHelper::OrderTotal($order) could be used.
     $currency = 'BDT';
-    $totalAmount = \App\Helpers\PriceHelper::OrderTotal($order, true);
+    $currency_value = $order->currency_value ?? 1;
+
+    // Convert and round all components
+    $shippingBase = $order->shipping ? (is_array($order->shipping) ? ($order->shipping['price'] ?? 0) : (json_decode($order->shipping, true)['price'] ?? 0)) : 0;
+    $shipping = round($shippingBase * $currency_value, 2);
     
-    if (empty($totalAmount) || $totalAmount == 0) {
-        // Fallback calculation if helper doesn't work or returns 0
-        $shipping = $order->shipping['price'] ?? 0;
-        $discount = $order->discount['discount'] ?? 0;
-        $tax = $order->tax ?? 0;
-        $statePrice = $order->state_price ?? 0;
-        
-        $total = $subtotal + $shipping + $tax + $statePrice - $discount;
-        $totalAmount = number_format($total, 2);
-    } else {
-        // If PriceHelper returned a number/string, ensure it's formatted. It might already have the sign.
-        // We will strip any non-numeric except dot and comma, then re-format, or just use it.
-        // Actually PriceHelper::OrderTotal($order, true) usually returns the plain number if we pass true?
-        // Let's just safely rely on $order->total if it exists, otherwise the helper.
-        // But $order doesn't have 'total' field in fillable, it's calculated.
-        
-        // Let's stick to our own precise calculation for safety if helper formats it with currency.
-        $shipping = $order->shipping ? (is_array($order->shipping) ? ($order->shipping['price'] ?? 0) : (json_decode($order->shipping, true)['price'] ?? 0)) : 0;
-        $discount = $order->discount ? (is_array($order->discount) ? ($order->discount['discount'] ?? 0) : (json_decode($order->discount, true)['discount'] ?? 0)) : 0;
-        $tax = $order->tax ?? 0;
-        $statePrice = $order->state_price ?? 0;
-        
-        $calculatedTotal = $subtotal + $shipping + $tax + $statePrice - $discount;
-        $totalAmount = number_format($calculatedTotal, 2);
-    }
+    $discountBase = $order->discount ? (is_array($order->discount) ? ($order->discount['discount'] ?? 0) : (json_decode($order->discount, true)['discount'] ?? 0)) : 0;
+    $discount = round($discountBase * $currency_value, 2);
+    
+    // Tax calculation in original logic: $total_tax += $item::taxCalculate($item) ... then $grand_total * currency_value
+    $tax = round(($order->tax ?? 0) * $currency_value, 2);
+    $statePrice = round(($order->state_price ?? 0) * $currency_value, 2);
+    
+    $calculatedTotal = $subtotal + $shipping + $tax + $statePrice - $discount;
+    $totalAmount = number_format($calculatedTotal, 2);
+
 @endphp
 
 <div style="margin-top: 10px;">

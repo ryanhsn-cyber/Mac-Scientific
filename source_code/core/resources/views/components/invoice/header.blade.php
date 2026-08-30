@@ -5,16 +5,16 @@
         <!-- Left Side: Logo & Company Info -->
         <td style="width: 50%; vertical-align: top;">
             @if($setting->logo)
-                <img src="{{ asset('assets/images/'.$setting->logo) }}" alt="Logo" style="width: 38mm; max-width: 40mm; height: auto; display: block; margin-bottom: 2mm;">
+                <img src="{{ asset('assets/images/'.$setting->logo) }}" alt="Logo" style="width: 38mm; max-width: 40mm; height: auto; display: block; margin-bottom: 0px;">
             @else
-                <div style="font-size: 20px; font-weight: bold; color: #C92732; display: block; margin-bottom: 2mm;">{{ $setting->title }}</div>
+                <div style="font-size: 20px; font-weight: bold; color: #C92732; display: block; margin-bottom: 0px;">{{ $setting->title }}</div>
             @endif
             
             <!-- Company Description (Hardcoded or from settings if available, using text from reference) -->
-            <div style="font-size: 8px; font-weight: bold; color: #b58024; text-transform: uppercase; margin-bottom: 3px;">
+            <div style="font-size: 8px; font-weight: bold; color: #b58024; text-transform: uppercase; margin-bottom: 4px; margin-top: 2px;">
                 MEDICAL & AESTHETIC SUPPLIES
             </div>
-            <div style="font-size: 8px; color: #888888; line-height: 1.4;">
+            <div style="font-size: 8.5px; color: #888888; line-height: 1.6;">
                 Shop No. 59, 2nd Floor, Rajanigandha Super Market<br>
                 Kachukhet, Dhaka Cantonment, Dhaka-1206, Bangladesh<br>
                 {{ $setting->footer_phone ?? '+880 1312-699221' }} | ms-bd.com
