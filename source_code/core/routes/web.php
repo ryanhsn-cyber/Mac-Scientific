@@ -223,7 +223,9 @@ Route::group(['middleware' => 'adminlocalize'], function () {
         Route::group(['middleware' => 'permissions:System Backup'], function () {
 
             // -------------- SYSTEM BACKUP ---------------//
+            Route::get('system/backup/index', 'Back\BackupController@index')->name('back.system.backup.index');
             Route::get('system/backup', 'Back\BackupController@systemBackup')->name('back.system.backup');
+            Route::post('system/restore', 'Back\BackupController@systemRestore')->name('back.system.restore');
 
         });
 

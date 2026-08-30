@@ -23,6 +23,11 @@ class BackupController extends Controller
     }
 
     
+    public function index()
+    {
+        return view('back.backup.index');
+    }
+    
     public function systemBackup()
     {
         $tables = [
@@ -46,7 +51,8 @@ class BackupController extends Controller
 
                 foreach($show_table_result as $show_table_row)
                 {
-                    $output .= "\n\n" . $show_table_row["Create Table"] . ";\n\n";
+                    $output .= "\n\nDROP TABLE IF EXISTS `" . $table . "`;\n";
+                    $output .= $show_table_row["Create Table"] . ";\n\n";
                 }
                 
                 $select_query = "SELECT * FROM " . $table . "";
@@ -89,6 +95,26 @@ class BackupController extends Controller
         fclose($file_handle);
 
         return response()->download($sql_file_name)->deleteFileAfterSend(true);
+    }
+
+    public function systemRestore(Request $request)
+    {
+        $request->validate([
+            'backup_file' => 'required|file'
+        ]);
+
+        $file = $request->file('backup_file');
+        
+        if ($file->getClientOriginalExtension() != 'sql') {
+            return back()->with('error', __('Please upload a valid .sql file.'));
+        }
+
+        try {
+            DB::unprepared(file_get_contents($file->getRealPath()));
+            return back()->with('success', __('System restored successfully.'));
+        } catch (\Exception $e) {
+            return back()->with('error', __('Error restoring system: ') . $e->getMessage());
+        }
     }
 
 }

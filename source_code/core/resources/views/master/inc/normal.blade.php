@@ -387,8 +387,8 @@
         <div class="collapse" id="backup">
             <ul class="nav nav-collapse">
                 <li>
-                    <a class="sub-link" href="{{ route('back.system.backup') }}">
-                        <span class="sub-item">{{ __('System Backup') }}</span>
+                    <a class="sub-link" href="{{ route('back.system.backup.index') }}">
+                        <span class="sub-item">{{ __('System Backup & Restore') }}</span>
                     </a>
                 </li>
 
