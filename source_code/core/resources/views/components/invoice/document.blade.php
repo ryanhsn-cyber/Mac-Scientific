@@ -31,7 +31,7 @@
         }
 
         body {
-            font-family: 'Inter', 'kalpurush', 'DejaVu Sans', Helvetica, Arial, sans-serif;
+            font-family: 'Inter', 'Helvetica', 'Arial', sans-serif, 'kalpurush';
             color: #292929;
             font-size: 11px;
             line-height: 1.4;

@@ -51,8 +51,8 @@
             <!-- Left Info -->
             <td style="width: 50%; vertical-align: top; padding-top: 15px;">
                 <div style="font-size: 9px; color: #888888; line-height: 1.6;">
-                    {{ $lineItems }} line items &nbsp;|&nbsp; Total quantity: {{ $totalQty }}<br>
-                    Payment method: {{ $order->payment_method ?: 'Nagad' }}
+                    <div>{{ $lineItems }} line items | Total quantity: {{ $totalQty }}</div>
+                    <div>Payment method: {{ $order->payment_method ?: 'Nagad' }}</div>
                 </div>
                 
                 <div style="margin-top: 25px; font-size: 11px; font-weight: bold; color: #292929;">

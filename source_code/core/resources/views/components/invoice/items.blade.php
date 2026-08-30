@@ -1,12 +1,12 @@
 @props(['cart', 'setting'])
 
-<table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 15px; table-layout: fixed;">
     <thead>
         <tr>
-            <th style="width: 110mm; text-align: left; background-color: #F6F7F9; padding: 10px 15px; font-size: 8px; color: #888888; text-transform: uppercase; border-top-left-radius: 4px; border-bottom-left-radius: 4px;">ITEM</th>
-            <th style="width: 12mm; text-align: center; background-color: #F6F7F9; padding: 10px 5px; font-size: 8px; color: #888888; text-transform: uppercase;">QTY</th>
-            <th style="width: 28mm; text-align: right; background-color: #F6F7F9; padding: 10px 5px; font-size: 8px; color: #888888; text-transform: uppercase;">UNIT PRICE</th>
-            <th style="width: 30mm; text-align: right; background-color: #F6F7F9; padding: 10px 15px; font-size: 8px; color: #888888; text-transform: uppercase; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">AMOUNT</th>
+            <th style="width: 61%; text-align: left; background-color: #F6F7F9; padding: 10px 15px; font-size: 8px; color: #888888; text-transform: uppercase; border-top-left-radius: 4px; border-bottom-left-radius: 4px; box-sizing: border-box;">ITEM</th>
+            <th style="width: 7%; text-align: center; background-color: #F6F7F9; padding: 10px 5px; font-size: 8px; color: #888888; text-transform: uppercase; box-sizing: border-box;">QTY</th>
+            <th style="width: 15%; text-align: right; background-color: #F6F7F9; padding: 10px 5px; font-size: 8px; color: #888888; text-transform: uppercase; box-sizing: border-box;">UNIT PRICE</th>
+            <th style="width: 17%; text-align: right; background-color: #F6F7F9; padding: 10px 15px; font-size: 8px; color: #888888; text-transform: uppercase; border-top-right-radius: 4px; border-bottom-right-radius: 4px; box-sizing: border-box;">AMOUNT</th>
         </tr>
     </thead>
     <tbody>

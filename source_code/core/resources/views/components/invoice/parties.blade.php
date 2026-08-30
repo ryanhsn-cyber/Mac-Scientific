@@ -12,21 +12,36 @@
                     {{ $bill['bill_first_name'] ?? '' }} {{ $bill['bill_last_name'] ?? '' }}
                 </div>
                 
-                <div style="font-size: 9px; color: #6b7280; line-height: 1.5;">
-                    @if(!empty($bill['bill_address1'])) <div>{{ $bill['bill_address1'] }}</div> @endif
-                    @if(!empty($bill['bill_address2'])) <div>{{ $bill['bill_address2'] }}</div> @endif
-                    @if(!empty($bill['bill_city'])) 
-                        <div>
-                            {{ $bill['bill_city'] }}@if(isset($state['name'])), {{ $state['name'] }}@endif 
-                            @if(!empty($bill['bill_zip'])) - {{ $bill['bill_zip'] }}@endif
-                        </div>
-                    @endif
-                    @if(!empty($bill['bill_country'])) <div>{{ $bill['bill_country'] }}</div> @endif
+                <div class="party-address" style="font-size: 9px; color: #6b7280; line-height: 1.5; white-space: normal; overflow-wrap: normal; word-break: normal;">
+                    @php
+                        $billParts = [];
+                        if(!empty($bill['bill_address1'])) $billParts[] = $bill['bill_address1'];
+                        if(!empty($bill['bill_address2'])) $billParts[] = $bill['bill_address2'];
+                        $billCity = '';
+                        if(!empty($bill['bill_city'])) {
+                            $billCity .= $bill['bill_city'];
+                            if(isset($state['name'])) $billCity .= ', ' . $state['name'];
+                            if(!empty($bill['bill_zip'])) $billCity .= '-' . $bill['bill_zip'];
+                        }
+                        if(!empty($billCity)) $billParts[] = $billCity;
+                        if(!empty($bill['bill_country'])) $billParts[] = $bill['bill_country'];
+                    @endphp
+                    {{ implode(', ', $billParts) }}
                     
-                    <div style="margin-top: 6px;">
-                        @if(!empty($bill['bill_email'])) <div>{{ $bill['bill_email'] }}</div> @endif
-                        @if(!empty($bill['bill_phone'])) <div>{{ $bill['bill_phone'] }}</div> @endif
+                    @if(!empty($bill['bill_email']) || !empty($bill['bill_phone']))
+                    <div style="margin-top: 4px;">
+                        @php
+                            $billContact = [];
+                            if(!empty($bill['bill_email'])) $billContact[] = $bill['bill_email'];
+                            if(!empty($bill['bill_phone'])) $billContact[] = $bill['bill_phone'];
+                        @endphp
+                        {{ implode(' | ', $billContact) }}
                     </div>
+                    @endif
+                    
+                    @if(!empty($bill['bill_company']))
+                        <div style="margin-top: 2px; font-weight: bold; color: #292929;">Company: {{ $bill['bill_company'] }}</div>
+                    @endif
                 </div>
             </td>
 
@@ -39,46 +54,50 @@
                     {{ $ship['ship_first_name'] ?? ($bill['bill_first_name'] ?? '') }} {{ $ship['ship_last_name'] ?? ($bill['bill_last_name'] ?? '') }}
                 </div>
                 
-                <div style="font-size: 9px; color: #6b7280; line-height: 1.5;">
-                    @if(!empty($ship['ship_address1']))
-                        <div>{{ $ship['ship_address1'] }}</div>
-                    @elseif(!empty($bill['bill_address1']))
-                        <div>{{ $bill['bill_address1'] }}</div>
-                    @endif
-                    
-                    @if(!empty($ship['ship_address2'])) <div>{{ $ship['ship_address2'] }}</div> @endif
-                    
-                    @if(!empty($ship['ship_city'])) 
-                        <div>
-                            {{ $ship['ship_city'] }}@if(isset($state['name'])), {{ $state['name'] }}@endif 
-                            @if(!empty($ship['ship_zip'])) - {{ $ship['ship_zip'] }}@elseif(!empty($bill['bill_zip'])) - {{ $bill['bill_zip'] }}@endif
-                        </div>
-                    @elseif(!empty($bill['bill_city']))
-                        <div>
-                            {{ $bill['bill_city'] }}@if(isset($state['name'])), {{ $state['name'] }}@endif 
-                            @if(!empty($bill['bill_zip'])) - {{ $bill['bill_zip'] }}@endif
-                        </div>
-                    @endif
-                    
-                    <div style="margin-top: 6px;">
-                        @if(!empty($ship['ship_email']))
-                            <div>{{ $ship['ship_email'] }}</div>
-                        @elseif(!empty($bill['bill_email']))
-                            <div>{{ $bill['bill_email'] }}</div>
-                        @endif
+                <div class="party-address" style="font-size: 9px; color: #6b7280; line-height: 1.5; white-space: normal; overflow-wrap: normal; word-break: normal;">
+                    @php
+                        $shipParts = [];
                         
-                        @if(!empty($ship['ship_phone']))
-                            <div>{{ $ship['ship_phone'] }}</div>
-                        @elseif(!empty($bill['bill_phone']))
-                            <div>{{ $bill['bill_phone'] }}</div>
-                        @endif
+                        $shipAddr1 = $ship['ship_address1'] ?? ($bill['bill_address1'] ?? '');
+                        if(!empty($shipAddr1)) $shipParts[] = $shipAddr1;
                         
-                        @if(!empty($ship['ship_company']))
-                            <div style="margin-top: 4px; font-weight: bold; color: #292929;">Company: {{ $ship['ship_company'] }}</div>
-                        @elseif(!empty($bill['bill_company']))
-                            <div style="margin-top: 4px; font-weight: bold; color: #292929;">Company: {{ $bill['bill_company'] }}</div>
-                        @endif
+                        if(!empty($ship['ship_address2'])) $shipParts[] = $ship['ship_address2'];
+                        
+                        $shipCity = '';
+                        $rawCity = $ship['ship_city'] ?? ($bill['bill_city'] ?? '');
+                        $rawZip = $ship['ship_zip'] ?? ($bill['bill_zip'] ?? '');
+                        
+                        if(!empty($rawCity)) {
+                            $shipCity .= $rawCity;
+                            if(isset($state['name'])) $shipCity .= ', ' . $state['name'];
+                            if(!empty($rawZip)) $shipCity .= '-' . $rawZip;
+                        }
+                        if(!empty($shipCity)) $shipParts[] = $shipCity;
+                        
+                        $shipCountry = $ship['ship_country'] ?? ($bill['bill_country'] ?? '');
+                        if(!empty($shipCountry)) $shipParts[] = $shipCountry;
+                    @endphp
+                    {{ implode(', ', $shipParts) }}
+                    
+                    @php
+                        $shipEmail = $ship['ship_email'] ?? ($bill['bill_email'] ?? '');
+                        $shipPhone = $ship['ship_phone'] ?? ($bill['bill_phone'] ?? '');
+                        $shipContact = [];
+                        if(!empty($shipEmail)) $shipContact[] = $shipEmail;
+                        if(!empty($shipPhone)) $shipContact[] = $shipPhone;
+                    @endphp
+                    @if(!empty($shipContact))
+                    <div style="margin-top: 4px;">
+                        {{ implode(' | ', $shipContact) }}
                     </div>
+                    @endif
+                    
+                    @php
+                        $shipCompany = $ship['ship_company'] ?? ($bill['bill_company'] ?? '');
+                    @endphp
+                    @if(!empty($shipCompany))
+                        <div style="margin-top: 2px; font-weight: bold; color: #292929;">Company: {{ $shipCompany }}</div>
+                    @endif
                 </div>
             </td>
         </tr>

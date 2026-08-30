@@ -5,7 +5,7 @@
         <!-- Left Side: Logo & Company Info -->
         <td style="width: 50%; vertical-align: middle;">
             @if($setting->logo)
-                <img src="{{ asset('assets/images/'.$setting->logo) }}" alt="Logo" style="max-width: 150px; max-height: 40px; margin-bottom: 8px;">
+                <img src="{{ asset('assets/images/'.$setting->logo) }}" alt="Logo" style="width: 38mm; max-width: 40mm; height: auto; margin-bottom: 8px;">
             @else
                 <div style="font-size: 20px; font-weight: bold; color: #C92732; margin-bottom: 8px;">{{ $setting->title }}</div>
             @endif
