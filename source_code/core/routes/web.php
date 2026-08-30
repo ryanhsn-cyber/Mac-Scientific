@@ -33,6 +33,27 @@ Route::get('/clear-settings-now', function () {
     }
 });
 
+// TEMPORARY DEBUG ROUTE - REMOVE AFTER FIXING
+Route::get('/debug-upload-limits', function () {
+    return response()->json([
+        'upload_max_filesize' => ini_get('upload_max_filesize'),
+        'post_max_size' => ini_get('post_max_size'),
+        'max_file_uploads' => ini_get('max_file_uploads'),
+        'max_input_time' => ini_get('max_input_time'),
+        'max_execution_time' => ini_get('max_execution_time'),
+        'memory_limit' => ini_get('memory_limit'),
+        'file_uploads' => ini_get('file_uploads'),
+        'tmp_dir' => sys_get_temp_dir(),
+        'tmp_writable' => is_writable(sys_get_temp_dir()),
+        'assets_dir_exists' => is_dir(base_path('../assets/images')),
+        'assets_dir_writable' => is_writable(base_path('../assets/images')),
+        'featured_banner_exists' => file_exists(base_path('../assets/images/featured-banner.png')),
+        'featured_banner_webp_exists' => file_exists(base_path('../assets/images/featured-banner.webp')),
+        'featured_banner_size' => @filesize(base_path('../assets/images/featured-banner.png')),
+        'featured_banner_mtime' => @date('Y-m-d H:i:s', filemtime(base_path('../assets/images/featured-banner.png'))),
+    ]);
+});
+
 Route::group(['middleware' => 'adminlocalize'], function () {
 
     Route::prefix('admin')->group(function () {

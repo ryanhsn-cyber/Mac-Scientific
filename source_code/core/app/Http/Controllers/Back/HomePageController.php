@@ -290,7 +290,7 @@ class HomePageController extends Controller
     public function highlight_banner_update(Request $request)
     {
         $request->validate([
-            'highlight_banner' => 'image',
+            'highlight_banner' => 'nullable|image|max:10240',
             'highlight_banner_url' => 'nullable|string|max:255'
         ]);
 
@@ -300,46 +300,46 @@ class HomePageController extends Controller
             if (!$file->isValid()) {
                 return redirect()->back()->with('error', 'File upload failed! Error code: ' . $file->getError() . '. The image might exceed the server upload size limit.');
             }
-            
+
+            $destDir = base_path('../assets/images');
+            $pngPath = $destDir . '/featured-banner.png';
+            $webpPath = $destDir . '/featured-banner.webp';
+            $mobileWebpPath = $destDir . '/featured-banner-mobile.webp';
+
+            // Step 1: Save the original uploaded file as PNG first
             try {
-                $img = \Image::make($file);
-                
-                $webpPath = base_path('../assets/images/featured-banner.webp');
-                $mobileWebpPath = base_path('../assets/images/featured-banner-mobile.webp');
-                
+                $file->move($destDir, 'featured-banner.png');
+            } catch (\Exception $e) {
+                \Log::error('Highlight banner: Failed to move uploaded file: ' . $e->getMessage());
+                return redirect()->back()->with('error', 'Failed to save uploaded file: ' . $e->getMessage());
+            }
+            
+            // Step 2: Generate WebP versions from the saved PNG
+            try {
+                // Desktop WebP - full size
+                $img = \Image::make($pngPath);
                 if (file_exists($webpPath)) { @unlink($webpPath); }
                 $img->encode('webp', 90)->save($webpPath);
+                $img->destroy();
                 
+                // Mobile WebP - resized
+                $imgMobile = \Image::make($pngPath);
                 if (file_exists($mobileWebpPath)) { @unlink($mobileWebpPath); }
-                $img->resize(767, null, function ($constraint) {
+                $imgMobile->resize(767, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->encode('webp', 90)->save($mobileWebpPath);
+                $imgMobile->destroy();
             } catch (\Exception $e) {
-                \Log::error('WebP generation failed: ' . $e->getMessage());
-                return redirect()->back()->with('error', 'WebP image processing failed: ' . $e->getMessage());
-            }
-
-            try {
-                $file->move(base_path('../assets/images'), 'featured-banner.png');
-            } catch (\Exception $e) {
-                return redirect()->back()->with('error', 'Failed to move uploaded file: ' . $e->getMessage());
+                \Log::error('Highlight banner: WebP generation failed: ' . $e->getMessage());
+                // PNG was already saved, so the banner still works even if WebP fails
             }
         } else {
-            return redirect()->back()->with('error', 'No file was received by the server! The image might exceed the server\'s upload limit, or the input was empty.');
-        }
-
-        if($request->has('highlight_banner_url')){
-            // We can store the URL in setting or home_customize if needed.
-            // Since we're modifying the hardcoded banner, we will just use 
-            // home_customize table's unused fields or simply skip URL for now 
-            // if we just want to replace the image.
-            // Wait, we need a place to store the URL if they want one.
-            // But let's just stick to the image first.
+            return redirect()->back()->with('error', 'No file was selected. Please choose an image to upload.');
         }
 
         $this->clearHomeCache();
-        return redirect()->back()->withSuccess(__('Highlight Banner Updated Successfully'));
+        return redirect()->back()->with('success', __('Highlight Banner Updated Successfully'));
     }
 
     private function clearHomeCache()

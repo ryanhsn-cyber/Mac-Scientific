@@ -992,6 +992,7 @@
                         <div class="tab-pane fade" id="v-pills-t10" role="tabpanel" aria-labelledby="v-pills-t10-tab">
                             <form class="admin-form" action="{{route('back.highlight.banner.update')}}" method="post" enctype="multipart/form-data">
                                 @csrf
+                                @include('alerts.alerts')
                                 <div class="form-group">
                                     <label for="name">{{ __('Highlight Banner') }} *</label>
                                     <br>
