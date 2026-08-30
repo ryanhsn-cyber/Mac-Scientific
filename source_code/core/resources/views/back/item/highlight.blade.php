@@ -57,7 +57,7 @@
 										<input type="text" name="date" class="form-control datepicker" id="datepicker"
 											id="slug"
 											placeholder="{{ __('Enter Date') }}"
-											value="{{ $item- required>date }}" >
+											value="{{ $item->date }}" >
 									</div>
 
 
