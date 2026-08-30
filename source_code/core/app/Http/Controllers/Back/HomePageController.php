@@ -306,35 +306,28 @@ class HomePageController extends Controller
             $webpPath = $destDir . '/featured-banner.webp';
             $mobileWebpPath = $destDir . '/featured-banner-mobile.webp';
 
-            // Step 1: Save the original uploaded file as PNG first
+            // Process image: Save as PNG and generate WebP versions
             try {
                 $img = \Image::make($file);
+                
+                // Save PNG
                 $img->encode('png')->save($pngPath);
-                $img->destroy();
-            } catch (\Throwable $e) {
-                \Log::error('Highlight banner: Failed to move uploaded file: ' . $e->getMessage());
-                return redirect()->back()->with('error', 'Failed to save uploaded file: ' . $e->getMessage());
-            }
-            
-            // Step 2: Generate WebP versions from the saved PNG
-            try {
+                
                 // Desktop WebP - full size
-                $img = \Image::make($pngPath);
                 if (file_exists($webpPath)) { @unlink($webpPath); }
                 $img->encode('webp', 90)->save($webpPath);
-                $img->destroy();
                 
                 // Mobile WebP - resized
-                $imgMobile = \Image::make($pngPath);
                 if (file_exists($mobileWebpPath)) { @unlink($mobileWebpPath); }
-                $imgMobile->resize(767, null, function ($constraint) {
+                $img->resize(767, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->encode('webp', 90)->save($mobileWebpPath);
-                $imgMobile->destroy();
+                
+                $img->destroy();
             } catch (\Throwable $e) {
-                \Log::error('Highlight banner: WebP generation failed: ' . $e->getMessage());
-                // PNG was already saved, so the banner still works even if WebP fails
+                \Log::error('Highlight banner: Failed to process image: ' . $e->getMessage());
+                return redirect()->back()->with('error', 'Failed to process and save uploaded image. The image might be too large or invalid. Error: ' . $e->getMessage());
             }
         } else {
             return redirect()->back()->with('error', 'No file was selected. Please choose an image to upload.');

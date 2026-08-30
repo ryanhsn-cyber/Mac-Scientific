@@ -414,10 +414,14 @@
                             @php
                                 $bannerTime = @filemtime(base_path('../assets/images/featured-banner.png')) ?: time();
                             @endphp
-                            <img src="/assets/images/featured-banner.webp?v={{ $bannerTime }}"
-                                 alt="Regenerative Medicine - All About The Procedure And Treatment Options"
-                                 class="img-fluid w-100" width="1114" height="320"
-                                 style="border-radius: 8px; max-height: 320px; object-fit: cover;" loading="lazy">
+                            <picture>
+                                <source media="(max-width: 767px)" srcset="{{ asset('assets/images/featured-banner-mobile.webp') }}?v={{ $bannerTime ?? time() }}" type="image/webp">
+                                <source srcset="{{ asset('assets/images/featured-banner.webp') }}?v={{ $bannerTime ?? time() }}" type="image/webp">
+                                <img src="{{ asset('assets/images/featured-banner.png') }}?v={{ $bannerTime ?? time() }}"
+                                     alt="Regenerative Medicine - All About The Procedure And Treatment Options"
+                                     class="img-fluid w-100" width="1114" height="320"
+                                     style="border-radius: 8px; max-height: 320px; object-fit: cover;" loading="lazy">
+                            </picture>
                         </a>
                     </div>
                 </div>
