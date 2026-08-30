@@ -150,8 +150,8 @@
             color: #64748b;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            padding: 8px 6px;
-            border-bottom: 1.5px solid #cbd5e1;
+            padding: 10px 6px;
+            background-color: #f1f5f9;
         }
         .items-table tbody tr {
             page-break-inside: avoid;
@@ -205,10 +205,10 @@
                     <div style="font-size: 11px; font-weight: 800; color: #a0261a; letter-spacing: 0.8px; margin-top: 5px; text-transform: uppercase;">
                         MEDICAL &amp; AESTHETIC SUPPLIES
                     </div>
-                    <div style="font-size: 11px; color: #475569; line-height: 1.4; margin-top: 3px;">
-                        Shop 59, 2nd Floor, Rajanigandha Super Market<br>
-                        Kachukhet, Dhaka Cantonment, Dhaka-1206, Bangladesh<br>
-                        {{ $setting->footer_phone ?? '+880 1312-699221' }} | ms-bd.com
+                    <div style="font-size: 11px; color: #475569; margin-top: 5px;">
+                        <div style="margin-bottom: 2px;">Shop No. 59, 2nd Floor, Rajanigandha Super Market</div>
+                        <div style="margin-bottom: 2px;">Kachukhet, Dhaka Cantonment, Dhaka-1206, Bangladesh</div>
+                        <div>{{ $setting->footer_phone ?? '+880 1312-699221' }} | ms-bd.com</div>
                     </div>
                 </td>
                 <td style="width: 45%; text-align: right;">
@@ -249,7 +249,7 @@
                 </td>
                 <td class="meta-col">
                     <span style="font-size: 9.5px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;">TRANSACTION ID</span><br>
-                    <strong style="font-size: 12.5px; color: #0f172a;">{{ $order->txnid ?: $order->transaction_number }}</strong>
+                    <strong style="font-size: 12.5px; color: #0f172a;">{{ rtrim($order->txnid ?: $order->transaction_number, '\') }}</strong>
                 </td>
             </tr>
         </table>
@@ -265,22 +265,22 @@
                     </div>
                     <div style="font-size: 11px; color: #475569; line-height: 1.45;">
                         @if(isset($bill['bill_address1']) && $bill['bill_address1'])
-                            {{ $bill['bill_address1'] }}<br>
+                            <div>{{ $bill['bill_address1'] }}</div>
                         @endif
                         @if(isset($bill['bill_address2']) && $bill['bill_address2'])
-                            {{ $bill['bill_address2'] }}<br>
+                            <div>{{ $bill['bill_address2'] }}</div>
                         @endif
                         @if(isset($bill['bill_city']) && $bill['bill_city'])
-                            {{ $bill['bill_city'] }}@if(isset($state['name'])), {{ $state['name'] }}@endif @if(isset($bill['bill_zip'])) - {{ $bill['bill_zip'] }}@endif<br>
+                            <div>{{ $bill['bill_city'] }}@if(isset($state['name'])), {{ $state['name'] }}@endif @if(isset($bill['bill_zip'])) - {{ $bill['bill_zip'] }}@endif</div>
                         @endif
                         @if(isset($bill['bill_country']) && $bill['bill_country'])
-                            {{ $bill['bill_country'] }}<br>
+                            <div>{{ $bill['bill_country'] }}</div>
                         @endif
                         @if(isset($bill['bill_email']) && $bill['bill_email'])
-                            {{ $bill['bill_email'] }}<br>
+                            <div>{{ $bill['bill_email'] }}</div>
                         @endif
                         @if(isset($bill['bill_phone']) && $bill['bill_phone'])
-                            {{ $bill['bill_phone'] }}<br>
+                            <div>{{ $bill['bill_phone'] }}</div>
                         @endif
                         @if(isset($bill['bill_company']) && $bill['bill_company'])
                             Company: {{ $bill['bill_company'] }}
@@ -295,24 +295,24 @@
                     </div>
                     <div style="font-size: 11px; color: #475569; line-height: 1.45;">
                         @if(isset($ship['ship_address1']) && $ship['ship_address1'])
-                            {{ $ship['ship_address1'] }}<br>
+                            <div>{{ $ship['ship_address1'] }}</div>
                         @elseif(isset($bill['bill_address1']))
-                            {{ $bill['bill_address1'] }}<br>
+                            <div>{{ $bill['bill_address1'] }}</div>
                         @endif
                         @if(isset($ship['ship_address2']) && $ship['ship_address2'])
-                            {{ $ship['ship_address2'] }}<br>
+                            <div>{{ $ship['ship_address2'] }}</div>
                         @endif
                         @if(isset($ship['ship_city']) && $ship['ship_city'])
-                            {{ $ship['ship_city'] }}@if(isset($state['name'])), {{ $state['name'] }}@endif @if(isset($ship['ship_zip'])) - {{ $ship['ship_zip'] }}@endif<br>
+                            <div>{{ $ship['ship_city'] }}@if(isset($state['name'])), {{ $state['name'] }}@endif @if(isset($ship['ship_zip'])) - {{ $ship['ship_zip'] }}@endif</div>
                         @endif
                         @if(isset($ship['ship_country']) && $ship['ship_country'])
-                            {{ $ship['ship_country'] }}<br>
+                            <div>{{ $ship['ship_country'] }}</div>
                         @endif
                         @if(isset($ship['ship_email']) && $ship['ship_email'])
-                            {{ $ship['ship_email'] }}<br>
+                            <div>{{ $ship['ship_email'] }}</div>
                         @endif
                         @if(isset($ship['ship_phone']) && $ship['ship_phone'])
-                            {{ $ship['ship_phone'] }}<br>
+                            <div>{{ $ship['ship_phone'] }}</div>
                         @endif
                         <div style="font-size: 11px; color: #475569; margin-top: 1px;">
                             Company: {{ $ship['ship_company'] ?? ($bill['bill_company'] ?? 'Mac Scientific') }}
@@ -345,7 +345,7 @@
                     @endphp
                     <tr>
                         <td class="text-left">
-                            <div style="font-size: 12px; font-weight: 700; color: #0f172a;">
+                            <div style="font-size: 12px; font-weight: 800; color: #0f172a;">
                                 {{ sprintf('%02d', $loop->iteration) }} {{ $item['name'] ?? 'Product' }}
                             </div>
                             @if(isset($item['attribute']['option_name']) && $item['attribute']['option_name'])
