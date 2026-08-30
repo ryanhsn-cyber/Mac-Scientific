@@ -163,3 +163,4 @@ N/A
 - [x] Added Draft & Auto-Save feature to Product Editor. Uses browser `localStorage` for offline protection and adds a dedicated 'Save Draft' and 'Cancel' button.
 - [x] Reduced the vertical spacing above the hero slider and between the "Our Current Highlight" and "Featured Products" sections specifically for mobile views (max-width: 767px).
 - [x] Fixed highlight banner image upload memory exhaustion and client-side preview issues.
+- [x] Redesigned and refactored the A4 Invoice PDF generation system using specialized Blade components (document, header, meta, parties, items, summary, footer) to accurately match the visual reference and ensure DOMPDF renders exactly at 210x297mm.
