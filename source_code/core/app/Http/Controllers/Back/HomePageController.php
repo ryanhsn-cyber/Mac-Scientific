@@ -308,8 +308,10 @@ class HomePageController extends Controller
 
             // Step 1: Save the original uploaded file as PNG first
             try {
-                $file->move($destDir, 'featured-banner.png');
-            } catch (\Exception $e) {
+                $img = \Image::make($file);
+                $img->encode('png')->save($pngPath);
+                $img->destroy();
+            } catch (\Throwable $e) {
                 \Log::error('Highlight banner: Failed to move uploaded file: ' . $e->getMessage());
                 return redirect()->back()->with('error', 'Failed to save uploaded file: ' . $e->getMessage());
             }
@@ -330,7 +332,7 @@ class HomePageController extends Controller
                     $constraint->upsize();
                 })->encode('webp', 90)->save($mobileWebpPath);
                 $imgMobile->destroy();
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 \Log::error('Highlight banner: WebP generation failed: ' . $e->getMessage());
                 // PNG was already saved, so the banner still works even if WebP fails
             }
