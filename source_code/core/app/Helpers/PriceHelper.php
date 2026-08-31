@@ -120,12 +120,16 @@ class PriceHelper
     }
 
     public static function setCurrencyName() {
-        if(Session::has('currency')){
-            $curr = Currency::findOrFail(Session::get('currency'));
-        }else{
-            $curr = Currency::where('is_default',1)->first();
+        try {
+            if(Session::has('currency')){
+                $curr = Currency::find(Session::get('currency'));
+            }else{
+                $curr = Currency::where('is_default',1)->first();
+            }
+            return $curr ? $curr->name : 'BDT';
+        } catch (\Exception $e) {
+            return 'BDT';
         }
-       return $curr->name;
     }
 
     public static function grandCurrencyPrice($item)
@@ -203,34 +207,40 @@ class PriceHelper
         $total = 0;
 
         foreach($cart as $key => $item){
-            $total += ($item['main_price'] + $item['attribute_price']) * $item['qty'];
+            $mainPrice = $item['main_price'] ?? $item['price'] ?? 0;
+            $attrPrice = $item['attribute_price'] ?? 0;
+            $qty = $item['qty'] ?? 1;
+            $total += ($mainPrice + $attrPrice) * $qty;
             $cart_total = $total;
-            if(Item::where('id',$key)->exists()){
-                $item = Item::findOrFail($key);
-                if(isset($item)){
-                    if($item && $item->tax){
+            try {
+                if(Item::where('id',$key)->exists()){
+                    $item = Item::findOrFail($key);
+                    if(isset($item) && $item->tax){
                         $total_tax += $item::taxCalculate($item);
                     }
                 }
+            } catch (\Exception $e) {
+                // Ignore DB error if offline
             }
         }
 
         $shipping = [];
-        if(json_decode($order->shipping)){
+        if(isset($order->shipping) && json_decode($order->shipping)){
             $shipping = json_decode($order->shipping,true);
         }
 
         $discount = [];
-        if(json_decode($order->discount)){
+        if(isset($order->discount) && json_decode($order->discount)){
             $discount = json_decode($order->discount,true);
         }
 
-        $grand_total = ($cart_total + ($shipping?$shipping['price']:0)) + $total_tax;
-        $grand_total = $grand_total - ($discount ? $discount['discount'] : 0);
-        $grand_total = $grand_total + $order->state_price;
+        $grand_total = ($cart_total + ($shipping ? ($shipping['price'] ?? 0) : 0)) + $total_tax;
+        $grand_total = $grand_total - ($discount ? ($discount['discount'] ?? 0) : 0);
+        $grand_total = $grand_total + ($order->state_price ?? 0);
 
-        $total_amount = round($grand_total * $order->currency_value,2);
-        if(!$trns){
+        $currencyValue = $order->currency_value ?? 1;
+        $total_amount = round($grand_total * $currencyValue, 2);
+        if(!$trns && method_exists(self::class, 'testPrice')){
             $total_amount = self::testPrice($total_amount);
         }
 

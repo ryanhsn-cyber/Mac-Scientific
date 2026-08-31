@@ -111,7 +111,7 @@ class DataLayerBuilder
             ];
         }
 
-        $orderTotal = (float)(\App\Helpers\PriceHelper::OrderTotal($order, true));
+        $orderTotal = (float)($order->pay_amount ?? $order->total_amount ?? (method_exists(\App\Helpers\PriceHelper::class, 'OrderTotal') ? \App\Helpers\PriceHelper::OrderTotal($order, true) : 0));
 
         return [
             'event' => 'purchase',
