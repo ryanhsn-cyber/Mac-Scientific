@@ -55,4 +55,18 @@ class CustomTrackingEvent extends Model
     {
         return $query->whereIn('trigger_type', ['server_event', 'route_visit']);
     }
+
+    /**
+     * Get active client-side events safely without throwing errors if table is unmigrated.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
+     */
+    public static function getActiveClientEvents()
+    {
+        try {
+            return static::active()->clientSide()->get();
+        } catch (\Exception $e) {
+            return collect();
+        }
+    }
 }

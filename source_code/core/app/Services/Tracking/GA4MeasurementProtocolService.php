@@ -69,7 +69,7 @@ class GA4MeasurementProtocolService
         $responseData = [];
 
         try {
-            $response = Http::timeout(10)->post($url, $payload);
+            $response = Http::timeout(5)->post($url, $payload);
             $latencyMs = round((microtime(true) - $startTime) * 1000, 2);
             $httpStatus = $response->status();
             $responseData = $response->json() ?: ['body' => $response->body() ?: 'Event accepted'];

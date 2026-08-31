@@ -10,22 +10,21 @@ use Illuminate\Support\Facades\Log;
 class MetaCapiService
 {
     /**
-     * Send event to Meta Conversions API.
+     * Send event to Meta Conversions API (Graph API v19.0+)
      *
      * @param string $eventName
      * @param string $eventId
      * @param array $customData
      * @param array $userData
      * @param string|null $eventSourceUrl
-     * @return array ['success' => bool, 'status' => int, 'response' => array, 'latency_ms' => float]
+     * @return array
      */
     public static function sendEvent($eventName, $eventId, array $customData = [], array $userData = [], $eventSourceUrl = null)
     {
         $startTime = microtime(true);
-
-        $pixelId = TrackingSetting::get('meta_pixel_id');
-        $accessToken = TrackingSetting::get('meta_capi_token');
-        $testEventCode = TrackingSetting::get('meta_capi_test_code');
+        $pixelId = TrackingSetting::get('meta_pixel_id', '');
+        $accessToken = TrackingSetting::get('meta_capi_token', '');
+        $testEventCode = TrackingSetting::get('meta_test_event_code', '');
 
         if (empty($pixelId) || empty($accessToken)) {
             return [
@@ -46,7 +45,7 @@ class MetaCapiService
             'event_time' => time(),
             'event_id' => $eventId,
             'action_source' => 'website',
-            'event_source_url' => $eventSourceUrl ?: (url()->current() ?: config('app.url')),
+            'event_source_url' => $eventSourceUrl ?: (request() ? (url()->current() ?: config('app.url')) : config('app.url')),
             'user_data' => $formattedUserData,
         ];
 
@@ -66,7 +65,7 @@ class MetaCapiService
         $responseData = [];
 
         try {
-            $response = Http::timeout(10)->post($url . '?access_token=' . $accessToken, $payload);
+            $response = Http::timeout(5)->post($url . '?access_token=' . $accessToken, $payload);
             $latencyMs = round((microtime(true) - $startTime) * 1000, 2);
             $httpStatus = $response->status();
             $responseData = $response->json() ?: ['body' => $response->body()];

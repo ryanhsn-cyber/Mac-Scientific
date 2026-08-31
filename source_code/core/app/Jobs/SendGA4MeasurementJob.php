@@ -59,16 +59,23 @@ class SendGA4MeasurementJob implements ShouldQueue
      */
     public function handle()
     {
-        $result = GA4MeasurementProtocolService::sendEvent(
-            $this->eventName,
-            $this->eventId,
-            $this->eventParams,
-            $this->clientId,
-            $this->userId
-        );
+        try {
+            $result = GA4MeasurementProtocolService::sendEvent(
+                $this->eventName,
+                $this->eventId,
+                $this->eventParams,
+                $this->clientId,
+                $this->userId
+            );
 
-        if (!$result['success'] && $this->attempts() < $this->tries) {
-            throw new \Exception("GA4 MP HTTP {$result['status']}: " . json_encode($result['response']));
+            if (!$result['success'] && config('queue.default') !== 'sync' && $this->attempts() < $this->tries) {
+                throw new \Exception("GA4 MP HTTP {$result['status']}: " . json_encode($result['response']));
+            }
+        } catch (\Exception $e) {
+            Log::error("SendGA4MeasurementJob Error ({$this->eventName}): " . $e->getMessage());
+            if (config('queue.default') !== 'sync') {
+                throw $e;
+            }
         }
     }
 

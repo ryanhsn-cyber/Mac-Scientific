@@ -59,17 +59,23 @@ class SendMetaCapiJob implements ShouldQueue
      */
     public function handle()
     {
-        $result = MetaCapiService::sendEvent(
-            $this->eventName,
-            $this->eventId,
-            $this->customData,
-            $this->userData,
-            $this->eventSourceUrl
-        );
+        try {
+            $result = MetaCapiService::sendEvent(
+                $this->eventName,
+                $this->eventId,
+                $this->customData,
+                $this->userData,
+                $this->eventSourceUrl
+            );
 
-        if (!$result['success'] && $this->attempts() < $this->tries) {
-            // Throw exception to trigger automatic retry by queue worker
-            throw new \Exception("Meta CAPI HTTP {$result['status']}: " . json_encode($result['response']));
+            if (!$result['success'] && config('queue.default') !== 'sync' && $this->attempts() < $this->tries) {
+                throw new \Exception("Meta CAPI HTTP {$result['status']}: " . json_encode($result['response']));
+            }
+        } catch (\Exception $e) {
+            Log::error("SendMetaCapiJob Error ({$this->eventName}): " . $e->getMessage());
+            if (config('queue.default') !== 'sync') {
+                throw $e;
+            }
         }
     }
 

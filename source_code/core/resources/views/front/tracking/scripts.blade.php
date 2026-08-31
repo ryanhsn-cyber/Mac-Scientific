@@ -1,6 +1,6 @@
 @php
     $trackingSettings = \App\Models\TrackingSetting::getAllSettings();
-    $customClientEvents = \App\Models\CustomTrackingEvent::active()->clientSide()->get();
+    $customClientEvents = \App\Models\CustomTrackingEvent::getActiveClientEvents();
 
     $enableGtm = ($trackingSettings['enable_gtm'] ?? '0') == '1' && !empty($trackingSettings['gtm_container_id']);
     $gtmContainerId = $trackingSettings['gtm_container_id'] ?? '';
