@@ -175,3 +175,4 @@ N/A
 - [x] Redesigned and refactored the A4 Invoice PDF generation system using specialized Blade components (document, header, meta, parties, items, summary, footer) to accurately match the visual reference and ensure DOMPDF renders exactly at 210x297mm.
 - [x] Fixed syntax error in highlight.blade.php.
 - [x] Added System Restore functionality allowing administrators to upload `.sql` files and safely restore system backups from a new Backup & Restore view.
+- [x] Architected and deployed the Unified Tracking & Integrations Engine (GTM, Meta CAPI, GA4 MP) to Coolify live server.
