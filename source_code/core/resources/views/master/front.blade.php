@@ -612,17 +612,8 @@ a.list-group-item:hover,
 @endif
 {{-- Google AdSense End --}}
 
-{{-- Google AnalyTics Start --}}
-@if ($setting->is_google_analytics == '1')
-    {!! $setting->google_analytics !!}
-@endif
-{{-- Google AnalyTics End --}}
-
-{{-- Facebook pixel  Start --}}
-@if ($setting->is_facebook_pixel == '1')
-    {!! $setting->facebook_pixel !!}
-@endif
-{{-- Facebook pixel End --}}
+{{-- Unified Tracking & Integrations (GTM, GA4, Meta Pixel, Event Builder) --}}
+@include('front.tracking.scripts')
 
 </head>
 <!-- Body-->
@@ -637,6 +628,17 @@ body_theme3
 body_theme4
 @endif
 ">
+
+@php
+    $gtmContainer = \App\Models\TrackingSetting::get('gtm_container_id');
+    $gtmActive = \App\Models\TrackingSetting::get('enable_gtm') == '1' && !empty($gtmContainer);
+@endphp
+@if($gtmActive)
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ $gtmContainer }}"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+@endif
 
 
 <!-- Header-->

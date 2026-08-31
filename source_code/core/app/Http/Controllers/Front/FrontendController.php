@@ -370,16 +370,19 @@ class FrontendController extends Controller
         $video = explode('=',$item->video);
 
         // Send Facebook CAPI ViewContent Event
+        $eventId = \App\Services\Tracking\TrackingManager::generateEventId('ViewContent', $item->id);
+
         \App\Helpers\FacebookCapiHelper::sendEvent('ViewContent', [
             'content_name' => $item->name,
             'content_ids' => [(string)$item->id],
             'content_type' => 'product',
             'value' => (float)$item->discount_price,
-            'currency' => 'BDT' // Defaulting to BDT, can be customized
-        ]);
+            'currency' => \App\Helpers\PriceHelper::setCurrencyName()
+        ], [], $eventId);
 
         return view('front.catalog.product',[
             'item'          => $item,
+            'eventId'       => $eventId,
             'reviews'       => $item->reviews()->where('status',1)->paginate(3),
             'galleries'     => $item->galleries,
             'video'         => $item->video ? end($video) : '',

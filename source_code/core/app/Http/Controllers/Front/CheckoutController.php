@@ -116,12 +116,15 @@ class CheckoutController extends Controller
         foreach($cart as $key => $item){
             $content_ids[] = (string)$key;
         }
+        $eventId = \App\Services\Tracking\TrackingManager::generateEventId('InitiateCheckout');
+        $data['eventId'] = $eventId;
+
         \App\Helpers\FacebookCapiHelper::sendEvent('InitiateCheckout', [
             'content_ids' => $content_ids,
             'content_type' => 'product',
             'value' => (float)$total_amount,
             'currency' => PriceHelper::setCurrencyName()
-        ]);
+        ], [], $eventId);
 
         return view('front.checkout.billing',$data);
 
@@ -526,12 +529,14 @@ class CheckoutController extends Controller
             if ($order->billing_first_name) $userData['fn'] = hash('sha256', strtolower(trim($order->billing_first_name)));
             if ($order->billing_last_name) $userData['ln'] = hash('sha256', strtolower(trim($order->billing_last_name)));
             
+            $eventId = 'pur_' . ($order->transaction_number ?? $order->id);
+
             \App\Helpers\FacebookCapiHelper::sendEvent('Purchase', [
                 'content_ids' => $content_ids,
                 'content_type' => 'product',
                 'value' => (float)\App\Helpers\PriceHelper::OrderTotal($order, true),
                 'currency' => PriceHelper::setCurrencyName()
-            ], $userData);
+            ], $userData, $eventId);
 
 
             if($setting->is_twilio == 1 && !empty($setting->footer_phone)){

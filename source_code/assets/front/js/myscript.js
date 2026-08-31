@@ -883,7 +883,14 @@ $(function ($) {
                     type: "GET",
                     url: addToCartUrl,
                     success: function (data) {
-                        console.log(data);
+                        // DataLayer & Meta Pixel Tracking
+                        if (data.dataLayer && window.dataLayer) {
+                            window.dataLayer.push(data.dataLayer);
+                        }
+                        if (data.event_id && typeof fbq === 'function') {
+                            fbq('track', 'AddToCart', {}, { eventID: data.event_id });
+                        }
+
                         $(".cart_count").text(data.qty);
                         $(".cart_view_header").load(
                             $("#header_cart_load").attr("data-target")

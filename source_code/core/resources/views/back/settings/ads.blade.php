@@ -10,6 +10,15 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
+            <div class="alert alert-primary shadow-sm border-0 d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <h5 class="alert-heading mb-1 font-weight-bold"><i class="fas fa-chart-line mr-2"></i> {{ __('Unified Tracking & Integrations Engine') }}</h5>
+                    <p class="mb-0 small">{{ __('Manage GTM, GA4 Server Measurement Protocol, Meta Pixel & CAPI (with Deduplication), Visual Event Builder, and Live Event Logs in the new Tracking Dashboard.') }}</p>
+                </div>
+                <a href="{{ route('back.tracking.index') }}" class="btn btn-sm btn-primary shadow-sm ml-3">
+                    <i class="fas fa-external-link-alt mr-1"></i> {{ __('Open Tracking Dashboard') }}
+                </a>
+            </div>
             @include('alerts.alerts')
         </div>
     </div>

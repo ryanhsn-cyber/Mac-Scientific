@@ -57,6 +57,15 @@ Cleaned up the `[null]` corrupted strings in the database, fixed the 404 jQuery 
 - Fixed a bug where Tagify JSON arrays (e.g. `[{"value":"Safe"}]`) would appear visually broken on the frontend by updating `ItemRepository` to robustly `json_decode` the string before storing and updating the frontend `product.blade.php` to decode legacy JSON strings.
 - Fixed horizontal overflow on mobile viewports for the product action buttons ("Quantity", "Add to Cart", "Order via WhatsApp", "Buy Now") by implementing flexible wrapping (`flex-wrap`).
 
+**Tracking & Integrations Engine:**
+- Architected and implemented a 4-tab unified Tracking & Integrations dashboard in Admin (`[ Admin > Tracking & Integrations ]`) with persistent platform status badges (GTM Container, Direct GA4, Meta Pixel, Meta CAPI).
+- **Tab 1: Google Suite & GTM Integration:** Master GTM toggle, Container ID injection into `<head>` and `<body>`, Server Container URL (sGTM), Direct GA4 Fallback, GA4 Measurement ID, GA4 Server API Secret, Google Ads Conversion ID & labels, and an Auto-Push Ecommerce DataLayer switch.
+- **Tab 2: Meta (Facebook) Suite:** Browser Pixel & Server Conversions API (CAPI v19.0+) toggles, secure token management with show/hide and test triggers, Test Event Code for Events Manager, Advanced Matching with automatic SHA-256 hashing (`em`, `ph`, `fn`, `ln`, `ct`, `zp`), and independent standard e-commerce event toggles (PageView, ViewContent, AddToCart, InitiateCheckout, AddPaymentInfo, Purchase, Lead) with synchronized deduplication keys (`event_id`).
+- **Tab 3: Visual Event Builder:** No-code dynamic rule builder supporting Client-side (CSS Click Selector, URL Path Match, JS Custom Dispatch) and Server-side (Model Hooks, Route Hits, Laravel Events) with dynamic parameter mapping and multi-destination dispatching (`Meta CAPI`, `GA4 Server`, `GTM DataLayer`).
+- **Tab 4: Event Logs, History & Monitoring Engine:** Real-time event monitor with channel and status filtering, search by Event ID / Name, Raw JSON Payload & Response Inspector modal, Deduplication Key inspector, failed event retry engine, and scheduled auto-pruning command (`php artisan tracking:prune`).
+- **Live Connection Health Checks:** Integrated diagnostic engine for Meta CAPI and GA4 MP returning live latency (ms) and raw HTTP response codes.
+- **Deduplication Engine & Queue Pipeline:** Synchronized deterministic UUID / event keys across frontend Blade views and background queue workers (`SendMetaCapiJob`, `SendGA4MeasurementJob`) to prevent double-counting.
+
 ## Goal Pivots
 
 N/A

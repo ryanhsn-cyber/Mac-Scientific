@@ -41,27 +41,38 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-        
         $msg = $this->repository->store($request);
+        $eventId = null;
+        $dataLayerData = null;
 
         if($request->item_id){
             $item = Item::find($request->item_id);
             if($item){
+                $eventId = \App\Services\Tracking\TrackingManager::generateEventId('AddToCart', $item->id);
+                $currency = \App\Helpers\PriceHelper::setCurrencyName();
+                $price = (float)($item->discount_price ?? $item->previous_price ?? 0);
+                $quantity = (int)($request->quantity ?? 1);
+
                 \App\Helpers\FacebookCapiHelper::sendEvent('AddToCart', [
                     'content_name' => $item->name,
                     'content_ids' => [(string)$item->id],
                     'content_type' => 'product',
-                    'value' => (float)$item->discount_price,
-                    'currency' => 'BDT'
-                ]);
+                    'value' => (float)($price * $quantity),
+                    'currency' => $currency
+                ], [], $eventId);
+
+                $dataLayerData = \App\Services\Tracking\DataLayerBuilder::buildAddToCart($item, $quantity, $eventId);
             }
         }
 
         if($request->ajax()){
-            return response()->json(['message' => $msg , 'qty' => count(Session::get('cart'))]);
+            return response()->json([
+                'message' => $msg,
+                'qty' => Session::has('cart') ? count(Session::get('cart')) : 0,
+                'event_id' => $eventId,
+                'dataLayer' => $dataLayerData
+            ]);
         }
-        
-        
     }
 
 	public function store(Request $request)

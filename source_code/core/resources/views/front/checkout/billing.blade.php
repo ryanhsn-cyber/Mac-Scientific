@@ -144,4 +144,7 @@
       @include('includes.checkout_sitebar',$cart)
     </div>
   </div>
+
+@include('front.tracking.events.checkout', ['total' => $total_amount ?? null])
+
 @endsection

@@ -39,7 +39,19 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapTrackingRoutes();
+    }
+
+    /**
+     * Define the "tracking" routes for the application.
+     *
+     * @return void
+     */
+    protected function mapTrackingRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/tracking.php'));
     }
 
     /**

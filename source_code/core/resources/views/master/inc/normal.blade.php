@@ -227,6 +227,11 @@
                     </a>
                 </li>
                 <li>
+                    <a class="sub-link" href="{{ route('back.tracking.index') }}">
+                        <span class="sub-item">{{ __('Tracking & Integrations') }}</span>
+                    </a>
+                </li>
+                <li>
                     <a class="sub-link" href="{{ route('back.homePage') }}">
                         <span class="sub-item">{{ __('Home Page') }}</span>
                     </a>

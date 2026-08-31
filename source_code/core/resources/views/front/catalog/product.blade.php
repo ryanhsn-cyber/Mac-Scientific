@@ -1056,4 +1056,6 @@
     });
 </script>
 
+@include('front.tracking.events.view_content', ['item' => $item])
+
 @endsection

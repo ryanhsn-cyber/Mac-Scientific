@@ -36,4 +36,7 @@
           </div>
         </div>
         </div>
+
+@include('front.tracking.events.purchase', ['order' => $order, 'cart' => $cart])
+
 @endsection
