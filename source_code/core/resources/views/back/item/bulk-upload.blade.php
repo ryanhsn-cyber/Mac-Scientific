@@ -80,14 +80,14 @@
                         <span class="badge badge-primary rounded-circle mr-2 px-2 py-1">1</span>
                         {{ __('Download Official Template') }}
                     </h6>
-                    <span class="badge badge-success px-2 py-1"><i class="fas fa-check mr-1"></i> {{ __('Formatted for Mac Scientific') }}</span>
+                    <span class="badge badge-success px-2 py-1"><i class="fab fa-facebook mr-1"></i> {{ __('Meta / Facebook Catalog Format') }}</span>
                 </div>
                 <div class="card-body">
                     <p class="text-muted mb-3">
-                        {{ __('Download the pre-configured CSV template containing all required product fields (Name, Category, Price, Stock, Specifications, Images, etc.) and sample test rows.') }}
+                        {{ __('Download the official Meta / Facebook Product Catalog CSV template. It supports id (SKU), title, description, availability, image_link, brand, price, sale_price, google_product_category, and product tags.') }}
                     </p>
                     <a href="{{ route('back.csv.template') }}" class="btn btn-success shadow-sm">
-                        <i class="fas fa-download mr-1"></i> {{ __('Download CSV Template (.csv)') }}
+                        <i class="fas fa-download mr-1"></i> {{ __('Download Meta Catalog Template (.csv)') }}
                     </a>
                 </div>
             </div>
@@ -161,39 +161,34 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><code>name</code></td>
+                                    <td><code>title</code> / <code>name</code></td>
                                     <td><span class="badge badge-danger">Required</span></td>
-                                    <td>{{ __('Full product name/title') }}</td>
+                                    <td>{{ __('Full product name / title') }}</td>
                                 </tr>
                                 <tr>
-                                    <td><code>category</code></td>
-                                    <td><span class="badge badge-danger">Required</span></td>
-                                    <td>{{ __('Category name (auto-created if new)') }}</td>
-                                </tr>
-                                <tr>
-                                    <td><code>current_price</code></td>
-                                    <td><span class="badge badge-danger">Required</span></td>
-                                    <td>{{ __('Selling price (numbers only)') }}</td>
-                                </tr>
-                                <tr>
-                                    <td><code>previous_price</code></td>
+                                    <td><code>id</code> / <code>sku</code></td>
                                     <td><span class="badge badge-secondary">Optional</span></td>
-                                    <td>{{ __('Original / Strikethrough price') }}</td>
+                                    <td>{{ __('Product SKU / Content ID (matches Pixel ID)') }}</td>
                                 </tr>
                                 <tr>
-                                    <td><code>stock</code></td>
+                                    <td><code>description</code></td>
                                     <td><span class="badge badge-danger">Required</span></td>
-                                    <td>{{ __('Units in inventory (default: 10)') }}</td>
+                                    <td>{{ __('Full product details / description') }}</td>
                                 </tr>
                                 <tr>
-                                    <td><code>sku</code></td>
-                                    <td><span class="badge badge-secondary">Optional</span></td>
-                                    <td>{{ __('Unique SKU (auto-generated if empty)') }}</td>
+                                    <td><code>price</code></td>
+                                    <td><span class="badge badge-danger">Required</span></td>
+                                    <td>{{ __('Regular/Original price (e.g. 10.00 USD or 850 BDT)') }}</td>
                                 </tr>
                                 <tr>
-                                    <td><code>subcategory</code></td>
+                                    <td><code>sale_price</code></td>
                                     <td><span class="badge badge-secondary">Optional</span></td>
-                                    <td>{{ __('Subcategory name under category') }}</td>
+                                    <td>{{ __('Discounted selling price (if on sale)') }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>google_product_category</code></td>
+                                    <td><span class="badge badge-danger">Required</span></td>
+                                    <td>{{ __('Category hierarchy (e.g. Category > Subcategory)') }}</td>
                                 </tr>
                                 <tr>
                                     <td><code>brand</code></td>
@@ -201,24 +196,39 @@
                                     <td>{{ __('Brand name (auto-created if new)') }}</td>
                                 </tr>
                                 <tr>
-                                    <td><code>short_description</code></td>
+                                    <td><code>image_link</code></td>
                                     <td><span class="badge badge-secondary">Optional</span></td>
-                                    <td>{{ __('Short highlight text') }}</td>
+                                    <td>{{ __('Main image URL (auto-downloaded as WebP)') }}</td>
                                 </tr>
                                 <tr>
-                                    <td><code>description</code></td>
+                                    <td><code>availability</code></td>
                                     <td><span class="badge badge-secondary">Optional</span></td>
-                                    <td>{{ __('Detailed product specification / description') }}</td>
+                                    <td><code>in stock</code> {{ __('or') }} <code>out of stock</code></td>
                                 </tr>
                                 <tr>
-                                    <td><code>photo_url</code></td>
+                                    <td><code>quantity_to_sell_on_facebook</code></td>
                                     <td><span class="badge badge-secondary">Optional</span></td>
-                                    <td>{{ __('Public image URL (auto-downloaded as WebP)') }}</td>
+                                    <td>{{ __('Stock count (e.g. 75)') }}</td>
                                 </tr>
                                 <tr>
-                                    <td><code>how_to_use</code></td>
+                                    <td><code>link</code></td>
                                     <td><span class="badge badge-secondary">Optional</span></td>
-                                    <td>{{ __('Usage instructions') }}</td>
+                                    <td>{{ __('Live product URL link') }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>material</code>, <code>color</code>, <code>size</code></td>
+                                    <td><span class="badge badge-secondary">Optional</span></td>
+                                    <td>{{ __('Stored into specifications and attributes') }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>product_tags[0]</code></td>
+                                    <td><span class="badge badge-secondary">Optional</span></td>
+                                    <td>{{ __('Search & filter tags') }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>video[0].url</code></td>
+                                    <td><span class="badge badge-secondary">Optional</span></td>
+                                    <td>{{ __('Product video URL (YouTube, MP4)') }}</td>
                                 </tr>
                                 <tr>
                                     <td><code>specifications</code></td>

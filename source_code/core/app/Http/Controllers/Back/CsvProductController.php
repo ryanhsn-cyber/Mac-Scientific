@@ -30,47 +30,44 @@ class CsvProductController extends Controller
     }
 
     /**
-     * Download the standard CSV Template for bulk product uploading.
+     * Download the standard CSV Template for bulk product uploading (Meta / Facebook & Google Catalog Format).
      */
     public function template()
     {
         $templatePath = base_path('../assets/bulk_product_template.csv');
 
         if (file_exists($templatePath)) {
-            return response()->download($templatePath, 'mac_scientific_bulk_products_template.csv', [
+            return response()->download($templatePath, 'meta_catalog_bulk_products_template.csv', [
                 'Content-Type' => 'text/csv'
             ]);
         }
 
-        // Generate on the fly if file missing
+        // Fallback generator
         $headers = [
             'Content-type'        => 'text/csv',
-            'Content-Disposition' => 'attachment; filename=mac_scientific_bulk_products_template.csv',
+            'Content-Disposition' => 'attachment; filename=meta_catalog_bulk_products_template.csv',
             'Pragma'              => 'no-cache',
             'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
             'Expires'             => '0'
         ];
 
         $columns = [
-            'name', 'category', 'subcategory', 'childcategory', 'brand',
-            'sku', 'current_price', 'previous_price', 'stock', 'short_description',
-            'description', 'how_to_use', 'specifications', 'features', 'tags',
-            'photo_url', 'video', 'meta_keywords', 'meta_description', 'status'
+            'id', 'title', 'description', 'availability', 'condition', 'link', 'image_link', 'brand',
+            'price', 'google_product_category', 'fb_product_category', 'quantity_to_sell_on_facebook',
+            'sale_price', 'sale_price_effective_date', 'item_group_id', 'gender', 'color', 'size',
+            'age_group', 'material', 'pattern', 'shipping', 'shipping_weight', 'offer_disclaimer',
+            'offer_disclaimer_url', 'video[0].url', 'video[0].tag[0]', 'gtin', 'product_tags[0]',
+            'product_tags[1]', 'style[0]'
         ];
 
         $sampleRow = [
-            'Digital Microscope 1000x HD', 'Laboratory Equipment', 'Microscopes', '', 'Mac Scientific',
-            'MS-MIC-1000', '8500', '9500', '25', 'High-definition digital laboratory microscope with 1000x magnification',
-            'Professional optical glass lenses with 4.3 inch LCD display and rechargeable lithium battery for laboratory research and clinical analysis.',
-            'Connect USB cable to power source or charge battery. Place specimen slide on the adjustable stage and rotate focus wheel until crisp focus is reached.',
-            'Magnification: 50x-1000x; Display: 4.3 inch LCD; Light Source: 8 adjustable LEDs',
-            '1000x Magnification, 4.3-inch Screen, Rechargeable Battery, LED Illumination',
-            'microscope, lab, optics, digital',
-            'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b',
-            'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-            'microscope, lab equipment, mac scientific',
-            'Professional digital microscope with 1000x magnification for research and diagnostic labs.',
-            '1'
+            '0', 'Blue Facebook T-Shirt (Unisex)', 'A vibrant blue crewneck T-shirt for all shapes and sizes. Made from 100% cotton.',
+            'in stock', 'new', 'https://www.facebook.com/facebook_t_shirt', 'https://www.facebook.com/t_shirt_image_001.jpg',
+            'Facebook', '10.00 USD', 'Apparel & Accessories > Clothing', 'Clothing & Accessories > Clothing', '75',
+            '10.00 USD', '2020-04-30T09:30-08:00/2020-05-30T23:59-08:00', '', 'unisex', 'royal blue', 'M',
+            'adult', 'cotton', 'stripes', 'US:CA:Ground:9.99 USD;US:NY:Air:15.99 USD', '10 kg',
+            'Valid while supplies last. Terms and conditions apply.', 'https://example.com/terms-and-conditions',
+            'http://www.facebook.com/a0.mp4', 'Gym', '8806088573892', 'some_string', 'other', 'Bodycon'
         ];
 
         $callback = function () use ($columns, $sampleRow) {
@@ -84,14 +81,14 @@ class CsvProductController extends Controller
     }
 
     /**
-     * Export all products to CSV in the exact template format.
+     * Export all products to CSV in the Meta Catalog template format.
      */
     public function export()
     {
         $headers = [
             'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
             'Content-type'        => 'text/csv',
-            'Content-Disposition' => 'attachment; filename=products_export_' . date('Y_m_d_His') . '.csv',
+            'Content-Disposition' => 'attachment; filename=products_meta_catalog_export_' . date('Y_m_d_His') . '.csv',
             'Expires'             => '0',
             'Pragma'              => 'public'
         ];
@@ -101,36 +98,63 @@ class CsvProductController extends Controller
         $callback = function () use ($items) {
             $fh = fopen('php://output', 'w');
 
-            // Header row
+            // Header row in Meta catalog format
             fputcsv($fh, [
-                'name', 'category', 'subcategory', 'childcategory', 'brand',
-                'sku', 'current_price', 'previous_price', 'stock', 'short_description',
-                'description', 'how_to_use', 'specifications', 'features', 'tags',
-                'photo_url', 'video', 'meta_keywords', 'meta_description', 'status'
+                'id', 'title', 'description', 'availability', 'condition', 'link', 'image_link', 'brand',
+                'price', 'google_product_category', 'fb_product_category', 'quantity_to_sell_on_facebook',
+                'sale_price', 'sale_price_effective_date', 'item_group_id', 'gender', 'color', 'size',
+                'age_group', 'material', 'pattern', 'shipping', 'shipping_weight', 'offer_disclaimer',
+                'offer_disclaimer_url', 'video[0].url', 'video[0].tag[0]', 'gtin', 'product_tags[0]',
+                'product_tags[1]', 'style[0]'
             ]);
 
             foreach ($items as $item) {
+                $categoryHierarchy = $item->category ? $item->category->name : '';
+                if ($item->subcategory) {
+                    $categoryHierarchy .= ' > ' . $item->subcategory->name;
+                }
+                if ($item->childcategory) {
+                    $categoryHierarchy .= ' > ' . $item->childcategory->name;
+                }
+
+                $imageUrl = $item->photo ? (Str::startsWith($item->photo, 'http') ? $item->photo : asset('assets/images/' . $item->photo)) : '';
+                $productUrl = route('front.product', $item->slug);
+
+                $regularPrice = $item->previous_price > 0 ? number_format($item->previous_price, 2, '.', '') . ' BDT' : number_format($item->discount_price, 2, '.', '') . ' BDT';
+                $salePrice = number_format($item->discount_price, 2, '.', '') . ' BDT';
+
                 fputcsv($fh, [
+                    $item->sku ?: $item->id,
                     $item->name,
-                    $item->category ? $item->category->name : '',
-                    $item->subcategory ? $item->subcategory->name : '',
-                    $item->childcategory ? $item->childcategory->name : '',
-                    $item->brand ? $item->brand->name : '',
-                    $item->sku,
-                    $item->discount_price,
-                    $item->previous_price,
+                    $item->details ?: $item->sort_details,
+                    $item->stock > 0 ? 'in stock' : 'out of stock',
+                    'new',
+                    $productUrl,
+                    $imageUrl,
+                    $item->brand ? $item->brand->name : 'Mac Scientific',
+                    $regularPrice,
+                    $categoryHierarchy,
+                    $categoryHierarchy,
                     $item->stock,
-                    $item->sort_details,
-                    $item->details,
-                    $item->how_to_use,
-                    $item->specification_name,
-                    $item->features,
-                    $item->tags,
-                    $item->photo ? (Str::startsWith($item->photo, 'http') ? $item->photo : asset('assets/images/' . $item->photo)) : '',
-                    $item->video,
-                    $item->meta_keywords,
-                    $item->meta_description,
-                    $item->status
+                    $salePrice,
+                    '', // sale_price_effective_date
+                    '', // item_group_id
+                    'unisex',
+                    '', // color
+                    '', // size
+                    'adult',
+                    '', // material
+                    '', // pattern
+                    '', // shipping
+                    '', // shipping_weight
+                    '', // offer_disclaimer
+                    '', // offer_disclaimer_url
+                    $item->video ?: '',
+                    '',
+                    '',
+                    $item->tags ?: '',
+                    '',
+                    ''
                 ]);
             }
 
@@ -195,7 +219,7 @@ class CsvProductController extends Controller
     }
 
     /**
-     * Intelligent Bulk Product CSV Importer
+     * Intelligent Bulk Product CSV Importer supporting Meta Catalog & Standard Store formats
      */
     public function import(Request $request)
     {
@@ -241,12 +265,24 @@ class CsvProductController extends Controller
             rewind($handle);
         }
 
-        // Read and normalize header row
-        $rawHeaders = fgetcsv($handle);
+        // Read and locate header row, skipping comment lines (lines starting with '#')
+        $rawHeaders = null;
+        while (($line = fgetcsv($handle)) !== false) {
+            if (empty($line) || empty(array_filter($line))) {
+                continue;
+            }
+            $firstCell = trim($line[0] ?? '');
+            if (Str::startsWith($firstCell, '#')) {
+                continue;
+            }
+            $rawHeaders = $line;
+            break;
+        }
+
         if (!$rawHeaders) {
             fclose($handle);
             @unlink($fullTempPath);
-            return back()->withError(__('The uploaded CSV file appears to be empty.'));
+            return back()->withError(__('The uploaded CSV file appears to be empty or contains only comments.'));
         }
 
         $headerMap = [];
@@ -281,8 +317,8 @@ class CsvProductController extends Controller
         while (($row = fgetcsv($handle)) !== false) {
             $rowNum++;
 
-            // Skip completely empty lines
-            if (count(array_filter($row)) === 0) {
+            // Skip completely empty lines or lines starting with #
+            if (count(array_filter($row)) === 0 || Str::startsWith(trim($row[0] ?? ''), '#')) {
                 continue;
             }
 
@@ -295,30 +331,46 @@ class CsvProductController extends Controller
                 }
             }
 
-            $name = $data['name'] ?? '';
+            // Title / Product Name
+            $name = $data['name'] ?? ($data['title'] ?? '');
             if (empty($name)) {
-                $rowErrors[] = "Row {$rowNum}: Skipped because Product Name is missing.";
+                $rowErrors[] = "Row {$rowNum}: Skipped because Title/Product Name is missing.";
                 $failedCount++;
                 continue;
             }
 
             try {
-                // 1. Resolve Category
-                $catName = strtolower(trim($data['category'] ?? ''));
+                // 1. Resolve Category & Subcategories (Supports Meta hierarchy: "Apparel & Accessories > Clothing")
+                $rawCategory = $data['google_product_category'] ?? ($data['fb_product_category'] ?? ($data['category'] ?? ''));
+                $catName = '';
+                $subName = '';
+                $childName = '';
+
+                if (strpos($rawCategory, '>') !== false) {
+                    $parts = array_map('trim', explode('>', $rawCategory));
+                    $catName = $parts[0] ?? '';
+                    $subName = $parts[1] ?? '';
+                    $childName = $parts[2] ?? '';
+                } else {
+                    $catName = !empty($rawCategory) ? $rawCategory : ($data['category'] ?? '');
+                    $subName = $data['subcategory'] ?? '';
+                    $childName = $data['childcategory'] ?? '';
+                }
+
                 $categoryId = 0;
-                if (!empty($catName)) {
-                    if (isset($categoriesByName[$catName])) {
-                        $categoryId = $categoriesByName[$catName]->id;
-                    } elseif (is_numeric($data['category'] ?? null) && Category::where('id', $data['category'])->exists()) {
-                        $categoryId = intval($data['category']);
+                $catKey = strtolower(trim($catName));
+                if (!empty($catKey)) {
+                    if (isset($categoriesByName[$catKey])) {
+                        $categoryId = $categoriesByName[$catKey]->id;
+                    } elseif (is_numeric($catName) && Category::where('id', $catName)->exists()) {
+                        $categoryId = intval($catName);
                     } else {
-                        // Auto-create category
                         $newCat = Category::create([
-                            'name'   => $data['category'],
-                            'slug'   => Str::slug($data['category']),
+                            'name'   => $catName,
+                            'slug'   => Str::slug($catName),
                             'status' => 1
                         ]);
-                        $categoriesByName[strtolower(trim($newCat->name))] = $newCat;
+                        $categoriesByName[$catKey] = $newCat;
                         $categoryId = $newCat->id;
                     }
                 }
@@ -326,88 +378,135 @@ class CsvProductController extends Controller
                     $categoryId = $defaultCategory ? $defaultCategory->id : 0;
                 }
 
-                // 2. Resolve Subcategory
-                $subName = strtolower(trim($data['subcategory'] ?? ''));
+                // Subcategory
                 $subcategoryId = 0;
-                if (!empty($subName)) {
-                    if (isset($subcategoriesByName[$subName])) {
-                        $subcategoryId = $subcategoriesByName[$subName]->id;
-                    } elseif (is_numeric($data['subcategory'] ?? null) && Subcategory::where('id', $data['subcategory'])->exists()) {
-                        $subcategoryId = intval($data['subcategory']);
+                $subKey = strtolower(trim($subName));
+                if (!empty($subKey)) {
+                    if (isset($subcategoriesByName[$subKey])) {
+                        $subcategoryId = $subcategoriesByName[$subKey]->id;
+                    } elseif (is_numeric($subName) && Subcategory::where('id', $subName)->exists()) {
+                        $subcategoryId = intval($subName);
                     } elseif ($categoryId) {
                         $newSub = Subcategory::create([
                             'category_id' => $categoryId,
-                            'name'        => $data['subcategory'],
-                            'slug'        => Str::slug($data['subcategory']),
+                            'name'        => $subName,
+                            'slug'        => Str::slug($subName),
                             'status'      => 1
                         ]);
-                        $subcategoriesByName[strtolower(trim($newSub->name))] = $newSub;
+                        $subcategoriesByName[$subKey] = $newSub;
                         $subcategoryId = $newSub->id;
                     }
                 }
 
-                // 3. Resolve Child Category
-                $childName = strtolower(trim($data['childcategory'] ?? ''));
+                // Child Category
                 $childcategoryId = 0;
-                if (!empty($childName)) {
-                    if (isset($childcategoriesByName[$childName])) {
-                        $childcategoryId = $childcategoriesByName[$childName]->id;
-                    } elseif (is_numeric($data['childcategory'] ?? null) && ChieldCategory::where('id', $data['childcategory'])->exists()) {
-                        $childcategoryId = intval($data['childcategory']);
+                $childKey = strtolower(trim($childName));
+                if (!empty($childKey)) {
+                    if (isset($childcategoriesByName[$childKey])) {
+                        $childcategoryId = $childcategoriesByName[$childKey]->id;
+                    } elseif (is_numeric($childName) && ChieldCategory::where('id', $childName)->exists()) {
+                        $childcategoryId = intval($childName);
                     } elseif ($subcategoryId && $categoryId) {
                         $newChild = ChieldCategory::create([
                             'category_id'    => $categoryId,
                             'subcategory_id' => $subcategoryId,
-                            'name'           => $data['childcategory'],
-                            'slug'           => Str::slug($data['childcategory']),
+                            'name'           => $childName,
+                            'slug'           => Str::slug($childName),
                             'status'         => 1
                         ]);
-                        $childcategoriesByName[strtolower(trim($newChild->name))] = $newChild;
+                        $childcategoriesByName[$childKey] = $newChild;
                         $childcategoryId = $newChild->id;
                     }
                 }
 
-                // 4. Resolve Brand
-                $brandName = strtolower(trim($data['brand'] ?? ''));
+                // 2. Resolve Brand
+                $rawBrand = $data['brand'] ?? '';
+                $brandKey = strtolower(trim($rawBrand));
                 $brandId = 0;
-                if (!empty($brandName)) {
-                    if (isset($brandsByName[$brandName])) {
-                        $brandId = $brandsByName[$brandName]->id;
-                    } elseif (is_numeric($data['brand'] ?? null) && Brand::where('id', $data['brand'])->exists()) {
-                        $brandId = intval($data['brand']);
+                if (!empty($brandKey)) {
+                    if (isset($brandsByName[$brandKey])) {
+                        $brandId = $brandsByName[$brandKey]->id;
+                    } elseif (is_numeric($rawBrand) && Brand::where('id', $rawBrand)->exists()) {
+                        $brandId = intval($rawBrand);
                     } else {
                         $newBrand = Brand::create([
-                            'name'   => $data['brand'],
-                            'slug'   => Str::slug($data['brand']),
+                            'name'   => $rawBrand,
+                            'slug'   => Str::slug($rawBrand),
                             'status' => 1
                         ]);
-                        $brandsByName[strtolower(trim($newBrand->name))] = $newBrand;
+                        $brandsByName[$brandKey] = $newBrand;
                         $brandId = $newBrand->id;
                     }
                 }
 
-                // 5. SKU & Slug
-                $sku = !empty($data['sku']) ? trim($data['sku']) : ('MS-' . strtoupper(Str::random(8)));
+                // 3. SKU & Content ID
+                $sku = !empty($data['id']) ? trim($data['id']) : (!empty($data['sku']) ? trim($data['sku']) : ('MS-' . strtoupper(Str::random(8))));
                 $slug = !empty($data['slug']) ? Str::slug($data['slug']) : Str::slug($name);
 
-                // 6. Prices
-                $rawCurrentPrice = floatval(preg_replace('/[^0-9.]/', '', $data['current_price'] ?? 0));
-                $rawPreviousPrice = floatval(preg_replace('/[^0-9.]/', '', $data['previous_price'] ?? 0));
+                // 4. Prices (Handles "10.00 USD", "850.00 BDT", "$10", etc.)
+                $rawSalePrice = isset($data['sale_price']) ? floatval(preg_replace('/[^0-9.]/', '', $data['sale_price'])) : 0;
+                $rawPrice = isset($data['price']) ? floatval(preg_replace('/[^0-9.]/', '', $data['price'])) : 0;
+                $rawCurrentPrice = isset($data['current_price']) ? floatval(preg_replace('/[^0-9.]/', '', $data['current_price'])) : 0;
+                $rawPreviousPrice = isset($data['previous_price']) ? floatval(preg_replace('/[^0-9.]/', '', $data['previous_price'])) : 0;
+
+                if ($rawSalePrice > 0) {
+                    $currentPriceVal = $rawSalePrice;
+                    $previousPriceVal = $rawPrice > $rawSalePrice ? $rawPrice : ($rawPreviousPrice ?: 0);
+                } elseif ($rawCurrentPrice > 0) {
+                    $currentPriceVal = $rawCurrentPrice;
+                    $previousPriceVal = $rawPreviousPrice ?: $rawPrice;
+                } elseif ($rawPrice > 0) {
+                    $currentPriceVal = $rawPrice;
+                    $previousPriceVal = 0;
+                } else {
+                    $currentPriceVal = 0;
+                    $previousPriceVal = 0;
+                }
+
                 $currVal = $curr->value > 0 ? $curr->value : 1;
-                $discountPrice = $rawCurrentPrice / $currVal;
-                $previousPrice = $rawPreviousPrice > 0 ? ($rawPreviousPrice / $currVal) : 0;
+                $discountPrice = $currentPriceVal / $currVal;
+                $previousPrice = $previousPriceVal > 0 ? ($previousPriceVal / $currVal) : 0;
 
-                // 7. Stock
-                $stock = isset($data['stock']) && $data['stock'] !== '' ? intval(preg_replace('/[^0-9]/', '', $data['stock'])) : 10;
+                // 5. Stock & Availability
+                $stock = 10;
+                if (isset($data['quantity_to_sell_on_facebook']) && $data['quantity_to_sell_on_facebook'] !== '') {
+                    $stock = intval(preg_replace('/[^0-9]/', '', $data['quantity_to_sell_on_facebook']));
+                } elseif (isset($data['stock']) && $data['stock'] !== '') {
+                    $stock = intval(preg_replace('/[^0-9]/', '', $data['stock']));
+                }
+                $availability = strtolower(trim($data['availability'] ?? ''));
+                if ($availability === 'out of stock' || $availability === 'outofstock') {
+                    $stock = 0;
+                }
 
-                // 8. Descriptions & Content
-                $details = $data['description'] ?? ($data['short_description'] ?? $name);
+                // 6. Descriptions, Specifications, Tags, Features
+                $details = $data['description'] ?? ($data['details'] ?? ($data['short_description'] ?? $name));
                 $sortDetails = $data['short_description'] ?? Str::limit(strip_tags($details), 180);
                 $howToUse = $data['how_to_use'] ?? null;
-                $specifications = $data['specifications'] ?? null;
+
+                // Build specifications from Meta attributes
+                $specsList = [];
+                if (!empty($data['specifications'])) $specsList[] = $data['specifications'];
+                if (!empty($data['material'])) $specsList[] = 'Material: ' . $data['material'];
+                if (!empty($data['color'])) $specsList[] = 'Color: ' . $data['color'];
+                if (!empty($data['size'])) $specsList[] = 'Size: ' . $data['size'];
+                if (!empty($data['condition'])) $specsList[] = 'Condition: ' . $data['condition'];
+                if (!empty($data['gender'])) $specsList[] = 'Gender: ' . $data['gender'];
+                if (!empty($data['age_group'])) $specsList[] = 'Age Group: ' . $data['age_group'];
+                if (!empty($data['shipping'])) $specsList[] = 'Shipping: ' . $data['shipping'];
+                if (!empty($data['shipping_weight'])) $specsList[] = 'Weight: ' . $data['shipping_weight'];
+                $specifications = !empty($specsList) ? implode("; ", $specsList) : null;
+
+                // Build tags
+                $tagsList = [];
+                if (!empty($data['tags'])) $tagsList[] = $data['tags'];
+                if (!empty($data['producttags0'])) $tagsList[] = $data['producttags0'];
+                if (!empty($data['producttags1'])) $tagsList[] = $data['producttags1'];
+                if (!empty($data['style0'])) $tagsList[] = $data['style0'];
+                $tags = !empty($tagsList) ? implode(', ', array_unique($tagsList)) : null;
+
                 $features = $data['features'] ?? null;
-                $tags = $data['tags'] ?? null;
-                $video = $data['video'] ?? null;
+                $video = $data['video0url'] ?? ($data['video'] ?? null);
                 $metaKeywords = $data['meta_keywords'] ?? ($tags ?: $name);
                 $metaDescription = $data['meta_description'] ?? Str::limit(strip_tags($sortDetails), 160);
                 $status = isset($data['status']) && $data['status'] !== '' ? intval($data['status']) : 1;
@@ -431,8 +530,8 @@ class CsvProductController extends Controller
                     }
                 }
 
-                // 9. Photo Download / Association
-                $photoUrl = $data['photo_url'] ?? ($data['photo'] ?? '');
+                // 7. Image Download / Association
+                $photoUrl = $data['image_link'] ?? ($data['photo_url'] ?? ($data['photo'] ?? ''));
                 $photoFileName = null;
                 $thumbFileName = null;
 
@@ -509,7 +608,7 @@ class CsvProductController extends Controller
             'success' => $successCount,
             'updated' => $updatedCount,
             'failed'  => $failedCount,
-            'errors'  => array_slice($rowErrors, 0, 10) // Display up to 10 row errors
+            'errors'  => array_slice($rowErrors, 0, 10)
         ]);
 
         if ($failedCount > 0 && $successCount === 0 && $updatedCount === 0) {
@@ -571,58 +670,87 @@ class CsvProductController extends Controller
     private function canonicalizeHeader($cleaned)
     {
         $aliases = [
-            'name'                     => 'name',
-            'productname'              => 'name',
-            'title'                    => 'name',
-            'category'                 => 'category',
-            'categoryname'             => 'category',
-            'categoryid'               => 'category',
-            'subcategory'              => 'subcategory',
-            'subcategoryname'          => 'subcategory',
-            'childcategory'            => 'childcategory',
-            'childcategoryname'        => 'childcategory',
-            'brand'                    => 'brand',
-            'brandname'                => 'brand',
-            'sku'                      => 'sku',
-            'currentprice'             => 'current_price',
-            'price'                    => 'current_price',
-            'discountprice'            => 'current_price',
-            'saleprice'                => 'current_price',
-            'previousprice'            => 'previous_price',
-            'regularprice'             => 'previous_price',
-            'originalprice'            => 'previous_price',
-            'mrp'                      => 'previous_price',
-            'stock'                    => 'stock',
-            'quantity'                 => 'stock',
-            'qty'                      => 'stock',
-            'shortdescription'         => 'short_description',
-            'sortdetails'              => 'short_description',
-            'shortdesc'                => 'short_description',
-            'description'              => 'description',
-            'details'                  => 'description',
-            'desc'                     => 'description',
-            'howtouse'                 => 'how_to_use',
-            'usage'                    => 'how_to_use',
-            'specifications'           => 'specifications',
-            'specification'            => 'specifications',
-            'specificationname'        => 'specifications',
-            'specs'                    => 'specifications',
-            'features'                 => 'features',
-            'keyfeatures'              => 'features',
-            'tags'                     => 'tags',
-            'producttags'              => 'tags',
-            'photourl'                 => 'photo_url',
-            'photo'                    => 'photo_url',
-            'image'                    => 'photo_url',
-            'imageurl'                 => 'photo_url',
-            'featuredimage'            => 'photo_url',
-            'video'                    => 'video',
-            'videourl'                 => 'video',
-            'videolink'                => 'video',
-            'metakeywords'             => 'meta_keywords',
-            'metadescription'          => 'meta_description',
-            'status'                   => 'status',
-            'itemtype'                 => 'item_type'
+            // Meta / Facebook catalog names
+            'id'                          => 'id',
+            'title'                       => 'title',
+            'availability'                => 'availability',
+            'condition'                   => 'condition',
+            'link'                        => 'link',
+            'imagelink'                   => 'image_link',
+            'googleproductcategory'       => 'google_product_category',
+            'fbproductcategory'           => 'fb_product_category',
+            'quantitytosellonfacebook'    => 'quantity_to_sell_on_facebook',
+            'saleprice'                   => 'sale_price',
+            'salepriceeffectivedate'      => 'sale_price_effective_date',
+            'itemgroupid'                 => 'item_group_id',
+            'gender'                      => 'gender',
+            'color'                       => 'color',
+            'size'                        => 'size',
+            'agegroup'                    => 'age_group',
+            'material'                    => 'material',
+            'pattern'                     => 'pattern',
+            'shipping'                    => 'shipping',
+            'shippingweight'              => 'shipping_weight',
+            'offerdisclaimer'             => 'offer_disclaimer',
+            'offerdisclaimerurl'          => 'offer_disclaimer_url',
+            'video0url'                   => 'video0url',
+            'video0tag0'                  => 'video0tag0',
+            'gtin'                        => 'gtin',
+            'producttags0'                => 'producttags0',
+            'producttags1'                => 'producttags1',
+            'style0'                      => 'style0',
+
+            // Standard Mac-Scientific store names
+            'name'                        => 'name',
+            'productname'                 => 'name',
+            'category'                    => 'category',
+            'categoryname'                => 'category',
+            'categoryid'                  => 'category',
+            'subcategory'                 => 'subcategory',
+            'subcategoryname'             => 'subcategory',
+            'childcategory'               => 'childcategory',
+            'childcategoryname'           => 'childcategory',
+            'brand'                       => 'brand',
+            'brandname'                   => 'brand',
+            'sku'                         => 'sku',
+            'currentprice'                => 'current_price',
+            'price'                       => 'price',
+            'discountprice'               => 'current_price',
+            'previousprice'               => 'previous_price',
+            'regularprice'                => 'previous_price',
+            'originalprice'               => 'previous_price',
+            'mrp'                         => 'previous_price',
+            'stock'                       => 'stock',
+            'quantity'                    => 'stock',
+            'qty'                         => 'stock',
+            'shortdescription'            => 'short_description',
+            'sortdetails'                 => 'short_description',
+            'shortdesc'                   => 'short_description',
+            'description'                 => 'description',
+            'details'                     => 'description',
+            'desc'                        => 'description',
+            'howtouse'                    => 'how_to_use',
+            'usage'                       => 'how_to_use',
+            'specifications'              => 'specifications',
+            'specification'               => 'specifications',
+            'specificationname'           => 'specifications',
+            'specs'                       => 'specifications',
+            'features'                    => 'features',
+            'keyfeatures'                 => 'features',
+            'tags'                        => 'tags',
+            'producttags'                 => 'tags',
+            'photourl'                    => 'photo_url',
+            'photo'                       => 'photo_url',
+            'image'                       => 'photo_url',
+            'imageurl'                    => 'photo_url',
+            'featuredimage'               => 'photo_url',
+            'video'                       => 'video',
+            'videourl'                    => 'video',
+            'videolink'                   => 'video',
+            'metakeywords'                => 'meta_keywords',
+            'metadescription'             => 'meta_description',
+            'status'                      => 'status',
+            'itemtype'                    => 'item_type'
         ];
 
         return $aliases[$cleaned] ?? $cleaned;
