@@ -30,10 +30,13 @@ class TrackingRepository
      */
     public function updateSettings(array $data)
     {
-        $booleanKeys = [
+        $googleBooleanKeys = [
             'enable_gtm',
             'enable_ga4_direct',
             'auto_push_datalayer',
+        ];
+
+        $metaBooleanKeys = [
             'enable_meta_pixel',
             'enable_meta_capi',
             'meta_advanced_matching_em',
@@ -58,13 +61,25 @@ class TrackingRepository
             'track_server_lead',
         ];
 
-        // Process boolean checkboxes (if not present in POST, default to '0')
-        foreach ($booleanKeys as $key) {
-            $data[$key] = isset($data[$key]) ? '1' : '0';
+        $formSource = $data['form_source'] ?? null;
+        $isGoogleSection = $formSource === 'google' || isset($data['gtm_container_id']) || isset($data['ga4_measurement_id']);
+        $isMetaSection = $formSource === 'meta' || isset($data['meta_pixel_id']) || isset($data['meta_capi_token']);
+
+        // Only process the boolean checkboxes belonging to the submitted tab
+        if ($isGoogleSection) {
+            foreach ($googleBooleanKeys as $key) {
+                $data[$key] = isset($data[$key]) ? '1' : '0';
+            }
+        }
+
+        if ($isMetaSection) {
+            foreach ($metaBooleanKeys as $key) {
+                $data[$key] = isset($data[$key]) ? '1' : '0';
+            }
         }
 
         foreach ($data as $key => $value) {
-            if ($key === '_token') continue;
+            if ($key === '_token' || $key === 'form_source') continue;
             TrackingSetting::set($key, $value);
         }
     }

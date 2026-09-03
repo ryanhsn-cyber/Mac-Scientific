@@ -1,5 +1,6 @@
 <form action="{{ route('back.tracking.settings.update') }}" method="POST">
     @csrf
+    <input type="hidden" name="form_source" value="google">
 
     <div class="row">
         {{-- Left Column: Google Tag Manager & Direct GA4 --}}

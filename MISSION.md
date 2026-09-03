@@ -176,3 +176,8 @@ N/A
 - [x] Fixed syntax error in highlight.blade.php.
 - [x] Added System Restore functionality allowing administrators to upload `.sql` files and safely restore system backups from a new Backup & Restore view.
 - [x] Architected and deployed the Unified Tracking & Integrations Engine (GTM, Meta CAPI, GA4 MP) to Coolify live server.
+- [x] Fixed GTM not triggering Purchase event to Meta Pixel:
+  1. Resolved form-wipe bug in `TrackingRepository` where saving Google/GTM settings wiped Meta Pixel and Purchase checkboxes to '0'.
+  2. Enhanced `DataLayerBuilder` and `purchase.blade.php` to push `{ ecommerce: null }`, both lowercase `purchase` and capitalized `Purchase` events, and top-level Meta Pixel parameters (`value`, `currency`, `content_ids`, `content_type`, `num_items`, `event_id`).
+  3. Cleaned product ID parsing (`$rawId = $item['id'] ?? explode('-', $key)[0]`) for consistent Meta CAPI and Pixel catalog matching.
+

@@ -519,8 +519,10 @@ class CheckoutController extends Controller
 
             // Send Facebook CAPI Purchase Event
             $content_ids = [];
-            foreach($cart as $key => $item){
-                $content_ids[] = (string)$key;
+            if(is_array($cart)){
+                foreach($cart as $key => $item){
+                    $content_ids[] = (string)($item['id'] ?? explode('-', (string)$key)[0]);
+                }
             }
             
             $userData = [];

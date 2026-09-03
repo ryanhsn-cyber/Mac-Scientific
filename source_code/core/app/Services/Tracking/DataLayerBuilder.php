@@ -99,12 +99,22 @@ class DataLayerBuilder
      * @param string $eventId
      * @return array
      */
-    public static function buildPurchase($order, array $cart, $eventId)
+    public static function buildPurchase($order, $cart, $eventId)
     {
+        if (is_string($cart)) {
+            $cart = json_decode($cart, true) ?: [];
+        }
+        if (!is_array($cart)) {
+            $cart = [];
+        }
+
         $items = [];
+        $contentIds = [];
         foreach ($cart as $key => $item) {
+            $rawId = (string)($item['id'] ?? explode('-', (string)$key)[0]);
+            $contentIds[] = $rawId;
             $items[] = [
-                'item_id' => (string)($item['id'] ?? $key),
+                'item_id' => $rawId,
                 'item_name' => $item['name'] ?? '',
                 'price' => (float)($item['main_price'] ?? $item['price'] ?? 0),
                 'quantity' => (int)($item['qty'] ?? 1),
@@ -112,14 +122,22 @@ class DataLayerBuilder
         }
 
         $orderTotal = (float)($order->pay_amount ?? $order->total_amount ?? (method_exists(\App\Helpers\PriceHelper::class, 'OrderTotal') ? \App\Helpers\PriceHelper::OrderTotal($order, true) : 0));
+        $currency = \App\Helpers\PriceHelper::setCurrencyName();
+        $txnId = (string)($order->transaction_number ?? $order->id);
 
         return [
             'event' => 'purchase',
             'event_id' => $eventId,
+            'transaction_id' => $txnId,
+            'value' => $orderTotal,
+            'currency' => $currency,
+            'content_ids' => $contentIds,
+            'content_type' => 'product',
+            'num_items' => count($contentIds) > 0 ? count($contentIds) : 1,
             'ecommerce' => [
-                'transaction_id' => (string)($order->transaction_number ?? $order->id),
+                'transaction_id' => $txnId,
                 'value' => $orderTotal,
-                'currency' => \App\Helpers\PriceHelper::setCurrencyName(),
+                'currency' => $currency,
                 'tax' => (float)($order->tax ?? 0),
                 'shipping' => (float)($order->shipping_cost ?? 0),
                 'items' => $items,
@@ -140,6 +158,18 @@ class DataLayerBuilder
         }
 
         $json = json_encode($dataLayer, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        return "<script>window.dataLayer = window.dataLayer || []; window.dataLayer.push({$json});</script>";
+        $hasEcommerce = isset($dataLayer['ecommerce']);
+        $clearEcommerce = $hasEcommerce ? "window.dataLayer.push({ ecommerce: null });\n" : "";
+
+        $eventName = $dataLayer['event'] ?? '';
+        $capitalEventPush = '';
+        if (!empty($eventName) && ctype_lower($eventName[0])) {
+            $capitalData = $dataLayer;
+            $capitalData['event'] = ucfirst($eventName);
+            $capitalJson = json_encode($capitalData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            $capitalEventPush = "\nwindow.dataLayer.push({$capitalJson});";
+        }
+
+        return "<script>\nwindow.dataLayer = window.dataLayer || [];\n{$clearEcommerce}window.dataLayer.push({$json});{$capitalEventPush}\n</script>";
     }
 }

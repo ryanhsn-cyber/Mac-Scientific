@@ -4,20 +4,27 @@
     $currency = \App\Helpers\PriceHelper::setCurrencyName();
     $eventId = $eventId ?? ('pur_' . ($order->transaction_number ?? $order->id));
 
+    $cartItems = $cart ?? (isset($order->cart) ? $order->cart : []);
+    if (is_string($cartItems)) {
+        $cartItems = json_decode($cartItems, true) ?: [];
+    }
+    if (!is_array($cartItems)) {
+        $cartItems = [];
+    }
+
     $contentIds = [];
-    if (isset($cart) && is_array($cart)) {
-        foreach ($cart as $k => $cItem) {
-            $contentIds[] = (string)($cItem['id'] ?? $k);
-        }
+    foreach ($cartItems as $k => $cItem) {
+        $rawId = $cItem['id'] ?? explode('-', (string)$k)[0];
+        $contentIds[] = (string)$rawId;
     }
 
     $gadsId = $trackingSettings['gads_conversion_id'] ?? '';
     $gadsLabel = $trackingSettings['gads_purchase_label'] ?? '';
 @endphp
 
-{{-- 1. Standard E-commerce DataLayer Push --}}
-@if(($trackingSettings['auto_push_datalayer'] ?? 1) == 1 && isset($cart))
-{!! \App\Services\Tracking\DataLayerBuilder::renderScript(\App\Services\Tracking\DataLayerBuilder::buildPurchase($order, $cart, $eventId)) !!}
+{{-- 1. Standard E-commerce DataLayer Push (Supports GA4 & GTM Meta Pixel Tags) --}}
+@if(($trackingSettings['auto_push_datalayer'] ?? 1) == 1)
+{!! \App\Services\Tracking\DataLayerBuilder::renderScript(\App\Services\Tracking\DataLayerBuilder::buildPurchase($order, $cartItems, $eventId)) !!}
 @endif
 
 {{-- 2. Meta Pixel Purchase with Deduplication Event ID --}}
@@ -29,7 +36,7 @@
             content_type: 'product',
             value: {{ $orderTotal }},
             currency: '{{ $currency }}',
-            num_items: {{ isset($cart) ? count($cart) : 1 }}
+            num_items: {{ count($contentIds) > 0 ? count($contentIds) : 1 }}
         }, { eventID: '{{ $eventId }}' });
     }
 </script>
