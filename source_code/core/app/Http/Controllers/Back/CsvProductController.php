@@ -37,7 +37,7 @@ class CsvProductController extends Controller
         $templatePath = base_path('../assets/bulk_product_template.csv');
 
         if (file_exists($templatePath)) {
-            return response()->download($templatePath, 'meta_catalog_bulk_products_template.csv', [
+            return response()->download($templatePath, 'bulk_products_template.csv', [
                 'Content-Type' => 'text/csv'
             ]);
         }
@@ -45,7 +45,7 @@ class CsvProductController extends Controller
         // Fallback generator
         $headers = [
             'Content-type'        => 'text/csv',
-            'Content-Disposition' => 'attachment; filename=meta_catalog_bulk_products_template.csv',
+            'Content-Disposition' => 'attachment; filename=bulk_products_template.csv',
             'Pragma'              => 'no-cache',
             'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
             'Expires'             => '0'

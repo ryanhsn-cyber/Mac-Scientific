@@ -75,19 +75,15 @@
 
             <!-- Step 1: Download Template -->
             <div class="card shadow-sm border-0 mb-4">
-                <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
+                <div class="card-header bg-white py-3">
                     <h6 class="m-0 font-weight-bold text-primary">
                         <span class="badge badge-primary rounded-circle mr-2 px-2 py-1">1</span>
                         {{ __('Download Official Template') }}
                     </h6>
-                    <span class="badge badge-success px-2 py-1"><i class="fab fa-facebook mr-1"></i> {{ __('Meta / Facebook Catalog Format') }}</span>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted mb-3">
-                        {{ __('Download the official Meta / Facebook Product Catalog CSV template. It supports id (SKU), title, description, availability, image_link, brand, price, sale_price, google_product_category, and product tags.') }}
-                    </p>
                     <a href="{{ route('back.csv.template') }}" class="btn btn-success shadow-sm">
-                        <i class="fas fa-download mr-1"></i> {{ __('Download Meta Catalog Template (.csv)') }}
+                        <i class="fas fa-download mr-1"></i> {{ __('Download CSV Template (.csv)') }}
                     </a>
                 </div>
             </div>
