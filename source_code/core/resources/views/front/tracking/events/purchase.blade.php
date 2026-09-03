@@ -27,18 +27,40 @@
 {!! \App\Services\Tracking\DataLayerBuilder::renderScript(\App\Services\Tracking\DataLayerBuilder::buildPurchase($order, $cartItems, $eventId)) !!}
 @endif
 
-{{-- 2. Meta Pixel Purchase with Deduplication Event ID --}}
-@if(($trackingSettings['enable_meta_pixel'] ?? 0) == 1 && ($trackingSettings['track_browser_purchase'] ?? 1) == 1)
+{{-- 2. Meta Pixel Purchase with Deduplication Event ID (Triggers whether initialized via backend or via GTM) --}}
+@if((($trackingSettings['enable_meta_pixel'] ?? 0) == 1 && ($trackingSettings['track_browser_purchase'] ?? 1) == 1) || (($trackingSettings['enable_gtm'] ?? 0) == 1))
 <script>
-    if (typeof fbq === 'function') {
-        fbq('track', 'Purchase', {
-            content_ids: {!! json_encode($contentIds) !!},
-            content_type: 'product',
-            value: {{ $orderTotal }},
-            currency: '{{ $currency }}',
-            num_items: {{ count($contentIds) > 0 ? count($contentIds) : 1 }}
-        }, { eventID: '{{ $eventId }}' });
-    }
+    (function() {
+        var purchaseFired = false;
+        function triggerPixelPurchase() {
+            if (purchaseFired) return;
+            if (typeof fbq === 'function') {
+                purchaseFired = true;
+                fbq('track', 'Purchase', {
+                    content_ids: {!! json_encode($contentIds) !!},
+                    content_type: 'product',
+                    value: {{ $orderTotal }},
+                    currency: '{{ $currency }}',
+                    num_items: {{ count($contentIds) > 0 ? count($contentIds) : 1 }}
+                }, { eventID: '{{ $eventId }}' });
+            }
+        }
+
+        // 1. Try immediate execution if fbq is already defined
+        triggerPixelPurchase();
+
+        // 2. Poll every 100ms up to 30 times (3s) to catch GTM asynchronously injecting fbq
+        if (!purchaseFired) {
+            var attempts = 0;
+            var timer = setInterval(function() {
+                attempts++;
+                triggerPixelPurchase();
+                if (purchaseFired || attempts >= 30) {
+                    clearInterval(timer);
+                }
+            }, 100);
+        }
+    })();
 </script>
 @endif
 

@@ -15,16 +15,32 @@
 {!! \App\Services\Tracking\DataLayerBuilder::renderScript(\App\Services\Tracking\DataLayerBuilder::buildBeginCheckout($cart, (float)$totalAmount, $eventId)) !!}
 @endif
 
-@if(($trackingSettings['enable_meta_pixel'] ?? 0) == 1 && ($trackingSettings['track_browser_initiate_checkout'] ?? 1) == 1)
+@if((($trackingSettings['enable_meta_pixel'] ?? 0) == 1 && ($trackingSettings['track_browser_initiate_checkout'] ?? 1) == 1) || (($trackingSettings['enable_gtm'] ?? 0) == 1))
 <script>
-    if (typeof fbq === 'function') {
-        fbq('track', 'InitiateCheckout', {
-            content_ids: {!! json_encode($contentIds) !!},
-            content_type: 'product',
-            value: {{ (float)$totalAmount }},
-            currency: '{{ $currency }}',
-            num_items: {{ count($cart) }}
-        }, { eventID: '{{ $eventId }}' });
-    }
+    (function() {
+        var icFired = false;
+        function triggerPixelIC() {
+            if (icFired) return;
+            if (typeof fbq === 'function') {
+                icFired = true;
+                fbq('track', 'InitiateCheckout', {
+                    content_ids: {!! json_encode($contentIds) !!},
+                    content_type: 'product',
+                    value: {{ (float)$totalAmount }},
+                    currency: '{{ $currency }}',
+                    num_items: {{ count($cart) }}
+                }, { eventID: '{{ $eventId }}' });
+            }
+        }
+        triggerPixelIC();
+        if (!icFired) {
+            var attempts = 0;
+            var timer = setInterval(function() {
+                attempts++;
+                triggerPixelIC();
+                if (icFired || attempts >= 30) clearInterval(timer);
+            }, 100);
+        }
+    })();
 </script>
 @endif
