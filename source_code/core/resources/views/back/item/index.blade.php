@@ -14,7 +14,8 @@
             <div class="d-sm-flex align-items-center justify-content-between">
                 <h3 class="mb-0 bc-title"><b>{{ __('All Products') }}</b></h3>
                     <div class="right">
-                        <a href="{{route('back.csv.export')}}" class="btn btn-info btn-sm d-inline-block">{{__('CSV Export')}}</a>
+                        <a href="{{route('back.bulk.product.index')}}" class="btn btn-primary btn-sm d-inline-block"><i class="fas fa-file-upload mr-1"></i> {{__('Bulk Upload')}}</a>
+                        <a href="{{route('back.csv.export')}}" class="btn btn-info btn-sm d-inline-block"><i class="fas fa-file-export mr-1"></i> {{__('CSV Export')}}</a>
                         <form class="d-inline-block" action="{{route('back.bulk.delete')}}" method="get">
                             <input type="hidden" value="" name="ids[]" id="bulk_delete">
                             <input type="hidden" value="items" name="table">

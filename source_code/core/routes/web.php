@@ -129,6 +129,7 @@ Route::group(['middleware' => 'adminlocalize'], function () {
 
             // Bulk product upload
             Route::get('/product/csv/export', 'Back\CsvProductController@export')->name('back.csv.export');
+            Route::get('/product/csv/template', 'Back\CsvProductController@template')->name('back.csv.template');
             Route::get('bulk/product/index', 'Back\CsvProductController@index')->name('back.bulk.product.index');
             Route::post('csv/import', 'Back\CsvProductController@import')->name('back.csv.import');
             Route::get('transaction/csv/export', 'Back\CsvProductController@transactionExport')->name('back.csv.transaction.export');

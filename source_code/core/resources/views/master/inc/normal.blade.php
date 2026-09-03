@@ -80,7 +80,7 @@
                 </li>
                 <li>
                     <a class="sub-link" href="{{ route('back.bulk.product.index') }}">
-                        <span class="sub-item">{{ __('CSV Import & Export') }}</span>
+                        <span class="sub-item">{{ __('Bulk Product Upload') }}</span>
                     </a>
                 </li>
                 <li>
